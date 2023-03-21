@@ -1,4 +1,6 @@
 package com.universitybullshit.model;
+import java.lang.Integer;
+import java.util.List;
 
 public abstract class Building {
     private long interval;
@@ -10,4 +12,5 @@ public abstract class Building {
     public abstract long GetInterval();
     public abstract double GetProbability();
     public abstract int GetSize();
+    public abstract List<Integer> GetCoordinates();
 }
