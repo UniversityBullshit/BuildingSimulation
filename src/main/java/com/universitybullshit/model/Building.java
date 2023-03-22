@@ -1,16 +1,13 @@
 package com.universitybullshit.model;
 import java.lang.Integer;
-import java.util.List;
+import java.util.ArrayList;
 
 public abstract class Building {
-    private long interval;
-    private double probability;
-    private int size;
+    private static long interval;
+    private static double probability;
+    private static int size;
     private int x;
     private int y;
 
-    public abstract long GetInterval();
-    public abstract double GetProbability();
-    public abstract int GetSize();
-    public abstract List<Integer> GetCoordinates();
+    public abstract ArrayList<Integer> GetCoordinates();
 }
