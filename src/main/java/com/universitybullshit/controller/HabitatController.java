@@ -23,10 +23,11 @@ public class HabitatController {
 
     /**
      * Constructor gets Habitat instance and provides interaction with it.
-     * @param context Habitat instance
+     * @param width simulation field width
+     * @param height simulation field height
      */
-    public HabitatController(Habitat context) {
-        this.context = context;
+    public HabitatController(int width, int height) {
+        this.context = new Habitat(width, height);
         this.simulationStartTime = System.currentTimeMillis();
         this.simulationCurrentTime = this.simulationStartTime;
     }
