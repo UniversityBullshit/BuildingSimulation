@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Habitat {
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
     private long time;
     private long lastWoodenBuildingSpawnTime;
     private long lastCapitalBuildingSpawnTime;
@@ -40,8 +40,6 @@ public class Habitat {
 
                 WoodenBuilding woodenBuilding = new WoodenBuilding(x, y);
 
-                System.out.println("Заспавнили вуден");
-
                 this.buildings.add(woodenBuilding);
                 this.woodenBuildingsCount++;
                 this.lastWoodenBuildingSpawnTime = time;
@@ -58,8 +56,6 @@ public class Habitat {
                 int y = generator.nextInt(this.height);
 
                 CapitalBuilding capitalBuilding = new CapitalBuilding(x, y);
-
-                System.out.println("Заспавнили капитал");
 
                 this.buildings.add(capitalBuilding);
                 this.capitalBuildingsCount++;
