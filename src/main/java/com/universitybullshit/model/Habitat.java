@@ -19,7 +19,7 @@ public class Habitat {
         this.time = System.currentTimeMillis();
         this.lastWoodenBuildingSpawnTime = this.time;
         this.lastCapitalBuildingSpawnTime = this.time;
-        this.buildings = new ArrayList<Building>();
+        this.buildings = new ArrayList<>();
         this.woodenBuildingsCount = 0;
         this.capitalBuildingsCount = 0;
     }
