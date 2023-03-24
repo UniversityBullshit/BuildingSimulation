@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public abstract class Building {
     private static long interval;
     private static double probability;
-    private static int size;
     private int x;
     private int y;
 

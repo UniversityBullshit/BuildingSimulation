@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class WoodenBuilding extends Building {
     private static final long interval = 2000;
     private static final double probability = 0.3;
-    private static final int size = 2;
     private int x;
     private int y;
 
@@ -18,9 +17,6 @@ public class WoodenBuilding extends Building {
     }
     public static double GetProbability() {
         return probability;
-    }
-    public static int GetSize() {
-        return size;
     }
     @Override
     public ArrayList<Integer> GetCoordinates() {
