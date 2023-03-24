@@ -10,7 +10,7 @@ public class Habitat {
     private long time;
     private long lastWoodenBuildingSpawnTime;
     private long lastCapitalBuildingSpawnTime;
-    private List<Building> buildings;
+    private final List<Building> buildings;
     private int woodenBuildingsCount;
     private int capitalBuildingsCount;
     public Habitat(int width, int height) {
