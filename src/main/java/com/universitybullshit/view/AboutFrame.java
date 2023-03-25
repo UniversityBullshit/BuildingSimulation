@@ -18,7 +18,7 @@ public class AboutFrame {
         dialog.add(panel);
         panel.add(new JLabel("BuildingSpawner"));
         panel.add(new JLabel("Version: 1.0-SNAPSHOT"));
-        panel.add(new JLabel("Authors: cheremshin, Arounte"));
+        panel.add(new JLabel("Authors: Sergei Cheremisin, Arounte"));
         return dialog;
     }
 }
