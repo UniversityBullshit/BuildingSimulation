@@ -1,22 +1,33 @@
 package com.universitybullshit.model;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 
 public class CapitalBuilding extends Building {
-    private static final long interval = 3000;
-    private static final double probability = 0.7;
+    @Getter
+    private long id;
+    @Getter
+    private static long interval;
+    @Getter
+    private static double probability;
     private int x;
     private int y;
+    @Getter
+    private long spawnTime;
+    @Getter
+    private static long lifeTime;
 
-    public CapitalBuilding(int x, int y) {
+    public CapitalBuilding(int x, int y, long time) {
         this.x = x;
         this.y = y;
+        this.spawnTime = time;
+        this.id = AtomicIdCounter.nextId();
     }
-    public static long GetInterval() {
-        return interval;
-    }
-    public static double GetProbability() {
-        return probability;
+    public static void SetDefaults(long interval, double probability, long lifeTime) {
+        CapitalBuilding.interval = interval;
+        CapitalBuilding.probability = probability;
+        CapitalBuilding.lifeTime = lifeTime;
     }
     @Override
     public ArrayList<Integer> GetCoordinates() {
