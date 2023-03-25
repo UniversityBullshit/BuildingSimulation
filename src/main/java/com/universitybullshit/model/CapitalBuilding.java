@@ -1,7 +1,6 @@
 package com.universitybullshit.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CapitalBuilding extends Building {
     private static final long interval = 3000;
@@ -21,7 +20,7 @@ public class CapitalBuilding extends Building {
     }
     @Override
     public ArrayList<Integer> GetCoordinates() {
-        ArrayList<Integer> coordinates = new ArrayList<Integer>();
+        ArrayList<Integer> coordinates = new ArrayList<>();
         coordinates.add(this.x);
         coordinates.add(this.y);
         return coordinates;

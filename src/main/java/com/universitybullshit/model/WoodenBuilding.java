@@ -20,7 +20,7 @@ public class WoodenBuilding extends Building {
     }
     @Override
     public ArrayList<Integer> GetCoordinates() {
-        ArrayList<Integer> coordinates = new ArrayList<Integer>();
+        ArrayList<Integer> coordinates = new ArrayList<>();
         coordinates.add(this.x);
         coordinates.add(this.y);
         return coordinates;
