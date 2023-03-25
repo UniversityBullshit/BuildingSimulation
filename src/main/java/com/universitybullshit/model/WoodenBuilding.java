@@ -1,5 +1,6 @@
 package com.universitybullshit.model;
 
+import com.universitybullshit.model.util.BuildingDto;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -8,15 +9,15 @@ public class WoodenBuilding extends Building {
     @Getter
     private long id;
     @Getter
-    private static long interval;
+    private static long interval = BuildingDto.getWoodenBuildingInterval();
     @Getter
-    private static double probability;
+    private static double probability = BuildingDto.getWoodenBuildingProbability();
     private int x;
     private int y;
     @Getter
     private long spawnTime;
     @Getter
-    private static long lifeTime;
+    private static long lifeTime = BuildingDto.getWoodenBuildingLifeTime();
 
     public WoodenBuilding(int x, int y, long time) {
         this.x = x;
