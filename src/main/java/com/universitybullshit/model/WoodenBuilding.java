@@ -22,7 +22,7 @@ public class WoodenBuilding extends Building {
         this.x = x;
         this.y = y;
         this.spawnTime = time;
-        this.id = id;
+        this.id = AtomicIdCounter.nextId();
     }
     public static void SetDefaults(long interval, double probability, long lifeTime) {
         WoodenBuilding.interval = interval;
