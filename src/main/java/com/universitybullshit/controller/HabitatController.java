@@ -3,12 +3,14 @@ package com.universitybullshit.controller;
 import com.universitybullshit.model.Building;
 import com.universitybullshit.model.Habitat;
 
+import java.util.HashSet;
+import java.util.TreeMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.List;
 
 /**
  * Controller, representing a component that controls simulation process.
- *
+ * <p>
  * Simulation is an endless process that runs asynchronously via StartSimulation method and can only be interrupted
  * by the StopSimulation method. Also provides getters with some information about habitat state.
  *
@@ -29,7 +31,7 @@ public class HabitatController {
     public HabitatController(int width, int height) {
         this.context = new Habitat(width, height);
         this.simulationStartTime = System.currentTimeMillis();
-        this.simulationCurrentTime = this.simulationStartTime;
+        this.simulationCurrentTime = 0;
     }
 
     /**
@@ -53,7 +55,24 @@ public class HabitatController {
      * @return Habitat.buildings
      */
     public List<Building> GetBuildings() {
-        return this.context.GetBuildings();
+        return this.context.getBuildings();
+    }
+
+    /**
+     * Method that allows getting actual list of ids in any time of application lifecycle.
+     * @return Habitat.ids
+     */
+    public HashSet<Long> GetIds() {
+        return this.context.getIds();
+    }
+
+    /**
+     * Method that allows getting actual list of alive objects with their spawn time
+     * in any time of application lifecycle.
+     * @return Habitat.spawnTimeMap
+     */
+    public TreeMap<Long, Long> GetSpawnTimeMap() {
+        return this.context.getSpawnTimeMap();
     }
 
     /**
@@ -61,7 +80,7 @@ public class HabitatController {
      * @return Habitat.woodenBuildingsCount
      */
     public int GetWoodenBuildingsCount() {
-        return this.context.GetWoodenBuildingsCount();
+        return this.context.getWoodenBuildingsCount();
     }
 
     /**
@@ -69,7 +88,7 @@ public class HabitatController {
      * @return Habitat.capitalBuildingsCount
      */
     public int GetCapitalBuildingsCount() {
-        return this.context.GetCapitalBuildingsCount();
+        return this.context.getCapitalBuildingsCount();
     }
 
     /**
@@ -77,15 +96,15 @@ public class HabitatController {
      * @return time spent from simulation start
      */
     public long GetSimulationTime() {
-        return this.simulationCurrentTime - this.simulationStartTime;
+        return this.simulationCurrentTime;
     }
 
     private void Simulation() {
         while (this.isSimulationRunning) {
             this.context.Update(this.simulationCurrentTime);
-            this.simulationCurrentTime = System.currentTimeMillis();
+            this.simulationCurrentTime = System.currentTimeMillis() - this.simulationStartTime;
             try {
-                Thread.sleep(1000); // 25 updates per second
+                Thread.sleep(50); // 25 updates per second
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
