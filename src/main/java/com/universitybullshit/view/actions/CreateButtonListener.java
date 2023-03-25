@@ -3,6 +3,7 @@ package com.universitybullshit.view.actions;
 import com.universitybullshit.controller.HabitatController;
 import com.universitybullshit.view.Area;
 import com.universitybullshit.view.MainFrame;
+import com.universitybullshit.view.util.KeyboardInput;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,9 +26,7 @@ public class CreateButtonListener implements ActionListener {
         Area area = new Area(width, height);
         HabitatController controller = new HabitatController(width, height);
         JRootPane rootPane = ctx.getRootPane();
-        Action myAction = new StartKeyAction(controller);
-        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("B"), "b");
-        rootPane.getActionMap().put("b", myAction);
+        KeyboardInput.createKeyBindings(rootPane, controller);
         area.create(root);
     }
 }
