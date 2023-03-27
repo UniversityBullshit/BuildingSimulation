@@ -23,10 +23,10 @@ public class CreateButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int width = Integer.parseInt(this.width.getText());
         int height = Integer.parseInt(this.height.getText());
-        Area area = new Area(width, height);
+        Area area = new Area(width, height, this.root);
         HabitatController controller = new HabitatController(width, height);
         JRootPane rootPane = ctx.getRootPane();
-        KeyboardInput.createKeyBindings(rootPane, controller);
-        area.create(root);
+        KeyboardInput.createKeyBindings(rootPane, controller, area);
+        area.create();
     }
 }
