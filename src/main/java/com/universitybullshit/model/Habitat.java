@@ -2,11 +2,7 @@ package com.universitybullshit.model;
 
 import lombok.Getter;
 
-import java.util.HashSet;
-import java.util.TreeMap;
-import java.util.Vector;
-import java.util.Random;
-import java.util.Iterator;
+import java.util.*;
 
 public class Habitat {
     private final int width;
@@ -38,7 +34,7 @@ public class Habitat {
     }
     public void Update(long time) {
         this.time = time;
-        DeleteExpiredObjects();
+        RemoveExpiredObjects(FindExpiredObjects());
         SpawnCapitalBuilding();
         SpawnWoodenBuilding();
     }
@@ -80,26 +76,28 @@ public class Habitat {
             }
         }
     }
-    public void DeleteExpiredObjects() {
-        for (Building building : this.buildings) {
-            boolean shouldDelete = false;
+    private Vector<Building> FindExpiredObjects() {
+        Vector<Building> expired = new Vector<>();
+
+        for (Building building : buildings) {
             if (building instanceof WoodenBuilding) {
-                if (this.time - building.getSpawnTime() >= WoodenBuilding.getLifeTime()) {
-                    shouldDelete = true;
+                if (time - building.getSpawnTime() >= WoodenBuilding.getLifeTime()) {
+                    expired.add(building);
                 }
             } else {
-                if (this.time - building.getSpawnTime() >= CapitalBuilding.getLifeTime()) {
-                    shouldDelete = true;
+                if (time - building.getSpawnTime() >= CapitalBuilding.getLifeTime()) {
+                    expired.add(building);
                 }
             }
-            if (shouldDelete) {
-                RemoveObject(building);
-            }
         }
+
+        return expired;
     }
-    private void RemoveObject(Building building) {
-        this.ids.remove(building.getId());
-        this.spawnTimeMap.remove(building.getId());
-        this.buildings.remove(building);
+    private void RemoveExpiredObjects(Vector<Building> expired) {
+        for (Building building : expired) {
+            this.ids.remove(building.getId());
+            this.spawnTimeMap.remove(building.getId());
+            this.buildings.remove(building);
+        }
     }
 }

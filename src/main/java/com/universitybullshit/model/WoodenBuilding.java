@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class WoodenBuilding extends Building {
     @Getter
-    private long id;
+    private final long id;
     @Getter
     private static long interval = BuildingDto.getWoodenBuildingInterval();
     @Getter
@@ -15,7 +15,7 @@ public class WoodenBuilding extends Building {
     private int x;
     private int y;
     @Getter
-    private long spawnTime;
+    private final long spawnTime;
     @Getter
     private static long lifeTime = BuildingDto.getWoodenBuildingLifeTime();
 
