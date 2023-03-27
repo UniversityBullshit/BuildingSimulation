@@ -32,13 +32,13 @@ public class Habitat {
         this.woodenBuildingsCount = 0;
         this.capitalBuildingsCount = 0;
     }
-    public void Update(long time) {
+    public void update(long time) {
         this.time = time;
-        RemoveExpiredObjects(FindExpiredObjects());
-        SpawnCapitalBuilding();
-        SpawnWoodenBuilding();
+        removeExpiredObjects(findExpiredObjects());
+        spawnCapitalBuilding();
+        spawnWoodenBuilding();
     }
-    private void SpawnWoodenBuilding() {
+    private void spawnWoodenBuilding() {
         Random generator = new Random();
 
         double chance = generator.nextDouble();
@@ -57,7 +57,7 @@ public class Habitat {
             }
         }
     }
-    private void SpawnCapitalBuilding() {
+    private void spawnCapitalBuilding() {
         Random generator = new Random();
 
         double chance = generator.nextDouble();
@@ -76,7 +76,7 @@ public class Habitat {
             }
         }
     }
-    private Vector<Building> FindExpiredObjects() {
+    private Vector<Building> findExpiredObjects() {
         Vector<Building> expired = new Vector<>();
 
         for (Building building : buildings) {
@@ -93,7 +93,7 @@ public class Habitat {
 
         return expired;
     }
-    private void RemoveExpiredObjects(Vector<Building> expired) {
+    private void removeExpiredObjects(Vector<Building> expired) {
         for (Building building : expired) {
             this.ids.remove(building.getId());
             this.spawnTimeMap.remove(building.getId());

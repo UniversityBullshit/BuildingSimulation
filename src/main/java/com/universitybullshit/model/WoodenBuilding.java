@@ -25,13 +25,13 @@ public class WoodenBuilding extends Building {
         this.spawnTime = time;
         this.id = AtomicIdCounter.nextId();
     }
-    public static void SetDefaults(long interval, double probability, long lifeTime) {
+    public static void setDefaults(long interval, double probability, long lifeTime) {
         WoodenBuilding.interval = interval;
         WoodenBuilding.probability = probability;
         WoodenBuilding.lifeTime = lifeTime;
     }
     @Override
-    public ArrayList<Integer> GetCoordinates() {
+    public ArrayList<Integer> getCoordinates() {
         ArrayList<Integer> coordinates = new ArrayList<>();
         coordinates.add(this.x);
         coordinates.add(this.y);

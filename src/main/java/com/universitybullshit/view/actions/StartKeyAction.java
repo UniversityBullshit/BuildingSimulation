@@ -19,7 +19,7 @@ public class StartKeyAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.controller.StartSimulation();
+        this.controller.startSimulation();
         this.area.setAreaUpdating(true);
         CompletableFuture.runAsync(this.area::update);
     }

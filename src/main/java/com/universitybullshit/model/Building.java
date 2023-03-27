@@ -18,5 +18,5 @@ public abstract class Building {
     @Getter
     private static long lifeTime;
 
-    public abstract ArrayList<Integer> GetCoordinates();
+    public abstract ArrayList<Integer> getCoordinates();
 }

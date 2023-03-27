@@ -16,7 +16,7 @@ public class StopKeyAction extends AbstractAction {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.controller.StopSimulation();
+        this.controller.stopSimulation();
         this.area.setAreaUpdating(false);
     }
 }
