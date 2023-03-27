@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class CapitalBuilding extends Building {
     @Getter
-    private long id;
+    private final long id;
     @Getter
     private static long interval = BuildingDto.getCapitalBuildingInterval();
     @Getter
@@ -15,7 +15,7 @@ public class CapitalBuilding extends Building {
     private int x;
     private int y;
     @Getter
-    private long spawnTime;
+    private final long spawnTime;
     @Getter
     private static long lifeTime = BuildingDto.getCapitalBuildingLifeTime();
 
