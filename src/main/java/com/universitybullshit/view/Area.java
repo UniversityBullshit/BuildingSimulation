@@ -1,14 +1,16 @@
 package com.universitybullshit.view;
 
+import com.universitybullshit.controller.HabitatController;
+import com.universitybullshit.model.CapitalBuilding;
 import com.universitybullshit.view.component.ImageFactory;
+import com.universitybullshit.model.Building;
 import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
-//import java.awt.geom.AffineTransform;
-//import java.awt.image.BufferedImage;
-//import java.awt.image.BufferedImageOp;
-//import java.awt.image.ImageObserver;
+import java.util.ArrayList;
+import java.util.Vector;
+
 
 public class Area extends JPanel {
     private static final JFrame ctx = MainFrame.getCtx();
@@ -16,20 +18,18 @@ public class Area extends JPanel {
     private final int height;
     private final JPanel root;
     private final ImageFactory imageFactory = new ImageFactory();
+    private final HabitatController controller;
     @Setter
     private boolean isAreaUpdating = false;
+//    private Vector<Building> buildingsCache = new Vector<>();
 
-    public Area(int width, int height, JPanel root) {
+    public Area(int width, int height, JPanel root, HabitatController controller) {
         this.width = width;
         this.height = height;
         this.root = root;
+        this.controller = controller;
     }
 
-//    private void paint(Graphics g) {
-//        Graphics2D g2D = (Graphics2D) g;
-//        g2D.drawImage(imageFactory.getCapitalBuilding(), 0, 0, null);
-//    }
-    
     public void create() {
         this.root.setLayout(null);
         ctx.add(this.root, BorderLayout.CENTER);
@@ -42,14 +42,37 @@ public class Area extends JPanel {
 
     public void update() {
         while (isAreaUpdating) {
-//            area.add(new JLabel(imageFactory.getWoodenBuilding()));
+            spawnBuilding();
             this.updateUI();
-            System.out.println("Area updated!");
             try {
-                Thread.sleep(2000);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
+    }
+
+    private void spawnBuilding() {
+        Vector<Building> buildings = this.controller.getBuildings();
+        System.out.println(buildings.size());
+        for (Building building : buildings) {
+            ArrayList<Integer> coords = building.getCoordinates();
+            BuildingInstance buildingInstance = new BuildingInstance(building instanceof CapitalBuilding, coords.get(0), coords.get(1));
+            this.add(buildingInstance);
+            this.remove(buildingInstance);
+        }
+//        Vector<Building> buildings = this.controller.getBuildings();
+//        if (this.buildingsCache.isEmpty() && !buildings.isEmpty()) {
+//            this.buildingsCache = buildings;
+//            for (Building building : this.buildingsCache) {
+//                ArrayList<Integer> coords = building.getCoordinates();
+//                BuildingInstance buildingInstance = new BuildingInstance(building instanceof CapitalBuilding,
+//                        coords.get(0),
+//                        coords.get(1));
+//                this.add(buildingInstance);
+//            }
+//        } else {
+//            System.out.printf("%d %d", buildings, buildingsCache);
+//        }
     }
 }
