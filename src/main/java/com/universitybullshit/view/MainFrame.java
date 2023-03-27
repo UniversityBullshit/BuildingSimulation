@@ -33,11 +33,15 @@ public class MainFrame {
     private static void createMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu help = new JMenu("Help");
+        JMenu options = new JMenu("Options");
+        JMenuItem config = new JMenuItem("Configure");
         JMenuItem controls = new JMenuItem("Controls");
         JMenuItem about = new JMenuItem("About");
         AboutMenuItemListener actionListener = new AboutMenuItemListener();
         help.add(controls);
         help.add(about);
+        options.add(config);
+        menuBar.add(options);
         menuBar.add(help);
         about.addActionListener(actionListener);
         frame.setJMenuBar(menuBar);
