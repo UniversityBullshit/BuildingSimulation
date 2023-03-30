@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class ComponentFabric {
-    private static final Map<String, ArrayList<Object>> componentsList = new HashMap<>();
-    public static <T> void createComponent(T component, String name) {
+    private final Map<String, ArrayList<Object>> componentsList = new HashMap<>();
+    public <T> void createComponent(T component, String name) {
         componentsList.put(name, new ArrayList<>());
         componentsList.get(name).add(component);
     }
 
-    public static void setupConstraints(String name, Integer gridx, Integer gridy, Integer gridwidth, Integer gridheight, Integer fill, Integer anchor) {
+    public void setupConstraints(String name, Integer gridx, Integer gridy, Integer gridwidth, Integer gridheight, Integer fill, Integer anchor) {
         GridBagConstraints constraints = new GridBagConstraints();
         if (gridx != null) constraints.gridx = gridx;
         if (gridy != null) constraints.gridy = gridy;
@@ -23,11 +23,11 @@ public final class ComponentFabric {
         componentsList.get(name).add(constraints);
     }
 
-    public static <T> T getComponent(String key) {
+    public <T> T getComponent(String key) {
         return (T) componentsList.get(key).get(0);
     }
 
-    public static <T> T getConstraints(String key) {
+    public <T> T getConstraints(String key) {
         return (T) componentsList.get(key).get(1);
     }
 }
