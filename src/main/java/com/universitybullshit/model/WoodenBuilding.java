@@ -3,8 +3,6 @@ package com.universitybullshit.model;
 import com.universitybullshit.model.util.BuildingDto;
 import lombok.Getter;
 
-import java.util.ArrayList;
-
 public class WoodenBuilding extends Building {
     @Getter
     private final long id;
@@ -12,7 +10,9 @@ public class WoodenBuilding extends Building {
     private static long interval = BuildingDto.getWoodenBuildingInterval();
     @Getter
     private static double probability = BuildingDto.getWoodenBuildingProbability();
+    @Getter
     private int x;
+    @Getter
     private int y;
     @Getter
     private final long spawnTime;
@@ -29,12 +29,5 @@ public class WoodenBuilding extends Building {
         WoodenBuilding.interval = interval;
         WoodenBuilding.probability = probability;
         WoodenBuilding.lifeTime = lifeTime;
-    }
-    @Override
-    public ArrayList<Integer> getCoordinates() {
-        ArrayList<Integer> coordinates = new ArrayList<>();
-        coordinates.add(this.x);
-        coordinates.add(this.y);
-        return coordinates;
     }
 }
