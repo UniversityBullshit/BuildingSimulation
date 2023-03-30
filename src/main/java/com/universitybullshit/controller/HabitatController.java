@@ -39,7 +39,7 @@ public class HabitatController {
      */
     public void startSimulation() {
         this.isSimulationRunning = true;
-        CompletableFuture.runAsync(() -> simulation());
+        CompletableFuture.runAsync(this::simulation);
     }
 
     /**
