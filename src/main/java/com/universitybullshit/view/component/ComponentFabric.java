@@ -6,28 +6,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class ComponentFabric {
-    private static final Map<String, ArrayList<Object>> componentsList = new HashMap<>();
-    public static <T> void createComponent(T component, String name) {
+    private final Map<String, ArrayList<Object>> componentsList = new HashMap<>();
+    public <T> void createComponent(T component, String name) {
         componentsList.put(name, new ArrayList<>());
         componentsList.get(name).add(component);
     }
 
-    public static void setupConstraints(String name, Integer gridx, Integer gridy, Integer gridwidth, Integer gridheight, Integer fill, Integer anchor) {
+
+    public void setupConstraints(String name, HashMap<String, Integer> args) {
         GridBagConstraints constraints = new GridBagConstraints();
-        if (gridx != null) constraints.gridx = gridx;
-        if (gridy != null) constraints.gridy = gridy;
-        if (gridwidth != null) constraints.gridwidth = gridwidth;
-        if (gridheight != null) constraints.gridheight = gridheight;
-        if (fill != null) constraints.fill = fill;
-        if (anchor != null) constraints.anchor = anchor;
+        if (args.get("gridx") != null) constraints.gridx = args.get("gridx");
+        if (args.get("gridy") != null) constraints.gridy = args.get("gridy");
+        if (args.get("gridwidth") != null) constraints.gridwidth = args.get("gridwidth");
+        if (args.get("gridheight") != null) constraints.gridheight = args.get("gridheight");
+        if (args.get("fill") != null) constraints.fill = args.get("fill");
+        if (args.get("anchor") != null) constraints.anchor = args.get("anchor");
         componentsList.get(name).add(constraints);
     }
 
-    public static <T> T getComponent(String key) {
+    public <T> T getComponent(String key) {
         return (T) componentsList.get(key).get(0);
     }
 
-    public static <T> T getConstraints(String key) {
+    public <T> T getConstraints(String key) {
         return (T) componentsList.get(key).get(1);
     }
 }
