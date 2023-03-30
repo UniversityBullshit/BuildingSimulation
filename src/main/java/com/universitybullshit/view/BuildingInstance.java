@@ -1,27 +1,37 @@
 package com.universitybullshit.view;
 
+import com.universitybullshit.model.Building;
+import com.universitybullshit.model.CapitalBuilding;
+import com.universitybullshit.model.WoodenBuilding;
 import com.universitybullshit.view.component.ImageFactory;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class BuildingInstance extends JPanel {
-    private final int x;
-    private final int y;
-    private final boolean isCapitalBuilding;
+public class BuildingInstance {
+    @Getter
+    @Setter
+    private int x;
+    @Getter
+    @Setter
+    private int y;
+    @Getter
+    private boolean isCapitalBuilding = false;
+    @Getter
+    private boolean isWoodenBuilding = false;
     private final ImageFactory imageFactory = new ImageFactory();
 
-    public BuildingInstance(boolean isCapitalBuilding, int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.isCapitalBuilding = isCapitalBuilding;
-        this.setLayout(null);
-//        this.setSize(new Dimension(20, 20));
-        this.setBounds(this.x, this.y, 3, 3);
-        if (this.isCapitalBuilding)
-            this.setBackground(Color.RED);
-        else
-            this.setBackground(Color.DARK_GRAY);
+    public BuildingInstance(Building building) {
+        this.x = building.getX();
+        this.y = building.getY();
+        setType(building);
+    }
+
+    private void setType(Building building) {
+        if (building instanceof CapitalBuilding) this.isCapitalBuilding = true;
+        if (building instanceof WoodenBuilding) this.isWoodenBuilding = true;
     }
 
 //    public void paint(Graphics g) {
