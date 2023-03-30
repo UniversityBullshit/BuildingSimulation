@@ -39,7 +39,6 @@ public class HabitatController {
      */
     public void startSimulation() {
         this.isSimulationRunning = true;
-
         CompletableFuture.runAsync(() -> simulation());
     }
 
@@ -48,6 +47,13 @@ public class HabitatController {
      */
     public void stopSimulation() {
         this.isSimulationRunning = false;
+    }
+
+    /**
+     * Set context to default state
+     */
+    public void resetSimulation() {
+        this.context.reset();
     }
 
     /**
