@@ -11,11 +11,11 @@ public class Habitat {
     private long lastWoodenBuildingSpawnTime;
     private long lastCapitalBuildingSpawnTime;
     @Getter
-    private final Vector<Building> buildings;
+    private Vector<Building> buildings;
     @Getter
-    private final HashSet<Long> ids;
+    private HashSet<Long> ids;
     @Getter
-    private final TreeMap<Long, Long> spawnTimeMap;
+    private TreeMap<Long, Long> spawnTimeMap;
     @Getter
     private int woodenBuildingsCount;
     @Getter
@@ -23,6 +23,15 @@ public class Habitat {
     public Habitat(int width, int height) {
         this.width = width;
         this.height = height;
+        reset();
+    }
+    public void update(long time) {
+        this.time = time;
+        removeExpiredObjects(findExpiredObjects());
+        spawnCapitalBuilding();
+        spawnWoodenBuilding();
+    }
+    public void reset() {
         this.time = 0;
         this.lastWoodenBuildingSpawnTime = 0;
         this.lastCapitalBuildingSpawnTime = 0;
@@ -31,12 +40,6 @@ public class Habitat {
         this.spawnTimeMap = new TreeMap<>();
         this.woodenBuildingsCount = 0;
         this.capitalBuildingsCount = 0;
-    }
-    public void update(long time) {
-        this.time = time;
-        removeExpiredObjects(findExpiredObjects());
-        spawnCapitalBuilding();
-        spawnWoodenBuilding();
     }
     private void spawnWoodenBuilding() {
         Random generator = new Random();
