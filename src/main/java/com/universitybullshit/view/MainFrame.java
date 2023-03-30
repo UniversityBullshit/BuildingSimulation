@@ -1,7 +1,7 @@
 package com.universitybullshit.view;
 
 import com.universitybullshit.view.actions.AboutMenuItemListener;
-//import com.universitybullshit.view.actions.ConfigureMenuItemListener;
+import com.universitybullshit.view.actions.ConfigureMenuItemListener;
 import com.universitybullshit.view.actions.CreateButtonListener;
 import com.universitybullshit.view.component.ComponentFabric;
 
@@ -40,13 +40,13 @@ public class MainFrame {
         JMenuItem controls = new JMenuItem("Controls");
         JMenuItem about = new JMenuItem("About");
         AboutMenuItemListener aboutListener = new AboutMenuItemListener();
-        //ConfigureMenuItemListener configListener = new ConfigureMenuItemListener();
+        ConfigureMenuItemListener configListener = new ConfigureMenuItemListener();
         help.add(controls);
         help.add(about);
         options.add(config);
         menuBar.add(options);
         menuBar.add(help);
-        //config.addActionListener(configListener);
+        config.addActionListener(configListener);
         about.addActionListener(aboutListener);
         frame.setJMenuBar(menuBar);
     }
