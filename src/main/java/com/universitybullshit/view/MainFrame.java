@@ -1,6 +1,7 @@
 package com.universitybullshit.view;
 
 import com.universitybullshit.view.actions.AboutMenuItemListener;
+import com.universitybullshit.view.actions.ConfigureMenuItemListener;
 import com.universitybullshit.view.actions.CreateButtonListener;
 import com.universitybullshit.view.component.ComponentFabric;
 
@@ -37,17 +38,21 @@ public class MainFrame {
         JMenuItem config = new JMenuItem("Configure");
         JMenuItem controls = new JMenuItem("Controls");
         JMenuItem about = new JMenuItem("About");
-        AboutMenuItemListener actionListener = new AboutMenuItemListener();
+        AboutMenuItemListener aboutListener = new AboutMenuItemListener();
+        ConfigureMenuItemListener configListener = new ConfigureMenuItemListener();
         help.add(controls);
         help.add(about);
         options.add(config);
         menuBar.add(options);
         menuBar.add(help);
-        about.addActionListener(actionListener);
+        config.addActionListener(configListener);
+        about.addActionListener(aboutListener);
         frame.setJMenuBar(menuBar);
     }
 
     private static JPanel createTopPane() {
+        ComponentFabric componentFabric = new ComponentFabric();
+
         JPanel rootPanel = new JPanel();
         rootPanel.setLayout(new BorderLayout());
         rootPanel.setBorder(BorderFactory.createTitledBorder("Menu"));
@@ -66,30 +71,30 @@ public class MainFrame {
         leftPanel.setLayout(new GridBagLayout());
 
         // Create components
-        ComponentFabric.createComponent(new JLabel("Width"), "width_label");
-        ComponentFabric.setupConstraints("width_label", 0, 0, null, null, null, GridBagConstraints.FIRST_LINE_START);
-        JLabel widthLabel = ComponentFabric.getComponent("width_label");
-        GridBagConstraints widthLabelConstraints = ComponentFabric.getConstraints("width_label");
+        componentFabric.createComponent(new JLabel("Width"), "width_label");
+        componentFabric.setupConstraints("width_label", 0, 0, null, null, null, GridBagConstraints.FIRST_LINE_START);
+        JLabel widthLabel = componentFabric.getComponent("width_label");
+        GridBagConstraints widthLabelConstraints = componentFabric.getConstraints("width_label");
 
-        ComponentFabric.createComponent(new JLabel("Height"), "height_label");
-        ComponentFabric.setupConstraints("height_label", 1, 0, null, null, null, GridBagConstraints.FIRST_LINE_START);
-        JLabel heightLabel = ComponentFabric.getComponent("height_label");
-        GridBagConstraints heightLabelConstraints = ComponentFabric.getConstraints("height_label");
+        componentFabric.createComponent(new JLabel("Height"), "height_label");
+        componentFabric.setupConstraints("height_label", 1, 0, null, null, null, GridBagConstraints.FIRST_LINE_START);
+        JLabel heightLabel = componentFabric.getComponent("height_label");
+        GridBagConstraints heightLabelConstraints = componentFabric.getConstraints("height_label");
 
-        ComponentFabric.createComponent(new JTextField(8), "width_textfield");
-        ComponentFabric.setupConstraints("width_textfield", 0, 1, null, null, null, null);
-        JTextField widthTextField = ComponentFabric.getComponent("width_textfield");
-        GridBagConstraints widthTextFieldConstraints = ComponentFabric.getConstraints("width_textfield");
+        componentFabric.createComponent(new JTextField(8), "width_textfield");
+        componentFabric.setupConstraints("width_textfield", 0, 1, null, null, null, null);
+        JTextField widthTextField = componentFabric.getComponent("width_textfield");
+        GridBagConstraints widthTextFieldConstraints = componentFabric.getConstraints("width_textfield");
 
-        ComponentFabric.createComponent(new JTextField(8), "height_textfield");
-        ComponentFabric.setupConstraints("height_textfield", 1, 1, null, null, null, null);
-        JTextField heightTextField = ComponentFabric.getComponent("height_textfield");
-        GridBagConstraints heightTextFieldConstraints = ComponentFabric.getConstraints("height_textfield");
+        componentFabric.createComponent(new JTextField(8), "height_textfield");
+        componentFabric.setupConstraints("height_textfield", 1, 1, null, null, null, null);
+        JTextField heightTextField = componentFabric.getComponent("height_textfield");
+        GridBagConstraints heightTextFieldConstraints = componentFabric.getConstraints("height_textfield");
 
-        ComponentFabric.createComponent(new JButton("Create"), "create_button");
-        ComponentFabric.setupConstraints("create_button", null, 2, 2, null, GridBagConstraints.HORIZONTAL, null);
-        JButton createButton = ComponentFabric.getComponent("create_button");
-        GridBagConstraints createButtonConstraints = ComponentFabric.getConstraints("create_button");
+        componentFabric.createComponent(new JButton("Create"), "create_button");
+        componentFabric.setupConstraints("create_button", null, 2, 2, null, GridBagConstraints.HORIZONTAL, null);
+        JButton createButton = componentFabric.getComponent("create_button");
+        GridBagConstraints createButtonConstraints = componentFabric.getConstraints("create_button");
         //
         // Adding components
         leftPanel.add(widthLabel, widthLabelConstraints);
