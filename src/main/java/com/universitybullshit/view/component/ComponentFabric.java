@@ -12,14 +12,15 @@ public final class ComponentFabric {
         componentsList.get(name).add(component);
     }
 
-    public void setupConstraints(String name, Integer gridx, Integer gridy, Integer gridwidth, Integer gridheight, Integer fill, Integer anchor) {
+
+    public void setupConstraints(String name, HashMap<String, Integer> args) {
         GridBagConstraints constraints = new GridBagConstraints();
-        if (gridx != null) constraints.gridx = gridx;
-        if (gridy != null) constraints.gridy = gridy;
-        if (gridwidth != null) constraints.gridwidth = gridwidth;
-        if (gridheight != null) constraints.gridheight = gridheight;
-        if (fill != null) constraints.fill = fill;
-        if (anchor != null) constraints.anchor = anchor;
+        if (args.get("gridx") != null) constraints.gridx = args.get("gridx");
+        if (args.get("gridy") != null) constraints.gridy = args.get("gridy");
+        if (args.get("gridwidth") != null) constraints.gridwidth = args.get("gridwidth");
+        if (args.get("gridheight") != null) constraints.gridheight = args.get("gridheight");
+        if (args.get("fill") != null) constraints.fill = args.get("fill");
+        if (args.get("anchor") != null) constraints.anchor = args.get("anchor");
         componentsList.get(name).add(constraints);
     }
 
