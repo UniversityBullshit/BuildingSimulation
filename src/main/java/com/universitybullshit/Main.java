@@ -1,8 +1,5 @@
 package com.universitybullshit;
 
-//import com.universitybullshit.controller.HabitatController;
-//import com.universitybullshit.model.Habitat;
-
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 
