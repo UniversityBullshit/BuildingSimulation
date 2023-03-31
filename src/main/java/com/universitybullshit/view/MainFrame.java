@@ -2,6 +2,7 @@ package com.universitybullshit.view;
 
 import com.universitybullshit.view.actions.AboutMenuItemListener;
 //import com.universitybullshit.view.actions.ConfigureMenuItemListener;
+import com.universitybullshit.view.actions.ControlsMenuItemListener;
 import com.universitybullshit.view.actions.CreateButtonListener;
 import com.universitybullshit.view.component.ComponentFabric;
 
@@ -10,8 +11,6 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class MainFrame {
-    private static final int width = 800;
-    private static final int height = 600;
     private static final String title = "BuildingSpawner";
     private static final JFrame frame = new JFrame(title);
     private static final JPanel root = new JPanel();
@@ -20,56 +19,49 @@ public class MainFrame {
         return frame;
     }
 
-    public static void createFrame() {
+    public static void mainMenu() {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(width, height));
-        frame.setLayout(new BorderLayout());
+        frame.setMinimumSize(new Dimension(400, 600));
+        frame.setLayout(new GridBagLayout());
         frame.pack();
         frame.setLocationRelativeTo(null);
-        frame.add(createTopPane(), BorderLayout.NORTH);
-        frame.add(root, BorderLayout.CENTER);
+        frame.add(createSimulationSettings());
         createMenu();
         frame.setVisible(true);
+    }
+
+    public static void simulationWindow(int width, int height) {
+        frame.setMinimumSize(new Dimension(width + 20, height + 60));
+        frame.setLayout(new BorderLayout());
+
+        frame.getContentPane().removeAll();
+
+        ((JPanel)frame.getContentPane()).revalidate();
     }
 
     private static void createMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu help = new JMenu("Help");
-        JMenu options = new JMenu("Options");
-        JMenuItem config = new JMenuItem("Configure");
         JMenuItem controls = new JMenuItem("Controls");
         JMenuItem about = new JMenuItem("About");
+        ControlsMenuItemListener controlsListener = new ControlsMenuItemListener();
         AboutMenuItemListener aboutListener = new AboutMenuItemListener();
-        //ConfigureMenuItemListener configListener = new ConfigureMenuItemListener();
         help.add(controls);
         help.add(about);
-        options.add(config);
-        menuBar.add(options);
         menuBar.add(help);
-        //config.addActionListener(configListener);
+        controls.addActionListener(controlsListener);
         about.addActionListener(aboutListener);
         frame.setJMenuBar(menuBar);
     }
 
-    private static JPanel createTopPane() {
+    private static JPanel createSimulationSettings() {
         ComponentFabric componentFabric = new ComponentFabric();
 
         JPanel rootPanel = new JPanel();
         rootPanel.setLayout(new BorderLayout());
-        rootPanel.setBorder(BorderFactory.createTitledBorder("Menu"));
+        rootPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black),"Simulation settings"));
 
-        JPanel leftPanel = new JPanel();
-
-        JPanel rightPanel = new JPanel();
-        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-
-        rootPanel.add(leftPanel, BorderLayout.WEST);
-        rootPanel.add(rightPanel, BorderLayout.EAST);
-
-        rightPanel.add(new JLabel("FPS: 25"));
-        rightPanel.add(new JLabel("Simulation time: 228"));
-
-        leftPanel.setLayout(new GridBagLayout());
+        rootPanel.setLayout(new GridBagLayout());
 
         // Create components
         componentFabric.createComponent(new JLabel("Width"), "width_label");
@@ -90,7 +82,7 @@ public class MainFrame {
         JLabel heightLabel = componentFabric.getComponent("height_label");
         GridBagConstraints heightLabelConstraints = componentFabric.getConstraints("height_label");
 
-        componentFabric.createComponent(new JTextField(8), "width_textfield");
+        componentFabric.createComponent(new JTextField("800",8), "width_textfield");
         HashMap<String, Integer> widthFieldMap = new HashMap<>();
         widthFieldMap.put("gridx", 0);
         widthFieldMap.put("gridy", 1);
@@ -98,7 +90,7 @@ public class MainFrame {
         JTextField widthTextField = componentFabric.getComponent("width_textfield");
         GridBagConstraints widthTextFieldConstraints = componentFabric.getConstraints("width_textfield");
 
-        componentFabric.createComponent(new JTextField(8), "height_textfield");
+        componentFabric.createComponent(new JTextField("600",8), "height_textfield");
         HashMap<String, Integer> heightFieldMap = new HashMap<>();
         heightFieldMap.put("gridx", 1);
         heightFieldMap.put("gridy", 1);
@@ -114,13 +106,14 @@ public class MainFrame {
         componentFabric.setupConstraints("create_button", createButtonMap);
         JButton createButton = componentFabric.getComponent("create_button");
         GridBagConstraints createButtonConstraints = componentFabric.getConstraints("create_button");
+
         //
         // Adding components
-        leftPanel.add(widthLabel, widthLabelConstraints);
-        leftPanel.add(heightLabel, heightLabelConstraints);
-        leftPanel.add(widthTextField, widthTextFieldConstraints);
-        leftPanel.add(heightTextField, heightTextFieldConstraints);
-        leftPanel.add(createButton, createButtonConstraints);
+        rootPanel.add(widthLabel, widthLabelConstraints);
+        rootPanel.add(heightLabel, heightLabelConstraints);
+        rootPanel.add(widthTextField, widthTextFieldConstraints);
+        rootPanel.add(heightTextField, heightTextFieldConstraints);
+        rootPanel.add(createButton, createButtonConstraints);
         //
         // "Create" button action
         CreateButtonListener actionListener = new CreateButtonListener(widthTextField, heightTextField, root);
@@ -128,5 +121,4 @@ public class MainFrame {
         //
         return rootPanel;
     }
-
 }
