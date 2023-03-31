@@ -9,9 +9,7 @@ import java.util.concurrent.TimeUnit;
 import com.universitybullshit.view.MainFrame;
 public class Main {
     public static void main(String[] args) {
-//        HabitatController habitatController = new HabitatController(800, 600);
-//        habitatController.StartSimulation();
-        MainFrame.createFrame();
+        MainFrame.mainMenu();
         ForkJoinPool.commonPool().awaitQuiescence(5, TimeUnit.SECONDS);
     }
 }
