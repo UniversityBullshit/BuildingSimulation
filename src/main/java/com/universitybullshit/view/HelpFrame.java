@@ -27,7 +27,7 @@ public class HelpFrame {
         dialog.add(imgPanel, BorderLayout.NORTH);
         dialog.add(panel, BorderLayout.CENTER);
         panel.add(new JLabel("BuildingSpawner"));
-        panel.add(new JLabel("Version: 1.0-SNAPSHOT"));
+        panel.add(new JLabel("Version: 1.0"));
         panel.add(new JLabel("Authors: Sergei Cheremisin, Arounte"));
         return dialog;
     }
