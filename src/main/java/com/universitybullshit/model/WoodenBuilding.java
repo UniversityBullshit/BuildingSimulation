@@ -2,6 +2,7 @@ package com.universitybullshit.model;
 
 import com.universitybullshit.model.util.BuildingDto;
 import lombok.Getter;
+import lombok.Setter;
 
 public class WoodenBuilding extends Building {
     @Getter
@@ -11,7 +12,9 @@ public class WoodenBuilding extends Building {
     @Getter
     private static double probability = BuildingDto.getWoodenBuildingProbability();
     @Getter
+    @Setter
     private int x;
+    @Setter
     @Getter
     private int y;
     @Getter

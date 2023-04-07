@@ -1,5 +1,6 @@
 package com.universitybullshit.model;
 import lombok.Getter;
+import lombok.Setter;
 
 public abstract class Building {
     @Getter
@@ -9,8 +10,10 @@ public abstract class Building {
     @Getter
     private static double probability;
     @Getter
+    @Setter
     private int x;
     @Getter
+    @Setter
     private int y;
     @Getter
     private long spawnTime;
