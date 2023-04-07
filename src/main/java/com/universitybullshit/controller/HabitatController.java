@@ -19,9 +19,9 @@ import java.util.concurrent.CompletableFuture;
  */
 public class HabitatController {
     private boolean isSimulationRunning = false;
-    private long simulationStartTime;
+    private final long simulationStartTime;
     private long simulationCurrentTime;
-    private Habitat context;
+    private final Habitat context;
 
     /**
      * Constructor gets Habitat instance and provides interaction with it.
