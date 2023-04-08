@@ -1,7 +1,7 @@
 package com.universitybullshit.view.actions;
 
 import com.universitybullshit.view.HelpFrame;
-import com.universitybullshit.view.MainFrame;
+import com.universitybullshit.view.MainMenu;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class AboutMenuItemListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-        JDialog aboutDialog = HelpFrame.create(MainFrame.getCtx(), new String("About"));
+        JDialog aboutDialog = HelpFrame.create(MainMenu.getContext(), new String("About"));
         aboutDialog.setVisible(true);
     }
 }
