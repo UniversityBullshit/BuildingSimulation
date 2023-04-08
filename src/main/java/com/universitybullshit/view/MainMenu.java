@@ -110,7 +110,7 @@ public class MainMenu {
         WidthPanel = createField("Width");
         setup.add(WidthPanel);
 
-        setup.add(Box.createHorizontalStrut(9));
+        setup.add(Box.createHorizontalStrut(8));
 
         HeightPanel = createField("Height");
         setup.add(HeightPanel);
@@ -122,11 +122,14 @@ public class MainMenu {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.setBackground(Color.WHITE);
+        panel.setBorder(new EmptyBorder(0,20,0,20));
 
         JLabel label = new JLabel(fieldName);
         label.setFont(fontFactory.getKadwaRegularFont().deriveFont(Font.PLAIN, 18));
 
         HintTextField textField = new HintTextField("500-1000",9);
+        textField.setPreferredSize(new Dimension(160,30));
+        textField.setRadius(15);
         textField.setFont(fontFactory.getKadwaRegularFont().deriveFont(Font.PLAIN, 15));
         textField.setForeground(new Color(113,113,113));
         textField.setBorder(BorderFactory.createCompoundBorder(
