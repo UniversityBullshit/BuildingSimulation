@@ -17,7 +17,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class Area extends JPanel {
-    private static final JFrame ctx = MainFrame.getCtx();
+    private static final JFrame ctx = MainMenu.getContext();
     private final int width;
     private final int height;
     private final JPanel root;
