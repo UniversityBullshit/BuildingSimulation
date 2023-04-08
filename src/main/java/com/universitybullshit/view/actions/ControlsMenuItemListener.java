@@ -1,7 +1,6 @@
 package com.universitybullshit.view.actions;
 
 import com.universitybullshit.view.ControlsFrame;
-import com.universitybullshit.view.MainFrame;
 import com.universitybullshit.view.MainMenu;
 
 import javax.swing.*;

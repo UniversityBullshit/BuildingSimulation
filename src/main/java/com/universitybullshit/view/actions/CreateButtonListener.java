@@ -2,9 +2,7 @@ package com.universitybullshit.view.actions;
 
 import com.universitybullshit.controller.HabitatController;
 import com.universitybullshit.view.Area;
-import com.universitybullshit.view.MainFrame;
 import com.universitybullshit.view.MainMenu;
-import com.universitybullshit.view.SimulationArea;
 import com.universitybullshit.view.util.HintTextField;
 import com.universitybullshit.view.util.KeyboardInput;
 
@@ -12,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.charset.MalformedInputException;
 
 public class CreateButtonListener implements ActionListener {
     private final HintTextField width;
