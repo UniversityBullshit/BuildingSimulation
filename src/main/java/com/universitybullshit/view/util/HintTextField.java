@@ -11,35 +11,24 @@ import java.awt.event.FocusEvent;
 public class HintTextField extends JTextField {
     @Getter
     @Setter
+    private Color borderColor = null;
+    @Getter
+    @Setter
     private int radius;
     public HintTextField(String hint) {
         setText(hint);
 
-        addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (getText().equals(hint)) {
-                    setText("");
-                } else {
-                    setText(getText());
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (getText().equals(hint) || getText().length() == 0) {
-                    setText(hint);
-                } else {
-                    setText(getText());
-                }
-            }
-        });
+        addFocusListener(getFocusAdapter(hint));
     }
     public HintTextField(String hint, int columns) {
         setText(hint);
         setColumns(columns);
 
-        addFocusListener(new FocusAdapter() {
+        addFocusListener(getFocusAdapter(hint));
+    }
+
+    private FocusAdapter getFocusAdapter(String hint) {
+        return new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 if (getText().equals(hint)) {
@@ -57,7 +46,7 @@ public class HintTextField extends JTextField {
                     setText(getText());
                 }
             }
-        });
+        };
     }
 
     @Override
@@ -78,8 +67,7 @@ public class HintTextField extends JTextField {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-
-        g2d.setColor(getForeground());
+        g2d.setColor(this.borderColor == null ? getForeground() : this.borderColor);
         g2d.drawRoundRect(0,0,getWidth() - 1, getHeight() - 1, radius, radius);
     }
 }
