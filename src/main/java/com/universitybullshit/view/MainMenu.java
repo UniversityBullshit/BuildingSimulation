@@ -20,20 +20,29 @@ public class MainMenu {
     private static final FontFactory fontFactory = new FontFactory();
     private static JPanel WidthPanel;
     private static JPanel HeightPanel;
-    public static void Draw() {
+    public static void draw() {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(400, 650);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setIconImage(imageFactory.getIcon());
-        GenerateMenu();
+        generateMenu();
 
         frame.pack();
         frame.requestFocusInWindow();
         frame.setVisible(true);
     }
 
-    private static void GenerateMenu() {
+    public static void clearFrame() {
+        frame.getContentPane().removeAll();
+        ((JPanel)frame.getContentPane()).revalidate();
+    }
+
+    public static JFrame getContext() {
+        return frame;
+    }
+
+    private static void generateMenu() {
         createMenuBar();
         JPanel rootPanel = new JPanel();
         rootPanel.setLayout(new BoxLayout(rootPanel, BoxLayout.Y_AXIS));
@@ -160,8 +169,8 @@ public class MainMenu {
         button.setFont(fontFactory.getKadwaRegularFont().deriveFont(Font.PLAIN, 18));
 
         CreateButtonListener createButtonListener = new CreateButtonListener(
-                (JTextField) WidthPanel.getComponent(1),
-                (JTextField) HeightPanel.getComponent(1),
+                (HintTextField) WidthPanel.getComponent(1),
+                (HintTextField) HeightPanel.getComponent(1),
                 root);
 
         button.addActionListener(createButtonListener);
