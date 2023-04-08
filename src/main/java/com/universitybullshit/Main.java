@@ -1,8 +1,9 @@
 package com.universitybullshit;
 
-import com.universitybullshit.view.MainFrame;
+import com.universitybullshit.view.MainMenu;
+
 public class Main {
     public static void main(String[] args) {
-        MainFrame.mainMenu();
+        MainMenu.Draw();
     }
 }
