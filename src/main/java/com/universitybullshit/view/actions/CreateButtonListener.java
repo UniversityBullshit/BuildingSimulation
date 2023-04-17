@@ -1,10 +1,8 @@
 package com.universitybullshit.view.actions;
 
-import com.universitybullshit.controller.HabitatController;
-import com.universitybullshit.view.Area;
 import com.universitybullshit.view.MainMenu;
+import com.universitybullshit.view.SimulationWindow;
 import com.universitybullshit.view.util.HintTextField;
-import com.universitybullshit.view.util.KeyboardInput;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,15 +10,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CreateButtonListener implements ActionListener {
-    private final HintTextField width;
-    private final HintTextField height;
-    private int width_i = 0;
-    private int height_i = 0;
+    private final HintTextField width_field;
+    private final HintTextField height_field;
+    private int width = 0;
+    private int height = 0;
     private final JFrame context = MainMenu.getContext();
     private final JPanel root;
-    public CreateButtonListener(HintTextField width, HintTextField height, JPanel root) {
-        this.width = width;
-        this.height = height;
+    public CreateButtonListener(HintTextField width_field, HintTextField height_field, JPanel root) {
+        this.width_field = width_field;
+        this.height_field = height_field;
         this.root = root;
     }
     @Override
@@ -31,10 +29,8 @@ public class CreateButtonListener implements ActionListener {
     }
 
     private boolean verify() {
-        boolean isValid = false;
-
-        boolean isValidWidth = verifyWidth(this.width.getText());
-        boolean isValidHeight = verifyHeight(this.height.getText());
+        boolean isValidWidth = verifyWidth(this.width_field.getText());
+        boolean isValidHeight = verifyHeight(this.height_field.getText());
 
         return isValidHeight && isValidWidth;
     }
@@ -43,13 +39,13 @@ public class CreateButtonListener implements ActionListener {
         boolean isValid = false;
 
         if (text != null && text.matches("\\d+")) {
-            width_i = Integer.parseInt(text);
-            isValid = (width_i >= 500 && width_i <= 1000);
+            width = Integer.parseInt(text);
+            isValid = (width >= 500 && width <= 1000);
         }
 
-        if (isValid) {
-            this.width.setBorderColor(Color.RED);
-            this.width.repaint();
+        if (!isValid) {
+            this.width_field.setBorderColor(Color.RED);
+            this.width_field.repaint();
         }
 
         return isValid;
@@ -59,13 +55,13 @@ public class CreateButtonListener implements ActionListener {
         boolean isValid = false;
 
         if (text != null && text.matches("\\d+")) {
-            height_i = Integer.parseInt(text);
-            isValid = (height_i >= 500 && height_i <= 1000);
+            height = Integer.parseInt(text);
+            isValid = (height >= 500 && height <= 1000);
         }
 
         if (!isValid) {
-            this.height.setBorderColor(Color.RED);
-            this.height.repaint();
+            this.height_field.setBorderColor(Color.RED);
+            this.height_field.repaint();
         }
 
         return isValid;
@@ -73,10 +69,11 @@ public class CreateButtonListener implements ActionListener {
 
     private void nextScreen() {
         MainMenu.clearFrame();
-        HabitatController controller = new HabitatController(this.width_i, this.height_i);
-        Area area = new Area(this.width_i, this.height_i, this.root, controller);
-        JRootPane rootPane = this.context.getRootPane();
-        KeyboardInput.createKeyBindings(rootPane, controller, area);
-        area.create();
+        SimulationWindow.draw(this.context, this.width, this.height);
+//        HabitatController controller = new HabitatController(this.width_i, this.height_i);
+//        Area area = new Area(this.width_i, this.height_i, this.root, controller);
+//        JRootPane rootPane = this.context.getRootPane();
+//        KeyboardInput.createKeyBindings(rootPane, controller, area);
+//        area.create();
     }
 }
