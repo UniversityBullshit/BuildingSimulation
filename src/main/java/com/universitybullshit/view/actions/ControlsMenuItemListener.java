@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class ControlsMenuItemListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-        JDialog controlsDialog = ControlsFrame.create(MainMenu.getContext(), new String("Controls"));
+        JDialog controlsDialog = ControlsFrame.create(MainMenu.getContext(), "Controls");
         controlsDialog.setVisible(true);
     }
 }

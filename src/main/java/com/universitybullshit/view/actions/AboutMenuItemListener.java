@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class AboutMenuItemListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-        JDialog aboutDialog = HelpFrame.create(MainMenu.getContext(), new String("About"));
+        JDialog aboutDialog = HelpFrame.create(MainMenu.getContext(), "About");
         aboutDialog.setVisible(true);
     }
 }
