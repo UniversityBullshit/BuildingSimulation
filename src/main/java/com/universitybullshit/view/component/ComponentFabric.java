@@ -1,5 +1,8 @@
 package com.universitybullshit.view.component;
 
+import com.universitybullshit.view.util.ControlButton;
+
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +10,7 @@ import java.util.Map;
 
 public final class ComponentFabric {
     private final Map<String, ArrayList<Object>> componentsList = new HashMap<>();
+    private static final FontFactory fontFactory = new FontFactory();
     public <T> void createComponent(T component, String name) {
         componentsList.put(name, new ArrayList<>());
         componentsList.get(name).add(component);
@@ -30,5 +34,17 @@ public final class ComponentFabric {
 
     public <T> T getConstraints(String key) {
         return (T) componentsList.get(key).get(1);
+    }
+
+    public static void setupControlButtonDefaults(ControlButton button) {
+        button.setColorOver(new Color(20,20,20));
+        button.setColor(Color.BLACK);
+        button.setColorClick(new Color(80,80,80));
+        button.setRadius(20);
+        button.setPreferredSize(new Dimension(200, 40));
+        button.setBorder(new EmptyBorder(5,10,5,10));
+        button.setForeground(Color.WHITE);
+        button.setFocusable(false);
+        button.setFont(fontFactory.getKadwaRegularFont().deriveFont(Font.PLAIN, 18));
     }
 }
