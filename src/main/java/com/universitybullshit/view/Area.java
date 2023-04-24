@@ -17,10 +17,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class Area extends JPanel {
-    private static final JFrame ctx = MainMenu.getContext();
     private final int width;
     private final int height;
-    private final JPanel root;
     private final ImageFactory imageFactory = new ImageFactory();
     private final HabitatController controller;
     @Getter
@@ -30,21 +28,11 @@ public class Area extends JPanel {
     private final Vector<Long> deletingBuildings = new Vector<>();
     private final Vector<Building> addingBuildings = new Vector<>();
 
-    public Area(int width, int height, JPanel root, HabitatController controller) {
+    public Area(int width, int height, HabitatController controller) {
         this.width = width;
         this.height = height;
-        this.root = root;
         this.controller = controller;
-    }
-
-    public void create() {
-        this.root.setLayout(null);
-        ctx.add(this.root, BorderLayout.CENTER);
         this.setSize(new Dimension(this.width, this.height));
-        this.setBorder(BorderFactory.createTitledBorder("Area"));
-        this.setLayout(null);
-        this.root.add(this);
-        this.root.updateUI();
     }
 
     public void update() {
