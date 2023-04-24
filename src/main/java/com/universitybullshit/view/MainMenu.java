@@ -158,7 +158,7 @@ public class MainMenu {
         panel.setBackground(Color.WHITE);
 
         ControlButton button = new ControlButton("Create");
-        ComponentFabric.setupControlButtonDefaults(button);
+        ComponentFabric.setupControlButtonDark(button);
 
         CreateButtonListener createButtonListener = new CreateButtonListener(
                 (HintTextField) WidthPanel.getComponent(1),
@@ -177,7 +177,7 @@ public class MainMenu {
         panel.setBackground(Color.WHITE);
 
         ControlButton button = new ControlButton("Additional settings");
-        ComponentFabric.setupControlButtonDefaults(button);
+        ComponentFabric.setupControlButtonDark(button);
         button.setColorOver(new Color(90,90,90));
         button.setColor(new Color(80,80,80));
         button.setColorClick(new Color(100,100,100));
