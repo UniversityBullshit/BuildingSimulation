@@ -70,10 +70,5 @@ public class CreateButtonListener implements ActionListener {
     private void nextScreen() {
         MainMenu.clearFrame();
         SimulationWindow.draw(this.context, this.width, this.height);
-//        HabitatController controller = new HabitatController(this.width_i, this.height_i);
-//        Area area = new Area(this.width_i, this.height_i, this.root, controller);
-//        JRootPane rootPane = this.context.getRootPane();
-//        KeyboardInput.createKeyBindings(rootPane, controller, area);
-//        area.create();
     }
 }
