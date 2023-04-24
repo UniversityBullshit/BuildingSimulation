@@ -1,7 +1,6 @@
 package com.universitybullshit.view;
 
 import com.universitybullshit.controller.HabitatController;
-import com.universitybullshit.model.CapitalBuilding;
 import com.universitybullshit.view.component.ImageFactory;
 import com.universitybullshit.model.Building;
 import com.universitybullshit.view.util.BuildingDrawDto;
@@ -17,8 +16,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class Area extends JPanel {
-    private final int width;
-    private final int height;
     private final ImageFactory imageFactory = new ImageFactory();
     private final HabitatController controller;
     @Getter
@@ -29,10 +26,8 @@ public class Area extends JPanel {
     private final Vector<Building> addingBuildings = new Vector<>();
 
     public Area(int width, int height, HabitatController controller) {
-        this.width = width;
-        this.height = height;
         this.controller = controller;
-        this.setSize(new Dimension(this.width, this.height));
+        this.setSize(new Dimension(width, height));
     }
 
     public void update() {
