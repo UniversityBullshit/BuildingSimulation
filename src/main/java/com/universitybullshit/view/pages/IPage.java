@@ -1,7 +1,5 @@
 package com.universitybullshit.view.pages;
 
-import javax.swing.*;
-
 public interface IPage {
     /**
      * Creates all components of page
