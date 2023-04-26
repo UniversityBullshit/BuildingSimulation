@@ -13,7 +13,6 @@ public class ShowTimeAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(this.area.isShowTime());
         this.area.setShowTime(!this.area.isShowTime());
     }
 }
