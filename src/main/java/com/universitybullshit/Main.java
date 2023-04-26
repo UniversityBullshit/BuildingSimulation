@@ -1,6 +1,5 @@
 package com.universitybullshit;
 
-import com.universitybullshit.view.MainMenu;
 import com.universitybullshit.view.WindowManager;
 
 import javax.swing.*;
