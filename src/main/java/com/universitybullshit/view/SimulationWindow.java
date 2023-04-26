@@ -1,20 +1,18 @@
 package com.universitybullshit.view;
 
 import com.universitybullshit.controller.HabitatController;
-import com.universitybullshit.view.actions.ShowTimeAction;
-import com.universitybullshit.view.actions.StartKeyAction;
-import com.universitybullshit.view.actions.StopKeyAction;
+import com.universitybullshit.view.actions.*;
 import com.universitybullshit.view.component.ComponentFabric;
 import com.universitybullshit.view.component.FontFactory;
 import com.universitybullshit.view.util.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeListenerProxy;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class SimulationWindow {
     @Getter
@@ -25,7 +23,9 @@ public class SimulationWindow {
     private static int simulationAreaHeight;
     private static Area simulationArea;
     private static HabitatController controller;
-    private static boolean showTime = false;
+    @Getter
+    @Setter
+    private static boolean showInfoDialog = false;
 
     public static void draw(JFrame context, int width, int height) {
         frame = context;
@@ -57,13 +57,14 @@ public class SimulationWindow {
         controls.setLayout(new BoxLayout(controls, BoxLayout.Y_AXIS));
         controls.setPreferredSize(new Dimension(200, simulationAreaHeight + 20));
         controls.setMaximumSize(new Dimension(200, simulationAreaHeight + 20));
-        controls.setBorder(new EmptyBorder(20, 0, simulationAreaHeight - 250, 0));
+        controls.setBorder(new EmptyBorder(20, 0, simulationAreaHeight - 200, 0));
         controls.setBackground(Color.BLACK);
 
         controls.add(createControlsLabel());
         controls.add(createStartButton());
         controls.add(createStopButton());
         controls.add(createShowInfo());
+        controls.add(createShowTime());
 
         return controls;
     }
@@ -125,10 +126,54 @@ public class SimulationWindow {
         label.setBorder(new EmptyBorder(0,0,0,10));
 
         SwitchButton button = new SwitchButton();
-        button.setAction(new ShowTimeAction(simulationArea));
+        button.setAction(new ShowInfoAction());
 
         panel.add(label);
         panel.add(button);
+
+        return panel;
+    }
+
+    private static JPanel createShowTime() {
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.BLACK);
+
+        RadioButton showTimeButton = new RadioButton("Show time", true);
+        RadioButton hideTimeButton = new RadioButton("Hide time", false);
+        ButtonGroup timeButtons = new ButtonGroup();
+
+        showTimeButton.setBackground(Color.BLACK);
+        showTimeButton.setActiveColor(new Color(6,183,23));
+        showTimeButton.setUnactiveColor(new Color(125,125,125));
+        hideTimeButton.setBackground(Color.BLACK);
+        hideTimeButton.setActiveColor(new Color(6,183,23));
+        hideTimeButton.setUnactiveColor(new Color(125,125,125));
+
+        ItemListener showTimeListener = new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getSource() == showTimeButton) {
+                    if (e.getStateChange() == ItemEvent.SELECTED) {
+                        simulationArea.setShowTime(true);
+                        simulationArea.repaint();
+                    }
+                } else {
+                    if (e.getStateChange() == ItemEvent.SELECTED) {
+                        simulationArea.setShowTime(false);
+                        simulationArea.repaint();
+                    }
+                }
+            }
+        };
+
+        showTimeButton.addItemListener(showTimeListener);
+        hideTimeButton.addItemListener(showTimeListener);
+
+        timeButtons.add(showTimeButton);
+        timeButtons.add(hideTimeButton);
+
+        panel.add(showTimeButton, timeButtons);
+        panel.add(hideTimeButton, timeButtons);
 
         return panel;
     }
