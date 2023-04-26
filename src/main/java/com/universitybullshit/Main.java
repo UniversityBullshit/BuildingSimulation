@@ -1,9 +1,13 @@
 package com.universitybullshit;
 
 import com.universitybullshit.view.MainMenu;
+import com.universitybullshit.view.WindowManager;
+
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        MainMenu.draw();
+        WindowManager windowManager = new WindowManager();
+        SwingUtilities.invokeLater(() -> windowManager.swapPage(windowManager.getCurrentPage()));
     }
 }
