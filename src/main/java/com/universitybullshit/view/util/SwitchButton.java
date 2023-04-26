@@ -1,10 +1,13 @@
 package com.universitybullshit.view.util;
 
+import com.universitybullshit.view.actions.ShowTimeAction;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,7 +15,12 @@ public class SwitchButton extends JComponent {
     @Getter
     @Setter
     private Color activeBackground;
+    @Getter
     private boolean isActive;
+
+    @Getter
+    @Setter
+    private AbstractAction action = null;
     public SwitchButton() {
         this.isActive = false;
         setPreferredSize(new Dimension(50,20));
@@ -24,6 +32,10 @@ public class SwitchButton extends JComponent {
             @Override
             public void mousePressed(MouseEvent me) {
                 isActive = !isActive;
+                if (action != null) {
+                    JButton actionCompleter = new JButton(action);
+                    actionCompleter.doClick();
+                }
                 repaint();
             }
         });
