@@ -25,7 +25,7 @@ public class Area extends JPanel {
     private boolean isAreaUpdating = false;
     @Getter
     @Setter
-    private boolean showTime = false;
+    private boolean showTime = true;
     public final HashMap<Long, BuildingInstance> buildingsDictionary = new HashMap<>();
     private final Vector<Long> deletingBuildings = new Vector<>();
     private final Vector<Building> addingBuildings = new Vector<>();
@@ -104,23 +104,27 @@ public class Area extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
 
         for (BuildingInstance buildingInstance : this.buildingsDictionary.values()) {
             if (buildingInstance.isCapitalBuilding()) {
                 Integer side = BuildingDrawDto.getCapitalBuildingSide();
-                g.setColor(BuildingDrawDto.getCapitalBuildingColor());
-                g.fillRect(buildingInstance.getX(), buildingInstance.getY(), side, side);
+                g2d.setColor(BuildingDrawDto.getCapitalBuildingColor());
+                g2d.fillRect(buildingInstance.getX(), buildingInstance.getY(), side, side);
             } else if (buildingInstance.isWoodenBuilding()) {
                 Integer side = BuildingDrawDto.getWoodenBuildingSide();
-                g.setColor(BuildingDrawDto.getWoodenBuildingColor());
-                g.fillRect(buildingInstance.getX(), buildingInstance.getY(), side, side);
+                g2d.setColor(BuildingDrawDto.getWoodenBuildingColor());
+                g2d.fillRect(buildingInstance.getX(), buildingInstance.getY(), side, side);
             }
         }
 
         if (showTime) {
-            g.setColor(Color.BLACK);
-            g.setFont(fontFactory.getKadwaRegularFont().deriveFont(Font.PLAIN, 14));
-            g.drawString("Time: " + Long.toString(controller.getSimulationTime()/1000) + "s", getWidth() - 100,30);
+            g2d.setColor(Color.BLACK);
+            g2d.setFont(fontFactory.getKadwaRegularFont().deriveFont(Font.PLAIN, 14));
+            g2d.drawString("Time: " + Long.toString(controller.getSimulationTime()/1000) + "s", getWidth() - 100,30);
         }
     }
 }
