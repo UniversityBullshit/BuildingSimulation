@@ -3,6 +3,8 @@ package com.universitybullshit.view;
 import com.universitybullshit.controller.HabitatController;
 import com.universitybullshit.view.actions.*;
 import com.universitybullshit.view.component.*;
+import com.universitybullshit.view.fabrics.ComponentFabric;
+import com.universitybullshit.view.fabrics.FontFactory;
 import com.universitybullshit.view.util.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
 package com.universitybullshit.view;
 
-import com.universitybullshit.view.component.ImageFactory;
+import com.universitybullshit.view.fabrics.ImageFactory;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

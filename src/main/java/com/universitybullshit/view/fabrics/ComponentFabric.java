@@ -1,4 +1,6 @@
-package com.universitybullshit.view.component;
+package com.universitybullshit.view.fabrics;
+
+import com.universitybullshit.view.component.ControlButton;
 
 import javax.swing.border.EmptyBorder;
 import java.awt.*;

@@ -1,12 +1,12 @@
-package com.universitybullshit.view.component;
+package com.universitybullshit.view.fabrics;
 
+import com.universitybullshit.view.fabrics.ImageFactory;
 import lombok.Getter;
 
 import java.awt.*;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FontFactory {

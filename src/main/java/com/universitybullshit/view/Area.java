@@ -1,8 +1,8 @@
 package com.universitybullshit.view;
 
 import com.universitybullshit.controller.HabitatController;
-import com.universitybullshit.view.component.FontFactory;
-import com.universitybullshit.view.component.ImageFactory;
+import com.universitybullshit.view.fabrics.FontFactory;
+import com.universitybullshit.view.fabrics.ImageFactory;
 import com.universitybullshit.model.Building;
 import com.universitybullshit.view.util.BuildingDrawDto;
 import lombok.Getter;

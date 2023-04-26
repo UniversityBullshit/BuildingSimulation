@@ -1,10 +1,9 @@
-package com.universitybullshit.view.component;
+package com.universitybullshit.view.fabrics;
 
 import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.net.URL;
 
 public class ImageFactory {

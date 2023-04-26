@@ -3,9 +3,9 @@ package com.universitybullshit.view;
 import com.universitybullshit.view.actions.AboutMenuItemListener;
 import com.universitybullshit.view.actions.ControlsMenuItemListener;
 import com.universitybullshit.view.actions.CreateButtonListener;
-import com.universitybullshit.view.component.ComponentFabric;
-import com.universitybullshit.view.component.FontFactory;
-import com.universitybullshit.view.component.ImageFactory;
+import com.universitybullshit.view.fabrics.ComponentFabric;
+import com.universitybullshit.view.fabrics.FontFactory;
+import com.universitybullshit.view.fabrics.ImageFactory;
 import com.universitybullshit.view.component.ControlButton;
 import com.universitybullshit.view.component.HintTextField;
 

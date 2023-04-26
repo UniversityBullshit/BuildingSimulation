@@ -3,12 +3,9 @@ package com.universitybullshit.view;
 import com.universitybullshit.model.Building;
 import com.universitybullshit.model.CapitalBuilding;
 import com.universitybullshit.model.WoodenBuilding;
-import com.universitybullshit.view.component.ImageFactory;
+import com.universitybullshit.view.fabrics.ImageFactory;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class BuildingInstance {
     @Getter
