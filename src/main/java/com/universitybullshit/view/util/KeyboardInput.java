@@ -2,6 +2,7 @@ package com.universitybullshit.view.util;
 
 import com.universitybullshit.controller.HabitatController;
 import com.universitybullshit.view.Area;
+import com.universitybullshit.view.actions.ShowTimeAction;
 import com.universitybullshit.view.actions.StartKeyAction;
 import com.universitybullshit.view.actions.StopKeyAction;
 
@@ -15,10 +16,13 @@ public class KeyboardInput {
 
         Action startAction = new StartKeyAction(controller, area);
         Action stopAction = new StopKeyAction(controller, area);
+        Action showTimeAction = new ShowTimeAction(area);
 
         im.put(KeyStroke.getKeyStroke("B"), "start");
         im.put(KeyStroke.getKeyStroke("E"), "stop");
+        im.put(KeyStroke.getKeyStroke("T"), "time");
         am.put("start", startAction);
         am.put("stop", stopAction);
+        am.put("time", showTimeAction);
     }
 }
