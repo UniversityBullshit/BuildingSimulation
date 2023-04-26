@@ -53,7 +53,7 @@ public final class ComponentFabric {
         button.setColorClick(new Color(225,225,225));
         button.setBorderColor(Color.WHITE);
         button.setRadius(20);
-        button.setPreferredSize(new Dimension(140, 30));
+        button.setPreferredSize(new Dimension(160, 30));
         button.setBorder((new EmptyBorder(5,10,5,10)));
         button.setForeground(Color.BLACK);
         button.setFocusable(false);
