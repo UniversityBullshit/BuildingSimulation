@@ -2,13 +2,14 @@ package com.universitybullshit.view;
 
 import com.universitybullshit.view.fabrics.FontFactory;
 import com.universitybullshit.view.fabrics.ImageFactory;
+import com.universitybullshit.view.pages.IPage;
+import com.universitybullshit.view.pages.MainMenuPage;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Class represents program GUI and allows to manage pages switching
@@ -16,28 +17,31 @@ import java.util.ArrayList;
 public class WindowManager {
     private final JFrame mainFrame;
     @Getter
-    private final ImageFactory imageFactory;
+    private static final ImageFactory imageFactory = new ImageFactory();
     @Getter
-    private final FontFactory fontFactory;
+    private static final FontFactory fontFactory =   new FontFactory();
+    private final Map<String, IPage> pages;
     @Getter
     @Setter
     private String currentPage;
 
-
     // String constants
     @Getter
-    private final String TITLE = "BuildingSpawner";
+    private final String TITLE =                   "BuildingSpawner";
     @Getter
-    private static final String MAIN_MENU_PAGE = "MainMenu";
+    private static final String MAIN_MENU_PAGE =   "MainMenu";
     @Getter
     private static final String PREFERENCES_PAGE = "Preferences";
     @Getter
-    private static final String SIMULATION_PAGE = "Simulation";
+    private static final String SIMULATION_PAGE =  "Simulation";
 
     public WindowManager() {
         mainFrame = new JFrame();
-        imageFactory = new ImageFactory();
-        fontFactory = new FontFactory();
+
+        pages = new HashMap<>();
+        pages.put(MAIN_MENU_PAGE, new MainMenuPage(mainFrame));
+//        pages.add(new PreferencesPage(mainFrame));
+//        pages.add(new SimulationPage(mainFrame));
 
         currentPage = MAIN_MENU_PAGE;
 
@@ -50,7 +54,7 @@ public class WindowManager {
      */
     private void setDefaults() {
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        mainFrame.setIconImage(this.imageFactory.getIcon());
+        mainFrame.setIconImage(imageFactory.getIcon());
         mainFrame.setResizable(false);
         mainFrame.setTitle(TITLE);
     }
@@ -66,11 +70,14 @@ public class WindowManager {
         // Draw new one page
         switch (pageName) {
             case MAIN_MENU_PAGE:
+                pages.get(MAIN_MENU_PAGE).draw();
                 break;
             case PREFERENCES_PAGE:
                 break;
             case SIMULATION_PAGE:
                 break;
         }
+
+        mainFrame.setVisible(true);
     }
 }
