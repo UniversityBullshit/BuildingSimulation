@@ -1,4 +1,4 @@
-package com.universitybullshit.view.util;
+package com.universitybullshit.view.component;
 
 import com.universitybullshit.view.actions.ShowTimeAction;
 import lombok.Getter;

@@ -1,7 +1,5 @@
 package com.universitybullshit.view.component;
 
-import com.universitybullshit.view.util.ControlButton;
-
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
