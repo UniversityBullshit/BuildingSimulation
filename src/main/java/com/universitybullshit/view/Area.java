@@ -1,6 +1,7 @@
 package com.universitybullshit.view;
 
 import com.universitybullshit.controller.HabitatController;
+import com.universitybullshit.view.component.FontFactory;
 import com.universitybullshit.view.component.ImageFactory;
 import com.universitybullshit.model.Building;
 import com.universitybullshit.view.util.BuildingDrawDto;
@@ -17,10 +18,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Area extends JPanel {
     private final ImageFactory imageFactory = new ImageFactory();
+    private final FontFactory fontFactory = new FontFactory();
     private final HabitatController controller;
     @Getter
     @Setter
     private boolean isAreaUpdating = false;
+    @Getter
+    @Setter
+    private boolean showTime = false;
     public final HashMap<Long, BuildingInstance> buildingsDictionary = new HashMap<>();
     private final Vector<Long> deletingBuildings = new Vector<>();
     private final Vector<Building> addingBuildings = new Vector<>();
@@ -99,6 +104,7 @@ public class Area extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         for (BuildingInstance buildingInstance : this.buildingsDictionary.values()) {
             if (buildingInstance.isCapitalBuilding()) {
                 Integer side = BuildingDrawDto.getCapitalBuildingSide();
@@ -109,6 +115,12 @@ public class Area extends JPanel {
                 g.setColor(BuildingDrawDto.getWoodenBuildingColor());
                 g.fillRect(buildingInstance.getX(), buildingInstance.getY(), side, side);
             }
+        }
+
+        if (showTime) {
+            g.setColor(Color.BLACK);
+            g.setFont(fontFactory.getKadwaRegularFont().deriveFont(Font.PLAIN, 14));
+            g.drawString("Time: " + Long.toString(controller.getSimulationTime()/1000) + "s", getWidth() - 100,30);
         }
     }
 }
