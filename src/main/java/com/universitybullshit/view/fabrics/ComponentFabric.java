@@ -1,39 +1,40 @@
 package com.universitybullshit.view.fabrics;
 
+import com.universitybullshit.view.WindowManager;
 import com.universitybullshit.view.component.ControlButton;
+import com.universitybullshit.view.component.HintTextField;
+import com.universitybullshit.view.util.StyleDto;
 
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public final class ComponentFabric {
-    private final Map<String, ArrayList<Object>> componentsList = new HashMap<>();
-    private static final FontFactory fontFactory = new FontFactory();
-    public <T> void createComponent(T component, String name) {
-        componentsList.put(name, new ArrayList<>());
-        componentsList.get(name).add(component);
+    public static void setupLightPanel(JPanel panel) {
+        panel.setBackground(StyleDto.getPrimaryLightColor());
     }
 
-
-    public void setupConstraints(String name, HashMap<String, Integer> args) {
-        GridBagConstraints constraints = new GridBagConstraints();
-        if (args.get("gridx") != null) constraints.gridx = args.get("gridx");
-        if (args.get("gridy") != null) constraints.gridy = args.get("gridy");
-        if (args.get("gridwidth") != null) constraints.gridwidth = args.get("gridwidth");
-        if (args.get("gridheight") != null) constraints.gridheight = args.get("gridheight");
-        if (args.get("fill") != null) constraints.fill = args.get("fill");
-        if (args.get("anchor") != null) constraints.anchor = args.get("anchor");
-        componentsList.get(name).add(constraints);
+    public static void setupDarkPanel(JPanel panel) {
+        panel.setBackground(StyleDto.getPrimaryDarkColor());
+    }
+    public static void setupLabel1(JLabel label) {
+        label.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 36));
     }
 
-    public <T> T getComponent(String key) {
-        return (T) componentsList.get(key).get(0);
+    public static void setupLabel2(JLabel label) {
+        label.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 20));
     }
 
-    public <T> T getConstraints(String key) {
-        return (T) componentsList.get(key).get(1);
+    public static void setupLabel3(JLabel label) {
+        label.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 15));
+    }
+
+    public static void setupDarkLabel(JLabel label) {
+        label.setForeground(StyleDto.getPrimaryDarkColor());
+    }
+
+    public static void setupLightLabel(JLabel label) {
+        label.setForeground(StyleDto.getPrimaryLightColor());
     }
 
     public static void setupControlButtonDark(ControlButton button) {
@@ -45,7 +46,7 @@ public final class ComponentFabric {
         button.setBorder(new EmptyBorder(5,10,5,10));
         button.setForeground(Color.WHITE);
         button.setFocusable(false);
-        button.setFont(fontFactory.getKadwaRegularFont().deriveFont(Font.PLAIN, 18));
+        button.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 18));
     }
     public static void setupControlButtonLight(ControlButton button) {
         button.setColorOver(new Color(240,240,240));
@@ -57,6 +58,18 @@ public final class ComponentFabric {
         button.setBorder((new EmptyBorder(5,10,5,10)));
         button.setForeground(Color.BLACK);
         button.setFocusable(false);
-        button.setFont(fontFactory.getKadwaRegularFont().deriveFont(Font.PLAIN, 18));
+        button.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 18));
+    }
+
+    public static void setupHintTextField(HintTextField field) {
+        field.setColumns(9);
+        field.setPreferredSize(new Dimension(160,30));
+        field.setRadius(15);
+        field.setForeground(StyleDto.getTextFieldHintsColor());
+        field.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 15));
+        field.setBorder(BorderFactory.createCompoundBorder(
+                field.getBorder(),
+                BorderFactory.createEmptyBorder(2,20,2,5)
+        ));
     }
 }
