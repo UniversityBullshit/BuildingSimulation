@@ -15,6 +15,7 @@ import java.util.Map;
  * Class represents program GUI and allows to manage pages switching
  */
 public class WindowManager {
+    @Getter
     private final JFrame mainFrame;
     @Getter
     private static final ImageFactory imageFactory = new ImageFactory();
