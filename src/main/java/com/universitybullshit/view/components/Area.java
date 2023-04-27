@@ -28,9 +28,11 @@ public class Area extends JPanel {
     private final Vector<Long> deletingBuildings = new Vector<>();
     private final Vector<Building> addingBuildings = new Vector<>();
 
-    public Area(int width, int height, HabitatController controller) {
+    public Area(HabitatController controller) {
         this.controller = controller;
-        this.setSize(new Dimension(width, height));
+        this.setSize(new Dimension(
+                this.controller.getContext().getWidth(),
+                this.controller.getContext().getHeight()));
     }
 
     public void update() {
