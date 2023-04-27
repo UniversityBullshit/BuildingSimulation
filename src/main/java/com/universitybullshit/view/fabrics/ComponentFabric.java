@@ -3,6 +3,8 @@ package com.universitybullshit.view.fabrics;
 import com.universitybullshit.view.WindowManager;
 import com.universitybullshit.view.components.ControlButton;
 import com.universitybullshit.view.components.HintTextField;
+import com.universitybullshit.view.components.RadioButton;
+import com.universitybullshit.view.components.SwitchButton;
 import com.universitybullshit.view.util.StyleDto;
 
 import javax.swing.*;
@@ -71,5 +73,15 @@ public final class ComponentFabric {
                 field.getBorder(),
                 BorderFactory.createEmptyBorder(2,20,2,5)
         ));
+    }
+
+    public static void setupSwitchButton(SwitchButton button) {
+
+    }
+
+    public static void setupRadioButton(RadioButton button) {
+        button.setBackground(StyleDto.getPrimaryLightColor());
+        button.setActiveColor(StyleDto.getSelectColor());
+        button.setUnactiveColor(StyleDto.getUnselectColor());
     }
 }
