@@ -27,7 +27,7 @@ public class MainMenuPage implements IPage {
     private final String IMAGE_PANEL_NAME =        "Image";
     private final String WIDTH_FIELD_NAME =        "WidthTextField";
     private final String HEIGHT_FIELD_NAME =       "HeightTextField";
-    private final String CREATE_BUTTON_NAME =      "CreateButton";
+    private final String START_BUTTON_NAME =       "StartButton";
     private final String PREFERENCES_BUTTON_NAME = "PreferencesButton";
 
     public MainMenuPage(JFrame frame, WindowManager context) {
@@ -41,11 +41,11 @@ public class MainMenuPage implements IPage {
 
     @Override
     public void initializeComponents() {
-        final String PAGE_LABEL_TEXT =         "Main menu";
-        final String WIDTH_LABEL_TEXT =        "Width";
-        final String HEIGHT_LABEL_TEXT =       "Height";
-        final String TEXT_FIELDS_HINT =        "500-1000";
-        final String CREATE_BUTTON_TEXT =      "Create";
+        final String PAGE_LABEL_TEXT = "Main menu";
+        final String WIDTH_LABEL_TEXT = "Width";
+        final String HEIGHT_LABEL_TEXT = "Height";
+        final String TEXT_FIELDS_HINT = "500-1000";
+        final String START_BUTTON_TEXT = "Start";
         final String PREFERENCES_BUTTON_TEXT = "Preferences";
 
         components.put(PAGE_LABEL_NAME, new JLabel(PAGE_LABEL_TEXT));
@@ -57,7 +57,7 @@ public class MainMenuPage implements IPage {
         components.put(WIDTH_FIELD_NAME, new HintTextField(TEXT_FIELDS_HINT));
         components.put(HEIGHT_FIELD_NAME, new HintTextField(TEXT_FIELDS_HINT));
 
-        components.put(CREATE_BUTTON_NAME, new ControlButton(CREATE_BUTTON_TEXT));
+        components.put(START_BUTTON_NAME, new ControlButton(START_BUTTON_TEXT));
         components.put(PREFERENCES_BUTTON_NAME, new ControlButton(PREFERENCES_BUTTON_TEXT));
     }
 
@@ -83,7 +83,7 @@ public class MainMenuPage implements IPage {
         ComponentFabric.setupHintTextField((HintTextField) components.get(WIDTH_FIELD_NAME));
         ComponentFabric.setupHintTextField((HintTextField) components.get(HEIGHT_FIELD_NAME));
 
-        ComponentFabric.setupControlButtonDark((ControlButton) components.get(CREATE_BUTTON_NAME));
+        ComponentFabric.setupControlButtonDark((ControlButton) components.get(START_BUTTON_NAME));
         ComponentFabric.setupControlButtonDark((ControlButton) components.get(PREFERENCES_BUTTON_NAME));
 
         components.get(PREFERENCES_BUTTON_NAME).setBackground(StyleDto.getSecondaryDarkColor());
@@ -91,9 +91,6 @@ public class MainMenuPage implements IPage {
 
     @Override
     public void draw() {
-        frame.setSize(400,650);
-        frame.setLocationRelativeTo(null);
-
         frame.setJMenuBar(new CustomMenuBar(context));
 
         JPanel rootPanel = new JPanel();
@@ -153,8 +150,8 @@ public class MainMenuPage implements IPage {
                 context
         );
 
-        ((ControlButton)components.get(CREATE_BUTTON_NAME)).addActionListener(createButtonListener);
-        panel.add(components.get(CREATE_BUTTON_NAME));
+        ((ControlButton)components.get(START_BUTTON_NAME)).addActionListener(createButtonListener);
+        panel.add(components.get(START_BUTTON_NAME));
 
         return panel;
     }
