@@ -94,7 +94,7 @@ public class MainMenuPage implements IPage {
         frame.setSize(400,650);
         frame.setLocationRelativeTo(null);
 
-        frame.setJMenuBar(new CustomMenuBar());
+        frame.setJMenuBar(new CustomMenuBar(context));
 
         JPanel rootPanel = new JPanel();
         rootPanel.setLayout(new BoxLayout(rootPanel, BoxLayout.Y_AXIS));
