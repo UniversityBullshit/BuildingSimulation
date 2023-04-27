@@ -5,6 +5,7 @@ import com.universitybullshit.view.actions.CreateButtonListener;
 import com.universitybullshit.view.components.ControlButton;
 import com.universitybullshit.view.components.HintTextField;
 import com.universitybullshit.view.fabrics.ComponentFabric;
+import com.universitybullshit.view.menubar.CustomMenuBar;
 import com.universitybullshit.view.util.StyleDto;
 
 import javax.swing.*;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class MainMenuPage implements IPage {
     private final JFrame frame;
     private final Map<String, JComponent> components;
+    private final WindowManager context;
 
 
     // String constants
@@ -28,8 +30,9 @@ public class MainMenuPage implements IPage {
     private final String CREATE_BUTTON_NAME =      "CreateButton";
     private final String PREFERENCES_BUTTON_NAME = "PreferencesButton";
 
-    public MainMenuPage(JFrame frame) {
+    public MainMenuPage(JFrame frame, WindowManager context) {
         this.frame = frame;
+        this.context = context;
         components = new HashMap<>();
 
         initializeComponents();
@@ -91,6 +94,8 @@ public class MainMenuPage implements IPage {
         frame.setSize(400,650);
         frame.setLocationRelativeTo(null);
 
+        frame.setJMenuBar(new CustomMenuBar());
+
         JPanel rootPanel = new JPanel();
         rootPanel.setLayout(new BoxLayout(rootPanel, BoxLayout.Y_AXIS));
 
@@ -145,7 +150,7 @@ public class MainMenuPage implements IPage {
         CreateButtonListener createButtonListener = new CreateButtonListener(
                 (HintTextField) components.get(WIDTH_FIELD_NAME),
                 (HintTextField) components.get(HEIGHT_FIELD_NAME),
-                rootPanel
+                context
         );
 
         ((ControlButton)components.get(CREATE_BUTTON_NAME)).addActionListener(createButtonListener);
