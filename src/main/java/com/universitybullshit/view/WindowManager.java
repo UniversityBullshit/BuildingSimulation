@@ -39,7 +39,7 @@ public class WindowManager {
         mainFrame = new JFrame();
 
         pages = new HashMap<>();
-        pages.put(MAIN_MENU_PAGE, new MainMenuPage(mainFrame));
+        pages.put(MAIN_MENU_PAGE, new MainMenuPage(mainFrame, this));
 //        pages.add(new PreferencesPage(mainFrame));
 //        pages.add(new SimulationPage(mainFrame));
 
@@ -64,20 +64,8 @@ public class WindowManager {
      * @param pageName constant that can be got from WindowManager
      */
     public void swapPage(String pageName) {
-        // Cleanup frame from previous page
         mainFrame.getContentPane().removeAll();
-
-        // Draw new one page
-        switch (pageName) {
-            case MAIN_MENU_PAGE:
-                pages.get(MAIN_MENU_PAGE).draw();
-                break;
-            case PREFERENCES_PAGE:
-                break;
-            case SIMULATION_PAGE:
-                break;
-        }
-
+        pages.get(pageName).draw();
         mainFrame.setVisible(true);
     }
 }
