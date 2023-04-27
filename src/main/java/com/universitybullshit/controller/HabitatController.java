@@ -2,6 +2,8 @@ package com.universitybullshit.controller;
 
 import com.universitybullshit.model.Building;
 import com.universitybullshit.model.Habitat;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.TreeMap;
@@ -21,17 +23,17 @@ public class HabitatController {
     private boolean isSimulationRunning = false;
     private final long simulationStartTime;
     private long simulationCurrentTime;
-    private final Habitat context;
+    @Getter
+    @Setter
+    private Habitat context;
 
     /**
-     * Constructor gets Habitat instance and provides interaction with it.
-     * @param width simulation field width
-     * @param height simulation field height
+     * Constructor creates Habitat instance and provides interaction with it.
      */
-    public HabitatController(int width, int height) {
-        this.context = new Habitat(width, height);
+    public HabitatController() {
         this.simulationStartTime = System.currentTimeMillis();
         this.simulationCurrentTime = 0;
+        this.context = new Habitat(100,100);
     }
 
     /**
