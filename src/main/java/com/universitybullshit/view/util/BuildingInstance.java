@@ -18,7 +18,6 @@ public class BuildingInstance {
     private boolean isCapitalBuilding = false;
     @Getter
     private boolean isWoodenBuilding = false;
-    private final ImageFactory imageFactory = new ImageFactory();
 
     public BuildingInstance(Building building) {
         this.x = building.getX();
