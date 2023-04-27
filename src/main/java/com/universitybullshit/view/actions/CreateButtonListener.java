@@ -1,7 +1,6 @@
 package com.universitybullshit.view.actions;
 
-import com.universitybullshit.view.MainMenu;
-import com.universitybullshit.view.SimulationWindow;
+import com.universitybullshit.view.WindowManager;
 import com.universitybullshit.view.components.HintTextField;
 
 import javax.swing.*;
@@ -14,12 +13,11 @@ public class CreateButtonListener implements ActionListener {
     private final HintTextField height_field;
     private int width = 0;
     private int height = 0;
-    private final JFrame context = MainMenu.getContext();
-    private final JPanel root;
-    public CreateButtonListener(HintTextField width_field, HintTextField height_field, JPanel root) {
+    private final WindowManager context;
+    public CreateButtonListener(HintTextField width_field, HintTextField height_field, WindowManager context) {
         this.width_field = width_field;
         this.height_field = height_field;
-        this.root = root;
+        this.context = context;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -68,7 +66,6 @@ public class CreateButtonListener implements ActionListener {
     }
 
     private void nextScreen() {
-        MainMenu.clearFrame();
-        SimulationWindow.draw(this.context, this.width, this.height);
+        context.swapPage(WindowManager.getSIMULATION_PAGE());
     }
 }

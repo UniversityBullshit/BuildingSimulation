@@ -1,16 +1,19 @@
 package com.universitybullshit.view.actions;
 
 import com.universitybullshit.view.menubar.HelpFrame;
-import com.universitybullshit.view.MainMenu;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AboutMenuItemListener implements ActionListener {
+    private final JFrame frame;
+    public AboutMenuItemListener(JFrame frame) {
+        this.frame = frame;
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
-        JDialog aboutDialog = HelpFrame.create(MainMenu.getContext(), "About");
+        JDialog aboutDialog = HelpFrame.create(frame, "About");
         aboutDialog.setVisible(true);
     }
 }
