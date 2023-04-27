@@ -1,0 +1,242 @@
+package com.universitybullshit.view.pages;
+
+import com.universitybullshit.view.WindowManager;
+import com.universitybullshit.view.actions.ShowTimeAction;
+import com.universitybullshit.view.actions.StartKeyAction;
+import com.universitybullshit.view.actions.StopKeyAction;
+import com.universitybullshit.view.components.Area;
+import com.universitybullshit.view.components.ControlButton;
+import com.universitybullshit.view.components.RadioButton;
+import com.universitybullshit.view.components.SwitchButton;
+import com.universitybullshit.view.fabrics.ComponentFabric;
+import com.universitybullshit.view.util.StyleDto;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.HashMap;
+import java.util.Map;
+
+public class SimulationPage implements IPage {
+    private final JFrame frame;
+    private final Map<String, JComponent> components;
+    private final WindowManager context;
+
+
+    // String constants
+    private final String CONTROLS_LABEL_NAME =         "ControlsLabel";
+    private final String INFORMATION_LABEL_NAME =      "Information";
+    private final String SHOW_INFO_LABEL_NAME =        "ShowInfoLabel";
+    private final String SHOW_TIME_LABEL_NAME =        "ShowTimeLabel";
+    private final String HIDE_TIME_LABEL_NAME =        "HideTimeLabel";
+    private final String START_BUTTON_NAME =           "StartButton";
+    private final String STOP_BUTTON_NAME =            "StopButton";
+    private final String EXIT_BUTTON_NAME =            "ExitButton";
+    private final String SHOW_INFO_SWITCH_NAME =       "ShowInfoSwitch";
+    private final String SHOW_TIME_RADIO_BUTTON_NAME = "ShowTimeRadioButton";
+    private final String HIDE_TIME_RADIO_BUTTON_NAME = "HideTimeRadioButton";
+    private final String SIMULATION_AREA_NAME =        "SimulationArea";
+
+    public SimulationPage(JFrame frame, WindowManager context) {
+        this.frame = frame;
+        this.context = context;
+        components = new HashMap<>();
+
+        initializeComponents();
+        setupAppearance();
+    }
+
+    @Override
+    public void initializeComponents() {
+        final String CONTROLS_LABEL_TEXT = "Controls";
+        final String INFORMATION_LABEL_TEXT = "Information";
+        final String SHOW_INFO_LABEL_TEXT = "Show info";
+        final String SHOW_TIME_LABEL_TEXT = "Show time";
+        final String HIDE_TIME_LABEL_TEXT = "Hide time";
+        final String START_BUTTON_TEXT = "Start";
+        final String STOP_BUTTON_TEXT = "Stop";
+
+        components.put(CONTROLS_LABEL_NAME, new JLabel(CONTROLS_LABEL_TEXT));
+        components.put(INFORMATION_LABEL_NAME, new JLabel(INFORMATION_LABEL_TEXT));
+        components.put(SHOW_INFO_LABEL_NAME, new JLabel(SHOW_INFO_LABEL_TEXT));
+        components.put(SHOW_TIME_LABEL_NAME, new JLabel(SHOW_TIME_LABEL_TEXT));
+        components.put(HIDE_TIME_LABEL_NAME, new JLabel(HIDE_TIME_LABEL_TEXT));
+
+        components.put(START_BUTTON_NAME, new ControlButton(START_BUTTON_TEXT));
+        components.put(STOP_BUTTON_NAME, new ControlButton(STOP_BUTTON_TEXT));
+        components.put(EXIT_BUTTON_NAME, new ControlButton(null));
+
+        components.put(SHOW_INFO_SWITCH_NAME, new SwitchButton());
+
+        components.put(SHOW_TIME_RADIO_BUTTON_NAME, new RadioButton(null, true));
+        components.put(HIDE_TIME_RADIO_BUTTON_NAME, new RadioButton(null, false));
+
+        components.put(SIMULATION_AREA_NAME, new Area(context.getController()));
+    }
+
+    @Override
+    public void setupAppearance() {
+        ComponentFabric.setupLabel2((JLabel) components.get(CONTROLS_LABEL_NAME));
+        ComponentFabric.setupLightLabel((JLabel) components.get(CONTROLS_LABEL_NAME));
+
+        ComponentFabric.setupLabel2((JLabel) components.get(INFORMATION_LABEL_NAME));
+        ComponentFabric.setupLightLabel((JLabel) components.get(INFORMATION_LABEL_NAME));
+
+        ComponentFabric.setupLabel3((JLabel) components.get(SHOW_INFO_LABEL_NAME));
+        ComponentFabric.setupLightLabel((JLabel) components.get(SHOW_INFO_LABEL_NAME));
+
+        ComponentFabric.setupLabel3((JLabel) components.get(SHOW_TIME_LABEL_NAME));
+        ComponentFabric.setupLightLabel((JLabel) components.get(SHOW_TIME_LABEL_NAME));
+
+        ComponentFabric.setupLabel3((JLabel) components.get(HIDE_TIME_LABEL_NAME));
+        ComponentFabric.setupLightLabel((JLabel) components.get(HIDE_TIME_LABEL_NAME));
+
+        ComponentFabric.setupControlButtonLight((ControlButton) components.get(START_BUTTON_NAME));
+        ComponentFabric.setupControlButtonLight((ControlButton) components.get(STOP_BUTTON_NAME));
+
+        ComponentFabric.setupRadioButton((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME));
+        components.get(SHOW_TIME_RADIO_BUTTON_NAME).setBackground(StyleDto.getPrimaryDarkColor());
+
+        ComponentFabric.setupRadioButton((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME));
+        components.get(HIDE_TIME_RADIO_BUTTON_NAME).setBackground(StyleDto.getPrimaryDarkColor());
+    }
+
+    @Override
+    public void draw() {
+        JPanel rootPanel = new JPanel();
+        JPanel controlsPanel = new JPanel();
+        JPanel simulationAreaPanel = new JPanel();
+
+        rootPanel.setLayout(new BoxLayout(rootPanel, BoxLayout.X_AXIS));
+        controlsPanel.setLayout(new BoxLayout(controlsPanel, BoxLayout.Y_AXIS));
+        simulationAreaPanel.setLayout(null);
+
+        controlsPanel.setPreferredSize(new Dimension(200, context.getHeight()));
+        controlsPanel.setMaximumSize(new Dimension(200, context.getHeight()));
+
+        ComponentFabric.setupDarkPanel(rootPanel);
+        ComponentFabric.setupDarkPanel(controlsPanel);
+        ComponentFabric.setupLightPanel(simulationAreaPanel);
+
+        controlsPanel.add(createControlsLabelPanel());
+        controlsPanel.add(createStartButtonPanel());
+        controlsPanel.add(createStopButtonPanel());
+        controlsPanel.add(createInformationLabelPanel());
+        controlsPanel.add(createShowInfoPanel());
+        controlsPanel.add(createShowTimePanel());
+
+        components.get(SIMULATION_AREA_NAME).setSize(
+                context.getController().getContext().getWidth(),
+                context.getController().getContext().getHeight());
+        simulationAreaPanel.add(components.get(SIMULATION_AREA_NAME));
+
+        rootPanel.add(controlsPanel);
+        rootPanel.add(simulationAreaPanel);
+
+        frame.add(rootPanel);
+        frame.requestFocusInWindow();
+    }
+
+    private JPanel createControlsLabelPanel() {
+        JPanel panel = new JPanel();
+        ComponentFabric.setupDarkPanel(panel);
+
+        panel.add(components.get(CONTROLS_LABEL_NAME));
+
+        return panel;
+    }
+
+    private JPanel createStartButtonPanel() {
+        JPanel panel = new JPanel();
+        ComponentFabric.setupDarkPanel(panel);
+
+        StartKeyAction action = new StartKeyAction(
+                context.getController(),
+                (Area) components.get(SIMULATION_AREA_NAME));
+
+        ((ControlButton) components.get(START_BUTTON_NAME)).addActionListener(action);
+
+        panel.add(components.get(START_BUTTON_NAME));
+
+        return panel;
+    }
+
+    private JPanel createStopButtonPanel() {
+        JPanel panel = new JPanel();
+        ComponentFabric.setupDarkPanel(panel);
+
+        StopKeyAction action = new StopKeyAction(
+                context.getController(),
+                (Area) components.get(SIMULATION_AREA_NAME));
+
+        ((ControlButton) components.get(STOP_BUTTON_NAME)).addActionListener(action);
+
+        panel.add(components.get(STOP_BUTTON_NAME));
+
+        return panel;
+    }
+
+    private JPanel createInformationLabelPanel() {
+        JPanel panel = new JPanel();
+        ComponentFabric.setupDarkPanel(panel);
+
+        panel.add(components.get(INFORMATION_LABEL_NAME));
+
+        return panel;
+    }
+
+    private JPanel createShowInfoPanel() {
+        JPanel panel = new JPanel();
+        ComponentFabric.setupDarkPanel(panel);
+
+        panel.add(components.get(SHOW_INFO_LABEL_NAME));
+        panel.add(components.get(SHOW_INFO_SWITCH_NAME));
+
+        return panel;
+    }
+
+    private JPanel createShowTimePanel() {
+        JPanel panel = new JPanel();
+        JPanel showPanel = new JPanel();
+        JPanel hidePanel = new JPanel();
+
+        ComponentFabric.setupDarkPanel(panel);
+        ComponentFabric.setupDarkPanel(showPanel);
+        ComponentFabric.setupDarkPanel(hidePanel);
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        ButtonGroup timeButtons = new ButtonGroup();
+        timeButtons.add((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME));
+        timeButtons.add((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME));
+
+        ItemListener showTimeListener = e -> {
+            if (e.getSource() == components.get(SHOW_TIME_RADIO_BUTTON_NAME)) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    ((Area) components.get(SIMULATION_AREA_NAME)).setShowTime(true);
+                    components.get(SIMULATION_AREA_NAME).repaint();
+                }
+            } else {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    ((Area) components.get(SIMULATION_AREA_NAME)).setShowTime(false);
+                    components.get(SIMULATION_AREA_NAME).repaint();
+                }
+            }
+        };
+
+        ((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
+        ((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
+
+        showPanel.add(components.get(SHOW_TIME_LABEL_NAME));
+        showPanel.add(components.get(SHOW_TIME_RADIO_BUTTON_NAME));
+
+        hidePanel.add(components.get(HIDE_TIME_LABEL_NAME));
+        hidePanel.add(components.get(HIDE_TIME_RADIO_BUTTON_NAME));
+
+        panel.add(showPanel);
+        panel.add(hidePanel);
+
+        return panel;
+    }
+}
