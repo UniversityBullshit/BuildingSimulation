@@ -1,4 +1,4 @@
-package com.universitybullshit.view;
+package com.universitybullshit.view.frames;
 
 import com.universitybullshit.view.fabrics.ImageFactory;
 

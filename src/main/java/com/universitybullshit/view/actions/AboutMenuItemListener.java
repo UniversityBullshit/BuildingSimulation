@@ -1,6 +1,6 @@
 package com.universitybullshit.view.actions;
 
-import com.universitybullshit.view.HelpFrame;
+import com.universitybullshit.view.frames.HelpFrame;
 import com.universitybullshit.view.MainMenu;
 
 import javax.swing.*;

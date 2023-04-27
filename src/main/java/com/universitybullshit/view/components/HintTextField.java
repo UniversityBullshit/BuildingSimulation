@@ -1,4 +1,4 @@
-package com.universitybullshit.view.component;
+package com.universitybullshit.view.components;
 
 import lombok.Getter;
 import lombok.Setter;

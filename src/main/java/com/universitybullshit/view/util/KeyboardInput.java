@@ -1,7 +1,7 @@
 package com.universitybullshit.view.util;
 
 import com.universitybullshit.controller.HabitatController;
-import com.universitybullshit.view.Area;
+import com.universitybullshit.view.components.Area;
 import com.universitybullshit.view.actions.ShowTimeAction;
 import com.universitybullshit.view.actions.StartKeyAction;
 import com.universitybullshit.view.actions.StopKeyAction;

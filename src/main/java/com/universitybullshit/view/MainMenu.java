@@ -6,8 +6,8 @@ import com.universitybullshit.view.actions.CreateButtonListener;
 import com.universitybullshit.view.fabrics.ComponentFabric;
 import com.universitybullshit.view.fabrics.FontFactory;
 import com.universitybullshit.view.fabrics.ImageFactory;
-import com.universitybullshit.view.component.ControlButton;
-import com.universitybullshit.view.component.HintTextField;
+import com.universitybullshit.view.components.ControlButton;
+import com.universitybullshit.view.components.HintTextField;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

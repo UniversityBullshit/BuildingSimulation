@@ -1,8 +1,8 @@
-package com.universitybullshit.view;
+package com.universitybullshit.view.components;
 
 import com.universitybullshit.controller.HabitatController;
-import com.universitybullshit.view.fabrics.FontFactory;
-import com.universitybullshit.view.fabrics.ImageFactory;
+import com.universitybullshit.view.util.BuildingInstance;
+import com.universitybullshit.view.WindowManager;
 import com.universitybullshit.model.Building;
 import com.universitybullshit.view.util.BuildingDrawDto;
 import lombok.Getter;
@@ -17,8 +17,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class Area extends JPanel {
-    private final ImageFactory imageFactory = new ImageFactory();
-    private final FontFactory fontFactory = new FontFactory();
     private final HabitatController controller;
     @Getter
     @Setter
@@ -123,7 +121,7 @@ public class Area extends JPanel {
 
         if (showTime) {
             g2d.setColor(Color.BLACK);
-            g2d.setFont(fontFactory.getKadwaRegularFont().deriveFont(Font.PLAIN, 14));
+            g2d.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 15));
             g2d.drawString("Time: " + Long.toString(controller.getSimulationTime()/1000) + "s", getWidth() - 100,30);
         }
     }

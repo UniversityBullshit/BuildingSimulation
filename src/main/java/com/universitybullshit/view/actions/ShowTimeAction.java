@@ -1,6 +1,6 @@
 package com.universitybullshit.view.actions;
 
-import com.universitybullshit.view.Area;
+import com.universitybullshit.view.components.Area;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

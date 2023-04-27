@@ -1,4 +1,4 @@
-package com.universitybullshit.view;
+package com.universitybullshit.view.util;
 
 import com.universitybullshit.model.Building;
 import com.universitybullshit.model.CapitalBuilding;

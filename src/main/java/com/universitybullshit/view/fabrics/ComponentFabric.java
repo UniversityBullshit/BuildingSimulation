@@ -1,8 +1,8 @@
 package com.universitybullshit.view.fabrics;
 
 import com.universitybullshit.view.WindowManager;
-import com.universitybullshit.view.component.ControlButton;
-import com.universitybullshit.view.component.HintTextField;
+import com.universitybullshit.view.components.ControlButton;
+import com.universitybullshit.view.components.HintTextField;
 import com.universitybullshit.view.util.StyleDto;
 
 import javax.swing.*;

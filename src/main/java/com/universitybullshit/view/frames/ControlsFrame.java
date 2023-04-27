@@ -1,4 +1,4 @@
-package com.universitybullshit.view;
+package com.universitybullshit.view.frames;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

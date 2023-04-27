@@ -2,7 +2,7 @@ package com.universitybullshit.view.actions;
 
 import com.universitybullshit.view.MainMenu;
 import com.universitybullshit.view.SimulationWindow;
-import com.universitybullshit.view.component.HintTextField;
+import com.universitybullshit.view.components.HintTextField;
 
 import javax.swing.*;
 import java.awt.*;
