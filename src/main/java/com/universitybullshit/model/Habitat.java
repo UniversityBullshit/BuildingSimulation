@@ -1,12 +1,17 @@
 package com.universitybullshit.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.*;
 
 public class Habitat {
-    private final int width;
-    private final int height;
+    @Getter
+    @Setter
+    private int width;
+    @Setter
+    @Getter
+    private int height;
     private long time;
     private long lastWoodenBuildingSpawnTime;
     private long lastCapitalBuildingSpawnTime;
