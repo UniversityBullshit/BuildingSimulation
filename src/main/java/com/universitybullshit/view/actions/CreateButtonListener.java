@@ -1,9 +1,9 @@
 package com.universitybullshit.view.actions;
 
+import com.universitybullshit.model.Habitat;
 import com.universitybullshit.view.WindowManager;
 import com.universitybullshit.view.components.HintTextField;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,6 +66,11 @@ public class CreateButtonListener implements ActionListener {
     }
 
     private void nextScreen() {
+        context.getController().setContext(new Habitat(width, height));
+
+        context.setWidth(width + 200);
+        context.setHeight(height);
+
         context.swapPage(WindowManager.getSIMULATION_PAGE());
     }
 }
