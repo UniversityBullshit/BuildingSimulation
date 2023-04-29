@@ -2,12 +2,9 @@ package com.universitybullshit.controller;
 
 import com.universitybullshit.model.Building;
 import com.universitybullshit.model.Habitat;
-import lombok.Getter;
-import lombok.Setter;
+import com.universitybullshit.services.SimulationService;
 
-import java.util.HashSet;
-import java.util.TreeMap;
-import java.util.Vector;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -20,42 +17,46 @@ import java.util.concurrent.CompletableFuture;
  * @version 1.0
  */
 public class HabitatController {
-    private boolean isSimulationRunning = false;
-    private final long simulationStartTime;
-    private long simulationCurrentTime;
-    @Getter
-    @Setter
-    private Habitat context;
+    private final SimulationService context;
 
     /**
      * Constructor creates Habitat instance and provides interaction with it.
      */
-    public HabitatController() {
-        this.simulationStartTime = System.currentTimeMillis();
-        this.simulationCurrentTime = 0;
-        this.context = new Habitat(100,100);
+    public HabitatController(SimulationService simulationService) {
+        context = simulationService;
+        CompletableFuture.runAsync(context::simulation);
     }
 
     /**
      * Starts an endless process of simulation that runs asynchronously.
      */
     public void startSimulation() {
-        this.isSimulationRunning = true;
-        CompletableFuture.runAsync(this::simulation);
+        context.setSimulationRunning(true);
     }
 
     /**
      * Interrupts simulation process.
      */
     public void stopSimulation() {
-        this.isSimulationRunning = false;
+        context.setSimulationRunning(false);
     }
 
     /**
      * Set context to default state
      */
     public void resetSimulation() {
-        this.context.reset();
+        context.setSimulationRunning(false);
+        context.setTime(0);
+        context.getContext().reset();
+    }
+
+    public Habitat getContext() {
+        return context.getContext();
+    }
+
+    public void setContext(Habitat habitat) {
+        context.setContext(habitat);
+
     }
 
     /**
@@ -63,7 +64,7 @@ public class HabitatController {
      * @return Habitat.buildings
      */
     public Vector<Building> getBuildings() {
-        return this.context.getBuildings();
+        return context.getContext().getBuildings();
     }
 
     /**
@@ -71,7 +72,7 @@ public class HabitatController {
      * @return Habitat.ids
      */
     public HashSet<Long> getIds() {
-        return this.context.getIds();
+        return context.getContext().getIds();
     }
 
     /**
@@ -80,7 +81,7 @@ public class HabitatController {
      * @return Habitat.spawnTimeMap
      */
     public TreeMap<Long, Long> getSpawnTimeMap() {
-        return this.context.getSpawnTimeMap();
+        return context.getContext().getSpawnTimeMap();
     }
 
     /**
@@ -88,7 +89,7 @@ public class HabitatController {
      * @return Habitat.woodenBuildingsCount
      */
     public int getWoodenBuildingsCount() {
-        return this.context.getWoodenBuildingsCount();
+        return context.getContext().getWoodenBuildingsCount();
     }
 
     /**
@@ -96,7 +97,7 @@ public class HabitatController {
      * @return Habitat.capitalBuildingsCount
      */
     public int getCapitalBuildingsCount() {
-        return this.context.getCapitalBuildingsCount();
+        return context.getContext().getCapitalBuildingsCount();
     }
 
     /**
@@ -104,18 +105,6 @@ public class HabitatController {
      * @return time spent from simulation start
      */
     public long getSimulationTime() {
-        return this.simulationCurrentTime;
-    }
-
-    private void simulation() {
-        while (this.isSimulationRunning) {
-            this.context.update(this.simulationCurrentTime);
-            this.simulationCurrentTime = System.currentTimeMillis() - this.simulationStartTime;
-            try {
-                Thread.sleep(50); // 25 updates per second
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
+        return context.getTime();
     }
 }
