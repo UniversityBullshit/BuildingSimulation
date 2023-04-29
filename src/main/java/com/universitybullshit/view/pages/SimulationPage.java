@@ -4,14 +4,12 @@ import com.universitybullshit.view.WindowManager;
 import com.universitybullshit.view.actions.ShowTimeAction;
 import com.universitybullshit.view.actions.StartKeyAction;
 import com.universitybullshit.view.actions.StopKeyAction;
-import com.universitybullshit.view.components.Area;
-import com.universitybullshit.view.components.ControlButton;
-import com.universitybullshit.view.components.RadioButton;
-import com.universitybullshit.view.components.SwitchButton;
+import com.universitybullshit.view.components.*;
 import com.universitybullshit.view.fabrics.ComponentFabric;
 import com.universitybullshit.view.util.StyleDto;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -37,6 +35,11 @@ public class SimulationPage implements IPage {
     private final String SHOW_TIME_RADIO_BUTTON_NAME = "ShowTimeRadioButton";
     private final String HIDE_TIME_RADIO_BUTTON_NAME = "HideTimeRadioButton";
     private final String SIMULATION_AREA_NAME =        "SimulationArea";
+    private final String GAP_18_NAME =                 "Gap18";
+    private final String GAP_14_NAME =                 "Gap14";
+    private final String GAP_13_NAME =                 "Gap13";
+    private final String GAP_8_NAME =                  "Gap8";
+    private final String GAP_6_NAME =                  "Gap6";
 
     public SimulationPage(JFrame frame, WindowManager context) {
         this.frame = frame;
@@ -73,6 +76,12 @@ public class SimulationPage implements IPage {
         components.put(HIDE_TIME_RADIO_BUTTON_NAME, new RadioButton(null, false));
 
         components.put(SIMULATION_AREA_NAME, new Area(context.getController()));
+
+        components.put(GAP_18_NAME, new HorizontalGap(18));
+        components.put(GAP_14_NAME, new HorizontalGap(14));
+        components.put(GAP_13_NAME, new HorizontalGap(13));
+        components.put(GAP_8_NAME, new HorizontalGap(8));
+        components.put(GAP_6_NAME, new HorizontalGap(6));
     }
 
     @Override
@@ -100,6 +109,12 @@ public class SimulationPage implements IPage {
 
         ComponentFabric.setupRadioButton((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME));
         components.get(HIDE_TIME_RADIO_BUTTON_NAME).setBackground(StyleDto.getPrimaryDarkColor());
+
+        components.get(GAP_18_NAME).setForeground(StyleDto.getPrimaryDarkColor());
+        components.get(GAP_14_NAME).setForeground(StyleDto.getPrimaryDarkColor());
+        components.get(GAP_13_NAME).setForeground(StyleDto.getPrimaryDarkColor());
+        components.get(GAP_8_NAME).setForeground(StyleDto.getPrimaryDarkColor());
+        components.get(GAP_6_NAME).setForeground(StyleDto.getPrimaryDarkColor());
     }
 
     @Override
@@ -112,6 +127,7 @@ public class SimulationPage implements IPage {
         controlsPanel.setLayout(new BoxLayout(controlsPanel, BoxLayout.Y_AXIS));
         simulationAreaPanel.setLayout(null);
 
+        controlsPanel.setBorder(new EmptyBorder(0,0, context.getHeight() - 200, 0));
         controlsPanel.setPreferredSize(new Dimension(200, context.getHeight()));
         controlsPanel.setMaximumSize(new Dimension(200, context.getHeight()));
 
@@ -142,7 +158,10 @@ public class SimulationPage implements IPage {
         JPanel panel = new JPanel();
         ComponentFabric.setupDarkPanel(panel);
 
+        panel.setBorder(new EmptyBorder(30,0,0,0));
+
         panel.add(components.get(CONTROLS_LABEL_NAME));
+        panel.add(components.get(GAP_18_NAME));
 
         return panel;
     }
@@ -181,7 +200,10 @@ public class SimulationPage implements IPage {
         JPanel panel = new JPanel();
         ComponentFabric.setupDarkPanel(panel);
 
+        panel.setBorder(new EmptyBorder(20,0,0,0));
+
         panel.add(components.get(INFORMATION_LABEL_NAME));
+        panel.add(components.get(GAP_8_NAME));
 
         return panel;
     }
@@ -191,6 +213,7 @@ public class SimulationPage implements IPage {
         ComponentFabric.setupDarkPanel(panel);
 
         panel.add(components.get(SHOW_INFO_LABEL_NAME));
+        panel.add(components.get(GAP_6_NAME));
         panel.add(components.get(SHOW_INFO_SWITCH_NAME));
 
         return panel;
@@ -229,9 +252,11 @@ public class SimulationPage implements IPage {
         ((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
 
         showPanel.add(components.get(SHOW_TIME_LABEL_NAME));
+        showPanel.add(components.get(GAP_13_NAME));
         showPanel.add(components.get(SHOW_TIME_RADIO_BUTTON_NAME));
 
         hidePanel.add(components.get(HIDE_TIME_LABEL_NAME));
+        hidePanel.add(components.get(GAP_14_NAME));
         hidePanel.add(components.get(HIDE_TIME_RADIO_BUTTON_NAME));
 
         panel.add(showPanel);
