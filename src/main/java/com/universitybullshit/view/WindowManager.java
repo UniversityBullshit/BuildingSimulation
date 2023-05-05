@@ -94,6 +94,7 @@ public class WindowManager {
 
     public void showDialog(String dialogName) {
         JDialog dialog = new JDialog(mainFrame, dialogName, true);
+        dialog.setLocationRelativeTo(null);
         pages.get(dialogName).drawAsDialog(dialog);
         dialog.setVisible(true);
     }
