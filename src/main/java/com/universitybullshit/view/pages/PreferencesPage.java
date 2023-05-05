@@ -93,4 +93,26 @@ public class PreferencesPage implements IPage {
         panel.add(components.get(PAGE_LABEL_NAME));
         return panel;
     }
+
+    private JPanel createFields(JComponent leftField, JComponent rightField) {
+        JPanel setup = new JPanel();
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+
+        ComponentFabric.setupLightPanel(setup);
+        ComponentFabric.setupLightPanel(leftPanel);
+        ComponentFabric.setupLightPanel(rightPanel);
+
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+
+        leftPanel.add(leftField);
+        rightPanel.add(rightField);
+
+        setup.add(leftPanel);
+        setup.add(Box.createHorizontalStrut(23));
+        setup.add(rightPanel);
+
+        return setup;
+    }
 }
