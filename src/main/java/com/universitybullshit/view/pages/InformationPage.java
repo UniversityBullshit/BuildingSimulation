@@ -4,6 +4,7 @@ import com.universitybullshit.view.WindowManager;
 import com.universitybullshit.view.actions.CloseDialogAction;
 import com.universitybullshit.view.components.ControlButton;
 import com.universitybullshit.view.fabrics.ComponentFabric;
+import com.universitybullshit.view.util.StyleDto;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -80,12 +81,14 @@ public class InformationPage implements IPage {
                         getImageFactory().
                         getWoodenBuilding().
                         getScaledInstance(50,50, Image.SCALE_SMOOTH))));
+        components.get(WOODEN_BUILDINGS_IMAGE_NAME).setBackground(StyleDto.getPrimaryLightColor());
 
         components.get(CAPITAL_BUILDINGS_IMAGE_NAME).add(new JLabel(new ImageIcon(
                 WindowManager.
                         getImageFactory().
                         getCapitalBuilding().
                         getScaledInstance(50,50,Image.SCALE_SMOOTH))));
+        components.get(CAPITAL_BUILDINGS_IMAGE_NAME).setBackground(StyleDto.getPrimaryLightColor());
 
         ComponentFabric.setupLabel3((JLabel) components.get(WOODEN_BUILDINGS_COUNT_NAME));
         ComponentFabric.setupLabel3((JLabel) components.get(CAPITAL_BUILDINGS_COUNT_NAME));
@@ -117,6 +120,7 @@ public class InformationPage implements IPage {
 
     private JPanel createMainLabelPanel() {
         JPanel panel = new JPanel();
+        ComponentFabric.setupLightPanel(panel);
 
         panel.add(components.get(MAIN_LABEL_NAME));
 
@@ -125,6 +129,7 @@ public class InformationPage implements IPage {
 
     private JPanel createSimulationTimePanel() {
         JPanel panel = new JPanel();
+        ComponentFabric.setupLightPanel(panel);
         panel.setLayout(new BorderLayout());
         panel.setBorder(new EmptyBorder(0,50,0,41));
 
@@ -139,6 +144,7 @@ public class InformationPage implements IPage {
 
     private JPanel createTotalBuildingsCountPanel() {
         JPanel panel = new JPanel();
+        ComponentFabric.setupLightPanel(panel);
         panel.setLayout(new BorderLayout());
         panel.setBorder(new EmptyBorder(0,50,0,41));
 
@@ -155,6 +161,10 @@ public class InformationPage implements IPage {
         JPanel panel = new JPanel();
         JPanel woodenBuildingPanel = new JPanel();
         JPanel capitalBuildingPanel = new JPanel();
+
+        ComponentFabric.setupLightPanel(panel);
+        ComponentFabric.setupLightPanel(woodenBuildingPanel);
+        ComponentFabric.setupLightPanel(capitalBuildingPanel);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         panel.setBorder(new EmptyBorder(0,50,0,0));
@@ -178,6 +188,10 @@ public class InformationPage implements IPage {
         JPanel woodenBuildingPanel = new JPanel();
         JPanel capitalBuildingPanel = new JPanel();
 
+        ComponentFabric.setupLightPanel(panel);
+        ComponentFabric.setupLightPanel(woodenBuildingPanel);
+        ComponentFabric.setupLightPanel(capitalBuildingPanel);
+
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         panel.setBorder(new EmptyBorder(0,60,0,0));
         woodenBuildingPanel.setLayout(new BorderLayout());
@@ -200,6 +214,7 @@ public class InformationPage implements IPage {
 
     private JPanel createOKButtonPanel(JDialog dialog) {
         JPanel panel = new JPanel();
+        panel.setBackground(StyleDto.getPrimaryLightColor());
 
         panel.add(components.get(OK_BUTTON_NAME));
 
