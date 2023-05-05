@@ -89,6 +89,30 @@ public class PreferencesPage implements IPage {
     public void setupAppearance() {
         ComponentFabric.setupLabel1((JLabel) components.get(PAGE_LABEL_NAME));
         ComponentFabric.setupDarkLabel((JLabel) components.get(PAGE_LABEL_NAME));
+        ComponentFabric.setupDarkLabel((JLabel) components.get(WOODEN_LABEL_NAME));
+        ComponentFabric.setupLabel3((JLabel) components.get(WOODEN_LABEL_NAME));
+        ComponentFabric.setupDarkLabel((JLabel) components.get(CAPITAL_LABEL_NAME));
+        ComponentFabric.setupLabel3((JLabel) components.get(CAPITAL_LABEL_NAME));
+        ComponentFabric.setupDarkLabel((JLabel) components.get(INTERVAL_LABEL_NAME));
+        ComponentFabric.setupLabel3((JLabel) components.get(INTERVAL_LABEL_NAME));
+        ComponentFabric.setupDarkLabel((JLabel) components.get(PROBABILITY_LABEL_NAME));
+        ComponentFabric.setupLabel3((JLabel) components.get(PROBABILITY_LABEL_NAME));
+        ComponentFabric.setupDarkLabel((JLabel) components.get(LIFETIME_LABEL_NAME));
+        ComponentFabric.setupLabel3((JLabel) components.get(LIFETIME_LABEL_NAME));
+        ComponentFabric.setupDarkLabel((JLabel) components.get(SPEED_LABEL_NAME));
+        ComponentFabric.setupLabel3((JLabel) components.get(SPEED_LABEL_NAME));
+
+        ComponentFabric.setupHintTextField((HintTextField) components.get(WOODEN_INTERVAL_FIELD_NAME));
+        ComponentFabric.setupHintTextField((HintTextField) components.get(CAPITAL_INTERVAL_FIELD_NAME));
+        ComponentFabric.setupHintTextField((HintTextField) components.get(WOODEN_LIFETIME_FIELD_NAME));
+        ComponentFabric.setupHintTextField((HintTextField) components.get(CAPITAL_LIFETIME_FIELD_NAME));
+        ComponentFabric.setupHintTextField((HintTextField) components.get(WOODEN_SPEED_FIELD_NAME));
+        ComponentFabric.setupHintTextField((HintTextField) components.get(CAPITAL_SPEED_FIELD_NAME));
+        ComponentFabric.setupHintTextField((HintTextField) components.get(WOODEN_PROBABILITY_COMBOBOX));
+        ComponentFabric.setupHintTextField((HintTextField) components.get(CAPITAL_PROBABILITY_COMBOBOX));
+
+        ComponentFabric.setupControlButtonDark((ControlButton) components.get(SAVE_EXIT_BUTTON_NAME));
+        ComponentFabric.setupControlButtonLight((ControlButton) components.get(RESTORE_BUTTON_NAME));
     }
 
     @Override
