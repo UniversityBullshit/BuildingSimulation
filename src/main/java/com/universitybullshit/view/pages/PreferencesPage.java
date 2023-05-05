@@ -1,6 +1,8 @@
 package com.universitybullshit.view.pages;
 
 import com.universitybullshit.view.WindowManager;
+import com.universitybullshit.view.components.ControlButton;
+import com.universitybullshit.view.components.HintTextField;
 import com.universitybullshit.view.fabrics.ComponentFabric;
 import com.universitybullshit.view.menubar.CustomMenuBar;
 
@@ -53,13 +55,34 @@ public class PreferencesPage implements IPage {
         final String LIFETIME_LABEL_TEXT = "Life Time";
         final String SPEED_LABEL_TEXT = "Movement Speed";
         final String SAVE_EXIT_BUTTON_TEXT = "Save and exit";
-        final String RESTORE_BUTTON_NAME = "Restore defaults";
+        final String RESTORE_BUTTON_TEXT = "Restore defaults";
         final String INTERVAL_FIELDS_HINT = "500-10000 (ms)";
         final String PROBABILITY_COMBOBOX_HINT = "10-100%";
         final String LIFETIME_FIELDS_HINT = "1-1000 (s)";
-        final String MOVEMENT_FIELDS_HINT = "1-100 (pts/s)";
+        final String SPEED_FIELDS_HINT = "1-100 (pts/s)";
 
+        // Labels
         components.put(PAGE_LABEL_NAME, new JLabel(PAGE_LABEL_TEXT));
+        components.put(WOODEN_LABEL_NAME, new JLabel(WOODEN_LABEL_TEXT));
+        components.put(CAPITAL_LABEL_NAME, new JLabel(CAPITAL_LABEL_TEXT));
+        components.put(INTERVAL_LABEL_NAME, new JLabel(INTERVAL_LABEL_TEXT));
+        components.put(PROBABILITY_LABEL_NAME, new JLabel(PROBABILITY_LABEL_TEXT));
+        components.put(LIFETIME_LABEL_NAME, new JLabel(LIFETIME_LABEL_TEXT));
+        components.put(SPEED_LABEL_NAME, new JLabel(SPEED_LABEL_TEXT));
+
+        // Fields
+        components.put(WOODEN_INTERVAL_FIELD_NAME, new HintTextField(INTERVAL_FIELDS_HINT));
+        components.put(CAPITAL_INTERVAL_FIELD_NAME, new HintTextField(INTERVAL_FIELDS_HINT));
+        components.put(WOODEN_PROBABILITY_COMBOBOX, new HintTextField(PROBABILITY_COMBOBOX_HINT));
+        components.put(CAPITAL_PROBABILITY_COMBOBOX, new HintTextField(PROBABILITY_COMBOBOX_HINT));
+        components.put(WOODEN_LIFETIME_FIELD_NAME, new HintTextField(LIFETIME_FIELDS_HINT));
+        components.put(CAPITAL_LIFETIME_FIELD_NAME, new HintTextField(LIFETIME_FIELDS_HINT));
+        components.put(WOODEN_SPEED_FIELD_NAME, new HintTextField(SPEED_FIELDS_HINT));
+        components.put(CAPITAL_SPEED_FIELD_NAME, new HintTextField(SPEED_FIELDS_HINT));
+
+        // Buttons
+        components.put(SAVE_EXIT_BUTTON_NAME, new ControlButton(SAVE_EXIT_BUTTON_TEXT));
+        components.put(RESTORE_BUTTON_NAME, new ControlButton(RESTORE_BUTTON_TEXT));
     }
 
     @Override
