@@ -4,6 +4,7 @@ import com.universitybullshit.model.Habitat;
 import com.universitybullshit.view.WindowManager;
 import com.universitybullshit.view.components.HintTextField;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,13 @@ public class CreateButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (verify()) {
             nextScreen();
+        } else {
+            JOptionPane.showMessageDialog(context.getMainFrame(),
+                    new String[] {"Некорректное значение размерности. Допустимые значения:\n" +
+                                    "Ширина: 500-1000\n" +
+                                    "Высота: 500-1000"});
+            width_field.setText("500");
+            height_field.setText("500");
         }
     }
 
