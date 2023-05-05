@@ -4,6 +4,7 @@ import com.universitybullshit.controller.HabitatController;
 import com.universitybullshit.view.fabrics.FontFactory;
 import com.universitybullshit.view.fabrics.ImageFactory;
 import com.universitybullshit.view.pages.IPage;
+import com.universitybullshit.view.pages.InformationPage;
 import com.universitybullshit.view.pages.MainMenuPage;
 import com.universitybullshit.view.pages.SimulationPage;
 import lombok.Getter;
@@ -46,6 +47,8 @@ public class WindowManager {
     private static final String PREFERENCES_PAGE = "Preferences";
     @Getter
     private static final String SIMULATION_PAGE =  "Simulation";
+    @Getter
+    private static final String INFORMATION_PAGE = "Information";
 
     public WindowManager(HabitatController controller) {
         mainFrame = new JFrame();
@@ -55,6 +58,7 @@ public class WindowManager {
         pages.put(MAIN_MENU_PAGE, new MainMenuPage(mainFrame, this));
         pages.put(SIMULATION_PAGE, new SimulationPage(mainFrame, this));
 //        pages.add(new PreferencesPage(mainFrame));
+        pages.put(INFORMATION_PAGE, new InformationPage(mainFrame, this));
 
         currentPage = MAIN_MENU_PAGE;
         width = 400;
@@ -86,5 +90,11 @@ public class WindowManager {
         currentPage = pageName;
         pages.get(currentPage).draw();
         mainFrame.setVisible(true);
+    }
+
+    public void showDialog(String dialogName) {
+        JDialog dialog = new JDialog(mainFrame, dialogName, true);
+        pages.get(dialogName).drawAsDialog(dialog);
+        dialog.setVisible(true);
     }
 }
