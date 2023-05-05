@@ -6,9 +6,11 @@ import com.universitybullshit.view.components.ControlButton;
 import com.universitybullshit.view.components.HintTextField;
 import com.universitybullshit.view.fabrics.ComponentFabric;
 import com.universitybullshit.view.menubar.CustomMenuBar;
+import com.universitybullshit.view.util.StyleDto;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +38,8 @@ public class PreferencesPage implements IPage {
     private final String RESTORE_BUTTON_NAME = "RestoreButtonName";
     private final String WOODEN_PROBABILITY_COMBOBOX = "WoodenProbabilityCombobox";
     private final String CAPITAL_PROBABILITY_COMBOBOX = "CapitalProbabilityCombobox";
+    private final String WOODEN_BUILDINGS_IMAGE_NAME = "WoodenBuildingsImage";
+    private final String CAPITAL_BUILDINGS_IMAGE_NAME = "CapitalBuildingsImage";
 
     public PreferencesPage(JFrame frame, WindowManager context) {
         this.frame = frame;
@@ -50,8 +54,8 @@ public class PreferencesPage implements IPage {
     @Override
     public void initializeComponents() {
         final String PAGE_LABEL_TEXT = "Preferences";
-        final String WOODEN_LABEL_TEXT = "Wooden Building";
-        final String CAPITAL_LABEL_TEXT = "Capital Building";
+        final String WOODEN_LABEL_TEXT = "<html><p>Wooden<br>Building</p></html>";
+        final String CAPITAL_LABEL_TEXT = "<html><p>Capital<br>Building</p></html>";
         final String INTERVAL_LABEL_TEXT = "Spawn Interval";
         final String PROBABILITY_LABEL_TEXT = "Spawn Probability";
         final String LIFETIME_LABEL_TEXT = "Life Time";
@@ -65,8 +69,8 @@ public class PreferencesPage implements IPage {
 
         // Labels
         components.put(PAGE_LABEL_NAME, new JLabel(PAGE_LABEL_TEXT));
-        components.put(WOODEN_LABEL_NAME, new JLabel(WOODEN_LABEL_TEXT));
-        components.put(CAPITAL_LABEL_NAME, new JLabel(CAPITAL_LABEL_TEXT));
+        components.put(WOODEN_LABEL_NAME, new JLabel(WOODEN_LABEL_TEXT, SwingConstants.RIGHT));
+        components.put(CAPITAL_LABEL_NAME, new JLabel(CAPITAL_LABEL_TEXT, SwingConstants.RIGHT));
         components.put(INTERVAL_LABEL_NAME, new JLabel(INTERVAL_LABEL_TEXT));
         components.put(PROBABILITY_LABEL_NAME, new JLabel(PROBABILITY_LABEL_TEXT));
         components.put(LIFETIME_LABEL_NAME, new JLabel(LIFETIME_LABEL_TEXT));
@@ -85,6 +89,10 @@ public class PreferencesPage implements IPage {
         // Buttons
         components.put(SAVE_EXIT_BUTTON_NAME, new ControlButton(SAVE_EXIT_BUTTON_TEXT));
         components.put(RESTORE_BUTTON_NAME, new ControlButton(RESTORE_BUTTON_TEXT));
+
+        // Images
+        components.put(WOODEN_BUILDINGS_IMAGE_NAME, new JPanel());
+        components.put(CAPITAL_BUILDINGS_IMAGE_NAME, new JPanel());
     }
 
     @Override
@@ -92,9 +100,9 @@ public class PreferencesPage implements IPage {
         ComponentFabric.setupLabel1((JLabel) components.get(PAGE_LABEL_NAME));
         ComponentFabric.setupDarkLabel((JLabel) components.get(PAGE_LABEL_NAME));
         ComponentFabric.setupDarkLabel((JLabel) components.get(WOODEN_LABEL_NAME));
-        ComponentFabric.setupLabel3((JLabel) components.get(WOODEN_LABEL_NAME));
+        ComponentFabric.setupLabel2((JLabel) components.get(WOODEN_LABEL_NAME));
         ComponentFabric.setupDarkLabel((JLabel) components.get(CAPITAL_LABEL_NAME));
-        ComponentFabric.setupLabel3((JLabel) components.get(CAPITAL_LABEL_NAME));
+        ComponentFabric.setupLabel2((JLabel) components.get(CAPITAL_LABEL_NAME));
         ComponentFabric.setupDarkLabel((JLabel) components.get(INTERVAL_LABEL_NAME));
         ComponentFabric.setupLabel3((JLabel) components.get(INTERVAL_LABEL_NAME));
         ComponentFabric.setupDarkLabel((JLabel) components.get(PROBABILITY_LABEL_NAME));
@@ -115,6 +123,21 @@ public class PreferencesPage implements IPage {
 
         ComponentFabric.setupControlButtonDark((ControlButton) components.get(SAVE_EXIT_BUTTON_NAME));
         ComponentFabric.setupControlButtonLight((ControlButton) components.get(RESTORE_BUTTON_NAME));
+
+        components.get(WOODEN_BUILDINGS_IMAGE_NAME).add(new JLabel(new ImageIcon(
+                WindowManager
+                        .getImageFactory()
+                        .getWoodenBuilding()
+                        .getScaledInstance(50, 50, Image.SCALE_SMOOTH)
+        )));
+        components.get(WOODEN_BUILDINGS_IMAGE_NAME).setBackground(StyleDto.getPrimaryLightColor());
+        components.get(CAPITAL_BUILDINGS_IMAGE_NAME).add(new JLabel(new ImageIcon(
+                WindowManager
+                        .getImageFactory()
+                        .getCapitalBuilding()
+                        .getScaledInstance(50, 50, Image.SCALE_SMOOTH)
+        )));
+        components.get(CAPITAL_BUILDINGS_IMAGE_NAME).setBackground(StyleDto.getPrimaryLightColor());
 
         setupActions();
     }
@@ -140,6 +163,8 @@ public class PreferencesPage implements IPage {
 
         rootPanel.add(createPageLabelPanel());
 
+        rootPanel.add(createBuildingsTypesPanel());
+
         rootPanel.add(createFieldsLabelPanel(components.get(INTERVAL_LABEL_NAME)));
         rootPanel.add(createFields(components.get(WOODEN_INTERVAL_FIELD_NAME),
                 components.get(CAPITAL_INTERVAL_FIELD_NAME)));
@@ -160,7 +185,7 @@ public class PreferencesPage implements IPage {
         rootPanel.add(createRestoreButtonPanel());
 
         frame.add(rootPanel);
-//        frame.pack();
+        frame.pack();
         frame.requestFocusInWindow();
     }
 
@@ -219,6 +244,33 @@ public class PreferencesPage implements IPage {
         ComponentFabric.setupLightPanel(panel);
         panel.setBorder(new EmptyBorder(0, 0, 20, 0));
         panel.add(components.get(RESTORE_BUTTON_NAME));
+        return panel;
+    }
+
+    private JPanel createBuildingsTypesPanel() {
+        JPanel panel = new JPanel();
+        JPanel woodenBuildingPanel = new JPanel();
+        JPanel capitalBuildingPanel = new JPanel();
+
+        ComponentFabric.setupLightPanel(panel);
+        ComponentFabric.setupLightPanel(woodenBuildingPanel);
+        ComponentFabric.setupLightPanel(capitalBuildingPanel);
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setBorder(new EmptyBorder(0,12,0,12));
+        woodenBuildingPanel.setLayout(new BoxLayout(woodenBuildingPanel, BoxLayout.X_AXIS));
+        capitalBuildingPanel.setLayout(new BoxLayout(capitalBuildingPanel, BoxLayout.X_AXIS));
+
+        woodenBuildingPanel.add(components.get(WOODEN_BUILDINGS_IMAGE_NAME));
+        woodenBuildingPanel.add(components.get(WOODEN_LABEL_NAME));
+
+        capitalBuildingPanel.add(components.get(CAPITAL_BUILDINGS_IMAGE_NAME));
+        capitalBuildingPanel.add(components.get(CAPITAL_LABEL_NAME));
+
+        panel.add(woodenBuildingPanel);
+        panel.add(Box.createHorizontalStrut(12));
+        panel.add(capitalBuildingPanel);
+
         return panel;
     }
 }
