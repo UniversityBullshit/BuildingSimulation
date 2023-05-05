@@ -1,6 +1,5 @@
 package com.universitybullshit.view.util;
 
-import com.universitybullshit.controller.HabitatController;
 import com.universitybullshit.view.WindowManager;
 import com.universitybullshit.view.components.Area;
 import com.universitybullshit.view.actions.ShowTimeAction;
