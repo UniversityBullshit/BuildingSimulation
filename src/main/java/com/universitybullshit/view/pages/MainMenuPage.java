@@ -2,6 +2,7 @@ package com.universitybullshit.view.pages;
 
 import com.universitybullshit.view.WindowManager;
 import com.universitybullshit.view.actions.CreateButtonListener;
+import com.universitybullshit.view.actions.PreferencesButtonListener;
 import com.universitybullshit.view.components.ControlButton;
 import com.universitybullshit.view.components.HintTextField;
 import com.universitybullshit.view.fabrics.ComponentFabric;
@@ -70,7 +71,10 @@ public class MainMenuPage implements IPage {
                 context
         );
 
+        PreferencesButtonListener preferencesButtonListener = new PreferencesButtonListener(context);
+
         ((ControlButton)components.get(START_BUTTON_NAME)).addActionListener(createButtonListener);
+        ((ControlButton)components.get(PREFERENCES_BUTTON_NAME)).addActionListener(preferencesButtonListener);
     }
 
     @Override
