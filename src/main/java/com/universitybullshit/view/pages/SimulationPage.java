@@ -82,6 +82,41 @@ public class SimulationPage implements IPage {
         components.put(GAP_13_NAME, new HorizontalGap(13));
         components.put(GAP_8_NAME, new HorizontalGap(8));
         components.put(GAP_6_NAME, new HorizontalGap(6));
+
+        setupActions();
+    }
+
+    private void setupActions() {
+        StartKeyAction startKeyAction = new StartKeyAction(
+                context.getController(),
+                (Area) components.get(SIMULATION_AREA_NAME));
+
+        StopKeyAction stopKeyAction = new StopKeyAction(
+                (Area) components.get(SIMULATION_AREA_NAME),
+                context);
+
+        ShowInfoAction action = new ShowInfoAction(
+                (Area) components.get(SIMULATION_AREA_NAME));
+
+        ItemListener showTimeListener = e -> {
+            if (e.getSource() == components.get(SHOW_TIME_RADIO_BUTTON_NAME)) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    ((Area) components.get(SIMULATION_AREA_NAME)).setShowTime(true);
+                    components.get(SIMULATION_AREA_NAME).repaint();
+                }
+            } else {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    ((Area) components.get(SIMULATION_AREA_NAME)).setShowTime(false);
+                    components.get(SIMULATION_AREA_NAME).repaint();
+                }
+            }
+        };
+
+        ((ControlButton) components.get(START_BUTTON_NAME)).addActionListener(startKeyAction);
+        ((ControlButton) components.get(STOP_BUTTON_NAME)).addActionListener(stopKeyAction);
+        ((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
+        ((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
+        ((SwitchButton) components.get(SHOW_INFO_SWITCH_NAME)).setAction(action);
     }
 
     @Override
@@ -170,12 +205,6 @@ public class SimulationPage implements IPage {
         JPanel panel = new JPanel();
         ComponentFabric.setupDarkPanel(panel);
 
-        StartKeyAction action = new StartKeyAction(
-                context.getController(),
-                (Area) components.get(SIMULATION_AREA_NAME));
-
-        ((ControlButton) components.get(START_BUTTON_NAME)).addActionListener(action);
-
         panel.add(components.get(START_BUTTON_NAME));
 
         return panel;
@@ -184,12 +213,6 @@ public class SimulationPage implements IPage {
     private JPanel createStopButtonPanel() {
         JPanel panel = new JPanel();
         ComponentFabric.setupDarkPanel(panel);
-
-        StopKeyAction action = new StopKeyAction(
-                (Area) components.get(SIMULATION_AREA_NAME),
-                context);
-
-        ((ControlButton) components.get(STOP_BUTTON_NAME)).addActionListener(action);
 
         panel.add(components.get(STOP_BUTTON_NAME));
 
@@ -212,11 +235,6 @@ public class SimulationPage implements IPage {
         JPanel panel = new JPanel();
         ComponentFabric.setupDarkPanel(panel);
 
-        ShowInfoAction action = new ShowInfoAction(
-                (Area) components.get(SIMULATION_AREA_NAME));
-
-        ((SwitchButton) components.get(SHOW_INFO_SWITCH_NAME)).setAction(action);
-
         panel.add(components.get(SHOW_INFO_LABEL_NAME));
         panel.add(components.get(GAP_6_NAME));
         panel.add(components.get(SHOW_INFO_SWITCH_NAME));
@@ -238,23 +256,6 @@ public class SimulationPage implements IPage {
         ButtonGroup timeButtons = new ButtonGroup();
         timeButtons.add((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME));
         timeButtons.add((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME));
-
-        ItemListener showTimeListener = e -> {
-            if (e.getSource() == components.get(SHOW_TIME_RADIO_BUTTON_NAME)) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    ((Area) components.get(SIMULATION_AREA_NAME)).setShowTime(true);
-                    components.get(SIMULATION_AREA_NAME).repaint();
-                }
-            } else {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    ((Area) components.get(SIMULATION_AREA_NAME)).setShowTime(false);
-                    components.get(SIMULATION_AREA_NAME).repaint();
-                }
-            }
-        };
-
-        ((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
-        ((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
 
         showPanel.add(components.get(SHOW_TIME_LABEL_NAME));
         showPanel.add(components.get(GAP_13_NAME));

@@ -59,6 +59,18 @@ public class MainMenuPage implements IPage {
 
         components.put(START_BUTTON_NAME, new ControlButton(START_BUTTON_TEXT));
         components.put(PREFERENCES_BUTTON_NAME, new ControlButton(PREFERENCES_BUTTON_TEXT));
+
+        setupActions();
+    }
+
+    private void setupActions() {
+        CreateButtonListener createButtonListener = new CreateButtonListener(
+                (HintTextField) components.get(WIDTH_FIELD_NAME),
+                (HintTextField) components.get(HEIGHT_FIELD_NAME),
+                context
+        );
+
+        ((ControlButton)components.get(START_BUTTON_NAME)).addActionListener(createButtonListener);
     }
 
     @Override
@@ -144,13 +156,6 @@ public class MainMenuPage implements IPage {
         ComponentFabric.setupLightPanel(panel);
         panel.setBorder(new EmptyBorder(20,0,0,0));
 
-        CreateButtonListener createButtonListener = new CreateButtonListener(
-                (HintTextField) components.get(WIDTH_FIELD_NAME),
-                (HintTextField) components.get(HEIGHT_FIELD_NAME),
-                context
-        );
-
-        ((ControlButton)components.get(START_BUTTON_NAME)).addActionListener(createButtonListener);
         panel.add(components.get(START_BUTTON_NAME));
 
         return panel;
