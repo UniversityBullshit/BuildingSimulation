@@ -24,6 +24,9 @@ public class Area extends JPanel {
     @Getter
     @Setter
     private boolean showTime = true;
+    @Getter
+    @Setter
+    private boolean showInfo = false;
     public final HashMap<Long, BuildingInstance> buildingsDictionary = new HashMap<>();
     private final Vector<Long> deletingBuildings = new Vector<>();
     private final Vector<Building> addingBuildings = new Vector<>();
