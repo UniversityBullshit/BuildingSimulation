@@ -14,5 +14,6 @@ public class ShowTimeAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.area.setShowTime(!this.area.isShowTime());
+        this.area.repaint();
     }
 }
