@@ -1,5 +1,7 @@
 package com.universitybullshit.view.pages;
 
+import javax.swing.*;
+
 public interface IPage {
     /**
      * Creates all components of page
@@ -15,4 +17,9 @@ public interface IPage {
      * Adds all components of page to frame
      */
     void draw();
+
+    /**
+     * Draws all components in JDialog. (Optional)
+     */
+    void drawAsDialog(JDialog dialog);
 }
