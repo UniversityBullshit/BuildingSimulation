@@ -14,7 +14,7 @@ public class PreferencesPage implements IPage {
 
 
     // String constants
-    private final String PREFERENCES_LABEL_NAME = "PreferencesLabel";
+    private final String PAGE_LABEL_NAME = "PreferencesLabel";
     private final String WOODEN_LABEL_NAME = "WoodenLabel";
     private final String CAPITAL_LABEL_NAME = "CapitalLabel";
     private final String INTERVAL_LABEL_NAME = "IntervalLabel";
@@ -44,7 +44,6 @@ public class PreferencesPage implements IPage {
 
     @Override
     public void initializeComponents() {
-
     }
 
     @Override
