@@ -69,7 +69,7 @@ public class CreateButtonListener implements ActionListener {
         context.getController().setContext(new Habitat(width, height));
 
         context.setWidth(width + 200);
-        context.setHeight(height);
+        context.setHeight(height + 64);
 
         context.swapPage(WindowManager.getSIMULATION_PAGE());
     }

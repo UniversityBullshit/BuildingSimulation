@@ -6,6 +6,7 @@ import com.universitybullshit.view.actions.StartKeyAction;
 import com.universitybullshit.view.actions.StopKeyAction;
 import com.universitybullshit.view.components.*;
 import com.universitybullshit.view.fabrics.ComponentFabric;
+import com.universitybullshit.view.util.KeyboardInput;
 import com.universitybullshit.view.util.StyleDto;
 
 import javax.swing.*;
@@ -185,6 +186,7 @@ public class SimulationPage implements IPage {
         rootPanel.add(controlsPanel);
         rootPanel.add(simulationAreaPanel);
 
+        KeyboardInput.createKeyBindings(rootPanel, context, (Area) components.get(SIMULATION_AREA_NAME));
         frame.add(rootPanel);
         frame.requestFocusInWindow();
     }
