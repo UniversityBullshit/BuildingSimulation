@@ -7,6 +7,7 @@ import com.universitybullshit.view.fabrics.ComponentFabric;
 import com.universitybullshit.view.menubar.CustomMenuBar;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -124,6 +125,25 @@ public class PreferencesPage implements IPage {
 
         rootPanel.add(createPageLabelPanel());
 
+        rootPanel.add(createFieldsLabelPanel(components.get(INTERVAL_LABEL_NAME)));
+        rootPanel.add(createFields(components.get(WOODEN_INTERVAL_FIELD_NAME),
+                components.get(CAPITAL_INTERVAL_FIELD_NAME)));
+
+        rootPanel.add(createFieldsLabelPanel(components.get(PROBABILITY_LABEL_NAME)));
+        rootPanel.add(createFields(components.get(WOODEN_PROBABILITY_COMBOBOX),
+                components.get(CAPITAL_PROBABILITY_COMBOBOX)));
+
+        rootPanel.add(createFieldsLabelPanel(components.get(LIFETIME_LABEL_NAME)));
+        rootPanel.add(createFields(components.get(WOODEN_LIFETIME_FIELD_NAME),
+                components.get(CAPITAL_LIFETIME_FIELD_NAME)));
+
+        rootPanel.add(createFieldsLabelPanel(components.get(SPEED_LABEL_NAME)));
+        rootPanel.add(createFields(components.get(WOODEN_SPEED_FIELD_NAME),
+                components.get(CAPITAL_SPEED_FIELD_NAME)));
+
+        rootPanel.add(createSaveExitButtonPanel());
+        rootPanel.add(createRestoreButtonPanel());
+
         frame.add(rootPanel);
 //        frame.pack();
         frame.requestFocusInWindow();
@@ -138,6 +158,14 @@ public class PreferencesPage implements IPage {
         JPanel panel = new JPanel();
         ComponentFabric.setupLightPanel(panel);
         panel.add(components.get(PAGE_LABEL_NAME));
+        return panel;
+    }
+
+    private JPanel createFieldsLabelPanel(JComponent label) {
+        JPanel panel = new JPanel();
+        ComponentFabric.setupLightPanel(panel);
+//        panel.setBorder(new EmptyBorder(0, 0, -50, 0));
+        panel.add(label);
         return panel;
     }
 
@@ -157,9 +185,25 @@ public class PreferencesPage implements IPage {
         rightPanel.add(rightField);
 
         setup.add(leftPanel);
-        setup.add(Box.createHorizontalStrut(23));
+        setup.add(Box.createHorizontalStrut(12));
         setup.add(rightPanel);
 
         return setup;
+    }
+
+    private JPanel createSaveExitButtonPanel() {
+        JPanel panel = new JPanel();
+        ComponentFabric.setupLightPanel(panel);
+        panel.setBorder(new EmptyBorder(20, 0, 0, 0));
+        panel.add(components.get(SAVE_EXIT_BUTTON_NAME));
+        return panel;
+    }
+
+    private JPanel createRestoreButtonPanel() {
+        JPanel panel = new JPanel();
+        ComponentFabric.setupLightPanel(panel);
+        panel.setBorder(new EmptyBorder(0, 0, 20, 0));
+        panel.add(components.get(RESTORE_BUTTON_NAME));
+        return panel;
     }
 }
