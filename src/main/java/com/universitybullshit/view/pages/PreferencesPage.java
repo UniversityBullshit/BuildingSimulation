@@ -7,14 +7,14 @@ import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SettingsPage implements IPage {
+public class PreferencesPage implements IPage {
     private final JFrame frame;
     private final Map<String, JComponent> components;
     private final WindowManager context;
 
 
     // String constants
-    private final String SETTINGS_LABEL_NAME = "AdditionalSettings";
+    private final String PREFERENCES_LABEL_NAME = "PreferencesLabel";
     private final String WOODEN_LABEL_NAME = "WoodenLabel";
     private final String CAPITAL_LABEL_NAME = "CapitalLabel";
     private final String INTERVAL_LABEL_NAME = "IntervalLabel";
@@ -32,7 +32,7 @@ public class SettingsPage implements IPage {
     private final String WOODEN_PROBABILITY_COMBOBOX = "WoodenProbabilityCombobox";
     private final String CAPITAL_PROBABILITY_COMBOBOX = "CapitalProbabilityCombobox";
 
-    public SettingsPage(JFrame frame, WindowManager context) {
+    public PreferencesPage(JFrame frame, WindowManager context) {
         this.frame = frame;
         this.context = context;
         components = new HashMap<>();
@@ -59,6 +59,6 @@ public class SettingsPage implements IPage {
 
     @Override
     public void drawAsDialog(JDialog dialog) {
-
+        // No implementation
     }
 }
