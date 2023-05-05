@@ -167,4 +167,9 @@ public class MainMenuPage implements IPage {
 
         return panel;
     }
+
+    @Override
+    public void drawAsDialog(JDialog dialog) {
+        // No implementation
+    }
 }

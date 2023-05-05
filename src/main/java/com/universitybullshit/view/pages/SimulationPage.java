@@ -1,7 +1,7 @@
 package com.universitybullshit.view.pages;
 
 import com.universitybullshit.view.WindowManager;
-import com.universitybullshit.view.actions.ShowTimeAction;
+import com.universitybullshit.view.actions.ShowInfoAction;
 import com.universitybullshit.view.actions.StartKeyAction;
 import com.universitybullshit.view.actions.StopKeyAction;
 import com.universitybullshit.view.components.*;
@@ -186,8 +186,8 @@ public class SimulationPage implements IPage {
         ComponentFabric.setupDarkPanel(panel);
 
         StopKeyAction action = new StopKeyAction(
-                context.getController(),
-                (Area) components.get(SIMULATION_AREA_NAME));
+                (Area) components.get(SIMULATION_AREA_NAME),
+                context);
 
         ((ControlButton) components.get(STOP_BUTTON_NAME)).addActionListener(action);
 
@@ -211,6 +211,11 @@ public class SimulationPage implements IPage {
     private JPanel createShowInfoPanel() {
         JPanel panel = new JPanel();
         ComponentFabric.setupDarkPanel(panel);
+
+        ShowInfoAction action = new ShowInfoAction(
+                (Area) components.get(SIMULATION_AREA_NAME));
+
+        ((SwitchButton) components.get(SHOW_INFO_SWITCH_NAME)).setAction(action);
 
         panel.add(components.get(SHOW_INFO_LABEL_NAME));
         panel.add(components.get(GAP_6_NAME));
@@ -263,5 +268,10 @@ public class SimulationPage implements IPage {
         panel.add(hidePanel);
 
         return panel;
+    }
+
+    @Override
+    public void drawAsDialog(JDialog dialog) {
+        // No implementation
     }
 }
