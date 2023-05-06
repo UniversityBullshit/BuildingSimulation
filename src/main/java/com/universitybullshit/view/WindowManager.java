@@ -3,10 +3,7 @@ package com.universitybullshit.view;
 import com.universitybullshit.controller.HabitatController;
 import com.universitybullshit.view.fabrics.FontFactory;
 import com.universitybullshit.view.fabrics.ImageFactory;
-import com.universitybullshit.view.pages.IPage;
-import com.universitybullshit.view.pages.InformationPage;
-import com.universitybullshit.view.pages.MainMenuPage;
-import com.universitybullshit.view.pages.SimulationPage;
+import com.universitybullshit.view.pages.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -57,7 +54,7 @@ public class WindowManager {
         pages = new HashMap<>();
         pages.put(MAIN_MENU_PAGE, new MainMenuPage(mainFrame, this));
         pages.put(SIMULATION_PAGE, new SimulationPage(mainFrame, this));
-//        pages.add(new PreferencesPage(mainFrame));
+        pages.put(PREFERENCES_PAGE, new PreferencesPage(mainFrame, this));
         pages.put(INFORMATION_PAGE, new InformationPage(mainFrame, this));
 
         currentPage = MAIN_MENU_PAGE;
