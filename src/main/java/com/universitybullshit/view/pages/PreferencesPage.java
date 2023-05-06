@@ -1,6 +1,7 @@
 package com.universitybullshit.view.pages;
 
 import com.universitybullshit.view.WindowManager;
+import com.universitybullshit.view.actions.SavePreferencesAction;
 import com.universitybullshit.view.components.ControlButton;
 import com.universitybullshit.view.components.HintTextField;
 import com.universitybullshit.view.fabrics.ComponentFabric;
@@ -114,6 +115,20 @@ public class PreferencesPage implements IPage {
 
         ComponentFabric.setupControlButtonDark((ControlButton) components.get(SAVE_EXIT_BUTTON_NAME));
         ComponentFabric.setupControlButtonLight((ControlButton) components.get(RESTORE_BUTTON_NAME));
+
+        setupActions();
+    }
+
+    private void setupActions() {
+        SavePreferencesAction saveAndExit = new SavePreferencesAction(context);
+        saveAndExit.addField((HintTextField) components.get(WOODEN_INTERVAL_FIELD_NAME));
+        saveAndExit.addField((HintTextField) components.get(CAPITAL_INTERVAL_FIELD_NAME));
+        saveAndExit.addField((HintTextField) components.get(WOODEN_LIFETIME_FIELD_NAME));
+        saveAndExit.addField((HintTextField) components.get(CAPITAL_LIFETIME_FIELD_NAME));
+        saveAndExit.addField((HintTextField) components.get(WOODEN_SPEED_FIELD_NAME));
+        saveAndExit.addField((HintTextField) components.get(CAPITAL_SPEED_FIELD_NAME));
+
+        ((ControlButton) components.get(SAVE_EXIT_BUTTON_NAME)).addActionListener(saveAndExit);
     }
 
     @Override
