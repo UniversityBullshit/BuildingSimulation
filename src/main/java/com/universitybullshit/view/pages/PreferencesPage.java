@@ -28,7 +28,7 @@ public class PreferencesPage implements IPage {
     private final String PROBABILITY_LABEL_NAME = "ProbabilityLabel";
     private final String LIFETIME_LABEL_NAME = "LifetimeLabel";
     private final String SPEED_LABEL_NAME = "SpeedLabel";
-    private final String WOODEN_INTERVAL_FIELD_NAME = "WoodenIntevalField";
+    private final String WOODEN_INTERVAL_FIELD_NAME = "WoodenIntervalField";
     private final String CAPITAL_INTERVAL_FIELD_NAME = "CapitalIntervalField";
     private final String WOODEN_LIFETIME_FIELD_NAME = "WoodenLifetimeField";
     private final String CAPITAL_LIFETIME_FIELD_NAME = "CapitalLifetimeField";
