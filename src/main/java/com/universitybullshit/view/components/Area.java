@@ -46,7 +46,7 @@ public class Area extends JPanel {
         // Accept changes
         removeInstances();
         addInstances();
-        //moveInstances();
+        moveInstances();
 
         // Delete temporary info
         this.deletingBuildings.clear();
