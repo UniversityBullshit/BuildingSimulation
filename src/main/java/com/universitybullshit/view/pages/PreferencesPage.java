@@ -11,15 +11,8 @@ import com.universitybullshit.view.util.StyleDto;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
-public class PreferencesPage implements IPage {
-    private final JFrame frame;
-    private final Map<String, JComponent> components;
-    private final WindowManager context;
-
-
+public class PreferencesPage extends Page implements IPage {
     // String constants
     private final String PAGE_LABEL_NAME = "PreferencesLabel";
     private final String WOODEN_LABEL_NAME = "WoodenLabel";
@@ -42,12 +35,7 @@ public class PreferencesPage implements IPage {
     private final String CAPITAL_BUILDINGS_IMAGE_NAME = "CapitalBuildingsImage";
 
     public PreferencesPage(JFrame frame, WindowManager context) {
-        this.frame = frame;
-        this.context = context;
-        components = new HashMap<>();
-
-        initializeComponents();
-        setupAppearance();
+        super(frame, context);
     }
 
 

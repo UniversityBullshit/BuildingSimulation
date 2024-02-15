@@ -9,15 +9,8 @@ import com.universitybullshit.view.util.StyleDto;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
-public class InformationPage implements IPage {
-    private final JFrame frame;
-    private final Map<String, JComponent> components;
-    private final WindowManager context;
-
-
+public class InformationPage extends Page implements IPage {
     // String constants
     private final String MAIN_LABEL_NAME =                   "SimulationInfo";
     private final String SIMULATION_TIME_LABEL_NAME =        "SimulationTime";
@@ -33,12 +26,7 @@ public class InformationPage implements IPage {
     private final String OK_BUTTON_NAME =                    "OK";
 
     public InformationPage(JFrame frame, WindowManager context) {
-        this.frame = frame;
-        this.context = context;
-        components = new HashMap<>();
-
-        initializeComponents();
-        setupAppearance();
+        super(frame, context);
     }
 
     @Override

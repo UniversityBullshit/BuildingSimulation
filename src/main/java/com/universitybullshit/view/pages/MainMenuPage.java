@@ -12,15 +12,8 @@ import com.universitybullshit.view.util.StyleDto;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
-public class MainMenuPage implements IPage {
-    private final JFrame frame;
-    private final Map<String, JComponent> components;
-    private final WindowManager context;
-
-
+public class MainMenuPage extends Page implements IPage {
     // String constants
     private final String PAGE_LABEL_NAME =         "MainMenu";
     private final String WIDTH_LABEL_NAME =        "WidthLabel";
@@ -32,12 +25,7 @@ public class MainMenuPage implements IPage {
     private final String PREFERENCES_BUTTON_NAME = "PreferencesButton";
 
     public MainMenuPage(JFrame frame, WindowManager context) {
-        this.frame = frame;
-        this.context = context;
-        components = new HashMap<>();
-
-        initializeComponents();
-        setupAppearance();
+        super(frame, context);
     }
 
     @Override
