@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.util.*;
 
-public class Habitat {
+public class Habitat implements IHabitat {
     @Getter
     @Setter
     private int width;
@@ -30,12 +30,16 @@ public class Habitat {
         this.height = height;
         reset();
     }
+
+    @Override
     public void update(long time) {
         this.time = time;
         removeExpiredObjects(findExpiredObjects());
         spawnCapitalBuilding();
         spawnWoodenBuilding();
     }
+
+    @Override
     public void reset() {
         this.time = 0;
         this.lastWoodenBuildingSpawnTime = 0;
