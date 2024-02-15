@@ -103,8 +103,8 @@ public class MainMenuPage extends Page implements IPage {
         rootPanel.add(createMainLabelPanel());
         rootPanel.add(components.get(IMAGE_PANEL_NAME));
         rootPanel.add(createSetupFields());
-        rootPanel.add(createCreationButtonPanel(rootPanel));
-        rootPanel.add(createPreferencesButtonPanel(rootPanel));
+        rootPanel.add(createCreationButtonPanel());
+        rootPanel.add(createPreferencesButtonPanel());
 
         frame.add(rootPanel);
         frame.pack();
@@ -143,7 +143,7 @@ public class MainMenuPage extends Page implements IPage {
         return setup;
     }
 
-    private JPanel createCreationButtonPanel(JPanel rootPanel) {
+    private JPanel createCreationButtonPanel() {
         JPanel panel = new JPanel();
         ComponentFabric.setupLightPanel(panel);
         panel.setBorder(new EmptyBorder(20,0,0,0));
@@ -153,7 +153,7 @@ public class MainMenuPage extends Page implements IPage {
         return panel;
     }
 
-    private JPanel createPreferencesButtonPanel(JPanel rootPanel) {
+    private JPanel createPreferencesButtonPanel() {
         JPanel panel = new JPanel();
         ComponentFabric.setupLightPanel(panel);
         panel.setBorder(new EmptyBorder(0,0,20,0));
