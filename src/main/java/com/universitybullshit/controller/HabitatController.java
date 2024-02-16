@@ -24,28 +24,32 @@ public class HabitatController {
      */
     public HabitatController(SimulationService simulationService) {
         context = simulationService;
-        CompletableFuture.runAsync(context::simulation);
+//        CompletableFuture.runAsync(context::simulation);
     }
 
     /**
      * Starts an endless process of simulation that runs asynchronously.
      */
     public void startSimulation() {
-        context.setSimulationRunning(true);
+        context.startSimulation();
     }
 
     /**
      * Interrupts simulation process.
      */
     public void stopSimulation() {
-        context.setSimulationRunning(false);
+        try {
+            context.stopSimulation();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
      * Set context to default state
      */
     public void resetSimulation() {
-        context.setSimulationRunning(false);
+        stopSimulation();
         context.setTime(0);
         context.getContext().reset();
     }
@@ -56,7 +60,6 @@ public class HabitatController {
 
     public void setContext(Habitat habitat) {
         context.setContext(habitat);
-
     }
 
     /**
