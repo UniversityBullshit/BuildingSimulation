@@ -12,15 +12,8 @@ import com.universitybullshit.view.util.StyleDto;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
-public class MainMenuPage implements IPage {
-    private final JFrame frame;
-    private final Map<String, JComponent> components;
-    private final WindowManager context;
-
-
+public class MainMenuPage extends Page implements IPage {
     // String constants
     private final String PAGE_LABEL_NAME =         "MainMenu";
     private final String WIDTH_LABEL_NAME =        "WidthLabel";
@@ -32,12 +25,7 @@ public class MainMenuPage implements IPage {
     private final String PREFERENCES_BUTTON_NAME = "PreferencesButton";
 
     public MainMenuPage(JFrame frame, WindowManager context) {
-        this.frame = frame;
-        this.context = context;
-        components = new HashMap<>();
-
-        initializeComponents();
-        setupAppearance();
+        super(frame, context);
     }
 
     @Override
@@ -115,8 +103,8 @@ public class MainMenuPage implements IPage {
         rootPanel.add(createMainLabelPanel());
         rootPanel.add(components.get(IMAGE_PANEL_NAME));
         rootPanel.add(createSetupFields());
-        rootPanel.add(createCreationButtonPanel(rootPanel));
-        rootPanel.add(createPreferencesButtonPanel(rootPanel));
+        rootPanel.add(createCreationButtonPanel());
+        rootPanel.add(createPreferencesButtonPanel());
 
         frame.add(rootPanel);
         frame.pack();
@@ -155,7 +143,7 @@ public class MainMenuPage implements IPage {
         return setup;
     }
 
-    private JPanel createCreationButtonPanel(JPanel rootPanel) {
+    private JPanel createCreationButtonPanel() {
         JPanel panel = new JPanel();
         ComponentFabric.setupLightPanel(panel);
         panel.setBorder(new EmptyBorder(20,0,0,0));
@@ -165,7 +153,7 @@ public class MainMenuPage implements IPage {
         return panel;
     }
 
-    private JPanel createPreferencesButtonPanel(JPanel rootPanel) {
+    private JPanel createPreferencesButtonPanel() {
         JPanel panel = new JPanel();
         ComponentFabric.setupLightPanel(panel);
         panel.setBorder(new EmptyBorder(0,0,20,0));
