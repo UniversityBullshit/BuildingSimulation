@@ -1,4 +1,4 @@
-package com.universitybullshit.services;
+package com.universitybullshit.service;
 
 import com.universitybullshit.model.Habitat;
 import lombok.Getter;

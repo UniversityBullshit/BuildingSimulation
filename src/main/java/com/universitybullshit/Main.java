@@ -2,7 +2,7 @@ package com.universitybullshit;
 
 import com.universitybullshit.controller.HabitatController;
 import com.universitybullshit.model.Habitat;
-import com.universitybullshit.services.SimulationService;
+import com.universitybullshit.service.SimulationService;
 import com.universitybullshit.view.WindowManager;
 
 import javax.swing.*;

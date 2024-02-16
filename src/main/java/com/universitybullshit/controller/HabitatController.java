@@ -2,10 +2,9 @@ package com.universitybullshit.controller;
 
 import com.universitybullshit.model.Building;
 import com.universitybullshit.model.Habitat;
-import com.universitybullshit.services.SimulationService;
+import com.universitybullshit.service.SimulationService;
 
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Controller, representing a component that controls simulation process.
