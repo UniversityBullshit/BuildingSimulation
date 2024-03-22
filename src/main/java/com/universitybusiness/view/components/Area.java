@@ -10,6 +10,8 @@ import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
@@ -30,15 +32,31 @@ public class Area extends JPanel {
     public final HashMap<Long, BuildingInstance> buildingsDictionary = new HashMap<>();
     private final Vector<Long> deletingBuildings = new Vector<>();
     private final Vector<Building> addingBuildings = new Vector<>();
+    private final Timer timer;
 
     public Area(HabitatController controller) {
         this.controller = controller;
         this.setSize(new Dimension(
                 this.controller.getContext().getWidth(),
                 this.controller.getContext().getHeight()));
+
+        // Create timer that allows async process of update each (1000 / 60)ms (60 fps)
+        this.timer = new Timer(1000 / 60, event -> SwingUtilities.invokeLater(this::update));
     }
 
-    public void update() {
+    public void startUpdating() {
+        if (!timer.isRunning()) {
+            this.timer.start();
+        }
+    }
+
+    public void stopUpdating() {
+        if (timer.isRunning()) {
+            this.timer.stop();
+        }
+    }
+
+    private void update() {
         // Get actual info
         getDeletingInstances();
         getAddingInstances();

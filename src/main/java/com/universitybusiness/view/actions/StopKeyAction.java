@@ -17,7 +17,7 @@ public class StopKeyAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.context.getController().stopSimulation();
-        this.area.setAreaUpdating(false);
+        this.area.stopUpdating();
 
         if (this.area.isShowInfo()) {
             this.context.showDialog(WindowManager.getINFORMATION_PAGE());

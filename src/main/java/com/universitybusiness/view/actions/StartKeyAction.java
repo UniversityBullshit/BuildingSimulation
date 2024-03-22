@@ -23,26 +23,6 @@ public class StartKeyAction extends AbstractAction {
 
     private void startUpdating() {
         this.controller.startSimulation();
-        if (!this.area.isAreaUpdating()) {
-            CompletableFuture.runAsync(this::areaUpdating);
-        }
-        this.area.setAreaUpdating(true);
-    }
-
-    private void areaUpdating() {
-        while (this.area.isAreaUpdating()) {
-            this.area.update();
-            this.area.updateUI();
-
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-
-            if (Thread.currentThread().isInterrupted()) {
-                startUpdating();
-            }
-        }
+        this.area.startUpdating();
     }
 }
