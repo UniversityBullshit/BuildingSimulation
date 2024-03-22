@@ -33,12 +33,29 @@ public class Area extends JPanel {
     private final Vector<Long> deletingBuildings = new Vector<>();
     private final Vector<Building> addingBuildings = new Vector<>();
     private final Timer timer;
+    private final Integer woodenBuildingSide;
+    private final Integer capitalBuildingSide;
+    private final Image woodenBuildingImage;
+    private final Image capitalBuildingImage;
 
     public Area(HabitatController controller) {
         this.controller = controller;
         this.setSize(new Dimension(
                 this.controller.getContext().getWidth(),
                 this.controller.getContext().getHeight()));
+
+        this.woodenBuildingSide = BuildingDrawDto.getWoodenBuildingSide();
+        this.capitalBuildingSide = BuildingDrawDto.getCapitalBuildingSide();
+
+        this.woodenBuildingImage = WindowManager
+                .getImageFactory()
+                .getWoodenBuilding()
+                .getScaledInstance(this.woodenBuildingSide, this.woodenBuildingSide, Image.SCALE_SMOOTH);
+
+        this.capitalBuildingImage = WindowManager
+                .getImageFactory()
+                .getCapitalBuilding()
+                .getScaledInstance(this.capitalBuildingSide, this.capitalBuildingSide, Image.SCALE_SMOOTH);
 
         // Create timer that allows async process of update each (1000 / 60)ms (60 fps)
         this.timer = new Timer(1000 / 60, event -> SwingUtilities.invokeLater(this::update));
@@ -132,13 +149,17 @@ public class Area extends JPanel {
 
         for (BuildingInstance buildingInstance : this.buildingsDictionary.values()) {
             if (buildingInstance.isCapitalBuilding()) {
-                Integer side = BuildingDrawDto.getCapitalBuildingSide();
-                g2d.setColor(BuildingDrawDto.getCapitalBuildingColor());
-                g2d.fillRect(buildingInstance.getX(), buildingInstance.getY(), side, side);
+                g2d.drawImage(
+                        this.capitalBuildingImage,
+                        buildingInstance.getX() - (this.capitalBuildingSide / 2),
+                        buildingInstance.getY() - (this.capitalBuildingSide / 2),
+                        this);
             } else if (buildingInstance.isWoodenBuilding()) {
-                Integer side = BuildingDrawDto.getWoodenBuildingSide();
-                g2d.setColor(BuildingDrawDto.getWoodenBuildingColor());
-                g2d.fillRect(buildingInstance.getX(), buildingInstance.getY(), side, side);
+                g2d.drawImage(
+                        this.woodenBuildingImage,
+                        buildingInstance.getX() - (this.woodenBuildingSide / 2),
+                        buildingInstance.getY() - (this.woodenBuildingSide / 2),
+                        this);
             }
         }
 
