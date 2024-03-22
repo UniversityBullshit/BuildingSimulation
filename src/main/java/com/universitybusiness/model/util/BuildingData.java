@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-public class BuildingDto {
+public class BuildingData {
     @Getter
     @Setter
     private static long woodenBuildingInterval = 2000;

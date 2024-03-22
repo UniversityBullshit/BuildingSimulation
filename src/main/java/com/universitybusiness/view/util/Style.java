@@ -1,10 +1,12 @@
 package com.universitybusiness.view.util;
 
+import lombok.Data;
 import lombok.Getter;
 
 import java.awt.*;
 
-public class StyleDto {
+@Data
+public class Style {
     /**
      * Primary accent color. Should be used for panels, buttons, text, and borders,
      * when background color is primaryLightColor.

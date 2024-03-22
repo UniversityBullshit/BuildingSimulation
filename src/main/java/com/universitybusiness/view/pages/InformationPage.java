@@ -4,7 +4,7 @@ import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.CloseDialogAction;
 import com.universitybusiness.view.components.ControlButton;
 import com.universitybusiness.view.fabrics.ComponentFabric;
-import com.universitybusiness.view.util.StyleDto;
+import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -69,14 +69,14 @@ public class InformationPage extends Page implements IPage {
                         getImageFactory().
                         getWoodenBuilding().
                         getScaledInstance(50,50, Image.SCALE_SMOOTH))));
-        components.get(WOODEN_BUILDINGS_IMAGE_NAME).setBackground(StyleDto.getPrimaryLightColor());
+        components.get(WOODEN_BUILDINGS_IMAGE_NAME).setBackground(Style.getPrimaryLightColor());
 
         components.get(CAPITAL_BUILDINGS_IMAGE_NAME).add(new JLabel(new ImageIcon(
                 WindowManager.
                         getImageFactory().
                         getCapitalBuilding().
                         getScaledInstance(50,50,Image.SCALE_SMOOTH))));
-        components.get(CAPITAL_BUILDINGS_IMAGE_NAME).setBackground(StyleDto.getPrimaryLightColor());
+        components.get(CAPITAL_BUILDINGS_IMAGE_NAME).setBackground(Style.getPrimaryLightColor());
 
         ComponentFabric.setupLabel3((JLabel) components.get(WOODEN_BUILDINGS_COUNT_NAME));
         ComponentFabric.setupLabel3((JLabel) components.get(CAPITAL_BUILDINGS_COUNT_NAME));
@@ -202,7 +202,7 @@ public class InformationPage extends Page implements IPage {
 
     private JPanel createOKButtonPanel(JDialog dialog) {
         JPanel panel = new JPanel();
-        panel.setBackground(StyleDto.getPrimaryLightColor());
+        panel.setBackground(Style.getPrimaryLightColor());
 
         panel.add(components.get(OK_BUTTON_NAME));
 

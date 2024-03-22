@@ -6,7 +6,7 @@ import com.universitybusiness.view.components.ControlButton;
 import com.universitybusiness.view.components.HintTextField;
 import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.menubar.CustomMenuBar;
-import com.universitybusiness.view.util.StyleDto;
+import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -118,14 +118,14 @@ public class PreferencesPage extends Page implements IPage {
                         .getWoodenBuilding()
                         .getScaledInstance(50, 50, Image.SCALE_SMOOTH)
         )));
-        components.get(WOODEN_BUILDINGS_IMAGE_NAME).setBackground(StyleDto.getPrimaryLightColor());
+        components.get(WOODEN_BUILDINGS_IMAGE_NAME).setBackground(Style.getPrimaryLightColor());
         components.get(CAPITAL_BUILDINGS_IMAGE_NAME).add(new JLabel(new ImageIcon(
                 WindowManager
                         .getImageFactory()
                         .getCapitalBuilding()
                         .getScaledInstance(50, 50, Image.SCALE_SMOOTH)
         )));
-        components.get(CAPITAL_BUILDINGS_IMAGE_NAME).setBackground(StyleDto.getPrimaryLightColor());
+        components.get(CAPITAL_BUILDINGS_IMAGE_NAME).setBackground(Style.getPrimaryLightColor());
 
         setupActions();
     }

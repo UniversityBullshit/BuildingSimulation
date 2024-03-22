@@ -1,6 +1,6 @@
 package com.universitybusiness.view.actions;
 
-import com.universitybusiness.model.util.BuildingDto;
+import com.universitybusiness.model.util.BuildingData;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.components.HintTextField;
 
@@ -35,10 +35,10 @@ public class SavePreferencesAction extends AbstractAction {
     }
 
     private void setValues() {
-        BuildingDto.setWoodenBuildingInterval(values.get(0));
-        BuildingDto.setCapitalBuildingInterval(values.get(1));
-        BuildingDto.setWoodenBuildingLifeTime(values.get(2) * 1000);
-        BuildingDto.setCapitalBuildingLifeTime(values.get(3) * 1000);
+        BuildingData.setWoodenBuildingInterval(values.get(0));
+        BuildingData.setCapitalBuildingInterval(values.get(1));
+        BuildingData.setWoodenBuildingLifeTime(values.get(2) * 1000);
+        BuildingData.setCapitalBuildingLifeTime(values.get(3) * 1000);
     }
 
     private void nextScreen() {

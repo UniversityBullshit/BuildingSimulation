@@ -4,7 +4,7 @@ import com.universitybusiness.controller.HabitatController;
 import com.universitybusiness.view.util.BuildingInstance;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.model.Building;
-import com.universitybusiness.view.util.BuildingDrawDto;
+import com.universitybusiness.view.util.BuildingDraw;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,8 +44,8 @@ public class Area extends JPanel {
                 this.controller.getContext().getWidth(),
                 this.controller.getContext().getHeight()));
 
-        this.woodenBuildingSide = BuildingDrawDto.getWoodenBuildingSide();
-        this.capitalBuildingSide = BuildingDrawDto.getCapitalBuildingSide();
+        this.woodenBuildingSide = BuildingDraw.getWoodenBuildingSide();
+        this.capitalBuildingSide = BuildingDraw.getCapitalBuildingSide();
 
         this.woodenBuildingImage = WindowManager
                 .getImageFactory()
