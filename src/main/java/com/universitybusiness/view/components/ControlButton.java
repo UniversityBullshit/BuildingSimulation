@@ -12,6 +12,7 @@ public class ControlButton extends JButton {
     @Getter
     @Setter
     private boolean over;
+    private boolean isEnabled = true;
     @Getter
     private Color color;
     @Getter
@@ -33,23 +34,39 @@ public class ControlButton extends JButton {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
+                if (!isEnabled) {
+                    return;
+                }
+
                 setBackground(colorOver);
                 over = true;
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
+                if (!isEnabled) {
+                    return;
+                }
+
                 setBackground(color);
                 over = false;
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
+                if (!isEnabled) {
+                    return;
+                }
+
                 setBackground(colorClick);
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
+                if (!isEnabled) {
+                    return;
+                }
+
                 if (over) {
                     setBackground(colorOver);
                 } else {
@@ -59,9 +76,20 @@ public class ControlButton extends JButton {
         });
     }
 
+    public ControlButton(String text, boolean isEnabled) {
+        this(text);
+        this.setEnabled(isEnabled);
+    }
+
     public void setColor(Color color) {
         this.color = color;
         setBackground(color);
+    }
+
+    @Override
+    public void setEnabled(boolean status) {
+        this.isEnabled = status;
+        super.setEnabled(status);
     }
 
     @Override

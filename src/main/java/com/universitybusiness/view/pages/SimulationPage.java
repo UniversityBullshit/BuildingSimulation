@@ -56,7 +56,7 @@ public class SimulationPage extends Page implements IPage {
         components.put(HIDE_TIME_LABEL_NAME, new JLabel(HIDE_TIME_LABEL_TEXT));
 
         components.put(START_BUTTON_NAME, new ControlButton(START_BUTTON_TEXT));
-        components.put(STOP_BUTTON_NAME, new ControlButton(STOP_BUTTON_TEXT));
+        components.put(STOP_BUTTON_NAME, new ControlButton(STOP_BUTTON_TEXT, false));
         components.put(EXIT_BUTTON_NAME, new ControlButton(null));
 
         components.put(SHOW_INFO_SWITCH_NAME, new SwitchButton());
@@ -77,12 +77,18 @@ public class SimulationPage extends Page implements IPage {
 
     private void setupActions() {
         StartKeyAction startKeyAction = new StartKeyAction(
-                context.getController(),
-                (Area) components.get(SIMULATION_AREA_NAME));
+            context.getController(),
+            (Area) components.get(SIMULATION_AREA_NAME),
+            (ControlButton) components.get(START_BUTTON_NAME),
+            (ControlButton) components.get(STOP_BUTTON_NAME)
+        );
 
         StopKeyAction stopKeyAction = new StopKeyAction(
-                (Area) components.get(SIMULATION_AREA_NAME),
-                context);
+            (Area) components.get(SIMULATION_AREA_NAME),
+            context,
+            (ControlButton) components.get(START_BUTTON_NAME),
+            (ControlButton) components.get(STOP_BUTTON_NAME)
+        );
 
         ShowInfoAction action = new ShowInfoAction(
                 (Area) components.get(SIMULATION_AREA_NAME));
