@@ -1,8 +1,8 @@
-package com.universitybullshit.view.actions;
+package com.universitybusiness.view.actions;
 
-import com.universitybullshit.model.Habitat;
-import com.universitybullshit.view.WindowManager;
-import com.universitybullshit.view.components.HintTextField;
+import com.universitybusiness.model.Habitat;
+import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.components.HintTextField;
 
 import javax.swing.*;
 import java.awt.*;
