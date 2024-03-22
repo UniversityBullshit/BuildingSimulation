@@ -1,6 +1,6 @@
 package com.universitybusiness.model;
 
-import com.universitybusiness.model.util.BuildingDto;
+import com.universitybusiness.model.util.BuildingData;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,9 +8,9 @@ public class CapitalBuilding extends Building {
     @Getter
     private final long id;
     @Getter
-    private static long interval = BuildingDto.getCapitalBuildingInterval();
+    private static long interval = BuildingData.getCapitalBuildingInterval();
     @Getter
-    private static double probability = BuildingDto.getCapitalBuildingProbability();
+    private static double probability = BuildingData.getCapitalBuildingProbability();
     @Getter
     @Setter
     private int x;
@@ -20,7 +20,7 @@ public class CapitalBuilding extends Building {
     @Getter
     private final long spawnTime;
     @Getter
-    private static long lifeTime = BuildingDto.getCapitalBuildingLifeTime();
+    private static long lifeTime = BuildingData.getCapitalBuildingLifeTime();
 
     public CapitalBuilding(int x, int y, long time) {
         this.x = x;

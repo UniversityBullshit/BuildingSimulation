@@ -7,7 +7,7 @@ import com.universitybusiness.view.components.ControlButton;
 import com.universitybusiness.view.components.HintTextField;
 import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.menubar.CustomMenuBar;
-import com.universitybusiness.view.util.StyleDto;
+import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -82,7 +82,7 @@ public class MainMenuPage extends Page implements IPage {
                         getMainMenuImage().
                         getScaledInstance(420, 280, Image.SCALE_SMOOTH)
         )));
-        components.get(IMAGE_PANEL_NAME).setBackground(StyleDto.getPrimaryLightColor());
+        components.get(IMAGE_PANEL_NAME).setBackground(Style.getPrimaryLightColor());
 
         ComponentFabric.setupHintTextField((HintTextField) components.get(WIDTH_FIELD_NAME));
         ComponentFabric.setupHintTextField((HintTextField) components.get(HEIGHT_FIELD_NAME));
@@ -90,7 +90,7 @@ public class MainMenuPage extends Page implements IPage {
         ComponentFabric.setupControlButtonDark((ControlButton) components.get(START_BUTTON_NAME));
         ComponentFabric.setupControlButtonDark((ControlButton) components.get(PREFERENCES_BUTTON_NAME));
 
-        components.get(PREFERENCES_BUTTON_NAME).setBackground(StyleDto.getSecondaryDarkColor());
+        components.get(PREFERENCES_BUTTON_NAME).setBackground(Style.getSecondaryDarkColor());
     }
 
     @Override

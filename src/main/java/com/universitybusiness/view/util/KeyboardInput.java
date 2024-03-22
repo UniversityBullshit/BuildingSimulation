@@ -9,7 +9,6 @@ import com.universitybusiness.view.actions.StopKeyAction;
 import javax.swing.*;
 
 public class KeyboardInput {
-
     public static void createKeyBindings(JComponent component, WindowManager context, Area area) {
         InputMap im = component.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = component.getActionMap();

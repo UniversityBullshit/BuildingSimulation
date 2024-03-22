@@ -7,7 +7,7 @@ import com.universitybusiness.view.actions.StopKeyAction;
 import com.universitybusiness.view.components.*;
 import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.util.KeyboardInput;
-import com.universitybusiness.view.util.StyleDto;
+import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -129,16 +129,16 @@ public class SimulationPage extends Page implements IPage {
         ComponentFabric.setupControlButtonLight((ControlButton) components.get(STOP_BUTTON_NAME));
 
         ComponentFabric.setupRadioButton((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME));
-        components.get(SHOW_TIME_RADIO_BUTTON_NAME).setBackground(StyleDto.getPrimaryDarkColor());
+        components.get(SHOW_TIME_RADIO_BUTTON_NAME).setBackground(Style.getPrimaryDarkColor());
 
         ComponentFabric.setupRadioButton((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME));
-        components.get(HIDE_TIME_RADIO_BUTTON_NAME).setBackground(StyleDto.getPrimaryDarkColor());
+        components.get(HIDE_TIME_RADIO_BUTTON_NAME).setBackground(Style.getPrimaryDarkColor());
 
-        components.get(GAP_18_NAME).setForeground(StyleDto.getPrimaryDarkColor());
-        components.get(GAP_14_NAME).setForeground(StyleDto.getPrimaryDarkColor());
-        components.get(GAP_13_NAME).setForeground(StyleDto.getPrimaryDarkColor());
-        components.get(GAP_8_NAME).setForeground(StyleDto.getPrimaryDarkColor());
-        components.get(GAP_6_NAME).setForeground(StyleDto.getPrimaryDarkColor());
+        components.get(GAP_18_NAME).setForeground(Style.getPrimaryDarkColor());
+        components.get(GAP_14_NAME).setForeground(Style.getPrimaryDarkColor());
+        components.get(GAP_13_NAME).setForeground(Style.getPrimaryDarkColor());
+        components.get(GAP_8_NAME).setForeground(Style.getPrimaryDarkColor());
+        components.get(GAP_6_NAME).setForeground(Style.getPrimaryDarkColor());
     }
 
     @Override

@@ -4,14 +4,12 @@ import com.universitybusiness.controller.HabitatController;
 import com.universitybusiness.view.util.BuildingInstance;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.model.Building;
-import com.universitybusiness.view.util.BuildingDrawDto;
+import com.universitybusiness.view.util.BuildingDraw;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
@@ -132,12 +130,12 @@ public class Area extends JPanel {
 
         for (BuildingInstance buildingInstance : this.buildingsDictionary.values()) {
             if (buildingInstance.isCapitalBuilding()) {
-                Integer side = BuildingDrawDto.getCapitalBuildingSide();
-                g2d.setColor(BuildingDrawDto.getCapitalBuildingColor());
+                Integer side = BuildingDraw.getCapitalBuildingSide();
+                g2d.setColor(BuildingDraw.getCapitalBuildingColor());
                 g2d.fillRect(buildingInstance.getX(), buildingInstance.getY(), side, side);
             } else if (buildingInstance.isWoodenBuilding()) {
-                Integer side = BuildingDrawDto.getWoodenBuildingSide();
-                g2d.setColor(BuildingDrawDto.getWoodenBuildingColor());
+                Integer side = BuildingDraw.getWoodenBuildingSide();
+                g2d.setColor(BuildingDraw.getWoodenBuildingColor());
                 g2d.fillRect(buildingInstance.getX(), buildingInstance.getY(), side, side);
             }
         }

@@ -5,7 +5,7 @@ import com.universitybusiness.view.components.ControlButton;
 import com.universitybusiness.view.components.HintTextField;
 import com.universitybusiness.view.components.RadioButton;
 import com.universitybusiness.view.components.SwitchButton;
-import com.universitybusiness.view.util.StyleDto;
+import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -13,11 +13,11 @@ import java.awt.*;
 
 public final class ComponentFabric {
     public static void setupLightPanel(JPanel panel) {
-        panel.setBackground(StyleDto.getPrimaryLightColor());
+        panel.setBackground(Style.getPrimaryLightColor());
     }
 
     public static void setupDarkPanel(JPanel panel) {
-        panel.setBackground(StyleDto.getPrimaryDarkColor());
+        panel.setBackground(Style.getPrimaryDarkColor());
     }
     public static void setupLabel1(JLabel label) {
         label.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 36));
@@ -32,11 +32,11 @@ public final class ComponentFabric {
     }
 
     public static void setupDarkLabel(JLabel label) {
-        label.setForeground(StyleDto.getPrimaryDarkColor());
+        label.setForeground(Style.getPrimaryDarkColor());
     }
 
     public static void setupLightLabel(JLabel label) {
-        label.setForeground(StyleDto.getPrimaryLightColor());
+        label.setForeground(Style.getPrimaryLightColor());
     }
 
     public static void setupControlButtonDark(ControlButton button) {
@@ -67,7 +67,7 @@ public final class ComponentFabric {
         field.setColumns(9);
         field.setPreferredSize(new Dimension(160,30));
         field.setRadius(15);
-        field.setForeground(StyleDto.getTextFieldHintsColor());
+        field.setForeground(Style.getTextFieldHintsColor());
         field.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 15));
         field.setBorder(BorderFactory.createCompoundBorder(
                 field.getBorder(),
@@ -80,8 +80,8 @@ public final class ComponentFabric {
     }
 
     public static void setupRadioButton(RadioButton button) {
-        button.setBackground(StyleDto.getPrimaryLightColor());
-        button.setActiveColor(StyleDto.getSelectColor());
-        button.setUnactiveColor(StyleDto.getUnselectColor());
+        button.setBackground(Style.getPrimaryLightColor());
+        button.setActiveColor(Style.getSelectColor());
+        button.setUnactiveColor(Style.getUnselectColor());
     }
 }
