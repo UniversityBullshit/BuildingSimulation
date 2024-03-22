@@ -1,15 +1,13 @@
 package com.universitybusiness.model;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.*;
 
 public class Habitat implements IHabitat {
+    private static Habitat instance;
     @Getter
-    @Setter
     private int width;
-    @Setter
     @Getter
     private int height;
     private long time;
@@ -25,10 +23,17 @@ public class Habitat implements IHabitat {
     private int woodenBuildingsCount;
     @Getter
     private int capitalBuildingsCount;
-    public Habitat(int width, int height) {
-        this.width = width;
-        this.height = height;
+
+    private Habitat() {
         reset();
+    }
+
+    public static Habitat getInstance() {
+        if (instance == null) {
+            instance = new Habitat();
+        }
+
+        return instance;
     }
 
     @Override
@@ -50,6 +55,13 @@ public class Habitat implements IHabitat {
         this.woodenBuildingsCount = 0;
         this.capitalBuildingsCount = 0;
     }
+
+    @Override
+    public void setSize(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+
     private void spawnWoodenBuilding() {
         Random generator = new Random();
 
