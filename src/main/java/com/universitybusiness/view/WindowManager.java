@@ -37,7 +37,7 @@ public class WindowManager {
 
     // String constants
     @Getter
-    private final String TITLE =                   "BuildingSpawner";
+    private final String TITLE =                   "BuildingSimulator";
     @Getter
     private static final String MAIN_MENU_PAGE =   "MainMenu";
     @Getter
