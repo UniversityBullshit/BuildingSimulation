@@ -28,9 +28,4 @@ public class BuildingInstance {
         if (building instanceof CapitalBuilding) this.isCapitalBuilding = true;
         if (building instanceof WoodenBuilding) this.isWoodenBuilding = true;
     }
-
-//    public void paint(Graphics g) {
-//        Graphics2D g2D = (Graphics2D) g;
-//        g2D.drawImage(isCapitalBuilding ? imageFactory.getCapitalBuilding() : imageFactory.getWoodenBuilding(), this.x, this.y, null);
-//    }
 }
