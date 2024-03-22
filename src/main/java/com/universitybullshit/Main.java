@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        SimulationService simulation = new SimulationService(new Habitat(100,100));
+        SimulationService simulation = new SimulationService(Habitat.getInstance());
         HabitatController controller = new HabitatController(simulation);
         WindowManager windowManager = new WindowManager(controller);
         SwingUtilities.invokeLater(() -> windowManager.swapPage(windowManager.getCurrentPage()));

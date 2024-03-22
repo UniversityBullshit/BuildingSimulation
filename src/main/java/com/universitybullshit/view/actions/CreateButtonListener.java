@@ -1,6 +1,7 @@
 package com.universitybullshit.view.actions;
 
 import com.universitybullshit.model.Habitat;
+import com.universitybullshit.model.IHabitat;
 import com.universitybullshit.view.WindowManager;
 import com.universitybullshit.view.components.HintTextField;
 
@@ -74,7 +75,11 @@ public class CreateButtonListener implements ActionListener {
     }
 
     private void nextScreen() {
-        context.getController().setContext(new Habitat(width, height));
+        final Habitat instance = Habitat.getInstance();
+        instance.reset();
+        instance.setSize(width, height);
+
+        context.getController().setContext(instance);
 
         context.setWidth(width + 200);
         context.setHeight(height + 64);
