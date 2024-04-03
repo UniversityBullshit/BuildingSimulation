@@ -73,6 +73,11 @@ public class Area extends JPanel {
         }
     }
 
+    public void reset() {
+        buildingsDictionary.clear();
+        repaint();
+    }
+
     private void update() {
         // Get actual info
         getDeletingInstances();
