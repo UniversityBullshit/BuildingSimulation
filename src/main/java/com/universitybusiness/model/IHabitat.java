@@ -1,9 +1,9 @@
 package com.universitybusiness.model;
 
 public interface IHabitat {
-    public void update(long time);
+    void update(long time);
     
-    public void reset();
+    void reset();
 
-    public void setSize(int width, int height);
+    void setSize(int width, int height);
 }
