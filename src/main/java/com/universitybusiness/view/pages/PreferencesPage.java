@@ -84,7 +84,13 @@ public class PreferencesPage extends Page implements IPage {
     }
 
     @Override
-    public void reset() {}
+    public void reset() {
+        for (String key : components.keySet()) {
+            if (components.get(key) instanceof HintTextField) {
+                ((HintTextField) components.get(key)).clearError();
+            }
+        }
+    }
 
     @Override
     public void setupAppearance() {
@@ -147,8 +153,6 @@ public class PreferencesPage extends Page implements IPage {
 
     @Override
     public void draw() {
-        frame.setJMenuBar(new CustomMenuBar(context));
-
         JPanel rootPanel = new JPanel();
         rootPanel.setLayout(new BoxLayout(rootPanel, BoxLayout.Y_AXIS));
 

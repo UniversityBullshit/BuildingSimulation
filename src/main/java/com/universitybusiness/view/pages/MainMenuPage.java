@@ -52,7 +52,13 @@ public class MainMenuPage extends Page implements IPage {
     }
 
     @Override
-    public void reset() {}
+    public void reset() {
+        for (String componentName : components.keySet()) {
+            if (components.get(componentName) instanceof  HintTextField) {
+                ((HintTextField) components.get(componentName)).clearError();
+            }
+        }
+    }
 
     private void setupActions() {
         CreateButtonListener createButtonListener = new CreateButtonListener(
@@ -92,7 +98,7 @@ public class MainMenuPage extends Page implements IPage {
         ComponentFabric.setupControlButtonDark((ControlButton) components.get(START_BUTTON_NAME));
         ComponentFabric.setupControlButtonDark((ControlButton) components.get(PREFERENCES_BUTTON_NAME));
 
-        components.get(PREFERENCES_BUTTON_NAME).setBackground(Style.getSecondaryDarkColor());
+        ((ControlButton)components.get(PREFERENCES_BUTTON_NAME)).setColor(Style.getSecondaryDarkColor());
     }
 
     @Override
