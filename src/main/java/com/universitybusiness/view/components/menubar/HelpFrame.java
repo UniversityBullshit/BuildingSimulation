@@ -1,4 +1,4 @@
-package com.universitybusiness.view.menubar;
+package com.universitybusiness.view.components.menubar;
 
 import com.universitybusiness.view.fabrics.ImageFactory;
 

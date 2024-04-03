@@ -9,6 +9,11 @@ public interface IPage {
     void initializeComponents();
 
     /**
+     * Restore starting state of page (Optional)
+     */
+    void reset();
+
+    /**
      * Setups all components appearance
      */
     void setupAppearance();

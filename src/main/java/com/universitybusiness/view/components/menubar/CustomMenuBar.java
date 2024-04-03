@@ -1,8 +1,8 @@
-package com.universitybusiness.view.menubar;
+package com.universitybusiness.view.components.menubar;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.actions.AboutMenuItemListener;
-import com.universitybusiness.view.actions.ControlsMenuItemListener;
+import com.universitybusiness.view.actions.menubar.AboutMenuItemListener;
+import com.universitybusiness.view.actions.menubar.ControlsMenuItemListener;
 import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;

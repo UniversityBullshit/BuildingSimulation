@@ -1,9 +1,9 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.actions.BackToMenuAction;
-import com.universitybusiness.view.actions.CloseDialogAction;
-import com.universitybusiness.view.components.ControlButton;
+import com.universitybusiness.view.actions.common.BackToMenuAction;
+import com.universitybusiness.view.actions.dialog.CloseDialogAction;
+import com.universitybusiness.view.components.controls.ControlButton;
 import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.util.Style;
 
@@ -52,6 +52,9 @@ public class InformationPage extends Page implements IPage {
         components.put(CONTINUE_BUTTON_NAME, new ControlButton(CONTINUE_BUTTON_NAME));
         components.put(EXIT_BUTTON_NAME, new ControlButton(EXIT_BUTTON_NAME));
     }
+
+    @Override
+    public void reset() {}
 
     @Override
     public void setupAppearance() {

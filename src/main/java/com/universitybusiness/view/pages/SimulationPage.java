@@ -1,10 +1,14 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.actions.ShowInfoAction;
-import com.universitybusiness.view.actions.StartKeyAction;
-import com.universitybusiness.view.actions.StopKeyAction;
-import com.universitybusiness.view.components.*;
+import com.universitybusiness.view.actions.simulationPage.ShowInfoAction;
+import com.universitybusiness.view.actions.simulationPage.StartKeyAction;
+import com.universitybusiness.view.actions.simulationPage.StopKeyAction;
+import com.universitybusiness.view.components.controls.ControlButton;
+import com.universitybusiness.view.components.controls.RadioButton;
+import com.universitybusiness.view.components.controls.SwitchButton;
+import com.universitybusiness.view.components.layout.HorizontalGap;
+import com.universitybusiness.view.components.simulationView.Area;
 import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.util.KeyboardInput;
 import com.universitybusiness.view.util.Style;
@@ -75,7 +79,8 @@ public class SimulationPage extends Page implements IPage {
         setupActions();
     }
 
-    public void resetView() {
+    @Override
+    public void reset() {
         ((Area)components.get(SIMULATION_AREA_NAME)).reset();
     }
 

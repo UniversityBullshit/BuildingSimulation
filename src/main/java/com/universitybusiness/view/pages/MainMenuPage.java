@@ -1,12 +1,11 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.actions.CreateButtonListener;
-import com.universitybusiness.view.actions.PreferencesButtonListener;
-import com.universitybusiness.view.components.ControlButton;
-import com.universitybusiness.view.components.HintTextField;
+import com.universitybusiness.view.actions.mainMenu.CreateButtonListener;
+import com.universitybusiness.view.actions.mainMenu.PreferencesButtonListener;
+import com.universitybusiness.view.components.controls.ControlButton;
+import com.universitybusiness.view.components.textFilelds.HintTextField;
 import com.universitybusiness.view.fabrics.ComponentFabric;
-import com.universitybusiness.view.menubar.CustomMenuBar;
 import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
@@ -52,6 +51,9 @@ public class MainMenuPage extends Page implements IPage {
         setupActions();
     }
 
+    @Override
+    public void reset() {}
+
     private void setupActions() {
         CreateButtonListener createButtonListener = new CreateButtonListener(
                 (HintTextField) components.get(WIDTH_FIELD_NAME),
@@ -95,8 +97,6 @@ public class MainMenuPage extends Page implements IPage {
 
     @Override
     public void draw() {
-        frame.setJMenuBar(new CustomMenuBar(context));
-
         JPanel rootPanel = new JPanel();
         rootPanel.setLayout(new BoxLayout(rootPanel, BoxLayout.Y_AXIS));
 

@@ -1,6 +1,6 @@
-package com.universitybusiness.view.actions;
+package com.universitybusiness.view.actions.menubar;
 
-import com.universitybusiness.view.menubar.HelpFrame;
+import com.universitybusiness.view.components.menubar.HelpFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

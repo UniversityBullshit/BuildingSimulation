@@ -1,11 +1,11 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.actions.SavePreferencesAction;
-import com.universitybusiness.view.components.ControlButton;
-import com.universitybusiness.view.components.HintTextField;
+import com.universitybusiness.view.actions.preferences.SavePreferencesAction;
+import com.universitybusiness.view.components.controls.ControlButton;
+import com.universitybusiness.view.components.textFilelds.HintTextField;
 import com.universitybusiness.view.fabrics.ComponentFabric;
-import com.universitybusiness.view.menubar.CustomMenuBar;
+import com.universitybusiness.view.components.menubar.CustomMenuBar;
 import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
@@ -82,6 +82,9 @@ public class PreferencesPage extends Page implements IPage {
         components.put(WOODEN_BUILDINGS_IMAGE_NAME, new JPanel());
         components.put(CAPITAL_BUILDINGS_IMAGE_NAME, new JPanel());
     }
+
+    @Override
+    public void reset() {}
 
     @Override
     public void setupAppearance() {

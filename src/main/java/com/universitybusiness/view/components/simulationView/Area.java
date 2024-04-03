@@ -1,4 +1,4 @@
-package com.universitybusiness.view.components;
+package com.universitybusiness.view.components.simulationView;
 
 import com.universitybusiness.controller.HabitatController;
 import com.universitybusiness.view.util.BuildingInstance;

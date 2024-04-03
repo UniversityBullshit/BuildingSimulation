@@ -1,4 +1,4 @@
-package com.universitybusiness.view.actions;
+package com.universitybusiness.view.actions.mainMenu;
 
 import com.universitybusiness.view.WindowManager;
 

@@ -1,4 +1,4 @@
-package com.universitybusiness.view.menubar;
+package com.universitybusiness.view.components.menubar;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

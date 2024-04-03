@@ -1,4 +1,4 @@
-package com.universitybusiness.view.actions;
+package com.universitybusiness.view.actions.dialog;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

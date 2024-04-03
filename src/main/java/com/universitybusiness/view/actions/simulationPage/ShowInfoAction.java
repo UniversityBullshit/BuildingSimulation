@@ -1,6 +1,6 @@
-package com.universitybusiness.view.actions;
+package com.universitybusiness.view.actions.simulationPage;
 
-import com.universitybusiness.view.components.Area;
+import com.universitybusiness.view.components.simulationView.Area;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

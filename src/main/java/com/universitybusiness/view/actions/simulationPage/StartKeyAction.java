@@ -1,12 +1,11 @@
-package com.universitybusiness.view.actions;
+package com.universitybusiness.view.actions.simulationPage;
 
 import com.universitybusiness.controller.HabitatController;
-import com.universitybusiness.view.components.Area;
-import com.universitybusiness.view.components.ControlButton;
+import com.universitybusiness.view.components.simulationView.Area;
+import com.universitybusiness.view.components.controls.ControlButton;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.concurrent.CompletableFuture;
 
 public class StartKeyAction extends AbstractAction {
     private final HabitatController controller;

@@ -87,10 +87,7 @@ public class WindowManager {
 
         currentPage = pageName;
         pages.get(currentPage).draw();
-
-        if (Objects.equals(currentPage, SIMULATION_PAGE)) {
-            ((SimulationPage)pages.get(currentPage)).resetView();
-        }
+        pages.get(currentPage).reset();
 
         mainFrame.setVisible(true);
     }

@@ -1,10 +1,10 @@
 package com.universitybusiness.view.fabrics;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.components.ControlButton;
-import com.universitybusiness.view.components.HintTextField;
-import com.universitybusiness.view.components.RadioButton;
-import com.universitybusiness.view.components.SwitchButton;
+import com.universitybusiness.view.components.controls.ControlButton;
+import com.universitybusiness.view.components.textFilelds.HintTextField;
+import com.universitybusiness.view.components.controls.RadioButton;
+import com.universitybusiness.view.components.controls.SwitchButton;
 import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;

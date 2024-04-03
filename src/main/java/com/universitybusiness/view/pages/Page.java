@@ -1,6 +1,7 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.components.menubar.CustomMenuBar;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -16,6 +17,8 @@ public abstract class Page implements IPage {
         this.frame = frame;
         this.context = context;
         components = new HashMap<>();
+
+        this.frame.setJMenuBar(new CustomMenuBar(context));
         
         initializeComponents();
         setupAppearance();

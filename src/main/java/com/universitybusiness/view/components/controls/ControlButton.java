@@ -1,4 +1,4 @@
-package com.universitybusiness.view.components;
+package com.universitybusiness.view.components.controls;
 
 import lombok.Getter;
 import lombok.Setter;

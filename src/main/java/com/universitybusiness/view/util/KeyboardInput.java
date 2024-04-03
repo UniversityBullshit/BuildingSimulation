@@ -1,10 +1,10 @@
 package com.universitybusiness.view.util;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.components.Area;
-import com.universitybusiness.view.actions.ShowTimeAction;
-import com.universitybusiness.view.actions.StartKeyAction;
-import com.universitybusiness.view.actions.StopKeyAction;
+import com.universitybusiness.view.components.simulationView.Area;
+import com.universitybusiness.view.actions.simulationPage.ShowTimeAction;
+import com.universitybusiness.view.actions.simulationPage.StartKeyAction;
+import com.universitybusiness.view.actions.simulationPage.StopKeyAction;
 
 import javax.swing.*;
 

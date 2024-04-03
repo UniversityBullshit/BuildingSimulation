@@ -1,4 +1,4 @@
-package com.universitybusiness.view.components;
+package com.universitybusiness.view.components.textFilelds;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,7 +40,7 @@ public class HintTextField extends JTextField {
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (getText().equals(hint) || getText().length() == 0) {
+                if (getText().equals(hint) || getText().isEmpty()) {
                     setText(hint);
                 } else {
                     setText(getText());

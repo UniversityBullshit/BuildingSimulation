@@ -1,8 +1,8 @@
-package com.universitybusiness.view.actions;
+package com.universitybusiness.view.actions.simulationPage;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.components.Area;
-import com.universitybusiness.view.components.ControlButton;
+import com.universitybusiness.view.components.simulationView.Area;
+import com.universitybusiness.view.components.controls.ControlButton;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

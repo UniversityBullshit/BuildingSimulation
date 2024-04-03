@@ -1,8 +1,8 @@
-package com.universitybusiness.view.actions;
+package com.universitybusiness.view.actions.preferences;
 
 import com.universitybusiness.model.util.BuildingData;
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.components.HintTextField;
+import com.universitybusiness.view.components.textFilelds.HintTextField;
 
 import javax.swing.*;
 import java.awt.*;
