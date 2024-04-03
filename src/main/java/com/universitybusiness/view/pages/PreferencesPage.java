@@ -1,5 +1,6 @@
 package com.universitybusiness.view.pages;
 
+import com.universitybusiness.model.Preferences;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.preferences.RestoreDefaultsAction;
 import com.universitybusiness.view.actions.preferences.SavePreferencesAction;
@@ -90,6 +91,23 @@ public class PreferencesPage extends Page implements IPage {
                 ((HintTextField) components.get(key)).clearError();
             }
         }
+
+        ((HintTextField) components.get(WOODEN_INTERVAL_FIELD_NAME))
+                .setText(String.valueOf(Preferences.getWoodenBuildingInterval()));
+        ((HintTextField) components.get(CAPITAL_INTERVAL_FIELD_NAME))
+                .setText(String.valueOf(Preferences.getCapitalBuildingInterval()));
+        ((HintTextField) components.get(WOODEN_PROBABILITY_COMBOBOX))
+                .setText(String.valueOf(Preferences.getWoodenBuildingProbability()));
+        ((HintTextField) components.get(CAPITAL_PROBABILITY_COMBOBOX))
+                .setText(String.valueOf(Preferences.getCapitalBuildingProbability()));
+        ((HintTextField) components.get(WOODEN_LIFETIME_FIELD_NAME))
+                .setText(String.valueOf(Preferences.getWoodenBuildingLifeTime() / 1000));
+        ((HintTextField) components.get(CAPITAL_LIFETIME_FIELD_NAME))
+                .setText(String.valueOf(Preferences.getCapitalBuildingLifeTime() / 1000));
+        ((HintTextField) components.get(WOODEN_SPEED_FIELD_NAME))
+                .setText(String.valueOf(Preferences.getWoodenBuildingSpeed()));
+        ((HintTextField) components.get(CAPITAL_SPEED_FIELD_NAME))
+                .setText(String.valueOf(Preferences.getCapitalBuildingSpeed()));
     }
 
     @Override
