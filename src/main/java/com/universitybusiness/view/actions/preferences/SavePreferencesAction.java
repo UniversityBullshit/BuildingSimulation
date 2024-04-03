@@ -1,23 +1,25 @@
 package com.universitybusiness.view.actions.preferences;
 
-import com.universitybusiness.model.util.BuildingData;
+import com.universitybusiness.model.Preferences;
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.actions.common.BackToMenuAction;
 import com.universitybusiness.view.components.textFilelds.HintTextField;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class SavePreferencesAction extends AbstractAction {
-    private final WindowManager context;
+    private final WindowManager windowManager;
     private final ArrayList<HintTextField> fields;
     private final ArrayList<Integer> values;
+    private final BackToMenuAction backToMenuAction;
 
-    public SavePreferencesAction(WindowManager context) {
-        this.context = context;
-        this.fields = new ArrayList<>();
-        this.values = new ArrayList<>();
+    public SavePreferencesAction(WindowManager windowManager) {
+        this.windowManager = windowManager;
+        fields = new ArrayList<>();
+        values = new ArrayList<>();
+        backToMenuAction = new BackToMenuAction(windowManager);
     }
 
     public void addField(HintTextField field) {
@@ -28,25 +30,21 @@ public class SavePreferencesAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         if (verify()) {
             setValues();
-            nextScreen();
+            backToMenuAction.actionPerformed(e);
         } else {
             showErrorMessage();
         }
     }
 
     private void setValues() {
-        BuildingData.setWoodenBuildingInterval(values.get(0));
-        BuildingData.setCapitalBuildingInterval(values.get(1));
-        BuildingData.setWoodenBuildingLifeTime(values.get(2) * 1000);
-        BuildingData.setCapitalBuildingLifeTime(values.get(3) * 1000);
-    }
-
-    private void nextScreen() {
-        context.swapPage(WindowManager.getMAIN_MENU_PAGE());
+        Preferences.setWoodenBuildingInterval(values.get(0));
+        Preferences.setCapitalBuildingInterval(values.get(1));
+        Preferences.setWoodenBuildingLifeTime(values.get(2) * 1000);
+        Preferences.setCapitalBuildingLifeTime(values.get(3) * 1000);
     }
 
     private void showErrorMessage() {
-        JOptionPane.showMessageDialog(context.getMainFrame(),
+        JOptionPane.showMessageDialog(windowManager.getMainFrame(),
                 new String[] {"Incorrect values:\n" +
                         "Spawn Interval: 500-10000(ms)\n" +
                         "Life Time: 1-1000(s)\n"+

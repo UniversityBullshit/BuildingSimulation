@@ -1,11 +1,11 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.actions.preferences.RestoreDefaultsAction;
 import com.universitybusiness.view.actions.preferences.SavePreferencesAction;
 import com.universitybusiness.view.components.controls.ControlButton;
 import com.universitybusiness.view.components.textFilelds.HintTextField;
 import com.universitybusiness.view.fabrics.ComponentFabric;
-import com.universitybusiness.view.components.menubar.CustomMenuBar;
 import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
@@ -140,15 +140,18 @@ public class PreferencesPage extends Page implements IPage {
     }
 
     private void setupActions() {
-        SavePreferencesAction saveAndExit = new SavePreferencesAction(context);
-        saveAndExit.addField((HintTextField) components.get(WOODEN_INTERVAL_FIELD_NAME));
-        saveAndExit.addField((HintTextField) components.get(CAPITAL_INTERVAL_FIELD_NAME));
-        saveAndExit.addField((HintTextField) components.get(WOODEN_LIFETIME_FIELD_NAME));
-        saveAndExit.addField((HintTextField) components.get(CAPITAL_LIFETIME_FIELD_NAME));
-        saveAndExit.addField((HintTextField) components.get(WOODEN_SPEED_FIELD_NAME));
-        saveAndExit.addField((HintTextField) components.get(CAPITAL_SPEED_FIELD_NAME));
+        SavePreferencesAction saveAction = new SavePreferencesAction(context);
+        saveAction.addField((HintTextField) components.get(WOODEN_INTERVAL_FIELD_NAME));
+        saveAction.addField((HintTextField) components.get(CAPITAL_INTERVAL_FIELD_NAME));
+        saveAction.addField((HintTextField) components.get(WOODEN_LIFETIME_FIELD_NAME));
+        saveAction.addField((HintTextField) components.get(CAPITAL_LIFETIME_FIELD_NAME));
+        saveAction.addField((HintTextField) components.get(WOODEN_SPEED_FIELD_NAME));
+        saveAction.addField((HintTextField) components.get(CAPITAL_SPEED_FIELD_NAME));
 
-        ((ControlButton) components.get(SAVE_EXIT_BUTTON_NAME)).addActionListener(saveAndExit);
+        ((ControlButton) components.get(SAVE_EXIT_BUTTON_NAME)).addActionListener(saveAction);
+
+        RestoreDefaultsAction restoreAction = new RestoreDefaultsAction(context);
+        ((ControlButton) components.get(RESTORE_BUTTON_NAME)).addActionListener(restoreAction);
     }
 
     @Override
