@@ -38,8 +38,8 @@ public class SimulationService {
 
     public void stopSimulation() throws InterruptedException {
         isSimulationRunning = false;
-        future.cancel(true);
-        timer.cancel();
+        if (future != null) future.cancel(true);
+        if (timer != null) timer.cancel();
     }
 
     public void simulation() {

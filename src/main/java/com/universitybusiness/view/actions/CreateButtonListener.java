@@ -75,10 +75,9 @@ public class CreateButtonListener implements ActionListener {
 
     private void nextScreen() {
         final Habitat instance = Habitat.getInstance();
-        instance.reset();
-        instance.setSize(width, height);
-
         context.getController().setContext(instance);
+        context.getController().resetSimulation();
+        instance.setSize(width, height);
 
         context.setWidth(width + 200);
         context.setHeight(height + 64);
