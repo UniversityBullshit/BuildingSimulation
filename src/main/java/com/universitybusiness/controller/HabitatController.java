@@ -23,7 +23,6 @@ public class HabitatController {
      */
     public HabitatController(SimulationService simulationService) {
         context = simulationService;
-//        CompletableFuture.runAsync(context::simulation);
     }
 
     /**
