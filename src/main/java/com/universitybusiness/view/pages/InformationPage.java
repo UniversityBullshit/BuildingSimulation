@@ -1,6 +1,7 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.actions.BackToMenuAction;
 import com.universitybusiness.view.actions.CloseDialogAction;
 import com.universitybusiness.view.components.ControlButton;
 import com.universitybusiness.view.fabrics.ComponentFabric;
@@ -9,6 +10,7 @@ import com.universitybusiness.view.util.Style;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class InformationPage extends Page implements IPage {
     // String constants
@@ -23,7 +25,8 @@ public class InformationPage extends Page implements IPage {
     private final String CAPITAL_BUILDINGS_LABEL_NAME =      "CapitalBuildings";
     private final String CAPITAL_BUILDINGS_IMAGE_NAME =      "CapitalBuildingsImage";
     private final String CAPITAL_BUILDINGS_COUNT_NAME =      "CapitalBuildingsCount";
-    private final String OK_BUTTON_NAME =                    "OK";
+    private final String CONTINUE_BUTTON_NAME =              "Continue";
+    private final String EXIT_BUTTON_NAME =                  "Exit";
 
     public InformationPage(JFrame frame, WindowManager context) {
         super(frame, context);
@@ -46,7 +49,8 @@ public class InformationPage extends Page implements IPage {
         components.put(CAPITAL_BUILDINGS_LABEL_NAME, new JLabel("<html>Capital<br>building</html>"));
         components.put(CAPITAL_BUILDINGS_COUNT_NAME, new JLabel("Count: "));
 
-        components.put(OK_BUTTON_NAME, new ControlButton(OK_BUTTON_NAME));
+        components.put(CONTINUE_BUTTON_NAME, new ControlButton(CONTINUE_BUTTON_NAME));
+        components.put(EXIT_BUTTON_NAME, new ControlButton(EXIT_BUTTON_NAME));
     }
 
     @Override
@@ -81,7 +85,8 @@ public class InformationPage extends Page implements IPage {
         ComponentFabric.setupLabel3((JLabel) components.get(WOODEN_BUILDINGS_COUNT_NAME));
         ComponentFabric.setupLabel3((JLabel) components.get(CAPITAL_BUILDINGS_COUNT_NAME));
 
-        ComponentFabric.setupControlButtonDark((ControlButton) components.get(OK_BUTTON_NAME));
+        ComponentFabric.setupControlButtonDark((ControlButton) components.get(CONTINUE_BUTTON_NAME));
+        ComponentFabric.setupControlButtonDark((ControlButton) components.get(EXIT_BUTTON_NAME));
     }
 
     @Override
@@ -204,9 +209,14 @@ public class InformationPage extends Page implements IPage {
         JPanel panel = new JPanel();
         panel.setBackground(Style.getPrimaryLightColor());
 
-        panel.add(components.get(OK_BUTTON_NAME));
+        panel.add(components.get(CONTINUE_BUTTON_NAME));
+        panel.add(components.get(EXIT_BUTTON_NAME));
 
-        ((ControlButton) components.get(OK_BUTTON_NAME)).addActionListener(new CloseDialogAction(dialog));
+        ActionListener closeDialogAction = new CloseDialogAction(dialog);
+
+        ((ControlButton) components.get(CONTINUE_BUTTON_NAME)).addActionListener(closeDialogAction);
+        ((ControlButton) components.get(EXIT_BUTTON_NAME)).addActionListener(closeDialogAction);
+        ((ControlButton) components.get(EXIT_BUTTON_NAME)).addActionListener(new BackToMenuAction(context));
 
         return panel;
     }
