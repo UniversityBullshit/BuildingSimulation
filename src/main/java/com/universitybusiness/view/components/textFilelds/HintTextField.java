@@ -12,9 +12,17 @@ public class HintTextField extends JTextField {
     @Getter
     @Setter
     private Color borderColor = null;
+
+    @Getter
+    @Setter
+    private Color errorBorderColor = new Color(177, 2, 2);
+
+    private Boolean hasError = false;
+
     @Getter
     @Setter
     private int radius;
+
     public HintTextField(String hint) {
         setText(hint);
 
@@ -36,6 +44,8 @@ public class HintTextField extends JTextField {
                 } else {
                     setText(getText());
                 }
+
+                clearError();
             }
 
             @Override
@@ -47,6 +57,16 @@ public class HintTextField extends JTextField {
                 }
             }
         };
+    }
+
+    public void setError() {
+        hasError = true;
+        repaint();
+    }
+
+    public void clearError() {
+        hasError = false;
+        repaint();
     }
 
     @Override
@@ -67,7 +87,12 @@ public class HintTextField extends JTextField {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g2d.setColor(this.borderColor == null ? getForeground() : this.borderColor);
+        if (!hasError) {
+            g2d.setColor(this.borderColor == null ? getForeground() : this.borderColor);
+        } else {
+            g2d.setColor(this.errorBorderColor);
+        }
+
         g2d.drawRoundRect(0,0,getWidth() - 1, getHeight() - 1, radius, radius);
     }
 }

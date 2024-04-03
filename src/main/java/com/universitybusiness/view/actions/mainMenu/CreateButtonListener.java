@@ -35,8 +35,8 @@ public class CreateButtonListener implements ActionListener {
     }
 
     private boolean verify() {
-        boolean isValidWidth = verifyWidth(this.width_field.getText());
-        boolean isValidHeight = verifyHeight(this.height_field.getText());
+        boolean isValidWidth = verifyWidth(width_field.getText());
+        boolean isValidHeight = verifyHeight(height_field.getText());
 
         return isValidHeight && isValidWidth;
     }
@@ -50,8 +50,7 @@ public class CreateButtonListener implements ActionListener {
         }
 
         if (!isValid) {
-            this.width_field.setBorderColor(Color.RED);
-            this.width_field.repaint();
+            width_field.setError();
         }
 
         return isValid;
@@ -66,8 +65,7 @@ public class CreateButtonListener implements ActionListener {
         }
 
         if (!isValid) {
-            this.height_field.setBorderColor(Color.RED);
-            this.height_field.repaint();
+            height_field.setError();
         }
 
         return isValid;

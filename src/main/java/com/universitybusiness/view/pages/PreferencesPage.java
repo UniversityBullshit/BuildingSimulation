@@ -44,10 +44,10 @@ public class PreferencesPage extends Page implements IPage {
         final String PAGE_LABEL_TEXT = "Preferences";
         final String WOODEN_LABEL_TEXT = "<html><p>Wooden<br>Building</p></html>";
         final String CAPITAL_LABEL_TEXT = "<html><p>Capital<br>Building</p></html>";
-        final String INTERVAL_LABEL_TEXT = "Spawn Interval";
-        final String PROBABILITY_LABEL_TEXT = "Spawn Probability";
-        final String LIFETIME_LABEL_TEXT = "Life Time";
-        final String SPEED_LABEL_TEXT = "Movement Speed";
+        final String INTERVAL_LABEL_TEXT = "Spawn Interval: 500-100(ms)";
+        final String PROBABILITY_LABEL_TEXT = "Spawn Probability: 10-100%";
+        final String LIFETIME_LABEL_TEXT = "Life Time: 1-1000(s)";
+        final String SPEED_LABEL_TEXT = "Movement Speed: 1-100(pts/s)";
         final String SAVE_EXIT_BUTTON_TEXT = "Save and exit";
         final String RESTORE_BUTTON_TEXT = "Restore defaults";
         final String INTERVAL_FIELDS_HINT = "500-10000 (ms)";
@@ -195,7 +195,6 @@ public class PreferencesPage extends Page implements IPage {
     private JPanel createFieldsLabelPanel(JComponent label) {
         JPanel panel = new JPanel();
         ComponentFabric.setupLightPanel(panel);
-//        panel.setBorder(new EmptyBorder(0, 0, -50, 0));
         panel.add(label);
         return panel;
     }

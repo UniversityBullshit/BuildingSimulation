@@ -80,8 +80,7 @@ public class SavePreferencesAction extends AbstractAction {
         }
 
         if (!isValid) {
-            this.fields.get(index).setBorderColor(Color.RED);
-            this.fields.get(index).repaint();
+            fields.get(index).setError();
         }
 
         return isValid;
@@ -96,8 +95,7 @@ public class SavePreferencesAction extends AbstractAction {
         }
 
         if (!isValid) {
-            this.fields.get(index).setBorderColor(Color.RED);
-            this.fields.get(index).repaint();
+            fields.get(index).setError();
         }
 
         return isValid;
@@ -112,8 +110,7 @@ public class SavePreferencesAction extends AbstractAction {
         }
 
         if (!isValid) {
-            this.fields.get(index).setBorderColor(Color.RED);
-            this.fields.get(index).repaint();
+            fields.get(index).setError();
         }
 
         return isValid;
