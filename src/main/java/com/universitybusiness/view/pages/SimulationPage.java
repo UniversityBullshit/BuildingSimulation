@@ -75,6 +75,10 @@ public class SimulationPage extends Page implements IPage {
         setupActions();
     }
 
+    public void resetView() {
+        ((Area)components.get(SIMULATION_AREA_NAME)).reset();
+    }
+
     private void setupActions() {
         StartKeyAction startKeyAction = new StartKeyAction(
             context.getController(),

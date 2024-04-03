@@ -10,6 +10,7 @@ import lombok.Setter;
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Class represents program GUI and allows to manage pages switching
@@ -86,6 +87,11 @@ public class WindowManager {
 
         currentPage = pageName;
         pages.get(currentPage).draw();
+
+        if (Objects.equals(currentPage, SIMULATION_PAGE)) {
+            ((SimulationPage)pages.get(currentPage)).resetView();
+        }
+
         mainFrame.setVisible(true);
     }
 
