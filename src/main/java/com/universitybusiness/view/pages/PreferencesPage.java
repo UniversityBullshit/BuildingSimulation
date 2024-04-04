@@ -4,6 +4,7 @@ import com.universitybusiness.model.Preferences;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.preferences.RestoreDefaultsAction;
 import com.universitybusiness.view.actions.preferences.SavePreferencesAction;
+import com.universitybusiness.view.components.combobox.ComboBox;
 import com.universitybusiness.view.components.controls.ControlButton;
 import com.universitybusiness.view.components.textFilelds.HintTextField;
 import com.universitybusiness.view.fabrics.ComponentFabric;
@@ -52,7 +53,6 @@ public class PreferencesPage extends Page implements IPage {
         final String SAVE_EXIT_BUTTON_TEXT = "Save and exit";
         final String RESTORE_BUTTON_TEXT = "Restore defaults";
         final String INTERVAL_FIELDS_HINT = "500-10000 (ms)";
-        final String PROBABILITY_COMBOBOX_HINT = "10-100%";
         final String LIFETIME_FIELDS_HINT = "1-1000 (s)";
         final String SPEED_FIELDS_HINT = "1-100 (pts/s)";
 
@@ -68,12 +68,27 @@ public class PreferencesPage extends Page implements IPage {
         // Fields
         components.put(WOODEN_INTERVAL_FIELD_NAME, new HintTextField(INTERVAL_FIELDS_HINT));
         components.put(CAPITAL_INTERVAL_FIELD_NAME, new HintTextField(INTERVAL_FIELDS_HINT));
-        components.put(WOODEN_PROBABILITY_COMBOBOX, new HintTextField(PROBABILITY_COMBOBOX_HINT));
-        components.put(CAPITAL_PROBABILITY_COMBOBOX, new HintTextField(PROBABILITY_COMBOBOX_HINT));
         components.put(WOODEN_LIFETIME_FIELD_NAME, new HintTextField(LIFETIME_FIELDS_HINT));
         components.put(CAPITAL_LIFETIME_FIELD_NAME, new HintTextField(LIFETIME_FIELDS_HINT));
         components.put(WOODEN_SPEED_FIELD_NAME, new HintTextField(SPEED_FIELDS_HINT));
         components.put(CAPITAL_SPEED_FIELD_NAME, new HintTextField(SPEED_FIELDS_HINT));
+
+        // ComboBoxes
+        String[] comboBoxVariants =  {
+                "10%",
+                "20%",
+                "30%",
+                "40%",
+                "50%",
+                "60%",
+                "70%",
+                "80%",
+                "90%",
+                "100%"
+        };
+
+        components.put(WOODEN_PROBABILITY_COMBOBOX, new ComboBox<>(comboBoxVariants));
+        components.put(CAPITAL_PROBABILITY_COMBOBOX, new ComboBox<>(comboBoxVariants));
 
         // Buttons
         components.put(SAVE_EXIT_BUTTON_NAME, new ControlButton(SAVE_EXIT_BUTTON_TEXT));
@@ -96,10 +111,6 @@ public class PreferencesPage extends Page implements IPage {
                 .setText(String.valueOf(Preferences.getWoodenBuildingInterval()));
         ((HintTextField) components.get(CAPITAL_INTERVAL_FIELD_NAME))
                 .setText(String.valueOf(Preferences.getCapitalBuildingInterval()));
-        ((HintTextField) components.get(WOODEN_PROBABILITY_COMBOBOX))
-                .setText(String.valueOf(Preferences.getWoodenBuildingProbability()));
-        ((HintTextField) components.get(CAPITAL_PROBABILITY_COMBOBOX))
-                .setText(String.valueOf(Preferences.getCapitalBuildingProbability()));
         ((HintTextField) components.get(WOODEN_LIFETIME_FIELD_NAME))
                 .setText(String.valueOf(Preferences.getWoodenBuildingLifeTime() / 1000));
         ((HintTextField) components.get(CAPITAL_LIFETIME_FIELD_NAME))
@@ -133,8 +144,9 @@ public class PreferencesPage extends Page implements IPage {
         ComponentFabric.setupHintTextField((HintTextField) components.get(CAPITAL_LIFETIME_FIELD_NAME));
         ComponentFabric.setupHintTextField((HintTextField) components.get(WOODEN_SPEED_FIELD_NAME));
         ComponentFabric.setupHintTextField((HintTextField) components.get(CAPITAL_SPEED_FIELD_NAME));
-        ComponentFabric.setupHintTextField((HintTextField) components.get(WOODEN_PROBABILITY_COMBOBOX));
-        ComponentFabric.setupHintTextField((HintTextField) components.get(CAPITAL_PROBABILITY_COMBOBOX));
+
+        ComponentFabric.setupComboBox((ComboBox) components.get(WOODEN_PROBABILITY_COMBOBOX));
+        ComponentFabric.setupComboBox((ComboBox) components.get(CAPITAL_PROBABILITY_COMBOBOX));
 
         ComponentFabric.setupControlButtonDark((ControlButton) components.get(SAVE_EXIT_BUTTON_NAME));
         ComponentFabric.setupControlButtonLight((ControlButton) components.get(RESTORE_BUTTON_NAME));
