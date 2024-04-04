@@ -1,6 +1,7 @@
 package com.universitybusiness.view.fabrics;
 
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.components.combobox.ComboBox;
 import com.universitybusiness.view.components.controls.ControlButton;
 import com.universitybusiness.view.components.textFilelds.HintTextField;
 import com.universitybusiness.view.components.controls.RadioButton;
@@ -72,6 +73,18 @@ public final class ComponentFabric {
         field.setBorder(BorderFactory.createCompoundBorder(
                 field.getBorder(),
                 BorderFactory.createEmptyBorder(2,20,2,5)
+        ));
+    }
+
+    public static void setupComboBox(ComboBox comboBox) {
+        comboBox.setPreferredSize(new Dimension(165, 30));
+        comboBox.setRadius(15);
+        comboBox.setBackground(Style.getPrimaryLightColor());
+        comboBox.setForeground(Style.getTextFieldHintsColor());
+        comboBox.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 15));
+        comboBox.setBorder(BorderFactory.createCompoundBorder(
+                comboBox.getBorder(),
+                BorderFactory.createEmptyBorder(2, 20, 2, 5)
         ));
     }
 
