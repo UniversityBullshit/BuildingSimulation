@@ -7,9 +7,11 @@ public class CapitalBuilding extends Building {
     @Getter
     private final long id;
     @Getter
-    private static long interval = Preferences.getCapitalBuildingInterval();
+    @Setter
+    private static long interval;
     @Getter
-    private static double probability = 1.0 - Preferences.getCapitalBuildingProbability();
+    @Setter
+    private static double probability;
     @Getter
     @Setter
     private int x;
@@ -19,17 +21,13 @@ public class CapitalBuilding extends Building {
     @Getter
     private final long spawnTime;
     @Getter
-    private static long lifeTime = Preferences.getCapitalBuildingLifeTime();
+    @Setter
+    private static long lifeTime;
 
     public CapitalBuilding(int x, int y, long time) {
         this.x = x;
         this.y = y;
         this.spawnTime = time;
         this.id = AtomicIdCounter.nextId();
-    }
-    public static void setDefaults(long interval, double probability, long lifeTime) {
-        CapitalBuilding.interval = interval;
-        CapitalBuilding.probability = probability;
-        CapitalBuilding.lifeTime = lifeTime;
     }
 }
