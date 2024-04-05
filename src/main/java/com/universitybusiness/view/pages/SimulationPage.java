@@ -1,6 +1,7 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.actions.mainMenu.CurrentObjectsButtonListener;
 import com.universitybusiness.view.actions.simulationPage.ShowInfoAction;
 import com.universitybusiness.view.actions.simulationPage.StartKeyAction;
 import com.universitybusiness.view.actions.simulationPage.StopKeyAction;
@@ -121,10 +122,13 @@ public class SimulationPage extends Page implements IPage {
             }
         };
 
+        CurrentObjectsButtonListener currentObjectsButtonListener = new CurrentObjectsButtonListener(context);
+
         ((ControlButton) components.get(START_BUTTON_NAME)).addActionListener(startKeyAction);
         ((ControlButton) components.get(STOP_BUTTON_NAME)).addActionListener(stopKeyAction);
         ((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
         ((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
+        ((ControlButton) components.get(CURRENT_OBJECTS_NAME)).addActionListener(currentObjectsButtonListener);
         ((SwitchButton) components.get(SHOW_INFO_SWITCH_NAME)).setAction(action);
     }
 
