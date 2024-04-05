@@ -3,22 +3,25 @@ package com.universitybusiness.view.actions.preferences;
 import com.universitybusiness.model.Preferences;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.common.BackToMenuAction;
+import com.universitybusiness.view.components.combobox.ComboBox;
 import com.universitybusiness.view.components.textFilelds.HintTextField;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.function.Function;
 
 public class SavePreferencesAction extends AbstractAction {
     private final WindowManager windowManager;
     private final ArrayList<HintTextField> fields;
-    private final ArrayList<Integer> values;
+    private final ArrayList<ComboBox<String>> comboBoxes;
     private final BackToMenuAction backToMenuAction;
 
     public SavePreferencesAction(WindowManager windowManager) {
         this.windowManager = windowManager;
         fields = new ArrayList<>();
-        values = new ArrayList<>();
+        comboBoxes = new ArrayList<>();
         backToMenuAction = new BackToMenuAction(windowManager);
     }
 
@@ -26,21 +29,96 @@ public class SavePreferencesAction extends AbstractAction {
         fields.add(field);
     }
 
+    public void addComboBox(ComboBox<String> comboBox) { comboBoxes.add(comboBox); }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (verify()) {
-            setValues();
+        if (processFields()) {
             backToMenuAction.actionPerformed(e);
         } else {
             showErrorMessage();
         }
     }
 
-    private void setValues() {
-        Preferences.setWoodenBuildingInterval(values.get(0));
-        Preferences.setCapitalBuildingInterval(values.get(1));
-        Preferences.setWoodenBuildingLifeTime(values.get(2) * 1000);
-        Preferences.setCapitalBuildingLifeTime(values.get(3) * 1000);
+    private boolean processFields() {
+        // Process textFields
+        boolean woodenSpawnInterval = verifyValue(fields.get(0), 500, 10000);
+        if (!woodenSpawnInterval) {
+            fields.get(0).setError();
+            fields.get(0).setText(String.valueOf(Preferences.DEFAULT_WOODEN_BUILDING_INTERVAL));
+            Preferences.setWoodenBuildingInterval(Preferences.DEFAULT_WOODEN_BUILDING_INTERVAL);
+        } else {
+            Preferences.setWoodenBuildingInterval(Integer.parseInt(fields.get(0).getText()));
+        }
+
+        boolean capitalSpawnInterval = verifyValue(fields.get(1), 500, 10000);
+        if (!capitalSpawnInterval) {
+            fields.get(1).setError();
+            fields.get(1).setText(String.valueOf(Preferences.DEFAULT_CAPITAL_BUILDING_INTERVAL));
+            Preferences.setCapitalBuildingInterval(Preferences.DEFAULT_CAPITAL_BUILDING_INTERVAL);
+        } else {
+            Preferences.setCapitalBuildingInterval(Integer.parseInt(fields.get(1).getText()));
+        }
+
+        boolean woodenLifeTime = verifyValue(fields.get(2), 1, 1000);
+        if (!woodenLifeTime) {
+            fields.get(2).setError();
+            fields.get(2).setText(String.valueOf(Preferences.DEFAULT_WOODEN_BUILDING_LIFE_TIME));
+            Preferences.setWoodenBuildingLifeTime(Preferences.DEFAULT_WOODEN_BUILDING_LIFE_TIME);
+        } else {
+            Preferences.setWoodenBuildingLifeTime(Integer.parseInt(fields.get(2).getText()) * 1000L);
+        }
+
+        boolean capitalLifeTime = verifyValue(fields.get(3), 1, 1000);
+        if (!capitalLifeTime) {
+            fields.get(3).setError();
+            fields.get(3).setText(String.valueOf(Preferences.DEFAULT_CAPITAL_BUILDING_LIFE_TIME));
+            Preferences.setCapitalBuildingLifeTime(Preferences.DEFAULT_CAPITAL_BUILDING_LIFE_TIME);
+        } else {
+            Preferences.setCapitalBuildingLifeTime(Integer.parseInt(fields.get(3).getText()) * 1000L);
+        }
+
+        boolean woodenMovementSpeed = verifyValue(fields.get(4), 1, 100);
+        if (!woodenMovementSpeed) {
+            fields.get(4).setError();
+            fields.get(4).setText(String.valueOf(Preferences.DEFAULT_WOODEN_BUILDING_SPEED));
+            Preferences.setWoodenBuildingSpeed(Preferences.DEFAULT_WOODEN_BUILDING_SPEED);
+        } else {
+            Preferences.setWoodenBuildingSpeed(Integer.parseInt(fields.get(4).getText()));
+        }
+
+        boolean capitalMovementSpeed = verifyValue(fields.get(5), 1, 100);
+        if (!capitalMovementSpeed) {
+            fields.get(5).setError();
+            fields.get(5).setText(String.valueOf(Preferences.DEFAULT_CAPITAL_BUILDING_SPEED));
+            Preferences.setCapitalBuildingSpeed(Preferences.DEFAULT_CAPITAL_BUILDING_SPEED);
+        } else {
+            Preferences.setCapitalBuildingSpeed(Integer.parseInt(fields.get(5).getText()));
+        }
+
+        // Process comboBoxes
+        String woodenBuildingProbability = Objects.requireNonNull(comboBoxes.get(0).getSelectedItem())
+                .toString().replace("%", "");
+        String capitalBuildingProbability = Objects.requireNonNull(comboBoxes.get(1).getSelectedItem())
+                .toString().replace("%", "");
+
+        Preferences.setWoodenBuildingProbability(Double.parseDouble(woodenBuildingProbability) / 100);
+        Preferences.setCapitalBuildingProbability(Double.parseDouble(capitalBuildingProbability) / 100);
+
+        return woodenSpawnInterval && capitalSpawnInterval && woodenLifeTime && capitalLifeTime &&
+                woodenMovementSpeed && capitalMovementSpeed;
+    }
+
+    private boolean verifyValue(HintTextField field, int min, int max) {
+        boolean isValid = false;
+        String text = field.getText();
+
+        if (text != null && text.matches("\\d+")) {
+            int value = Integer.parseInt(text);
+            isValid = (value >= min && value <= max);
+        }
+
+        return isValid;
     }
 
     private void showErrorMessage() {
@@ -49,68 +127,5 @@ public class SavePreferencesAction extends AbstractAction {
                         "Spawn Interval: 500-10000(ms)\n" +
                         "Life Time: 1-1000(s)\n"+
                         "Movement Speed 1-100(pts/s)"});
-        fields.get(0).setText("2000");
-        fields.get(1).setText("3000");
-        fields.get(2).setText("30");
-        fields.get(3).setText("90");
-        fields.get(4).setText("5");
-        fields.get(5).setText("5");
-    }
-
-    private boolean verify() {
-        boolean woodenSpawnInterval = verifySpawnInterval(fields.get(0).getText(), 0);
-        boolean capitalSpawnInterval = verifySpawnInterval(fields.get(1).getText(), 1);
-        boolean woodenLifeTime = verifyLifeTime(fields.get(2).getText(), 2);
-        boolean capitalLifeTime = verifyLifeTime(fields.get(3).getText(), 3);
-        boolean woodenMovementSpeed = verifyMovementSpeed(fields.get(4).getText(), 4);
-        boolean capitalMovementSpeed = verifyMovementSpeed(fields.get(5).getText(), 5);
-
-        return woodenSpawnInterval && capitalSpawnInterval && woodenLifeTime && capitalLifeTime &&
-                woodenMovementSpeed && capitalMovementSpeed;
-    }
-
-    private boolean verifySpawnInterval(String text, int index) {
-        boolean isValid = false;
-
-        if (text != null && text.matches("\\d+")) {
-            values.add(Integer.parseInt(text));
-            isValid = (values.get(index) >= 500 && values.get(index) <= 10000);
-        }
-
-        if (!isValid) {
-            fields.get(index).setError();
-        }
-
-        return isValid;
-    }
-
-    private boolean verifyLifeTime(String text, int index) {
-        boolean isValid = false;
-
-        if (text != null && text.matches("\\d+")) {
-            values.add(Integer.parseInt(text));
-            isValid = (values.get(index) >= 1 && values.get(index) <= 1000);
-        }
-
-        if (!isValid) {
-            fields.get(index).setError();
-        }
-
-        return isValid;
-    }
-
-    private boolean verifyMovementSpeed(String text, int index) {
-        boolean isValid = false;
-
-        if (text != null && text.matches("\\d+")) {
-            values.add(Integer.parseInt(text));
-            isValid = (values.get(index) >= 1 && values.get(index) <= 100);
-        }
-
-        if (!isValid) {
-            fields.get(index).setError();
-        }
-
-        return isValid;
     }
 }
