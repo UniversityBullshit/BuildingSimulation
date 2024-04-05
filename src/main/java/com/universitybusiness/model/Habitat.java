@@ -66,7 +66,7 @@ public class Habitat implements IHabitat {
         Random generator = new Random();
 
         double chance = generator.nextDouble();
-        if (chance > WoodenBuilding.getProbability()) {
+        if (chance > 1.0 - WoodenBuilding.getProbability()) {
             if (this.time - this.lastWoodenBuildingSpawnTime >= WoodenBuilding.getInterval()) {
                 int x = generator.nextInt(this.width);
                 int y = generator.nextInt(this.height);
@@ -85,7 +85,7 @@ public class Habitat implements IHabitat {
         Random generator = new Random();
 
         double chance = generator.nextDouble();
-        if (chance > CapitalBuilding.getProbability()) {
+        if (chance > 1.0 - CapitalBuilding.getProbability()) {
             if (this.time - this.lastCapitalBuildingSpawnTime >= CapitalBuilding.getInterval()) {
                 int x = generator.nextInt(this.width);
                 int y = generator.nextInt(this.height);
