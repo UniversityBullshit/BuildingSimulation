@@ -12,7 +12,7 @@ import java.util.concurrent.CompletableFuture;
 public class SimulationService {
     @Getter
     @Setter
-    private Habitat context;
+    private Habitat habitat;
     @Getter
     @Setter
     private long time;
@@ -26,7 +26,7 @@ public class SimulationService {
     private final long TIMER_TICK_VALUE = 200;
 
     public SimulationService(Habitat habitat) {
-        context = habitat;
+        this.habitat = habitat;
         time = 0;
         isSimulationRunning = false;
     }
@@ -44,7 +44,15 @@ public class SimulationService {
         if (timer != null) timer.cancel();
     }
 
-    public void simulation() {
+    public void resetSimulation() {
+        try {
+            stopSimulation();
+            time = 0;
+            habitat.reset();
+        } catch (Exception ignored) {}
+    }
+
+    private void simulation() {
         long TIMER_DELAY_VALUE = 0;
 
         timer = new Timer();
@@ -53,7 +61,7 @@ public class SimulationService {
             @Override
             public void run() {
                 time += TIMER_TICK_VALUE;
-                context.update(time);
+                habitat.update(time);
             }
         }, TIMER_DELAY_VALUE, TIMER_TICK_VALUE);
     }

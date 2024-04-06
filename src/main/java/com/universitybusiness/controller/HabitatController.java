@@ -16,20 +16,20 @@ import java.util.*;
  * @version 1.0
  */
 public class HabitatController {
-    private final SimulationService context;
+    private final SimulationService simulationService;
 
     /**
      * Constructor creates Habitat instance and provides interaction with it.
      */
     public HabitatController(SimulationService simulationService) {
-        context = simulationService;
+        this.simulationService = simulationService;
     }
 
     /**
      * Starts an endless process of simulation that runs asynchronously.
      */
     public void startSimulation() {
-        context.startSimulation();
+        simulationService.startSimulation();
     }
 
     /**
@@ -37,31 +37,29 @@ public class HabitatController {
      */
     public void stopSimulation() {
         try {
-            context.stopSimulation();
+            simulationService.stopSimulation();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
     public Boolean getSimulationStatus() {
-        return context.getIsSimulationRunning();
+        return simulationService.getIsSimulationRunning();
     }
 
     /**
      * Set context to default state
      */
     public void resetSimulation() {
-        stopSimulation();
-        context.setTime(0);
-        context.getContext().reset();
+        simulationService.resetSimulation();
     }
 
-    public Habitat getContext() {
-        return context.getContext();
+    public Habitat getSimulationService() {
+        return simulationService.getHabitat();
     }
 
-    public void setContext(Habitat habitat) {
-        context.setContext(habitat);
+    public void setSimulationService(Habitat habitat) {
+        simulationService.setHabitat(habitat);
     }
 
     /**
@@ -69,7 +67,7 @@ public class HabitatController {
      * @return Habitat.buildings
      */
     public Vector<Building> getBuildings() {
-        return context.getContext().getBuildings();
+        return simulationService.getHabitat().getBuildings();
     }
 
     /**
@@ -77,7 +75,7 @@ public class HabitatController {
      * @return Habitat.ids
      */
     public HashSet<Long> getIds() {
-        return context.getContext().getIds();
+        return simulationService.getHabitat().getIds();
     }
 
     /**
@@ -86,7 +84,7 @@ public class HabitatController {
      * @return Habitat.spawnTimeMap
      */
     public TreeMap<Long, Long> getSpawnTimeMap() {
-        return context.getContext().getSpawnTimeMap();
+        return simulationService.getHabitat().getSpawnTimeMap();
     }
 
     /**
@@ -94,7 +92,7 @@ public class HabitatController {
      * @return Habitat.woodenBuildingsCount
      */
     public int getWoodenBuildingsCount() {
-        return context.getContext().getWoodenBuildingsCount();
+        return simulationService.getHabitat().getWoodenBuildingsCount();
     }
 
     /**
@@ -102,7 +100,7 @@ public class HabitatController {
      * @return Habitat.capitalBuildingsCount
      */
     public int getCapitalBuildingsCount() {
-        return context.getContext().getCapitalBuildingsCount();
+        return simulationService.getHabitat().getCapitalBuildingsCount();
     }
 
     /**
@@ -110,6 +108,6 @@ public class HabitatController {
      * @return time spent from simulation start
      */
     public long getSimulationTime() {
-        return context.getTime();
+        return simulationService.getTime();
     }
 }
