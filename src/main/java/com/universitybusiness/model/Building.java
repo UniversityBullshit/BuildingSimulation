@@ -1,4 +1,5 @@
 package com.universitybusiness.model;
+import com.universitybusiness.model.util.AtomicIdCounter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,45 +8,52 @@ public abstract class Building implements Comparable<Building> {
      * Object id
      */
     @Getter
-    private long id;
+    protected long id;
 
     /**
      * Spawn interval
      */
     @Getter
-    private static long interval;
+    protected long interval;
 
     /**
      * Spawn chance
      */
     @Getter
-    private static double probability;
+    protected double probability;
 
     /**
      * X coordinate of object
      */
     @Getter
     @Setter
-    private int x;
+    protected int x;
 
     /**
      * Y coordinate of object
      */
     @Getter
     @Setter
-    private int y;
+    protected int y;
 
     /**
      * Creation time
      */
     @Getter
-    private long spawnTime;
+    protected long spawnTime;
 
     /**
      * Member that stores time after which object is being deleted
      */
     @Getter
-    private static long lifeTime;
+    protected long lifeTime;
+
+    Building(int x, int y, long time) {
+        this.id = AtomicIdCounter.nextId();
+        this.x = x;
+        this.y = y;
+        this.spawnTime = time;
+    }
 
     @Override
     public int compareTo(Building building) {

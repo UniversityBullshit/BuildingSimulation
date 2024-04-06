@@ -1,33 +1,10 @@
 package com.universitybusiness.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 public class WoodenBuilding extends Building {
-    @Getter
-    private final long id;
-    @Getter
-    @Setter
-    private static long interval;
-    @Getter
-    @Setter
-    private static double probability;
-    @Getter
-    @Setter
-    private int x;
-    @Setter
-    @Getter
-    private int y;
-    @Getter
-    private final long spawnTime;
-    @Getter
-    @Setter
-    private static long lifeTime;
-
     public WoodenBuilding(int x, int y, long time) {
-        this.x = x;
-        this.y = y;
-        this.spawnTime = time;
-        this.id = AtomicIdCounter.nextId();
+        super(x, y, time);
+        this.interval = Preferences.getInstance().getWoodenBuildingInterval();
+        this.lifeTime = Preferences.getInstance().getWoodenBuildingLifeTime();
+        this.probability = Preferences.getInstance().getWoodenBuildingProbability();
     }
 }
