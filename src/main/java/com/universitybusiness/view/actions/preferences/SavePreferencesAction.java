@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.function.Function;
 
 public class SavePreferencesAction extends AbstractAction {
     private final WindowManager windowManager;
@@ -114,8 +113,10 @@ public class SavePreferencesAction extends AbstractAction {
         String text = field.getText();
 
         if (text != null && text.matches("\\d+")) {
-            int value = Integer.parseInt(text);
-            isValid = (value >= min && value <= max);
+            try {
+                int value = Integer.parseInt(text);
+                isValid = (value >= min && value <= max);
+            } catch (Exception ignored) {}
         }
 
         return isValid;

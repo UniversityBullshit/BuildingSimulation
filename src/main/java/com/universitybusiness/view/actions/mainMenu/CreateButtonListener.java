@@ -29,43 +29,38 @@ public class CreateButtonListener implements ActionListener {
                     new String[] {"Некорректное значение размерности. Допустимые значения:\n" +
                                     "Ширина: 500-1000\n" +
                                     "Высота: 500-1000"});
-            width_field.setText("500");
-            height_field.setText("500");
         }
     }
 
     private boolean verify() {
-        boolean isValidWidth = verifyWidth(width_field.getText());
-        boolean isValidHeight = verifyHeight(height_field.getText());
+        boolean isValidWidth = verifyValue(width_field, 500, 1000);
+        if (isValidWidth) {
+            width = Integer.parseInt(width_field.getText());
+        } else {
+            width_field.setError();
+            width_field.setText("500");
+        }
+
+        boolean isValidHeight = verifyValue(height_field, 500, 1000);
+        if (isValidHeight) {
+            height = Integer.parseInt(height_field.getText());
+        } else {
+            height_field.setError();
+            height_field.setText("500");
+        }
 
         return isValidHeight && isValidWidth;
     }
 
-    private boolean verifyWidth(String text) {
+    private boolean verifyValue(HintTextField field, int min, int max) {
         boolean isValid = false;
+        String text = field.getText();
 
         if (text != null && text.matches("\\d+")) {
-            width = Integer.parseInt(text);
-            isValid = (width >= 500 && width <= 1000);
-        }
-
-        if (!isValid) {
-            width_field.setError();
-        }
-
-        return isValid;
-    }
-
-    private boolean verifyHeight(String text) {
-        boolean isValid = false;
-
-        if (text != null && text.matches("\\d+")) {
-            height = Integer.parseInt(text);
-            isValid = (height >= 500 && height <= 1000);
-        }
-
-        if (!isValid) {
-            height_field.setError();
+            try {
+                int value = Integer.parseInt(text);
+                isValid = (value >= min && value <= max);
+            } catch (Exception ignored) {}
         }
 
         return isValid;
