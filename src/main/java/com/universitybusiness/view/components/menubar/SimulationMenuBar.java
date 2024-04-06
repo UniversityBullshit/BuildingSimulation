@@ -27,21 +27,15 @@ public class SimulationMenuBar extends CustomMenuBar {
 
         JMenuItem start = new JMenuItem("Start");
         JMenuItem stop = new JMenuItem("Stop");
-        JMenuItem showTime = new JMenuItem("Show time");
-        JMenuItem hideTime = new JMenuItem("Hide time");
-
-        showTime.setEnabled(!area.isShowTime());
-        hideTime.setEnabled(area.isShowTime());
+        JMenuItem toggleTime = new JMenuItem("Show/Hide time");
 
         start.addActionListener(new StartKeyAction(this.context.getController()));
         stop.addActionListener(new StopKeyAction(area, this.context));
-        showTime.addActionListener(new ShowTimeAction(area));
-        hideTime.addActionListener(new ShowTimeAction(area));
+        toggleTime.addActionListener(new ShowTimeAction(area));
 
         actions.add(start);
         actions.add(stop);
-        actions.add(showTime);
-        actions.add(hideTime);
+        actions.add(toggleTime);
 
         return actions;
     }

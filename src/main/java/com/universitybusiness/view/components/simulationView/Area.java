@@ -22,9 +22,6 @@ public class Area extends JPanel {
     private final HabitatController controller;
     @Getter
     @Setter
-    private boolean isAreaUpdating = false;
-    @Getter
-    @Setter
     private boolean showTime = true;
     @Getter
     @Setter
