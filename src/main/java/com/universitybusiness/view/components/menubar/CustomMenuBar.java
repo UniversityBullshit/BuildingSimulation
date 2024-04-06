@@ -3,12 +3,15 @@ package com.universitybusiness.view.components.menubar;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.menubar.AboutMenuItemListener;
 import com.universitybusiness.view.actions.menubar.ControlsMenuItemListener;
+import com.universitybusiness.view.actions.simulationPage.StartKeyAction;
+import com.universitybusiness.view.actions.simulationPage.StopKeyAction;
 import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
 public class CustomMenuBar extends JMenuBar {
-    private final WindowManager context;
+    protected final WindowManager context;
     public CustomMenuBar(WindowManager context) {
         this.context = context;
 
@@ -32,4 +35,6 @@ public class CustomMenuBar extends JMenuBar {
 
         return help;
     }
+
+
 }
