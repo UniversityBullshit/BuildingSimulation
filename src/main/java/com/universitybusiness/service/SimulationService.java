@@ -16,6 +16,7 @@ public class SimulationService {
     @Getter
     @Setter
     private long time;
+    @Getter
     private Boolean isSimulationRunning;
     private Timer timer;
 

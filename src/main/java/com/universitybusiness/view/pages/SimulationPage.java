@@ -1,6 +1,7 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.actions.LockButtonsAction;
 import com.universitybusiness.view.actions.mainMenu.CurrentObjectsButtonListener;
 import com.universitybusiness.view.actions.simulationPage.ShowInfoAction;
 import com.universitybusiness.view.actions.simulationPage.StartKeyAction;
@@ -15,6 +16,7 @@ import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.util.KeyboardInput;
 import com.universitybusiness.view.util.Style;
 
+import javax.naming.ldap.Control;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -67,7 +69,7 @@ public class SimulationPage extends Page implements IPage {
         components.put(START_BUTTON_NAME, new ControlButton(START_BUTTON_TEXT));
         components.put(STOP_BUTTON_NAME, new ControlButton(STOP_BUTTON_TEXT, false));
         components.put(EXIT_BUTTON_NAME, new ControlButton(null));
-        components.put(CURRENT_OBJECTS_NAME, new ControlButton(CURRENT_OBJECTS_TEXT, false));
+        components.put(CURRENT_OBJECTS_NAME, new ControlButton(CURRENT_OBJECTS_TEXT));
 
         components.put(SHOW_INFO_SWITCH_NAME, new SwitchButton());
 
@@ -126,6 +128,12 @@ public class SimulationPage extends Page implements IPage {
         };
 
         CurrentObjectsButtonListener currentObjectsButtonListener = new CurrentObjectsButtonListener(context);
+
+        ((Area) components.get(SIMULATION_AREA_NAME)).setActionListener(
+                new LockButtonsAction(
+                        (ControlButton) components.get(START_BUTTON_NAME),
+                        (ControlButton) components.get(STOP_BUTTON_NAME)
+        ));
 
         ((ControlButton) components.get(START_BUTTON_NAME)).addActionListener(startKeyAction);
         ((ControlButton) components.get(STOP_BUTTON_NAME)).addActionListener(stopKeyAction);

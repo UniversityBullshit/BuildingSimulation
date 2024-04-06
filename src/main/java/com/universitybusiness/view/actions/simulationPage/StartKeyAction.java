@@ -35,13 +35,13 @@ public class StartKeyAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         startUpdating();
 
-        if (this.startButton != null) {
-            startButton.setEnabled(false);
-        }
-
-        if (this.stopButton != null) {
-            stopButton.setEnabled(true);
-        }
+//        if (this.startButton != null) {
+//            startButton.setEnabled(false);
+//        }
+//
+//        if (this.stopButton != null) {
+//            stopButton.setEnabled(true);
+//        }
 
         if (this.currentObjectsButton != null) {
             currentObjectsButton.setEnabled(true);

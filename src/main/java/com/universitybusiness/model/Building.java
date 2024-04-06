@@ -2,7 +2,7 @@ package com.universitybusiness.model;
 import lombok.Getter;
 import lombok.Setter;
 
-public abstract class Building {
+public abstract class Building implements Comparable<Building> {
     /**
      * Object id
      */
@@ -46,4 +46,9 @@ public abstract class Building {
      */
     @Getter
     private static long lifeTime;
+
+    @Override
+    public int compareTo(Building building) {
+        return Long.compare(this.id, building.id);
+    }
 }

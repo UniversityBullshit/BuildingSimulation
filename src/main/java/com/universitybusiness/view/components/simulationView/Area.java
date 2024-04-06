@@ -19,6 +19,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class Area extends JPanel {
+    @Getter
+    private boolean isAreaUpdating = false;
     private final HabitatController controller;
     @Getter
     @Setter
@@ -34,6 +36,8 @@ public class Area extends JPanel {
     private final Integer capitalBuildingSide;
     private final Image woodenBuildingImage;
     private final Image capitalBuildingImage;
+    @Setter
+    private ActionListener actionListener = null;
 
     public Area(HabitatController controller) {
         this.controller = controller;
@@ -68,6 +72,8 @@ public class Area extends JPanel {
     }
 
     private void update() {
+        setAreaUpdating(controller.getSimulationStatus());
+
         // Get actual info
         getDeletingInstances();
         getAddingInstances();
@@ -75,13 +81,20 @@ public class Area extends JPanel {
         // Accept changes
         removeInstances();
         addInstances();
-        moveInstances();
+//        moveInstances();
 
         // Delete temporary info
         this.deletingBuildings.clear();
         this.addingBuildings.clear();
 
         repaint();
+    }
+
+    private void setAreaUpdating(Boolean status) {
+        if (isAreaUpdating != status) {
+            isAreaUpdating = status;
+            if (actionListener != null) actionListener.actionPerformed(null);
+        }
     }
 
     private void getDeletingInstances() {
@@ -114,20 +127,20 @@ public class Area extends JPanel {
         }
     }
 
-    private void moveInstances() {
-        Vector<Building> actualBuildings = this.controller.getBuildings();
-        for (Building building : new CopyOnWriteArrayList<>(actualBuildings)) {
-            if (!this.addingBuildings.contains(building)) {
-                Long id = building.getId();
-                int currentX = this.buildingsDictionary.get(id).getX();
-                int currentY = this.buildingsDictionary.get(id).getY();
-                if (isDifferentCoordinates(currentX, currentY, building.getX(), building.getY())) {
-                    this.buildingsDictionary.get(id).setX(currentX);
-                    this.buildingsDictionary.get(id).setY(currentY);
-                }
-            }
-        }
-    }
+//    private void moveInstances() {
+//        Vector<Building> actualBuildings = this.controller.getBuildings();
+//        for (Building building : new CopyOnWriteArrayList<>(actualBuildings)) {
+//            if (!this.addingBuildings.contains(building)) {
+//                Long id = building.getId();
+//                int currentX = this.buildingsDictionary.get(id).getX();
+//                int currentY = this.buildingsDictionary.get(id).getY();
+//                if (isDifferentCoordinates(currentX, currentY, building.getX(), building.getY())) {
+//                    this.buildingsDictionary.get(id).setX(currentX);
+//                    this.buildingsDictionary.get(id).setY(currentY);
+//                }
+//            }
+//        }
+//    }
 
     private boolean isDifferentCoordinates(int currentX, int currentY, int actualX, int actualY) {
         return currentX != actualX || currentY != actualY;

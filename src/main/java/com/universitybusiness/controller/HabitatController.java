@@ -43,6 +43,10 @@ public class HabitatController {
         }
     }
 
+    public Boolean getSimulationStatus() {
+        return context.getIsSimulationRunning();
+    }
+
     /**
      * Set context to default state
      */

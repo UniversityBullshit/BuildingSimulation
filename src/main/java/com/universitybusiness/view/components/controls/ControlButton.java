@@ -106,4 +106,8 @@ public class ControlButton extends JButton {
 
         super.paintComponent(g);
     }
+
+    public boolean getIsEnabled() {
+        return isEnabled;
+    }
 }
