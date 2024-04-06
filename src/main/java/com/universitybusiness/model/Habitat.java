@@ -64,52 +64,57 @@ public class Habitat implements IHabitat {
 
     private void spawnWoodenBuilding() {
         Random generator = new Random();
+        long currentTime = this.time;
 
         double chance = generator.nextDouble();
-        if (chance > 1.0 - WoodenBuilding.getProbability()) {
-            if (this.time - this.lastWoodenBuildingSpawnTime >= WoodenBuilding.getInterval()) {
+        if (chance > 1.0 - Preferences.getInstance().getWoodenBuildingProbability()) {
+            if (currentTime - this.lastWoodenBuildingSpawnTime >= Preferences.getInstance().getWoodenBuildingInterval()) {
                 int x = generator.nextInt(this.width);
                 int y = generator.nextInt(this.height);
 
-                WoodenBuilding woodenBuilding = new WoodenBuilding(x, y, this.time);
+                WoodenBuilding woodenBuilding = new WoodenBuilding(x, y, currentTime);
 
                 this.buildings.add(woodenBuilding);
                 this.ids.add(woodenBuilding.getId());
-                this.spawnTimeMap.put(woodenBuilding.getId(), this.time);
+                this.spawnTimeMap.put(woodenBuilding.getId(), currentTime);
                 this.woodenBuildingsCount++;
-                this.lastWoodenBuildingSpawnTime = this.time;
+                this.lastWoodenBuildingSpawnTime = currentTime;
             }
         }
     }
+
     private void spawnCapitalBuilding() {
         Random generator = new Random();
+        long currentTime = this.time;
 
         double chance = generator.nextDouble();
-        if (chance > 1.0 - CapitalBuilding.getProbability()) {
-            if (this.time - this.lastCapitalBuildingSpawnTime >= CapitalBuilding.getInterval()) {
+        if (chance > 1.0 - Preferences.getInstance().getCapitalBuildingProbability()) {
+            if (currentTime - this.lastCapitalBuildingSpawnTime >= Preferences.getInstance().getCapitalBuildingInterval()) {
                 int x = generator.nextInt(this.width);
                 int y = generator.nextInt(this.height);
 
-                CapitalBuilding capitalBuilding = new CapitalBuilding(x, y, this.time);
+                CapitalBuilding capitalBuilding = new CapitalBuilding(x, y, currentTime);
 
-                this.buildings.add(capitalBuilding);
-                this.ids.add(capitalBuilding.getId());
-                this.spawnTimeMap.put(capitalBuilding.getId(), this.time);
-                this.capitalBuildingsCount++;
-                this.lastCapitalBuildingSpawnTime = this.time;
+                buildings.add(capitalBuilding);
+                ids.add(capitalBuilding.getId());
+                spawnTimeMap.put(capitalBuilding.getId(), currentTime);
+                capitalBuildingsCount++;
+                lastCapitalBuildingSpawnTime = currentTime;
             }
         }
     }
+
     private Vector<Building> findExpiredObjects() {
         Vector<Building> expired = new Vector<>();
+        long currentTime = this.time;
 
         for (Building building : buildings) {
             if (building instanceof WoodenBuilding) {
-                if (time - building.getSpawnTime() >= WoodenBuilding.getLifeTime()) {
+                if (currentTime - building.getSpawnTime() >= Preferences.getInstance().getWoodenBuildingLifeTime()) {
                     expired.add(building);
                 }
-            } else {
-                if (time - building.getSpawnTime() >= CapitalBuilding.getLifeTime()) {
+            } else if (building instanceof CapitalBuilding) {
+                if (currentTime - building.getSpawnTime() >= Preferences.getInstance().getCapitalBuildingLifeTime()) {
                     expired.add(building);
                 }
             }
@@ -119,9 +124,15 @@ public class Habitat implements IHabitat {
     }
     private void removeExpiredObjects(Vector<Building> expired) {
         for (Building building : expired) {
-            this.ids.remove(building.getId());
-            this.spawnTimeMap.remove(building.getId());
-            this.buildings.remove(building);
+            ids.remove(building.getId());
+            spawnTimeMap.remove(building.getId());
+            buildings.remove(building);
+
+            if (building instanceof WoodenBuilding) {
+                woodenBuildingsCount--;
+            } else if (building instanceof CapitalBuilding) {
+                capitalBuildingsCount--;
+            }
         }
     }
 }
