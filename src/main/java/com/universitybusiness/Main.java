@@ -10,7 +10,9 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        Preferences.restoreDefaults();
+        // Setup default preferences
+        Preferences.getInstance().restoreDefaults();
+
         SimulationService simulation = new SimulationService(Habitat.getInstance());
         HabitatController controller = new HabitatController(simulation);
         WindowManager windowManager = new WindowManager(controller);
