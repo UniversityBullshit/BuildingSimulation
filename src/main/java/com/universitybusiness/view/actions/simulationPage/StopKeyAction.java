@@ -38,7 +38,6 @@ public class StopKeyAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.context.getController().stopSimulation();
-        this.area.stopUpdating();
 
         if (this.startButton != null) {
             this.startButton.setEnabled(true);

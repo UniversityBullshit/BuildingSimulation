@@ -61,20 +61,12 @@ public class Area extends JPanel {
         this.timer = new Timer(1000 / 60, event -> SwingUtilities.invokeLater(this::update));
     }
 
-    public void startUpdating() {
+    public void reset() {
+        buildingsDictionary.clear();
         if (!timer.isRunning()) {
             this.timer.start();
         }
-    }
 
-    public void stopUpdating() {
-        if (timer.isRunning()) {
-            this.timer.stop();
-        }
-    }
-
-    public void reset() {
-        buildingsDictionary.clear();
         repaint();
     }
 

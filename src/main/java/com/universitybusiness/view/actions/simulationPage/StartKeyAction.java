@@ -9,27 +9,23 @@ import java.awt.event.ActionEvent;
 
 public class StartKeyAction extends AbstractAction {
     private final HabitatController controller;
-    private final Area area;
     private ControlButton startButton = null;
     private ControlButton stopButton = null;
     private ControlButton currentObjectsButton = null;
 
     public StartKeyAction(
-        HabitatController controller,
-        Area area
+        HabitatController controller
     ) {
         this.controller = controller;
-        this.area = area;
     }
 
     public StartKeyAction(
         HabitatController controller,
-        Area area,
         ControlButton startButton,
         ControlButton stopButton,
         ControlButton currentObjectsButton
     ) {
-        this(controller, area);
+        this(controller);
         this.startButton = startButton;
         this.stopButton = stopButton;
         this.currentObjectsButton = currentObjectsButton;
@@ -54,6 +50,5 @@ public class StartKeyAction extends AbstractAction {
 
     private void startUpdating() {
         this.controller.startSimulation();
-        this.area.startUpdating();
     }
 }

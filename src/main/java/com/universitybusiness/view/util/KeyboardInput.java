@@ -13,7 +13,7 @@ public class KeyboardInput {
         InputMap im = component.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = component.getActionMap();
 
-        Action startAction = new StartKeyAction(context.getController(), area);
+        Action startAction = new StartKeyAction(context.getController());
         Action stopAction = new StopKeyAction(area, context);
         Action showTimeAction = new ShowTimeAction(area);
 
