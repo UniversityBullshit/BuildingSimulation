@@ -60,7 +60,7 @@ public class WindowManager {
         pages.put(SIMULATION_PAGE, new SimulationPage(mainFrame, this));
         pages.put(PREFERENCES_PAGE, new PreferencesPage(mainFrame, this));
         pages.put(INFORMATION_PAGE, new InformationPage(mainFrame, this));
-        pages.put(CURRENT_OBJECTS_PAGE, new CurrentObjectsPage(mainFrame, this, this.controller.getSpawnTimeMap()));
+        pages.put(CURRENT_OBJECTS_PAGE, new CurrentObjectsPage(mainFrame, this));
 
         currentPage = MAIN_MENU_PAGE;
         width = 400;
