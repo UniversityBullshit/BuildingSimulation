@@ -1,6 +1,5 @@
 package com.universitybusiness.view.pages;
 
-import com.universitybusiness.model.Habitat;
 import com.universitybusiness.view.WindowManager;
 
 import javax.swing.*;
@@ -36,8 +35,7 @@ public class CurrentObjectsPage extends Page implements IPage {
     }
 
     @Override
-    public void reset() {
-    }
+    public void reset() {}
 
     private JScrollPane createScrollPane() {
         JTable table = createTable();

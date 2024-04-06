@@ -4,6 +4,7 @@ import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.common.BackToMenuAction;
 import com.universitybusiness.view.actions.dialog.CloseDialogAction;
 import com.universitybusiness.view.components.controls.ControlButton;
+import com.universitybusiness.view.components.menubar.CustomMenuBar;
 import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.util.Style;
 
@@ -30,6 +31,7 @@ public class InformationPage extends Page implements IPage {
 
     public InformationPage(JFrame frame, WindowManager context) {
         super(frame, context);
+        this.menuBar = new CustomMenuBar(context);
     }
 
     @Override
@@ -54,7 +56,9 @@ public class InformationPage extends Page implements IPage {
     }
 
     @Override
-    public void reset() {}
+    public void reset() {
+        super.reset();
+    }
 
     @Override
     public void setupAppearance() {

@@ -9,6 +9,7 @@ import com.universitybusiness.view.components.controls.ControlButton;
 import com.universitybusiness.view.components.controls.RadioButton;
 import com.universitybusiness.view.components.controls.SwitchButton;
 import com.universitybusiness.view.components.layout.HorizontalGap;
+import com.universitybusiness.view.components.menubar.SimulationMenuBar;
 import com.universitybusiness.view.components.simulationView.Area;
 import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.util.KeyboardInput;
@@ -43,6 +44,7 @@ public class SimulationPage extends Page implements IPage {
 
     public SimulationPage(JFrame frame, WindowManager context) {
         super(frame, context);
+        this.menuBar = new SimulationMenuBar(context, (Area) this.components.get(SIMULATION_AREA_NAME));
     }
 
     @Override
@@ -85,6 +87,8 @@ public class SimulationPage extends Page implements IPage {
 
     @Override
     public void reset() {
+        super.reset();
+
         ((Area)components.get(SIMULATION_AREA_NAME)).reset();
     }
 

@@ -1,6 +1,7 @@
 package com.universitybusiness.service;
 
 import com.universitybusiness.model.Habitat;
+import com.universitybusiness.model.IHabitat;
 import lombok.Getter;
 import lombok.Setter;
 

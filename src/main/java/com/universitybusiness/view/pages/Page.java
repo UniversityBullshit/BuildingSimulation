@@ -10,17 +10,23 @@ public abstract class Page implements IPage {
     protected final JFrame frame;
     
     protected final HashMap<String, JComponent> components;
-    
+
     protected final WindowManager context;
+
+    // Needs to be initialized in inheritor class
+    protected JMenuBar menuBar;
     
     public Page(JFrame frame, WindowManager context) {
         this.frame = frame;
         this.context = context;
         components = new HashMap<>();
 
-        this.frame.setJMenuBar(new CustomMenuBar(context));
-        
         initializeComponents();
         setupAppearance();
+    }
+
+    @Override
+    public void reset() {
+        this.frame.setJMenuBar(menuBar);
     }
 }

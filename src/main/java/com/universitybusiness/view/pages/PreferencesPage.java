@@ -6,6 +6,7 @@ import com.universitybusiness.view.actions.preferences.RestoreDefaultsAction;
 import com.universitybusiness.view.actions.preferences.SavePreferencesAction;
 import com.universitybusiness.view.components.combobox.ComboBox;
 import com.universitybusiness.view.components.controls.ControlButton;
+import com.universitybusiness.view.components.menubar.CustomMenuBar;
 import com.universitybusiness.view.components.textFilelds.HintTextField;
 import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.util.Style;
@@ -38,6 +39,7 @@ public class PreferencesPage extends Page implements IPage {
 
     public PreferencesPage(JFrame frame, WindowManager context) {
         super(frame, context);
+        this.menuBar = new CustomMenuBar(context);
     }
 
 
@@ -102,6 +104,8 @@ public class PreferencesPage extends Page implements IPage {
 
     @Override
     public void reset() {
+        super.reset();
+
         for (String key : components.keySet()) {
             if (components.get(key) instanceof HintTextField) {
                 ((HintTextField) components.get(key)).clearError();

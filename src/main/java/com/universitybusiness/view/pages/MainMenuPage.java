@@ -4,6 +4,7 @@ import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.mainMenu.CreateButtonListener;
 import com.universitybusiness.view.actions.mainMenu.PreferencesButtonListener;
 import com.universitybusiness.view.components.controls.ControlButton;
+import com.universitybusiness.view.components.menubar.CustomMenuBar;
 import com.universitybusiness.view.components.textFilelds.HintTextField;
 import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.util.Style;
@@ -25,6 +26,7 @@ public class MainMenuPage extends Page implements IPage {
 
     public MainMenuPage(JFrame frame, WindowManager context) {
         super(frame, context);
+        this.menuBar = new CustomMenuBar(context);
     }
 
     @Override
@@ -53,6 +55,8 @@ public class MainMenuPage extends Page implements IPage {
 
     @Override
     public void reset() {
+        super.reset();
+
         for (String componentName : components.keySet()) {
             if (components.get(componentName) instanceof  HintTextField) {
                 ((HintTextField) components.get(componentName)).clearError();

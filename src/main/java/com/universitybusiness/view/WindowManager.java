@@ -1,6 +1,8 @@
 package com.universitybusiness.view;
 
 import com.universitybusiness.controller.HabitatController;
+import com.universitybusiness.view.components.menubar.CustomMenuBar;
+import com.universitybusiness.view.components.menubar.SimulationMenuBar;
 import com.universitybusiness.view.fabrics.FontFactory;
 import com.universitybusiness.view.fabrics.ImageFactory;
 import com.universitybusiness.view.pages.*;
