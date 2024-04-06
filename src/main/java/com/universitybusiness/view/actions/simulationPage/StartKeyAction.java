@@ -12,6 +12,7 @@ public class StartKeyAction extends AbstractAction {
     private final Area area;
     private ControlButton startButton = null;
     private ControlButton stopButton = null;
+    private ControlButton currentObjectsButton = null;
 
     public StartKeyAction(
         HabitatController controller,
@@ -25,11 +26,13 @@ public class StartKeyAction extends AbstractAction {
         HabitatController controller,
         Area area,
         ControlButton startButton,
-        ControlButton stopButton
+        ControlButton stopButton,
+        ControlButton currentObjectsButton
     ) {
         this(controller, area);
         this.startButton = startButton;
         this.stopButton = stopButton;
+        this.currentObjectsButton = currentObjectsButton;
     }
 
     @Override
@@ -42,6 +45,10 @@ public class StartKeyAction extends AbstractAction {
 
         if (this.stopButton != null) {
             stopButton.setEnabled(true);
+        }
+
+        if (this.currentObjectsButton != null) {
+            currentObjectsButton.setEnabled(true);
         }
     }
 

@@ -12,6 +12,7 @@ public class StopKeyAction extends AbstractAction {
     private final WindowManager context;
     private ControlButton startButton = null;
     private ControlButton stopButton = null;
+    private ControlButton currentObjectsButton = null;
 
     public StopKeyAction(
         Area area,
@@ -25,11 +26,13 @@ public class StopKeyAction extends AbstractAction {
         Area area,
         WindowManager context,
         ControlButton startButton,
-        ControlButton stopButton
+        ControlButton stopButton,
+        ControlButton currentObjectsButton
     ) {
         this(area, context);
         this.startButton = startButton;
         this.stopButton = stopButton;
+        this.currentObjectsButton = currentObjectsButton;
     }
 
     @Override
@@ -43,6 +46,10 @@ public class StopKeyAction extends AbstractAction {
 
         if (this.stopButton != null) {
             this.stopButton.setEnabled(false);
+        }
+
+        if (this.currentObjectsButton != null) {
+            this.currentObjectsButton.setEnabled(false);
         }
 
         if (this.area.isShowInfo()) {

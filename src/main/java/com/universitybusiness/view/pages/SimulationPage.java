@@ -1,6 +1,7 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.actions.mainMenu.CurrentObjectsButtonListener;
 import com.universitybusiness.view.actions.simulationPage.ShowInfoAction;
 import com.universitybusiness.view.actions.simulationPage.StartKeyAction;
 import com.universitybusiness.view.actions.simulationPage.StopKeyAction;
@@ -29,6 +30,7 @@ public class SimulationPage extends Page implements IPage {
     private final String START_BUTTON_NAME =           "StartButton";
     private final String STOP_BUTTON_NAME =            "StopButton";
     private final String EXIT_BUTTON_NAME =            "ExitButton";
+    private final String CURRENT_OBJECTS_NAME =        "CurrentObjectsButton";
     private final String SHOW_INFO_SWITCH_NAME =       "ShowInfoSwitch";
     private final String SHOW_TIME_RADIO_BUTTON_NAME = "ShowTimeRadioButton";
     private final String HIDE_TIME_RADIO_BUTTON_NAME = "HideTimeRadioButton";
@@ -52,6 +54,7 @@ public class SimulationPage extends Page implements IPage {
         final String HIDE_TIME_LABEL_TEXT = "Hide time";
         final String START_BUTTON_TEXT = "Start";
         final String STOP_BUTTON_TEXT = "Stop";
+        final String CURRENT_OBJECTS_TEXT = "Current objects";
 
         components.put(CONTROLS_LABEL_NAME, new JLabel(CONTROLS_LABEL_TEXT));
         components.put(INFORMATION_LABEL_NAME, new JLabel(INFORMATION_LABEL_TEXT));
@@ -62,6 +65,7 @@ public class SimulationPage extends Page implements IPage {
         components.put(START_BUTTON_NAME, new ControlButton(START_BUTTON_TEXT));
         components.put(STOP_BUTTON_NAME, new ControlButton(STOP_BUTTON_TEXT, false));
         components.put(EXIT_BUTTON_NAME, new ControlButton(null));
+        components.put(CURRENT_OBJECTS_NAME, new ControlButton(CURRENT_OBJECTS_TEXT, false));
 
         components.put(SHOW_INFO_SWITCH_NAME, new SwitchButton());
 
@@ -89,14 +93,16 @@ public class SimulationPage extends Page implements IPage {
             context.getController(),
             (Area) components.get(SIMULATION_AREA_NAME),
             (ControlButton) components.get(START_BUTTON_NAME),
-            (ControlButton) components.get(STOP_BUTTON_NAME)
+            (ControlButton) components.get(STOP_BUTTON_NAME),
+            (ControlButton) components.get(CURRENT_OBJECTS_NAME)
         );
 
         StopKeyAction stopKeyAction = new StopKeyAction(
             (Area) components.get(SIMULATION_AREA_NAME),
             context,
             (ControlButton) components.get(START_BUTTON_NAME),
-            (ControlButton) components.get(STOP_BUTTON_NAME)
+            (ControlButton) components.get(STOP_BUTTON_NAME),
+            (ControlButton) components.get(CURRENT_OBJECTS_NAME)
         );
 
         ShowInfoAction action = new ShowInfoAction(
@@ -116,10 +122,13 @@ public class SimulationPage extends Page implements IPage {
             }
         };
 
+        CurrentObjectsButtonListener currentObjectsButtonListener = new CurrentObjectsButtonListener(context);
+
         ((ControlButton) components.get(START_BUTTON_NAME)).addActionListener(startKeyAction);
         ((ControlButton) components.get(STOP_BUTTON_NAME)).addActionListener(stopKeyAction);
         ((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
         ((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
+        ((ControlButton) components.get(CURRENT_OBJECTS_NAME)).addActionListener(currentObjectsButtonListener);
         ((SwitchButton) components.get(SHOW_INFO_SWITCH_NAME)).setAction(action);
     }
 
@@ -142,6 +151,7 @@ public class SimulationPage extends Page implements IPage {
 
         ComponentFabric.setupControlButtonLight((ControlButton) components.get(START_BUTTON_NAME));
         ComponentFabric.setupControlButtonLight((ControlButton) components.get(STOP_BUTTON_NAME));
+        ComponentFabric.setupControlButtonLight((ControlButton) components.get(CURRENT_OBJECTS_NAME));
 
         ComponentFabric.setupRadioButton((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME));
         components.get(SHOW_TIME_RADIO_BUTTON_NAME).setBackground(Style.getPrimaryDarkColor());
@@ -180,6 +190,7 @@ public class SimulationPage extends Page implements IPage {
         controlsPanel.add(createInformationLabelPanel());
         controlsPanel.add(createShowInfoPanel());
         controlsPanel.add(createShowTimePanel());
+        controlsPanel.add(createCurrentObjectsButtonPanel());
 
         components.get(SIMULATION_AREA_NAME).setSize(
                 context.getController().getContext().getWidth(),
@@ -272,6 +283,16 @@ public class SimulationPage extends Page implements IPage {
 
         panel.add(showPanel);
         panel.add(hidePanel);
+
+        return panel;
+    }
+
+    private JPanel createCurrentObjectsButtonPanel() {
+        JPanel panel = new JPanel();
+
+        ComponentFabric.setupDarkPanel(panel);
+
+        panel.add(components.get(CURRENT_OBJECTS_NAME));
 
         return panel;
     }
