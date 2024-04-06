@@ -52,7 +52,7 @@ public class StopKeyAction extends AbstractAction {
         }
 
         if (this.area.isShowInfo()) {
-            this.context.showDialog(WindowManager.getINFORMATION_PAGE());
+            this.context.showDialog(WindowManager.Pages.INFORMATION);
         }
     }
 }

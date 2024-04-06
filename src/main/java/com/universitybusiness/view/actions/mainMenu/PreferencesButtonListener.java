@@ -17,6 +17,6 @@ public class PreferencesButtonListener implements ActionListener {
     }
 
     private void nextScreen() {
-        context.swapPage(WindowManager.getPREFERENCES_PAGE());
+        context.swapPage(WindowManager.Pages.PREFERENCES);
     }
 }

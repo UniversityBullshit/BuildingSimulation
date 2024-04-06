@@ -2,7 +2,7 @@ package com.universitybusiness.view.actions.preferences;
 
 import com.universitybusiness.model.Preferences;
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.actions.common.BackToMenuAction;
+import com.universitybusiness.view.actions.common.SwapPageAction;
 import com.universitybusiness.view.components.combobox.ComboBox;
 import com.universitybusiness.view.components.textFilelds.HintTextField;
 
@@ -16,13 +16,13 @@ public class SavePreferencesAction extends AbstractAction {
     private final WindowManager windowManager;
     private final ArrayList<HintTextField> fields;
     private final ArrayList<ComboBox<String>> comboBoxes;
-    private final BackToMenuAction backToMenuAction;
+    private final SwapPageAction swapPageAction;
 
     public SavePreferencesAction(WindowManager windowManager) {
         this.windowManager = windowManager;
         fields = new ArrayList<>();
         comboBoxes = new ArrayList<>();
-        backToMenuAction = new BackToMenuAction(windowManager);
+        swapPageAction = new SwapPageAction(windowManager, WindowManager.Pages.MAIN_MENU);
     }
 
     public void addField(HintTextField field) {
@@ -34,7 +34,7 @@ public class SavePreferencesAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (processFields()) {
-            backToMenuAction.actionPerformed(e);
+            swapPageAction.actionPerformed(e);
         } else {
             showErrorMessage();
         }
@@ -45,55 +45,55 @@ public class SavePreferencesAction extends AbstractAction {
         boolean woodenSpawnInterval = verifyValue(fields.get(0), 500, 10000);
         if (!woodenSpawnInterval) {
             fields.get(0).setError();
-            fields.get(0).setText(String.valueOf(Preferences.DEFAULT_WOODEN_BUILDING_INTERVAL));
-            Preferences.setWoodenBuildingInterval(Preferences.DEFAULT_WOODEN_BUILDING_INTERVAL);
+            fields.get(0).setText(String.valueOf(Preferences.Defaults.WOODEN_BUILDING_INTERVAL));
+            Preferences.getInstance().setWoodenBuildingInterval(Preferences.Defaults.WOODEN_BUILDING_INTERVAL);
         } else {
-            Preferences.setWoodenBuildingInterval(Integer.parseInt(fields.get(0).getText()));
+            Preferences.getInstance().setWoodenBuildingInterval(Integer.parseInt(fields.get(0).getText()));
         }
 
         boolean capitalSpawnInterval = verifyValue(fields.get(1), 500, 10000);
         if (!capitalSpawnInterval) {
             fields.get(1).setError();
-            fields.get(1).setText(String.valueOf(Preferences.DEFAULT_CAPITAL_BUILDING_INTERVAL));
-            Preferences.setCapitalBuildingInterval(Preferences.DEFAULT_CAPITAL_BUILDING_INTERVAL);
+            fields.get(1).setText(String.valueOf(Preferences.Defaults.CAPITAL_BUILDING_INTERVAL));
+            Preferences.getInstance().setCapitalBuildingInterval(Preferences.Defaults.CAPITAL_BUILDING_INTERVAL);
         } else {
-            Preferences.setCapitalBuildingInterval(Integer.parseInt(fields.get(1).getText()));
+            Preferences.getInstance().setCapitalBuildingInterval(Integer.parseInt(fields.get(1).getText()));
         }
 
         boolean woodenLifeTime = verifyValue(fields.get(2), 1, 1000);
         if (!woodenLifeTime) {
             fields.get(2).setError();
-            fields.get(2).setText(String.valueOf(Preferences.DEFAULT_WOODEN_BUILDING_LIFE_TIME));
-            Preferences.setWoodenBuildingLifeTime(Preferences.DEFAULT_WOODEN_BUILDING_LIFE_TIME);
+            fields.get(2).setText(String.valueOf(Preferences.Defaults.WOODEN_BUILDING_LIFE_TIME));
+            Preferences.getInstance().setWoodenBuildingLifeTime(Preferences.Defaults.WOODEN_BUILDING_LIFE_TIME);
         } else {
-            Preferences.setWoodenBuildingLifeTime(Integer.parseInt(fields.get(2).getText()) * 1000L);
+            Preferences.getInstance().setWoodenBuildingLifeTime(Integer.parseInt(fields.get(2).getText()) * 1000L);
         }
 
         boolean capitalLifeTime = verifyValue(fields.get(3), 1, 1000);
         if (!capitalLifeTime) {
             fields.get(3).setError();
-            fields.get(3).setText(String.valueOf(Preferences.DEFAULT_CAPITAL_BUILDING_LIFE_TIME));
-            Preferences.setCapitalBuildingLifeTime(Preferences.DEFAULT_CAPITAL_BUILDING_LIFE_TIME);
+            fields.get(3).setText(String.valueOf(Preferences.Defaults.CAPITAL_BUILDING_LIFE_TIME));
+            Preferences.getInstance().setCapitalBuildingLifeTime(Preferences.Defaults.CAPITAL_BUILDING_LIFE_TIME);
         } else {
-            Preferences.setCapitalBuildingLifeTime(Integer.parseInt(fields.get(3).getText()) * 1000L);
+            Preferences.getInstance().setCapitalBuildingLifeTime(Integer.parseInt(fields.get(3).getText()) * 1000L);
         }
 
         boolean woodenMovementSpeed = verifyValue(fields.get(4), 1, 100);
         if (!woodenMovementSpeed) {
             fields.get(4).setError();
-            fields.get(4).setText(String.valueOf(Preferences.DEFAULT_WOODEN_BUILDING_SPEED));
-            Preferences.setWoodenBuildingSpeed(Preferences.DEFAULT_WOODEN_BUILDING_SPEED);
+            fields.get(4).setText(String.valueOf(Preferences.Defaults.WOODEN_BUILDING_SPEED));
+            Preferences.getInstance().setWoodenBuildingSpeed(Preferences.Defaults.WOODEN_BUILDING_SPEED);
         } else {
-            Preferences.setWoodenBuildingSpeed(Integer.parseInt(fields.get(4).getText()));
+            Preferences.getInstance().setWoodenBuildingSpeed(Integer.parseInt(fields.get(4).getText()));
         }
 
         boolean capitalMovementSpeed = verifyValue(fields.get(5), 1, 100);
         if (!capitalMovementSpeed) {
             fields.get(5).setError();
-            fields.get(5).setText(String.valueOf(Preferences.DEFAULT_CAPITAL_BUILDING_SPEED));
-            Preferences.setCapitalBuildingSpeed(Preferences.DEFAULT_CAPITAL_BUILDING_SPEED);
+            fields.get(5).setText(String.valueOf(Preferences.Defaults.CAPITAL_BUILDING_SPEED));
+            Preferences.getInstance().setCapitalBuildingSpeed(Preferences.Defaults.CAPITAL_BUILDING_SPEED);
         } else {
-            Preferences.setCapitalBuildingSpeed(Integer.parseInt(fields.get(5).getText()));
+            Preferences.getInstance().setCapitalBuildingSpeed(Integer.parseInt(fields.get(5).getText()));
         }
 
         // Process comboBoxes
@@ -102,8 +102,8 @@ public class SavePreferencesAction extends AbstractAction {
         String capitalBuildingProbability = Objects.requireNonNull(comboBoxes.get(1).getSelectedItem())
                 .toString().replace("%", "");
 
-        Preferences.setWoodenBuildingProbability(Double.parseDouble(woodenBuildingProbability) / 100);
-        Preferences.setCapitalBuildingProbability(Double.parseDouble(capitalBuildingProbability) / 100);
+        Preferences.getInstance().setWoodenBuildingProbability(Double.parseDouble(woodenBuildingProbability) / 100);
+        Preferences.getInstance().setCapitalBuildingProbability(Double.parseDouble(capitalBuildingProbability) / 100);
 
         return woodenSpawnInterval && capitalSpawnInterval && woodenLifeTime && capitalLifeTime &&
                 woodenMovementSpeed && capitalMovementSpeed;

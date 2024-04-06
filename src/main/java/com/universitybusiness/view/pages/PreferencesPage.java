@@ -113,22 +113,22 @@ public class PreferencesPage extends Page implements IPage {
         }
 
         ((HintTextField) components.get(WOODEN_INTERVAL_FIELD_NAME))
-                .setText(String.valueOf(Preferences.getWoodenBuildingInterval()));
+                .setText(String.valueOf(Preferences.getInstance().getWoodenBuildingInterval()));
         ((HintTextField) components.get(CAPITAL_INTERVAL_FIELD_NAME))
-                .setText(String.valueOf(Preferences.getCapitalBuildingInterval()));
+                .setText(String.valueOf(Preferences.getInstance().getCapitalBuildingInterval()));
         ((HintTextField) components.get(WOODEN_LIFETIME_FIELD_NAME))
-                .setText(String.valueOf(Preferences.getWoodenBuildingLifeTime() / 1000));
+                .setText(String.valueOf(Preferences.getInstance().getWoodenBuildingLifeTime() / 1000));
         ((HintTextField) components.get(CAPITAL_LIFETIME_FIELD_NAME))
-                .setText(String.valueOf(Preferences.getCapitalBuildingLifeTime() / 1000));
+                .setText(String.valueOf(Preferences.getInstance().getCapitalBuildingLifeTime() / 1000));
         ((HintTextField) components.get(WOODEN_SPEED_FIELD_NAME))
-                .setText(String.valueOf(Preferences.getWoodenBuildingSpeed()));
+                .setText(String.valueOf(Preferences.getInstance().getWoodenBuildingSpeed()));
         ((HintTextField) components.get(CAPITAL_SPEED_FIELD_NAME))
-                .setText(String.valueOf(Preferences.getCapitalBuildingSpeed()));
+                .setText(String.valueOf(Preferences.getInstance().getCapitalBuildingSpeed()));
 
         ((ComboBox) components.get(WOODEN_PROBABILITY_COMBOBOX))
-                .setSelectedIndex((int) (Preferences.getWoodenBuildingProbability() * 10));
+                .setSelectedIndex((int) (Preferences.getInstance().getWoodenBuildingProbability() * 10));
         ((ComboBox) components.get(CAPITAL_PROBABILITY_COMBOBOX))
-                .setSelectedIndex((int) (Preferences.getCapitalBuildingProbability() * 10));
+                .setSelectedIndex((int) (Preferences.getInstance().getCapitalBuildingProbability() * 10));
     }
 
     @Override

@@ -10,7 +10,6 @@ import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -42,8 +41,8 @@ public class Area extends JPanel {
     public Area(HabitatController controller) {
         this.controller = controller;
         this.setSize(new Dimension(
-                this.controller.getContext().getWidth(),
-                this.controller.getContext().getHeight()));
+                this.controller.getSimulationService().getWidth(),
+                this.controller.getSimulationService().getHeight()));
 
         this.woodenBuildingSide = BuildingDraw.getWoodenBuildingSide();
         this.capitalBuildingSide = BuildingDraw.getCapitalBuildingSide();

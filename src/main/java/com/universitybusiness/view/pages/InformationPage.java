@@ -1,7 +1,7 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.actions.common.BackToMenuAction;
+import com.universitybusiness.view.actions.common.SwapPageAction;
 import com.universitybusiness.view.actions.dialog.CloseDialogAction;
 import com.universitybusiness.view.components.controls.ControlButton;
 import com.universitybusiness.view.components.menubar.CustomMenuBar;
@@ -223,7 +223,7 @@ public class InformationPage extends Page implements IPage {
 
         ((ControlButton) components.get(CONTINUE_BUTTON_NAME)).addActionListener(closeDialogAction);
         ((ControlButton) components.get(EXIT_BUTTON_NAME)).addActionListener(closeDialogAction);
-        ((ControlButton) components.get(EXIT_BUTTON_NAME)).addActionListener(new BackToMenuAction(context));
+        ((ControlButton) components.get(EXIT_BUTTON_NAME)).addActionListener(new SwapPageAction(context, WindowManager.Pages.MAIN_MENU));
 
         return panel;
     }

@@ -13,5 +13,5 @@ public class CurrentObjectsButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) { nextScreen(); }
 
-    private void nextScreen() { context.showDialog(WindowManager.getCURRENT_OBJECTS_PAGE()); }
+    private void nextScreen() { context.showDialog(WindowManager.Pages.CURRENT_OBJECTS); }
 }

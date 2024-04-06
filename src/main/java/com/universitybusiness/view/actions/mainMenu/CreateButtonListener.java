@@ -5,7 +5,6 @@ import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.components.textFilelds.HintTextField;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -68,13 +67,13 @@ public class CreateButtonListener implements ActionListener {
 
     private void nextScreen() {
         final Habitat instance = Habitat.getInstance();
-        context.getController().setContext(instance);
+        context.getController().setSimulationService(instance);
         context.getController().resetSimulation();
         instance.setSize(width, height);
 
         context.setWidth(width + 200);
         context.setHeight(height + 64);
 
-        context.swapPage(WindowManager.getSIMULATION_PAGE());
+        context.swapPage(WindowManager.Pages.SIMULATION);
     }
 }

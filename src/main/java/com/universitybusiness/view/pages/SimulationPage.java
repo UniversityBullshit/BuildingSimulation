@@ -16,7 +16,6 @@ import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.util.KeyboardInput;
 import com.universitybusiness.view.util.Style;
 
-import javax.naming.ldap.Control;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -204,8 +203,8 @@ public class SimulationPage extends Page implements IPage {
         controlsPanel.add(createCurrentObjectsButtonPanel());
 
         components.get(SIMULATION_AREA_NAME).setSize(
-                context.getController().getContext().getWidth(),
-                context.getController().getContext().getHeight());
+                context.getController().getSimulationService().getWidth(),
+                context.getController().getSimulationService().getHeight());
         simulationAreaPanel.add(components.get(SIMULATION_AREA_NAME));
 
         rootPanel.add(controlsPanel);

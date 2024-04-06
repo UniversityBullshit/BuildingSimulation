@@ -1,4 +1,4 @@
-package com.universitybusiness.model;
+package com.universitybusiness.model.util;
 
 import java.util.concurrent.atomic.AtomicLong;
 
