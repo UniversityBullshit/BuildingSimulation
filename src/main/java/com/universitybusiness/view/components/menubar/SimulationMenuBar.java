@@ -8,7 +8,6 @@ import com.universitybusiness.view.components.simulationView.Area;
 import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class SimulationMenuBar extends CustomMenuBar {
     private final Area area;

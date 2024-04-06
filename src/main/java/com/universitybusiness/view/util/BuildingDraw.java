@@ -3,8 +3,6 @@ package com.universitybusiness.view.util;
 import lombok.Data;
 import lombok.Getter;
 
-import java.awt.*;
-
 @Data
 public class BuildingDraw {
     @Getter

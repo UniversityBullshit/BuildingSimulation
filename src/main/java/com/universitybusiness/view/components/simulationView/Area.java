@@ -172,7 +172,7 @@ public class Area extends JPanel {
         if (showTime) {
             g2d.setColor(Color.BLACK);
             g2d.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 15));
-            g2d.drawString("Time: " + Long.toString(controller.getSimulationTime()/1000) + "s", getWidth() - 100,30);
+            g2d.drawString("Time: " + controller.getSimulationTime() / 1000 + "s", getWidth() - 100,30);
         }
     }
 }

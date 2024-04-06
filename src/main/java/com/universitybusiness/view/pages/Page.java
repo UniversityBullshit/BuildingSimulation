@@ -1,7 +1,6 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.components.menubar.CustomMenuBar;
 
 import javax.swing.*;
 import java.util.HashMap;

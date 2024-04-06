@@ -56,11 +56,6 @@ public class InformationPage extends Page implements IPage {
     }
 
     @Override
-    public void reset() {
-        super.reset();
-    }
-
-    @Override
     public void setupAppearance() {
         ComponentFabric.setupLabel1((JLabel) components.get(MAIN_LABEL_NAME));
         components.get(MAIN_LABEL_NAME).setBorder(new EmptyBorder(0,0,-20,0));

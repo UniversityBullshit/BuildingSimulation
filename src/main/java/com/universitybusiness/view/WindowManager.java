@@ -1,8 +1,6 @@
 package com.universitybusiness.view;
 
 import com.universitybusiness.controller.HabitatController;
-import com.universitybusiness.view.components.menubar.CustomMenuBar;
-import com.universitybusiness.view.components.menubar.SimulationMenuBar;
 import com.universitybusiness.view.fabrics.FontFactory;
 import com.universitybusiness.view.fabrics.ImageFactory;
 import com.universitybusiness.view.pages.*;
@@ -12,7 +10,6 @@ import lombok.Setter;
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Class represents program GUI and allows to manage pages switching

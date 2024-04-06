@@ -1,7 +1,6 @@
 package com.universitybusiness.service;
 
 import com.universitybusiness.model.Habitat;
-import com.universitybusiness.model.IHabitat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,7 +37,7 @@ public class SimulationService {
         }
     }
 
-    public void stopSimulation() throws InterruptedException {
+    public void stopSimulation() {
         isSimulationRunning = false;
         if (future != null) future.cancel(true);
         if (timer != null) timer.cancel();

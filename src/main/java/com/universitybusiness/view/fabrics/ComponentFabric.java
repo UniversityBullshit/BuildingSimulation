@@ -88,10 +88,6 @@ public final class ComponentFabric {
         ));
     }
 
-    public static void setupSwitchButton(SwitchButton button) {
-
-    }
-
     public static void setupRadioButton(RadioButton button) {
         button.setBackground(Style.getPrimaryLightColor());
         button.setActiveColor(Style.getSelectColor());

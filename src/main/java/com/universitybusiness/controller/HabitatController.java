@@ -36,11 +36,7 @@ public class HabitatController {
      * Interrupts simulation process.
      */
     public void stopSimulation() {
-        try {
-            simulationService.stopSimulation();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        simulationService.stopSimulation();
     }
 
     public Boolean getSimulationStatus() {

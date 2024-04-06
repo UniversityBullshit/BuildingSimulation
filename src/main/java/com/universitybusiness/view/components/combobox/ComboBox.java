@@ -4,11 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
-import javax.swing.plaf.ComboBoxUI;
-import javax.swing.plaf.basic.BasicArrowButton;
-import javax.swing.plaf.basic.BasicComboBoxUI;
-import javax.swing.plaf.basic.BasicComboPopup;
-import javax.swing.plaf.basic.ComboPopup;
 import java.awt.*;
 
 public class ComboBox<E> extends JComboBox<E> {

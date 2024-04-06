@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.function.Function;
 
 public class SavePreferencesAction extends AbstractAction {
     private final WindowManager windowManager;

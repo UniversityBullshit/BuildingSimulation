@@ -96,8 +96,6 @@ public class SimulationPage extends Page implements IPage {
     private void setupActions() {
         StartKeyAction startKeyAction = new StartKeyAction(
             context.getController(),
-            (ControlButton) components.get(START_BUTTON_NAME),
-            (ControlButton) components.get(STOP_BUTTON_NAME),
             (ControlButton) components.get(CURRENT_OBJECTS_NAME)
         );
 
