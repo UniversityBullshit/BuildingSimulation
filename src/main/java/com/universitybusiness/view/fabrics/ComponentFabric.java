@@ -76,7 +76,7 @@ public final class ComponentFabric {
         ));
     }
 
-    public static void setupComboBox(ComboBox comboBox) {
+    public static void setupComboBox(ComboBox<?> comboBox) {
         comboBox.setPreferredSize(new Dimension(165, 30));
         comboBox.setRadius(15);
         comboBox.setBackground(Style.getPrimaryLightColor());
