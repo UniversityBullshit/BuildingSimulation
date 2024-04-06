@@ -26,7 +26,6 @@ public class WindowManager {
     private static final FontFactory fontFactory =   new FontFactory();
     private final Map<String, IPage> pages;
     @Getter
-    @Setter
     private String currentPage;
     @Getter
     private final HabitatController controller;
@@ -39,43 +38,39 @@ public class WindowManager {
     private int height;
 
     // String constants
-    @Getter
     private final String TITLE =                   "BuildingSimulator";
-    @Getter
-    private static final String MAIN_MENU_PAGE =   "MainMenu";
-    @Getter
-    private static final String PREFERENCES_PAGE = "Preferences";
-    @Getter
-    private static final String SIMULATION_PAGE =  "Simulation";
-    @Getter
-    private static final String INFORMATION_PAGE = "Information";
 
-    @Getter
-    private static final String CURRENT_OBJECTS_PAGE = "CurrentObjectsPage";
+    public static class Pages {
+        public static final String MAIN_MENU = "MainMenu";
+        public static final String PREFERENCES = "Preferences";
+        public static final String SIMULATION = "Simulation";
+        public static final String INFORMATION = "Information";
+        public static final String CURRENT_OBJECTS = "CurrentObjectsPage";
+    }
 
     public WindowManager(HabitatController controller) {
         mainFrame = new JFrame();
         this.controller = controller;
 
         pages = new HashMap<>();
-        pages.put(MAIN_MENU_PAGE, new MainMenuPage(mainFrame, this));
-        pages.put(SIMULATION_PAGE, new SimulationPage(mainFrame, this));
-        pages.put(PREFERENCES_PAGE, new PreferencesPage(mainFrame, this));
-        pages.put(INFORMATION_PAGE, new InformationPage(mainFrame, this));
-        pages.put(CURRENT_OBJECTS_PAGE, new CurrentObjectsPage(mainFrame, this));
+        pages.put(Pages.MAIN_MENU, new MainMenuPage(mainFrame, this));
+        pages.put(Pages.SIMULATION, new SimulationPage(mainFrame, this));
+        pages.put(Pages.PREFERENCES, new PreferencesPage(mainFrame, this));
+        pages.put(Pages.INFORMATION, new InformationPage(mainFrame, this));
+        pages.put(Pages.CURRENT_OBJECTS, new CurrentObjectsPage(mainFrame, this));
 
-        currentPage = MAIN_MENU_PAGE;
+        currentPage = Pages.MAIN_MENU;
         width = 400;
         height = 650;
 
-        setDefaults();
+        setupMainFrame();
         swapPage(currentPage);
     }
 
     /**
      * Sets frame default settings
      */
-    private void setDefaults() {
+    private void setupMainFrame() {
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setIconImage(imageFactory.getIcon());
         mainFrame.setResizable(false);
@@ -98,10 +93,10 @@ public class WindowManager {
         mainFrame.setVisible(true);
     }
 
-    public void showDialog(String dialogName) {
-        JDialog dialog = new JDialog(mainFrame, dialogName, true);
+    public void showDialog(String pageName) {
+        JDialog dialog = new JDialog(mainFrame, pageName, true);
         dialog.setLocationRelativeTo(null);
-        pages.get(dialogName).drawAsDialog(dialog);
+        pages.get(pageName).drawAsDialog(dialog);
         dialog.setVisible(true);
     }
 }
