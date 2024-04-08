@@ -12,6 +12,7 @@ public class ControlButton extends JButton {
     @Getter
     @Setter
     private boolean over;
+    @Getter
     private boolean isEnabled = true;
     @Getter
     private Color color;
@@ -105,9 +106,5 @@ public class ControlButton extends JButton {
         g2d.fillRoundRect(2, 2, getWidth() - 4, getHeight() - 4, radius, radius);
 
         super.paintComponent(g);
-    }
-
-    public boolean getIsEnabled() {
-        return isEnabled;
     }
 }
