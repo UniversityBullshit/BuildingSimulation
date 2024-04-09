@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
+
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,11 +15,11 @@ public class SwitchButton extends JComponent {
     @Setter
     private Color activeBackground;
     @Getter
+    @Setter
     private boolean isActive;
 
-    @Getter
-    @Setter
-    private AbstractAction action = null;
+    private final JButton actionCompleter;
+
     public SwitchButton() {
         this.isActive = false;
         setPreferredSize(new Dimension(50,20));
@@ -25,17 +27,30 @@ public class SwitchButton extends JComponent {
         setForeground(Color.WHITE);
         setActiveBackground(new Color(35,184,68));
 
+        actionCompleter = new JButton();
+
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
                 isActive = !isActive;
-                if (action != null) {
-                    JButton actionCompleter = new JButton(action);
-                    actionCompleter.doClick();
-                }
+
+                fireActionPerformed();
+
                 repaint();
             }
         });
+    }
+
+    public void addActionListener(ActionListener l) {
+        actionCompleter.addActionListener(l);
+    }
+
+    public void removeActionListener(ActionListener l) {
+        actionCompleter.removeActionListener(l);
+    }
+
+    public void fireActionPerformed() {
+        actionCompleter.doClick();
     }
 
     @Override
