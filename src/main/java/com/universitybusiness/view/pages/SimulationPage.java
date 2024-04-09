@@ -1,11 +1,9 @@
 package com.universitybusiness.view.pages;
 
+import com.universitybusiness.controller.HabitatController;
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.actions.LockButtonsAction;
-import com.universitybusiness.view.actions.mainMenu.CurrentObjectsButtonListener;
-import com.universitybusiness.view.actions.simulationPage.ShowInfoAction;
-import com.universitybusiness.view.actions.simulationPage.StartKeyAction;
-import com.universitybusiness.view.actions.simulationPage.StopKeyAction;
+import com.universitybusiness.view.actions.dialog.ShowDialogAction;
+import com.universitybusiness.view.actions.simulationPage.*;
 import com.universitybusiness.view.components.controls.ControlButton;
 import com.universitybusiness.view.components.controls.RadioButton;
 import com.universitybusiness.view.components.controls.SwitchButton;
@@ -15,12 +13,13 @@ import com.universitybusiness.view.components.simulationView.Area;
 import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.util.KeyboardInput;
 import com.universitybusiness.view.util.Style;
+import com.universitybusiness.view.viewModel.SimulationViewModel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SimulationPage extends Page implements IPage {
     // String constants
@@ -45,37 +44,28 @@ public class SimulationPage extends Page implements IPage {
 
     public SimulationPage(JFrame frame, WindowManager context) {
         super(frame, context);
-        this.menuBar = new SimulationMenuBar(context, (Area) this.components.get(SIMULATION_AREA_NAME));
+        this.menuBar = new SimulationMenuBar(context);
     }
 
     @Override
     public void initializeComponents() {
-        final String CONTROLS_LABEL_TEXT = "Controls";
-        final String INFORMATION_LABEL_TEXT = "Information";
-        final String SHOW_INFO_LABEL_TEXT = "Show info";
-        final String SHOW_TIME_LABEL_TEXT = "Show time";
-        final String HIDE_TIME_LABEL_TEXT = "Hide time";
-        final String START_BUTTON_TEXT = "Start";
-        final String STOP_BUTTON_TEXT = "Stop";
-        final String CURRENT_OBJECTS_TEXT = "Current objects";
+        components.put(CONTROLS_LABEL_NAME, new JLabel("Controls"));
+        components.put(INFORMATION_LABEL_NAME, new JLabel("Information"));
+        components.put(SHOW_INFO_LABEL_NAME, new JLabel("Show info"));
+        components.put(SHOW_TIME_LABEL_NAME, new JLabel("Show time"));
+        components.put(HIDE_TIME_LABEL_NAME, new JLabel("Hide time"));
 
-        components.put(CONTROLS_LABEL_NAME, new JLabel(CONTROLS_LABEL_TEXT));
-        components.put(INFORMATION_LABEL_NAME, new JLabel(INFORMATION_LABEL_TEXT));
-        components.put(SHOW_INFO_LABEL_NAME, new JLabel(SHOW_INFO_LABEL_TEXT));
-        components.put(SHOW_TIME_LABEL_NAME, new JLabel(SHOW_TIME_LABEL_TEXT));
-        components.put(HIDE_TIME_LABEL_NAME, new JLabel(HIDE_TIME_LABEL_TEXT));
-
-        components.put(START_BUTTON_NAME, new ControlButton(START_BUTTON_TEXT));
-        components.put(STOP_BUTTON_NAME, new ControlButton(STOP_BUTTON_TEXT, false));
+        components.put(START_BUTTON_NAME, new ControlButton("Start"));
+        components.put(STOP_BUTTON_NAME, new ControlButton("Stop", false));
         components.put(EXIT_BUTTON_NAME, new ControlButton(null));
-        components.put(CURRENT_OBJECTS_NAME, new ControlButton(CURRENT_OBJECTS_TEXT));
+        components.put(CURRENT_OBJECTS_NAME, new ControlButton("Current objects"));
 
         components.put(SHOW_INFO_SWITCH_NAME, new SwitchButton());
 
         components.put(SHOW_TIME_RADIO_BUTTON_NAME, new RadioButton(null, true));
         components.put(HIDE_TIME_RADIO_BUTTON_NAME, new RadioButton(null, false));
 
-        components.put(SIMULATION_AREA_NAME, new Area(context.getController()));
+        components.put(SIMULATION_AREA_NAME, new Area(context.getViewModelFactory().getSimulationViewModel()));
 
         components.put(GAP_18_NAME, new HorizontalGap(18));
         components.put(GAP_14_NAME, new HorizontalGap(14));
@@ -90,54 +80,63 @@ public class SimulationPage extends Page implements IPage {
     public void reset() {
         super.reset();
 
-        ((Area)components.get(SIMULATION_AREA_NAME)).reset();
+        ((Area) components.get(SIMULATION_AREA_NAME)).reset();
     }
 
     private void setupActions() {
-        StartKeyAction startKeyAction = new StartKeyAction(
-            context.getController(),
-            (ControlButton) components.get(CURRENT_OBJECTS_NAME)
+        HabitatController controller = context.getController();
+        SimulationViewModel model = context.getViewModelFactory().getSimulationViewModel();
+
+        model.addUpdateListener(new RepaintAreaAction(
+            ((Area) components.get(SIMULATION_AREA_NAME))
+        ));
+
+        model.addUpdateListener(new SetInfoButtonAction(
+            model,
+            ((SwitchButton) components.get(SHOW_INFO_SWITCH_NAME))
+        ));
+
+        model.addUpdateListener(new LockButtonsAction(
+            model,
+            ((ControlButton) components.get(START_BUTTON_NAME)),
+            ((ControlButton) components.get(STOP_BUTTON_NAME))
+        ));
+
+        model.addUpdateListener(new SwitchRadioButtonsAction(
+            model,
+            ((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME)),
+            ((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME))
+        ));
+
+        ((ControlButton) components.get(START_BUTTON_NAME)).addActionListener(
+            new StartKeyAction(controller)
         );
 
-        StopKeyAction stopKeyAction = new StopKeyAction(
-            (Area) components.get(SIMULATION_AREA_NAME),
-            context,
-            (ControlButton) components.get(START_BUTTON_NAME),
-            (ControlButton) components.get(STOP_BUTTON_NAME),
-            (ControlButton) components.get(CURRENT_OBJECTS_NAME)
+        ((ControlButton) components.get(STOP_BUTTON_NAME)).addActionListener(
+            new StopKeyAction(context)
         );
 
-        ShowInfoAction action = new ShowInfoAction(
-                (Area) components.get(SIMULATION_AREA_NAME));
+        ((ControlButton) components.get(CURRENT_OBJECTS_NAME)).addActionListener(
+            new ShowDialogAction(context, WindowManager.Pages.CURRENT_OBJECTS)
+        );
 
-        ItemListener showTimeListener = e -> {
-            if (e.getSource() == components.get(SHOW_TIME_RADIO_BUTTON_NAME)) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    ((Area) components.get(SIMULATION_AREA_NAME)).setShowTime(true);
-                    components.get(SIMULATION_AREA_NAME).repaint();
-                }
-            } else {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    ((Area) components.get(SIMULATION_AREA_NAME)).setShowTime(false);
-                    components.get(SIMULATION_AREA_NAME).repaint();
+        ((SwitchButton) components.get(SHOW_INFO_SWITCH_NAME)).addActionListener(
+            new ToggleInfoAction(model)
+        );
+
+        AbstractAction radioButtonsToggle = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == components.get(SHOW_TIME_RADIO_BUTTON_NAME)) {
+                    model.setShowTime(true);
+                } else if (e.getSource() == components.get(HIDE_TIME_RADIO_BUTTON_NAME)) {
+                    model.setShowTime(false);
                 }
             }
         };
 
-        CurrentObjectsButtonListener currentObjectsButtonListener = new CurrentObjectsButtonListener(context);
-
-        ((Area) components.get(SIMULATION_AREA_NAME)).setActionListener(
-                new LockButtonsAction(
-                        (ControlButton) components.get(START_BUTTON_NAME),
-                        (ControlButton) components.get(STOP_BUTTON_NAME)
-        ));
-
-        ((ControlButton) components.get(START_BUTTON_NAME)).addActionListener(startKeyAction);
-        ((ControlButton) components.get(STOP_BUTTON_NAME)).addActionListener(stopKeyAction);
-        ((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
-        ((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME)).addItemListener(showTimeListener);
-        ((ControlButton) components.get(CURRENT_OBJECTS_NAME)).addActionListener(currentObjectsButtonListener);
-        ((SwitchButton) components.get(SHOW_INFO_SWITCH_NAME)).setAction(action);
+        ((RadioButton) components.get(SHOW_TIME_RADIO_BUTTON_NAME)).addActionListener(radioButtonsToggle);
+        ((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME)).addActionListener(radioButtonsToggle);
     }
 
     @Override
@@ -208,7 +207,7 @@ public class SimulationPage extends Page implements IPage {
         rootPanel.add(controlsPanel);
         rootPanel.add(simulationAreaPanel);
 
-        KeyboardInput.createKeyBindings(rootPanel, context, (Area) components.get(SIMULATION_AREA_NAME));
+        KeyboardInput.createKeyBindings(rootPanel, context);
         frame.add(rootPanel);
         frame.requestFocusInWindow();
     }

@@ -168,8 +168,6 @@ public class MainMenuPage extends Page implements IPage {
         ComponentFabric.setupLightPanel(panel);
         panel.setBorder(new EmptyBorder(0,0,20,0));
 
-        // Add action listener, allows swap to preferences page
-
         panel.add(components.get(PREFERENCES_BUTTON_NAME));
 
         return panel;

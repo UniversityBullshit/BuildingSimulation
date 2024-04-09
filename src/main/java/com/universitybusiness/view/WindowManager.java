@@ -1,6 +1,7 @@
 package com.universitybusiness.view;
 
 import com.universitybusiness.controller.HabitatController;
+import com.universitybusiness.view.fabrics.ApplicationViewModelFactory;
 import com.universitybusiness.view.fabrics.FontFactory;
 import com.universitybusiness.view.fabrics.ImageFactory;
 import com.universitybusiness.view.pages.*;
@@ -26,6 +27,8 @@ public class WindowManager {
     private String currentPage;
     @Getter
     private final HabitatController controller;
+    @Getter
+    private final ApplicationViewModelFactory viewModelFactory;
 
     @Getter
     @Setter
@@ -45,9 +48,10 @@ public class WindowManager {
         public static final String CURRENT_OBJECTS = "CurrentObjectsPage";
     }
 
-    public WindowManager(HabitatController controller) {
+    public WindowManager(HabitatController controller, ApplicationViewModelFactory viewModelFactory) {
         mainFrame = new JFrame();
         this.controller = controller;
+        this.viewModelFactory = viewModelFactory;
 
         pages = new HashMap<>();
         pages.put(Pages.MAIN_MENU, new MainMenuPage(mainFrame, this));

@@ -1,22 +1,17 @@
 package com.universitybusiness.view.components.menubar;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.actions.simulationPage.ShowTimeAction;
+import com.universitybusiness.view.actions.simulationPage.ToggleTimeAction;
 import com.universitybusiness.view.actions.simulationPage.StartKeyAction;
 import com.universitybusiness.view.actions.simulationPage.StopKeyAction;
-import com.universitybusiness.view.components.simulationView.Area;
 import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
 
 public class SimulationMenuBar extends CustomMenuBar {
-    private final Area area;
 
-    public SimulationMenuBar(WindowManager context, Area area) {
+    public SimulationMenuBar(WindowManager context) {
         super(context);
-
-        this.area = area;
-
         this.add(createActionsMenu());
     }
 
@@ -28,9 +23,21 @@ public class SimulationMenuBar extends CustomMenuBar {
         JMenuItem stop = new JMenuItem("Stop");
         JMenuItem toggleTime = new JMenuItem("Show/Hide time");
 
-        start.addActionListener(new StartKeyAction(this.context.getController()));
-        stop.addActionListener(new StopKeyAction(area, this.context));
-        toggleTime.addActionListener(new ShowTimeAction(area));
+        start.addActionListener(
+            new StartKeyAction(
+                context.getController()
+            )
+        );
+        stop.addActionListener(
+            new StopKeyAction(
+                context
+            )
+        );
+        toggleTime.addActionListener(
+            new ToggleTimeAction(
+                context.getViewModelFactory().getSimulationViewModel()
+            )
+        );
 
         actions.add(start);
         actions.add(stop);
