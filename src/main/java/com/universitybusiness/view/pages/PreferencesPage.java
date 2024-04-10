@@ -10,6 +10,7 @@ import com.universitybusiness.view.components.menubar.CustomMenuBar;
 import com.universitybusiness.view.components.textFilelds.HintTextField;
 import com.universitybusiness.view.fabrics.ComponentFabric;
 import com.universitybusiness.view.util.Style;
+import com.universitybusiness.view.viewModel.PreferencesViewModel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -163,16 +164,16 @@ public class PreferencesPage extends Page implements IPage {
 
         components.get(WOODEN_BUILDINGS_IMAGE_NAME).add(new JLabel(new ImageIcon(
                 WindowManager
-                        .getImageFactory()
-                        .getWoodenBuilding()
-                        .getScaledInstance(50, 50, Image.SCALE_SMOOTH)
+                    .getImageFactory()
+                    .getWoodenBuilding()
+                    .getScaledInstance(50, 50, Image.SCALE_SMOOTH)
         )));
         components.get(WOODEN_BUILDINGS_IMAGE_NAME).setBackground(Style.getPrimaryLightColor());
         components.get(CAPITAL_BUILDINGS_IMAGE_NAME).add(new JLabel(new ImageIcon(
                 WindowManager
-                        .getImageFactory()
-                        .getCapitalBuilding()
-                        .getScaledInstance(50, 50, Image.SCALE_SMOOTH)
+                    .getImageFactory()
+                    .getCapitalBuilding()
+                    .getScaledInstance(50, 50, Image.SCALE_SMOOTH)
         )));
         components.get(CAPITAL_BUILDINGS_IMAGE_NAME).setBackground(Style.getPrimaryLightColor());
 
@@ -180,21 +181,23 @@ public class PreferencesPage extends Page implements IPage {
     }
 
     private void setupActions() {
-        SavePreferencesAction saveAction = new SavePreferencesAction(context);
-        saveAction.addField((HintTextField) components.get(WOODEN_INTERVAL_FIELD_NAME));
-        saveAction.addField((HintTextField) components.get(CAPITAL_INTERVAL_FIELD_NAME));
-        saveAction.addField((HintTextField) components.get(WOODEN_LIFETIME_FIELD_NAME));
-        saveAction.addField((HintTextField) components.get(CAPITAL_LIFETIME_FIELD_NAME));
-        saveAction.addField((HintTextField) components.get(WOODEN_SPEED_FIELD_NAME));
-        saveAction.addField((HintTextField) components.get(CAPITAL_SPEED_FIELD_NAME));
+        PreferencesViewModel model = context.getViewModelFactory().getPreferencesViewModel();
+        model.setWoodenBuildingInterval((HintTextField) components.get(WOODEN_INTERVAL_FIELD_NAME));
+        model.setCapitalBuildingInterval((HintTextField) components.get(CAPITAL_INTERVAL_FIELD_NAME));
+        model.setWoodenBuildingLifetime((HintTextField) components.get(WOODEN_LIFETIME_FIELD_NAME));
+        model.setCapitalBuildingLifetime((HintTextField) components.get(CAPITAL_LIFETIME_FIELD_NAME));
+        model.setWoodenBuildingSpeed((HintTextField) components.get(WOODEN_SPEED_FIELD_NAME));
+        model.setCapitalBuildingSpeed((HintTextField) components.get(CAPITAL_SPEED_FIELD_NAME));
+        model.setWoodenBuildingProbability((ComboBox<String>) components.get(WOODEN_PROBABILITY_COMBOBOX));
+        model.setCapitalBuildingProbability((ComboBox<String>) components.get(CAPITAL_PROBABILITY_COMBOBOX));
 
-        saveAction.addComboBox((ComboBox<String>) components.get(WOODEN_PROBABILITY_COMBOBOX));
-        saveAction.addComboBox((ComboBox<String>) components.get(CAPITAL_PROBABILITY_COMBOBOX));
+        ((ControlButton) components.get(SAVE_EXIT_BUTTON_NAME)).addActionListener(
+            new SavePreferencesAction(context)
+        );
 
-        ((ControlButton) components.get(SAVE_EXIT_BUTTON_NAME)).addActionListener(saveAction);
-
-        RestoreDefaultsAction restoreAction = new RestoreDefaultsAction(context);
-        ((ControlButton) components.get(RESTORE_BUTTON_NAME)).addActionListener(restoreAction);
+        ((ControlButton) components.get(RESTORE_BUTTON_NAME)).addActionListener(
+            new RestoreDefaultsAction(context)
+        );
     }
 
     @Override
