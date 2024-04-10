@@ -18,10 +18,6 @@ import java.util.Map;
 public class WindowManager {
     @Getter
     private final JFrame mainFrame;
-    @Getter
-    private static final ImageFactory imageFactory = new ImageFactory();
-    @Getter
-    private static final FontFactory fontFactory =   new FontFactory();
     private final Map<String, IPage> pages;
     @Getter
     private String currentPage;
@@ -29,6 +25,10 @@ public class WindowManager {
     private final HabitatController controller;
     @Getter
     private final ApplicationViewModelFactory viewModelFactory;
+    @Getter
+    private static final ImageFactory imageFactory = new ImageFactory();
+    @Getter
+    private static final FontFactory fontFactory = new FontFactory();
 
     @Getter
     @Setter
@@ -46,9 +46,14 @@ public class WindowManager {
         public static final String SIMULATION = "Simulation";
         public static final String INFORMATION = "Information";
         public static final String CURRENT_OBJECTS = "CurrentObjectsPage";
+        public static final String HELP = "Help";
+        public static final String CONTROLS = "Controls";
     }
 
-    public WindowManager(HabitatController controller, ApplicationViewModelFactory viewModelFactory) {
+    public WindowManager(
+        HabitatController controller,
+        ApplicationViewModelFactory viewModelFactory
+    ) {
         mainFrame = new JFrame();
         this.controller = controller;
         this.viewModelFactory = viewModelFactory;
@@ -59,6 +64,8 @@ public class WindowManager {
         pages.put(Pages.PREFERENCES, new PreferencesPage(mainFrame, this));
         pages.put(Pages.INFORMATION, new InformationPage(mainFrame, this));
         pages.put(Pages.CURRENT_OBJECTS, new CurrentObjectsPage(mainFrame, this));
+        pages.put(Pages.CONTROLS, new ControlsPage(mainFrame, this));
+        pages.put(Pages.HELP, new HelpPage(mainFrame, this));
 
         currentPage = Pages.MAIN_MENU;
         width = 400;
