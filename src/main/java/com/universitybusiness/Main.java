@@ -6,6 +6,9 @@ import com.universitybusiness.model.Preferences;
 import com.universitybusiness.service.SimulationService;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.fabrics.ApplicationViewModelFactory;
+import com.universitybusiness.view.fabrics.FontFactory;
+import com.universitybusiness.view.fabrics.ImageFactory;
+import com.universitybusiness.view.viewModel.PreferencesViewModel;
 import com.universitybusiness.view.viewModel.SimulationViewModel;
 
 import javax.swing.*;
@@ -18,11 +21,12 @@ public class Main {
         SimulationService simulation = new SimulationService(Habitat.getInstance());
         HabitatController controller = new HabitatController(simulation);
 
-        ApplicationViewModelFactory factory = new ApplicationViewModelFactory(
-            new SimulationViewModel(controller)
+        ApplicationViewModelFactory modelFactory = new ApplicationViewModelFactory(
+            new SimulationViewModel(controller),
+            new PreferencesViewModel(Preferences.getInstance())
         );
 
-        WindowManager windowManager = new WindowManager(controller, factory);
+        WindowManager windowManager = new WindowManager(controller, modelFactory);
         SwingUtilities.invokeLater(() -> windowManager.swapPage(windowManager.getCurrentPage()));
     }
 }
