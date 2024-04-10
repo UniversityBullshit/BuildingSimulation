@@ -1,11 +1,10 @@
 package com.universitybusiness.view.components.menubar;
 
 import com.universitybusiness.view.WindowManager;
-import com.universitybusiness.view.actions.menubar.AboutMenuItemListener;
-import com.universitybusiness.view.actions.menubar.ControlsMenuItemListener;
 import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 public class CustomMenuBar extends JMenuBar {
     protected final WindowManager context;
@@ -24,14 +23,23 @@ public class CustomMenuBar extends JMenuBar {
         JMenuItem controls = new JMenuItem("Controls");
         JMenuItem about = new JMenuItem("About");
 
-        controls.addActionListener(new ControlsMenuItemListener(context.getMainFrame()));
-        about.addActionListener(new AboutMenuItemListener(context.getMainFrame()));
+        controls.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                context.showDialog(WindowManager.Pages.CONTROLS);
+            }
+        });
+
+        about.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                context.showDialog(WindowManager.Pages.HELP);
+            }
+        });
 
         help.add(controls);
         help.add(about);
 
         return help;
     }
-
-
 }
