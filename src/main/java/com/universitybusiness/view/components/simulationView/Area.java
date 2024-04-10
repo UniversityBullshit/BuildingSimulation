@@ -1,5 +1,7 @@
 package com.universitybusiness.view.components.simulationView;
 
+import com.universitybusiness.view.fabrics.FontFactory;
+import com.universitybusiness.view.fabrics.ImageFactory;
 import com.universitybusiness.view.util.BuildingInstance;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.util.BuildingDraw;
@@ -11,24 +13,26 @@ import java.awt.*;
 
 public class Area extends JPanel {
     private final SimulationViewModel simulationViewModel;
+    private final ImageFactory imageFactory;
+    private final FontFactory fontFactory;
     private final Integer woodenBuildingSide;
     private final Integer capitalBuildingSide;
     private final Image woodenBuildingImage;
     private final Image capitalBuildingImage;
 
-    public Area(SimulationViewModel viewModel) {
+    public Area(SimulationViewModel viewModel, ImageFactory imageFactory, FontFactory fontFactory) {
         this.simulationViewModel = viewModel;
+        this.imageFactory = imageFactory;
+        this.fontFactory = fontFactory;
 
         this.woodenBuildingSide = BuildingDraw.getWoodenBuildingSide();
         this.capitalBuildingSide = BuildingDraw.getCapitalBuildingSide();
 
-        this.woodenBuildingImage = WindowManager
-                .getImageFactory()
+        this.woodenBuildingImage = imageFactory
                 .getWoodenBuilding()
                 .getScaledInstance(this.woodenBuildingSide, this.woodenBuildingSide, Image.SCALE_SMOOTH);
 
-        this.capitalBuildingImage = WindowManager
-                .getImageFactory()
+        this.capitalBuildingImage = imageFactory
                 .getCapitalBuilding()
                 .getScaledInstance(this.capitalBuildingSide, this.capitalBuildingSide, Image.SCALE_SMOOTH);
     }
@@ -64,7 +68,7 @@ public class Area extends JPanel {
 
         if (simulationViewModel.isShowTime()) {
             g2d.setColor(Color.BLACK);
-            g2d.setFont(WindowManager.getFontFactory().getKadwaRegularFont().deriveFont(Font.PLAIN, 15));
+            g2d.setFont(fontFactory.getKadwaRegularFont().deriveFont(Font.PLAIN, 15));
             g2d.drawString("Time: " + simulationViewModel.getSimulationTime() / 1000 + "s", getWidth() - 100,30);
         }
     }

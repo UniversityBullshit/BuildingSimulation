@@ -90,9 +90,9 @@ public class MainMenuPage extends Page implements IPage {
 
         components.get(IMAGE_PANEL_NAME).add(new JLabel(new ImageIcon(
                 WindowManager.
-                        getImageFactory().
-                        getMainMenuImage().
-                        getScaledInstance(420, 280, Image.SCALE_SMOOTH)
+                    getImageFactory().
+                    getMainMenuImage().
+                    getScaledInstance(420, 280, Image.SCALE_SMOOTH)
         )));
         components.get(IMAGE_PANEL_NAME).setBackground(Style.getPrimaryLightColor());
 

@@ -72,16 +72,16 @@ public class InformationPage extends Page implements IPage {
 
         components.get(WOODEN_BUILDINGS_IMAGE_NAME).add(new JLabel(new ImageIcon(
                 WindowManager.
-                        getImageFactory().
-                        getWoodenBuilding().
-                        getScaledInstance(50,50, Image.SCALE_SMOOTH))));
+                    getImageFactory().
+                    getWoodenBuilding().
+                    getScaledInstance(50,50, Image.SCALE_SMOOTH))));
         components.get(WOODEN_BUILDINGS_IMAGE_NAME).setBackground(Style.getPrimaryLightColor());
 
         components.get(CAPITAL_BUILDINGS_IMAGE_NAME).add(new JLabel(new ImageIcon(
                 WindowManager.
-                        getImageFactory().
-                        getCapitalBuilding().
-                        getScaledInstance(50,50,Image.SCALE_SMOOTH))));
+                    getImageFactory().
+                    getCapitalBuilding().
+                    getScaledInstance(50,50,Image.SCALE_SMOOTH))));
         components.get(CAPITAL_BUILDINGS_IMAGE_NAME).setBackground(Style.getPrimaryLightColor());
 
         ComponentFabric.setupLabel3((JLabel) components.get(WOODEN_BUILDINGS_COUNT_NAME));

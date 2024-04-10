@@ -65,7 +65,11 @@ public class SimulationPage extends Page implements IPage {
         components.put(SHOW_TIME_RADIO_BUTTON_NAME, new RadioButton(null, true));
         components.put(HIDE_TIME_RADIO_BUTTON_NAME, new RadioButton(null, false));
 
-        components.put(SIMULATION_AREA_NAME, new Area(context.getViewModelFactory().getSimulationViewModel()));
+        components.put(SIMULATION_AREA_NAME, new Area(
+                context.getViewModelFactory().getSimulationViewModel(),
+                context.getImageFactory(),
+                context.getFontFactory()
+        ));
 
         components.put(GAP_18_NAME, new HorizontalGap(18));
         components.put(GAP_14_NAME, new HorizontalGap(14));
