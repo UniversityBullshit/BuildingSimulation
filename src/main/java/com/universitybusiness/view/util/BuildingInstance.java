@@ -7,6 +7,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class BuildingInstance {
+    public enum Type {
+        WOODEN,
+        CAPITAL
+    }
+
     @Getter
     @Setter
     private int x;
@@ -14,18 +19,16 @@ public class BuildingInstance {
     @Setter
     private int y;
     @Getter
-    private boolean isCapitalBuilding = false;
-    @Getter
-    private boolean isWoodenBuilding = false;
+    private Type type;
 
     public BuildingInstance(Building building) {
-        this.x = building.getX();
-        this.y = building.getY();
+        this.x = (int) building.getX();
+        this.y = (int) building.getY();
         setType(building);
     }
 
     private void setType(Building building) {
-        if (building instanceof CapitalBuilding) this.isCapitalBuilding = true;
-        if (building instanceof WoodenBuilding) this.isWoodenBuilding = true;
+        if (building instanceof CapitalBuilding) type = Type.CAPITAL;
+        if (building instanceof WoodenBuilding) type = Type.WOODEN;
     }
 }

@@ -78,7 +78,7 @@ public class SimulationViewModel implements ViewModel {
         setAreaUpdating(controller.getSimulationStatus());
         setSimulationTime(controller.getSimulationTime());
 
-        removeInstances();
+        buildingsDictionary.clear();
         addInstances();
 
         for (ActionListener listener : updateListeners) {
@@ -105,9 +105,7 @@ public class SimulationViewModel implements ViewModel {
         Vector<Building> actualBuildings = controller.getBuildings();
 
         for (Building building : actualBuildings) {
-            if (!buildingsDictionary.containsKey(building.getId())) {
-                buildingsDictionary.put(building.getId(), new BuildingInstance(building));
-            }
+            buildingsDictionary.put(building.getId(), new BuildingInstance(building));
         }
     }
 }
