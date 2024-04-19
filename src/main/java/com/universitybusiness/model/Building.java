@@ -1,9 +1,12 @@
 package com.universitybusiness.model;
+
 import com.universitybusiness.model.util.AtomicIdCounter;
 import lombok.Getter;
 import lombok.Setter;
 
-public abstract class Building implements Comparable<Building> {
+import java.awt.*;
+
+public abstract class Building extends BaseAI implements Comparable<Building> {
     /**
      * Object id
      */
@@ -27,14 +30,14 @@ public abstract class Building implements Comparable<Building> {
      */
     @Getter
     @Setter
-    protected int x;
+    protected double x;
 
     /**
      * Y coordinate of object
      */
     @Getter
     @Setter
-    protected int y;
+    protected double y;
 
     /**
      * Creation time
@@ -48,11 +51,39 @@ public abstract class Building implements Comparable<Building> {
     @Getter
     protected long lifeTime;
 
-    Building(int x, int y, long time) {
+    Building(int x, int y, long time, Point finishPoint) {
+        super(finishPoint);
         this.id = AtomicIdCounter.nextId();
         this.x = x;
         this.y = y;
         this.spawnTime = time;
+    }
+
+    @Override
+    protected void move() {
+        if ((Math.abs(x - finishPoint.getX()) > 0.5)
+            && (Math.abs(y - finishPoint.getY()) > 0.5)) {
+            double angle = Math.atan(((finishPoint.y - y) / (finishPoint.x - x)));
+
+            double moveX = ((double) speed) / multiplier / TIMER_TICK_VALUE * Math.cos(angle);
+            moveX *= (x > finishPoint.getX()) ? -1 : 1;
+            double moveY = ((double) speed) / multiplier / TIMER_TICK_VALUE * Math.sin(angle);
+            moveY *= (y > finishPoint.getY()) ? -1 : 1;
+
+            if (moveX < Math.abs(x - finishPoint.getX())) {
+                x += moveX;
+            } else {
+                x = finishPoint.getX();
+            }
+
+            if (moveY < Math.abs(y - finishPoint.getY())) {
+                y += moveY;
+            } else {
+                y = finishPoint.getY();
+            }
+        } else {
+            Thread.currentThread().interrupt();
+        }
     }
 
     @Override
