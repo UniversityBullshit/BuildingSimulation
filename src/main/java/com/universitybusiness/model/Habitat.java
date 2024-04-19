@@ -2,6 +2,7 @@ package com.universitybusiness.model;
 
 import lombok.Getter;
 
+import java.awt.*;
 import java.util.*;
 
 public class Habitat implements IHabitat {
@@ -13,8 +14,8 @@ public class Habitat implements IHabitat {
     private long time;
     private long lastWoodenBuildingSpawnTime;
     private long lastCapitalBuildingSpawnTime;
-    @Getter
     private Vector<Building> buildings;
+    private HashMap<Long, Thread> threads;
     @Getter
     private HashSet<Long> ids;
     @Getter
@@ -46,20 +47,33 @@ public class Habitat implements IHabitat {
 
     @Override
     public void reset() {
-        this.time = 0;
-        this.lastWoodenBuildingSpawnTime = 0;
-        this.lastCapitalBuildingSpawnTime = 0;
-        this.buildings = new Vector<>();
-        this.ids = new HashSet<>();
-        this.spawnTimeMap = new TreeMap<>();
-        this.woodenBuildingsCount = 0;
-        this.capitalBuildingsCount = 0;
+        time = 0;
+        lastWoodenBuildingSpawnTime = 0;
+        lastCapitalBuildingSpawnTime = 0;
+        buildings = new Vector<>();
+        threads = new HashMap<>();
+        ids = new HashSet<>();
+        spawnTimeMap = new TreeMap<>();
+        woodenBuildingsCount = 0;
+        capitalBuildingsCount = 0;
     }
 
     @Override
     public void setSize(int width, int height) {
         this.width = width;
         this.height = height;
+    }
+
+    public final synchronized Vector<Building> getBuildings() {
+        return buildings;
+    }
+
+    public void sleepAI() {
+        for (Long key : threads.keySet()) {
+            threads.get(key).interrupt();
+        }
+
+        threads.clear();
     }
 
     private void spawnWoodenBuilding() {
@@ -69,16 +83,23 @@ public class Habitat implements IHabitat {
         double chance = generator.nextDouble();
         if (chance > 1.0 - Preferences.getInstance().getWoodenBuildingProbability()) {
             if (currentTime - this.lastWoodenBuildingSpawnTime >= Preferences.getInstance().getWoodenBuildingInterval()) {
-                int x = generator.nextInt(this.width);
-                int y = generator.nextInt(this.height);
+                int x = generator.nextInt(this.width - 10);
+                int y = generator.nextInt(this.height - 10);
+                int finishX = this.width / 2 + generator.nextInt(this.width / 2) - 10;
+                int finishY = this.height / 2 + generator.nextInt(this.height / 2) - 10;
 
-                WoodenBuilding woodenBuilding = new WoodenBuilding(x, y, currentTime);
+                WoodenBuilding woodenBuilding = new WoodenBuilding(x, y, currentTime, new Point(finishX, finishY));
+                if (x < width / 2 || y < height / 2 ) {
+                    Thread thread = new Thread(woodenBuilding);
+                    thread.start();
+                    threads.put(woodenBuilding.getId(), thread);
+                }
 
-                this.buildings.add(woodenBuilding);
-                this.ids.add(woodenBuilding.getId());
-                this.spawnTimeMap.put(woodenBuilding.getId(), currentTime);
-                this.woodenBuildingsCount++;
-                this.lastWoodenBuildingSpawnTime = currentTime;
+                buildings.add(woodenBuilding);
+                ids.add(woodenBuilding.getId());
+                spawnTimeMap.put(woodenBuilding.getId(), currentTime);
+                woodenBuildingsCount++;
+                lastWoodenBuildingSpawnTime = currentTime;
             }
         }
     }
@@ -90,10 +111,17 @@ public class Habitat implements IHabitat {
         double chance = generator.nextDouble();
         if (chance > 1.0 - Preferences.getInstance().getCapitalBuildingProbability()) {
             if (currentTime - this.lastCapitalBuildingSpawnTime >= Preferences.getInstance().getCapitalBuildingInterval()) {
-                int x = generator.nextInt(this.width);
-                int y = generator.nextInt(this.height);
+                int x = generator.nextInt(this.width - 10);
+                int y = generator.nextInt(this.height - 10);
+                int finishX = generator.nextInt(this.width / 2);
+                int finishY = generator.nextInt(this.height / 2);
 
-                CapitalBuilding capitalBuilding = new CapitalBuilding(x, y, currentTime);
+                CapitalBuilding capitalBuilding = new CapitalBuilding(x, y, currentTime, new Point(finishX, finishY));
+                if (x > width / 2 || y > height / 2) {
+                    Thread thread = new Thread(capitalBuilding);
+                    thread.start();
+                    threads.put(capitalBuilding.getId(), thread);
+                }
 
                 buildings.add(capitalBuilding);
                 ids.add(capitalBuilding.getId());
@@ -107,7 +135,8 @@ public class Habitat implements IHabitat {
     private Vector<Building> findExpiredObjects() {
         Vector<Building> expired = new Vector<>();
         long currentTime = this.time;
-
+        System.out.println(Thread.activeCount());
+        System.out.println("Buildings count: " + buildings.size());
         for (Building building : buildings) {
             if (building instanceof WoodenBuilding) {
                 if (currentTime - building.getSpawnTime() >= Preferences.getInstance().getWoodenBuildingLifeTime()) {

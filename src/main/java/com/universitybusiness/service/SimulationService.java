@@ -39,6 +39,7 @@ public class SimulationService {
 
     public void stopSimulation() {
         isSimulationRunning = false;
+        habitat.sleepAI();
         if (future != null) future.cancel(true);
         if (timer != null) timer.cancel();
     }

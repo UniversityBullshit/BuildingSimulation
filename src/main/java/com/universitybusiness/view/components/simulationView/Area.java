@@ -51,13 +51,13 @@ public class Area extends JPanel {
 
 
         for (BuildingInstance buildingInstance : simulationViewModel.getBuildingsDictionary().values()) {
-            if (buildingInstance.isCapitalBuilding()) {
+            if (buildingInstance.getType() == BuildingInstance.Type.CAPITAL) {
                 g2d.drawImage(
                         this.capitalBuildingImage,
                         buildingInstance.getX() - (this.capitalBuildingSide / 2),
                         buildingInstance.getY() - (this.capitalBuildingSide / 2),
                         this);
-            } else if (buildingInstance.isWoodenBuilding()) {
+            } else if (buildingInstance.getType() == BuildingInstance.Type.WOODEN) {
                 g2d.drawImage(
                         this.woodenBuildingImage,
                         buildingInstance.getX() - (this.woodenBuildingSide / 2),
