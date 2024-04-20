@@ -4,6 +4,7 @@ import com.universitybusiness.controller.HabitatController;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.dialog.ShowDialogAction;
 import com.universitybusiness.view.actions.simulationPage.*;
+import com.universitybusiness.view.components.combobox.ComboBox;
 import com.universitybusiness.view.components.controls.ControlButton;
 import com.universitybusiness.view.components.controls.RadioButton;
 import com.universitybusiness.view.components.controls.SwitchButton;
@@ -23,24 +24,31 @@ import java.awt.event.ActionListener;
 
 public class SimulationPage extends Page implements IPage {
     // String constants
-    private final String CONTROLS_LABEL_NAME =         "ControlsLabel";
-    private final String INFORMATION_LABEL_NAME =      "Information";
-    private final String SHOW_INFO_LABEL_NAME =        "ShowInfoLabel";
-    private final String SHOW_TIME_LABEL_NAME =        "ShowTimeLabel";
-    private final String HIDE_TIME_LABEL_NAME =        "HideTimeLabel";
-    private final String START_BUTTON_NAME =           "StartButton";
-    private final String STOP_BUTTON_NAME =            "StopButton";
-    private final String EXIT_BUTTON_NAME =            "ExitButton";
-    private final String CURRENT_OBJECTS_NAME =        "CurrentObjectsButton";
-    private final String SHOW_INFO_SWITCH_NAME =       "ShowInfoSwitch";
-    private final String SHOW_TIME_RADIO_BUTTON_NAME = "ShowTimeRadioButton";
-    private final String HIDE_TIME_RADIO_BUTTON_NAME = "HideTimeRadioButton";
-    private final String SIMULATION_AREA_NAME =        "SimulationArea";
-    private final String GAP_18_NAME =                 "Gap18";
-    private final String GAP_14_NAME =                 "Gap14";
-    private final String GAP_13_NAME =                 "Gap13";
-    private final String GAP_8_NAME =                  "Gap8";
-    private final String GAP_6_NAME =                  "Gap6";
+    private final String CONTROLS_LABEL_NAME =          "ControlsLabel";
+    private final String INFORMATION_LABEL_NAME =       "Information";
+    private final String SHOW_INFO_LABEL_NAME =         "ShowInfoLabel";
+    private final String SHOW_TIME_LABEL_NAME =         "ShowTimeLabel";
+    private final String HIDE_TIME_LABEL_NAME =         "HideTimeLabel";
+    private final String AI_LABEL_NAME =                "AILabel";
+    private final String START_BUTTON_NAME =            "StartButton";
+    private final String STOP_BUTTON_NAME =             "StopButton";
+    private final String EXIT_BUTTON_NAME =             "ExitButton";
+    private final String CURRENT_OBJECTS_NAME =         "CurrentObjectsButton";
+    private final String SHOW_INFO_SWITCH_NAME =        "ShowInfoSwitch";
+    private final String WOODEN_AI_SWITCH =             "WoodenAISwitch";
+    private final String CAPITAL_AI_SWITCH =            "CapitalAISwitch";
+    private final String SHOW_TIME_RADIO_BUTTON_NAME =  "ShowTimeRadioButton";
+    private final String HIDE_TIME_RADIO_BUTTON_NAME =  "HideTimeRadioButton";
+    private final String SIMULATION_AREA_NAME =         "SimulationArea";
+    private final String WOODEN_BUILDINGS_IMAGE_NAME =  "WoodenBuildingsImageName";
+    private final String CAPITAL_BUILDINGS_IMAGE_NAME = "CapitalBuildingsImageName";
+    private final String WOODEN_PRIORITY_COMBOBOX =     "WoodenPriorityComboBox";
+    private final String CAPITAL_PRIORITY_COMBOBOX =    "CapitalPriorityComboBox";
+    private final String GAP_18_NAME =                  "Gap18";
+    private final String GAP_14_NAME =                  "Gap14";
+    private final String GAP_13_NAME =                  "Gap13";
+    private final String GAP_8_NAME =                   "Gap8";
+    private final String GAP_6_NAME =                   "Gap6";
 
     public SimulationPage(JFrame frame, WindowManager context) {
         super(frame, context);
@@ -54,6 +62,7 @@ public class SimulationPage extends Page implements IPage {
         components.put(SHOW_INFO_LABEL_NAME, new JLabel("Show info"));
         components.put(SHOW_TIME_LABEL_NAME, new JLabel("Show time"));
         components.put(HIDE_TIME_LABEL_NAME, new JLabel("Hide time"));
+        components.put(AI_LABEL_NAME, new JLabel("AI"));
 
         components.put(START_BUTTON_NAME, new ControlButton("Start"));
         components.put(STOP_BUTTON_NAME, new ControlButton("Stop", false));
@@ -61,9 +70,30 @@ public class SimulationPage extends Page implements IPage {
         components.put(CURRENT_OBJECTS_NAME, new ControlButton("Current objects"));
 
         components.put(SHOW_INFO_SWITCH_NAME, new SwitchButton());
+        components.put(WOODEN_AI_SWITCH, new SwitchButton());
+        components.put(CAPITAL_AI_SWITCH, new SwitchButton());
+
+        components.put(WOODEN_BUILDINGS_IMAGE_NAME, new JPanel());
+        components.put(CAPITAL_BUILDINGS_IMAGE_NAME, new JPanel());
 
         components.put(SHOW_TIME_RADIO_BUTTON_NAME, new RadioButton(null, true));
         components.put(HIDE_TIME_RADIO_BUTTON_NAME, new RadioButton(null, false));
+
+        String[] priorityList = {
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+        };
+
+        components.put(WOODEN_PRIORITY_COMBOBOX, new ComboBox<>(priorityList));
+        components.put(CAPITAL_PRIORITY_COMBOBOX, new ComboBox<>(priorityList));
 
         components.put(SIMULATION_AREA_NAME, new Area(
                 context.getViewModelFactory().getSimulationViewModel(),
@@ -160,6 +190,12 @@ public class SimulationPage extends Page implements IPage {
         ComponentFabric.setupLabel3((JLabel) components.get(HIDE_TIME_LABEL_NAME));
         ComponentFabric.setupLightLabel((JLabel) components.get(HIDE_TIME_LABEL_NAME));
 
+        ComponentFabric.setupLabel2((JLabel) components.get(AI_LABEL_NAME));
+        ComponentFabric.setupLightLabel((JLabel) components.get(AI_LABEL_NAME));
+
+        ComponentFabric.setupComboBox((ComboBox) components.get(WOODEN_PRIORITY_COMBOBOX));
+        ComponentFabric.setupComboBox((ComboBox) components.get(CAPITAL_PRIORITY_COMBOBOX));
+
         ComponentFabric.setupControlButtonLight((ControlButton) components.get(START_BUTTON_NAME));
         ComponentFabric.setupControlButtonLight((ControlButton) components.get(STOP_BUTTON_NAME));
         ComponentFabric.setupControlButtonLight((ControlButton) components.get(CURRENT_OBJECTS_NAME));
@@ -169,6 +205,21 @@ public class SimulationPage extends Page implements IPage {
 
         ComponentFabric.setupRadioButton((RadioButton) components.get(HIDE_TIME_RADIO_BUTTON_NAME));
         components.get(HIDE_TIME_RADIO_BUTTON_NAME).setBackground(Style.getPrimaryDarkColor());
+
+        components.get(WOODEN_BUILDINGS_IMAGE_NAME).add(new JLabel(new ImageIcon(
+                WindowManager
+                        .getImageFactory()
+                        .getWoodenBuilding()
+                        .getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+        )));
+        components.get(CAPITAL_BUILDINGS_IMAGE_NAME).add(new JLabel(new ImageIcon(
+            WindowManager
+                    .getImageFactory()
+                    .getCapitalBuilding()
+                    .getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+        )));
+        components.get(WOODEN_BUILDINGS_IMAGE_NAME).setBackground(Style.getPrimaryDarkColor());
+        components.get(CAPITAL_BUILDINGS_IMAGE_NAME).setBackground(Style.getPrimaryDarkColor());
 
         components.get(GAP_18_NAME).setForeground(Style.getPrimaryDarkColor());
         components.get(GAP_14_NAME).setForeground(Style.getPrimaryDarkColor());
@@ -198,6 +249,8 @@ public class SimulationPage extends Page implements IPage {
         controlsPanel.add(createControlsLabelPanel());
         controlsPanel.add(createStartButtonPanel());
         controlsPanel.add(createStopButtonPanel());
+        controlsPanel.add(createAILabelPanel());
+        controlsPanel.add(createAIPanel());
         controlsPanel.add(createInformationLabelPanel());
         controlsPanel.add(createShowInfoPanel());
         controlsPanel.add(createShowTimePanel());
@@ -220,10 +273,20 @@ public class SimulationPage extends Page implements IPage {
         JPanel panel = new JPanel();
         ComponentFabric.setupDarkPanel(panel);
 
-        panel.setBorder(new EmptyBorder(30,0,0,0));
+        panel.setBorder(new EmptyBorder(10,0,0,0));
 
         panel.add(components.get(CONTROLS_LABEL_NAME));
         panel.add(components.get(GAP_18_NAME));
+
+        return panel;
+    }
+
+    private JPanel createAILabelPanel() {
+        JPanel panel = new JPanel();
+        ComponentFabric.setupDarkPanel(panel);
+
+        panel.add(components.get(AI_LABEL_NAME));
+        panel.add(components.get(GAP_14_NAME));
 
         return panel;
     }
@@ -306,6 +369,39 @@ public class SimulationPage extends Page implements IPage {
         panel.add(components.get(CURRENT_OBJECTS_NAME));
 
         return panel;
+    }
+
+    private JPanel createAIPanel() {
+        JPanel root = new JPanel();
+        JPanel images = new JPanel();
+        JPanel switches = new JPanel();
+        JPanel comboboxes = new JPanel();
+
+        root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
+        images.setLayout(new BoxLayout(images, BoxLayout.X_AXIS));
+        comboboxes.setLayout(new BoxLayout(comboboxes, BoxLayout.X_AXIS));
+
+        root.setBackground(Style.getPrimaryDarkColor());
+        images.setBackground(Style.getPrimaryDarkColor());
+        switches.setBackground(Style.getPrimaryDarkColor());
+        comboboxes.setBackground(Style.getPrimaryDarkColor());
+
+        images.add(components.get(WOODEN_BUILDINGS_IMAGE_NAME));
+        images.add(components.get(CAPITAL_BUILDINGS_IMAGE_NAME));
+
+        switches.add(components.get(WOODEN_AI_SWITCH));
+        switches.add(components.get(CAPITAL_AI_SWITCH));
+        switches.setBorder(new EmptyBorder(0, 0, 24, 0));
+
+        comboboxes.add(components.get(WOODEN_PRIORITY_COMBOBOX));
+        comboboxes.add(components.get(CAPITAL_PRIORITY_COMBOBOX));
+
+        root.add(images);
+        root.add(components.get(GAP_18_NAME));
+        root.add(switches);
+        root.add(comboboxes);
+
+        return root;
     }
 
     @Override
