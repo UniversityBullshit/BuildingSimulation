@@ -62,8 +62,8 @@ public abstract class Building extends BaseAI implements Comparable<Building> {
     @Override
     protected void move() {
         if ((Math.abs(x - finishPoint.getX()) > 0.5)
-            && (Math.abs(y - finishPoint.getY()) > 0.5)) {
-            double angle = Math.atan(((finishPoint.y - y) / (finishPoint.x - x)));
+                && (Math.abs(y - finishPoint.getY()) > 0.5)) {
+            double angle = Math.atan((Math.abs((finishPoint.y - y) / (finishPoint.x - x))));
 
             double moveX = ((double) speed) / multiplier / TIMER_TICK_VALUE * Math.cos(angle);
             moveX *= (x > finishPoint.getX()) ? -1 : 1;
@@ -81,6 +81,7 @@ public abstract class Building extends BaseAI implements Comparable<Building> {
             } else {
                 y = finishPoint.getY();
             }
+
         } else {
             Thread.currentThread().interrupt();
         }
