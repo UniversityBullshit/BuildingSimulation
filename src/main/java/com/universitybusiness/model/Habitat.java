@@ -30,6 +30,10 @@ public class Habitat implements IHabitat {
     private int woodenBuildingsCount;
     @Getter
     private int capitalBuildingsCount;
+    @Getter
+    private boolean isWoodenBuildingAISleeping = false;
+    @Getter
+    private boolean isCapitalBuildingAISleeping = false;
 
     private Habitat() {
         reset();
@@ -81,17 +85,25 @@ public class Habitat implements IHabitat {
     public void sleepAI() {
         for (Building building : buildings) {
             building.stopMoving();
+            isWoodenBuildingAISleeping = true;
+            isCapitalBuildingAISleeping = true;
         }
     }
 
     public void sleepAI(BuildingType type) {
         for (Building building : buildings) {
             if (type == BuildingType.WOODEN) {
-                if (building instanceof WoodenBuilding) building.stopMoving();
+                if (building instanceof WoodenBuilding) {
+                    building.stopMoving();
+                    isWoodenBuildingAISleeping = true;
+                }
             }
 
             if (type == BuildingType.CAPITAL) {
-                if (building instanceof CapitalBuilding) building.stopMoving();
+                if (building instanceof CapitalBuilding) {
+                    building.stopMoving();
+                    isCapitalBuildingAISleeping = true;
+                }
             }
         }
     }
@@ -99,17 +111,25 @@ public class Habitat implements IHabitat {
     public void resumeAI() {
         for (Building building : buildings) {
             building.resumeMoving();
+            isWoodenBuildingAISleeping = false;
+            isCapitalBuildingAISleeping = false;
         }
     }
 
     public void resumeAI(BuildingType type) {
         for (Building building : buildings) {
             if (type == BuildingType.WOODEN) {
-                if (building instanceof WoodenBuilding) building.resumeMoving();
+                if (building instanceof WoodenBuilding) {
+                    building.resumeMoving();
+                    isWoodenBuildingAISleeping = false;
+                }
             }
 
             if (type == BuildingType.CAPITAL) {
-                if (building instanceof CapitalBuilding) building.resumeMoving();
+                if (building instanceof CapitalBuilding) {
+                    building.resumeMoving();
+                    isCapitalBuildingAISleeping = false;
+                }
             }
         }
     }
