@@ -66,4 +66,12 @@ public class SimulationService {
             }
         }, TIMER_DELAY_VALUE, TIMER_TICK_VALUE);
     }
+
+    public boolean isWoodenBuildingAISleeping() {
+        return habitat.isWoodenBuildingAISleeping();
+    }
+
+    public boolean isCapitalBuildingAISleeping() {
+        return habitat.isCapitalBuildingAISleeping();
+    }
 }

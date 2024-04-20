@@ -106,4 +106,20 @@ public class HabitatController {
     public long getSimulationTime() {
         return simulationService.getTime();
     }
+
+    /**
+     * Method for monitoring the sleep state of an AI-controlled building.
+     * @return true/false
+     */
+    public boolean getIsWoodenBuildingAISleeping() {
+        return simulationService.isWoodenBuildingAISleeping();
+    }
+
+    /**
+     * Method for monitoring the sleep state of an AI-controlled building.
+     * @return true/false
+     */
+    public boolean getIsCapitalBuildingAISleeping() {
+        return simulationService.isCapitalBuildingAISleeping();
+    }
 }
