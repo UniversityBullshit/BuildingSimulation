@@ -131,6 +131,22 @@ public class SimulationPage extends Page implements IPage {
             ((SwitchButton) components.get(SHOW_INFO_SWITCH_NAME))
         ));
 
+        model.addUpdateListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ((SwitchButton) components.get(WOODEN_AI_SWITCH))
+                    .setActive(model.isWoodenAI());
+            }
+        });
+
+        model.addUpdateListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ((SwitchButton) components.get(CAPITAL_AI_SWITCH))
+                    .setActive(model.isCapitalAI());
+            }
+        });
+
         model.addUpdateListener(new LockButtonsAction(
             model,
             ((ControlButton) components.get(START_BUTTON_NAME)),
@@ -160,20 +176,11 @@ public class SimulationPage extends Page implements IPage {
         );
 
         ((SwitchButton) components.get(WOODEN_AI_SWITCH)).addActionListener(
-                new AbstractAction() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-//                        if () {
-//                            context.getController().getSimulationService().sleepAI(
-//                                Habitat.BuildingType.WOODEN
-//                            );
-//                        } else {
-//                            context.getController().getSimulationService().resumeAI(
-//                                Habitat.BuildingType.WOODEN
-//                            );
-//                        }
-                    }
-                }
+            new SwitchWoodenAI(controller, model)
+        );
+
+        ((SwitchButton) components.get(CAPITAL_AI_SWITCH)).addActionListener(
+            new SwitchCapitalAI(controller, model)
         );
 
         AbstractAction radioButtonsToggle = new AbstractAction() {
