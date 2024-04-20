@@ -51,6 +51,10 @@ public class Habitat implements IHabitat {
         lastWoodenBuildingSpawnTime = 0;
         lastCapitalBuildingSpawnTime = 0;
         buildings = new Vector<>();
+        if (threads != null) {
+            threads.forEach((key, thread) -> thread.interrupt());
+            threads.clear();
+        }
         threads = new HashMap<>();
         ids = new HashSet<>();
         spawnTimeMap = new TreeMap<>();
@@ -69,11 +73,15 @@ public class Habitat implements IHabitat {
     }
 
     public void sleepAI() {
-        for (Long key : threads.keySet()) {
-            threads.get(key).interrupt();
+        for (Building building : buildings) {
+            building.stopMoving();
         }
+    }
 
-        threads.clear();
+    public void resumeAI() {
+        for (Building building : buildings) {
+            building.resumeMoving();
+        }
     }
 
     private void spawnWoodenBuilding() {
@@ -135,8 +143,6 @@ public class Habitat implements IHabitat {
     private Vector<Building> findExpiredObjects() {
         Vector<Building> expired = new Vector<>();
         long currentTime = this.time;
-        System.out.println(Thread.activeCount());
-        System.out.println("Buildings count: " + buildings.size());
         for (Building building : buildings) {
             if (building instanceof WoodenBuilding) {
                 if (currentTime - building.getSpawnTime() >= Preferences.getInstance().getWoodenBuildingLifeTime()) {

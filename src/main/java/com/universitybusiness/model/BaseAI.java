@@ -40,6 +40,9 @@ public abstract class BaseAI implements Runnable {
     }
 
     public void resumeMoving() {
-        isMoving = true;
+        synchronized (this) {
+            isMoving = true;
+            this.notify();
+        }
     }
 }

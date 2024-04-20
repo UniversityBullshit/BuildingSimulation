@@ -33,6 +33,7 @@ public class SimulationService {
     public void startSimulation() {
         if (!isSimulationRunning) {
             isSimulationRunning = true;
+            habitat.resumeAI();
             future = CompletableFuture.runAsync(this::simulation);
         }
     }
