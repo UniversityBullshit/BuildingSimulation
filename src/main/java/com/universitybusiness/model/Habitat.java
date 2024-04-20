@@ -147,6 +147,7 @@ public class Habitat implements IHabitat {
                 int finishY = this.height / 2 + generator.nextInt(this.height / 2) - 10;
 
                 WoodenBuilding woodenBuilding = new WoodenBuilding(x, y, currentTime, new Point(finishX, finishY));
+                if (isWoodenBuildingAISleeping) woodenBuilding.isMoving = false;
                 if (x < width / 2 || y < height / 2 ) {
                     Thread thread = new Thread(woodenBuilding);
                     thread.start();
@@ -175,6 +176,7 @@ public class Habitat implements IHabitat {
                 int finishY = generator.nextInt(this.height / 2);
 
                 CapitalBuilding capitalBuilding = new CapitalBuilding(x, y, currentTime, new Point(finishX, finishY));
+                if (isCapitalBuildingAISleeping()) capitalBuilding.isMoving = false;
                 if (x > width / 2 || y > height / 2) {
                     Thread thread = new Thread(capitalBuilding);
                     thread.start();

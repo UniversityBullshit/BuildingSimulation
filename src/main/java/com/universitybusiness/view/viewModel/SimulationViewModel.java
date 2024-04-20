@@ -93,7 +93,8 @@ public class SimulationViewModel implements ViewModel {
     private void update() {
         setAreaUpdating(controller.getSimulationStatus());
         setSimulationTime(controller.getSimulationTime());
-
+        setWoodenAI(!controller.getIsWoodenBuildingAISleeping());
+        setCapitalAI(!controller.getIsCapitalBuildingAISleeping());
 
         buildingsDictionary.clear();
         addInstances();
