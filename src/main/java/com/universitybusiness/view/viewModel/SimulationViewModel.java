@@ -29,6 +29,10 @@ public class SimulationViewModel implements ViewModel {
     @Getter
     private boolean showInfo = true;
     @Getter
+    private boolean woodenAI = false;
+    @Getter
+    private boolean capitalAI = false;
+    @Getter
     private final HashMap<Long, BuildingInstance> buildingsDictionary;
     private final HashSet<ActionListener> updateListeners;
 
@@ -74,30 +78,28 @@ public class SimulationViewModel implements ViewModel {
         }
     }
 
+    public void setWoodenAI(boolean status) {
+        if (woodenAI != status) {
+            woodenAI = status;
+        }
+    }
+
+    public void setCapitalAI(boolean status) {
+        if (capitalAI != status) {
+            capitalAI = status;
+        }
+    }
+
     private void update() {
         setAreaUpdating(controller.getSimulationStatus());
         setSimulationTime(controller.getSimulationTime());
+
 
         buildingsDictionary.clear();
         addInstances();
 
         for (ActionListener listener : updateListeners) {
             listener.actionPerformed(null);
-        }
-    }
-
-    private void removeInstances() {
-        HashSet<Long> actualBuildingsIds = controller.getIds();
-        HashSet<Long> deletingBuildingsIds = new HashSet<>();
-
-        for (Long id: buildingsDictionary.keySet()) {
-            if (!actualBuildingsIds.contains(id)) {
-                deletingBuildingsIds.add(id);
-            }
-        }
-
-        for (Long id: deletingBuildingsIds) {
-            buildingsDictionary.remove(id);
         }
     }
 

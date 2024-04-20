@@ -1,6 +1,7 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.controller.HabitatController;
+import com.universitybusiness.model.Habitat;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.dialog.ShowDialogAction;
 import com.universitybusiness.view.actions.simulationPage.*;
@@ -156,6 +157,23 @@ public class SimulationPage extends Page implements IPage {
 
         ((SwitchButton) components.get(SHOW_INFO_SWITCH_NAME)).addActionListener(
             new ToggleInfoAction(model)
+        );
+
+        ((SwitchButton) components.get(WOODEN_AI_SWITCH)).addActionListener(
+                new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+//                        if () {
+//                            context.getController().getSimulationService().sleepAI(
+//                                Habitat.BuildingType.WOODEN
+//                            );
+//                        } else {
+//                            context.getController().getSimulationService().resumeAI(
+//                                Habitat.BuildingType.WOODEN
+//                            );
+//                        }
+                    }
+                }
         );
 
         AbstractAction radioButtonsToggle = new AbstractAction() {
