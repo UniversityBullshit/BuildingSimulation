@@ -1,4 +1,4 @@
-package com.universitybusiness.model;
+package com.universitybusiness.model.simulation;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -49,6 +49,16 @@ public abstract class BaseAI implements Runnable {
         synchronized (this) {
             isMoving = true;
             this.notify();
+        }
+    }
+
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    public void setIsMoving(boolean value) {
+        if (isMoving != value) {
+            isMoving = value;
         }
     }
 }

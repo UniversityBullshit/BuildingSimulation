@@ -1,8 +1,7 @@
 package com.universitybusiness.view.actions.simulationPage;
 
 import com.universitybusiness.controller.HabitatController;
-import com.universitybusiness.model.BuildingType;
-import com.universitybusiness.model.Habitat;
+import com.universitybusiness.model.simulation.BuildingType;
 import com.universitybusiness.view.viewModel.SimulationViewModel;
 
 import javax.swing.*;

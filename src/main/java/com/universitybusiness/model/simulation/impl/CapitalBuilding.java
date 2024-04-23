@@ -1,4 +1,7 @@
-package com.universitybusiness.model;
+package com.universitybusiness.model.simulation.impl;
+
+import com.universitybusiness.model.Preferences;
+import com.universitybusiness.model.simulation.Building;
 
 import java.awt.*;
 

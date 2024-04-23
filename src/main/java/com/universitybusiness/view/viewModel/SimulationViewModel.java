@@ -1,7 +1,7 @@
 package com.universitybusiness.view.viewModel;
 
 import com.universitybusiness.controller.HabitatController;
-import com.universitybusiness.model.Building;
+import com.universitybusiness.model.simulation.Building;
 import com.universitybusiness.view.util.BuildingInstance;
 import lombok.Getter;
 import lombok.Setter;

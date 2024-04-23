@@ -1,13 +1,11 @@
 package com.universitybusiness;
 
 import com.universitybusiness.controller.HabitatController;
-import com.universitybusiness.model.Habitat;
+import com.universitybusiness.model.simulation.impl.Habitat;
 import com.universitybusiness.model.Preferences;
 import com.universitybusiness.service.SimulationService;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.fabrics.ApplicationViewModelFactory;
-import com.universitybusiness.view.fabrics.FontFactory;
-import com.universitybusiness.view.fabrics.ImageFactory;
 import com.universitybusiness.view.viewModel.PreferencesViewModel;
 import com.universitybusiness.view.viewModel.SimulationViewModel;
 

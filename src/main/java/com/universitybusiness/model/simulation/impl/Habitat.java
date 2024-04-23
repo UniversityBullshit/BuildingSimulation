@@ -1,5 +1,9 @@
-package com.universitybusiness.model;
+package com.universitybusiness.model.simulation.impl;
 
+import com.universitybusiness.model.simulation.Building;
+import com.universitybusiness.model.Preferences;
+import com.universitybusiness.model.simulation.BuildingType;
+import com.universitybusiness.model.simulation.IHabitat;
 import lombok.Getter;
 
 import java.awt.*;
@@ -139,7 +143,7 @@ public class Habitat implements IHabitat {
                 int finishY = this.height / 2 + generator.nextInt(this.height / 2) - 10;
 
                 WoodenBuilding woodenBuilding = new WoodenBuilding(x, y, currentTime, new Point(finishX, finishY));
-                if (isWoodenBuildingAISleeping) woodenBuilding.isMoving = false;
+                if (isWoodenBuildingAISleeping) woodenBuilding.setIsMoving(false);
                 if (x < width / 2 || y < height / 2 ) {
                     Thread thread = new Thread(woodenBuilding);
                     thread.start();
@@ -168,7 +172,7 @@ public class Habitat implements IHabitat {
                 int finishY = generator.nextInt(this.height / 2);
 
                 CapitalBuilding capitalBuilding = new CapitalBuilding(x, y, currentTime, new Point(finishX, finishY));
-                if (isCapitalBuildingAISleeping()) capitalBuilding.isMoving = false;
+                if (isCapitalBuildingAISleeping()) capitalBuilding.setIsMoving(false);
                 if (x > width / 2 || y > height / 2) {
                     Thread thread = new Thread(capitalBuilding);
                     thread.start();

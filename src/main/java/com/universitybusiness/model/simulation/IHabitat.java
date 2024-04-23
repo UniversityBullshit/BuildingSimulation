@@ -1,4 +1,4 @@
-package com.universitybusiness.model;
+package com.universitybusiness.model.simulation;
 
 public interface IHabitat {
     /**

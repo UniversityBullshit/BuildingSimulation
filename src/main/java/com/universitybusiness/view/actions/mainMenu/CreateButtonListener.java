@@ -1,6 +1,6 @@
 package com.universitybusiness.view.actions.mainMenu;
 
-import com.universitybusiness.model.Habitat;
+import com.universitybusiness.model.simulation.impl.Habitat;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.components.textFilelds.HintTextField;
 

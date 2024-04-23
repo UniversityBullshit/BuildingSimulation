@@ -1,8 +1,8 @@
 package com.universitybusiness.view.util;
 
-import com.universitybusiness.model.Building;
-import com.universitybusiness.model.CapitalBuilding;
-import com.universitybusiness.model.WoodenBuilding;
+import com.universitybusiness.model.simulation.Building;
+import com.universitybusiness.model.simulation.impl.CapitalBuilding;
+import com.universitybusiness.model.simulation.impl.WoodenBuilding;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,7 +1,6 @@
 package com.universitybusiness.view.pages;
 
 import com.universitybusiness.controller.HabitatController;
-import com.universitybusiness.model.Habitat;
 import com.universitybusiness.model.Preferences;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.dialog.ShowDialogAction;
@@ -22,7 +21,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SimulationPage extends Page implements IPage {
     // String constants

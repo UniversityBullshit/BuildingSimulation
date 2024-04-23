@@ -1,4 +1,4 @@
-package com.universitybusiness.model;
+package com.universitybusiness.model.simulation;
 
 import com.universitybusiness.model.util.AtomicIdCounter;
 import lombok.Getter;
@@ -51,7 +51,7 @@ public abstract class Building extends BaseAI implements Comparable<Building> {
     @Getter
     protected long lifeTime;
 
-    Building(int x, int y, long time, Point finishPoint) {
+    public Building(int x, int y, long time, Point finishPoint) {
         super(finishPoint);
         this.id = AtomicIdCounter.nextId();
         this.x = x;

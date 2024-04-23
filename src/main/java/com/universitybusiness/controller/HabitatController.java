@@ -1,7 +1,7 @@
 package com.universitybusiness.controller;
 
-import com.universitybusiness.model.Building;
-import com.universitybusiness.model.Habitat;
+import com.universitybusiness.model.simulation.Building;
+import com.universitybusiness.model.simulation.impl.Habitat;
 import com.universitybusiness.service.SimulationService;
 
 import java.util.*;
