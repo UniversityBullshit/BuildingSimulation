@@ -9,11 +9,13 @@ public class Preferences {
         public static final long WOODEN_BUILDING_INTERVAL = 2000;
         public static final double WOODEN_BUILDING_PROBABILITY = 0.7;
         public static final long WOODEN_BUILDING_LIFE_TIME = 30000;
-        public static final long WOODEN_BUILDING_SPEED = 5;
+        public static final long WOODEN_BUILDING_SPEED = 50;
         public static final long CAPITAL_BUILDING_INTERVAL = 3000;
         public static final double CAPITAL_BUILDING_PROBABILITY = 0.3;
         public static final long CAPITAL_BUILDING_LIFE_TIME = 90000;
-        public static final long CAPITAL_BUILDING_SPEED = 5;
+        public static final long CAPITAL_BUILDING_SPEED = 50;
+        public static final int WOODEN_BUILDING_AI_PRIORITY = Thread.NORM_PRIORITY;
+        public static final int CAPITAL_BUILDING_AI_PRIORITY = Thread.NORM_PRIORITY;
     }
 
     private static Preferences instance;
@@ -42,6 +44,12 @@ public class Preferences {
     @Getter
     @Setter
     private long capitalBuildingSpeed = Defaults.CAPITAL_BUILDING_SPEED;
+    @Getter
+    @Setter
+    private int woodenBuildingAIPriority = Defaults.WOODEN_BUILDING_AI_PRIORITY;
+    @Getter
+    @Setter
+    private int capitalBuildingAIPriority = Defaults.CAPITAL_BUILDING_AI_PRIORITY;
 
     private Preferences() {
         restoreDefaults();
@@ -64,5 +72,7 @@ public class Preferences {
         setCapitalBuildingProbability(Defaults.CAPITAL_BUILDING_PROBABILITY);
         setCapitalBuildingLifeTime(Defaults.CAPITAL_BUILDING_LIFE_TIME);
         setCapitalBuildingSpeed(Defaults.CAPITAL_BUILDING_SPEED);
+        setWoodenBuildingAIPriority(Defaults.WOODEN_BUILDING_AI_PRIORITY);
+        setCapitalBuildingAIPriority(Defaults.CAPITAL_BUILDING_AI_PRIORITY);
     }
 }

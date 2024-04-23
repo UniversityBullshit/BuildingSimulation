@@ -2,6 +2,7 @@ package com.universitybusiness.view.pages;
 
 import com.universitybusiness.controller.HabitatController;
 import com.universitybusiness.model.Habitat;
+import com.universitybusiness.model.Preferences;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.dialog.ShowDialogAction;
 import com.universitybusiness.view.actions.simulationPage.*;
@@ -116,6 +117,12 @@ public class SimulationPage extends Page implements IPage {
         super.reset();
 
         ((Area) components.get(SIMULATION_AREA_NAME)).reset();
+        ((ComboBox<?>) components.get(WOODEN_PRIORITY_COMBOBOX)).setSelectedIndex(
+            Preferences.getInstance().getWoodenBuildingAIPriority() - 1
+        );
+        ((ComboBox<?>) components.get(CAPITAL_PRIORITY_COMBOBOX)).setSelectedIndex(
+            Preferences.getInstance().getCapitalBuildingAIPriority() - 1
+        );
     }
 
     private void setupActions() {
@@ -134,16 +141,16 @@ public class SimulationPage extends Page implements IPage {
         model.addUpdateListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ((SwitchButton) components.get(WOODEN_AI_SWITCH))
-                    .setActive(model.isWoodenAI());
+                components.get(WOODEN_AI_SWITCH).setEnabled(model.isAreaUpdating());
+                ((SwitchButton) components.get(WOODEN_AI_SWITCH)).setActive(model.isWoodenAI());
             }
         });
 
         model.addUpdateListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ((SwitchButton) components.get(CAPITAL_AI_SWITCH))
-                    .setActive(model.isCapitalAI());
+                components.get(CAPITAL_AI_SWITCH).setEnabled(model.isAreaUpdating());
+                ((SwitchButton) components.get(CAPITAL_AI_SWITCH)).setActive(model.isCapitalAI());
             }
         });
 
@@ -183,6 +190,28 @@ public class SimulationPage extends Page implements IPage {
             new SwitchCapitalAI(controller, model)
         );
 
+        ((ComboBox<?>) components.get(WOODEN_PRIORITY_COMBOBOX)).addActionListener(
+                new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Preferences.getInstance().setWoodenBuildingAIPriority(
+                            ((ComboBox<?>) components.get(WOODEN_PRIORITY_COMBOBOX)).getSelectedIndex() + 1
+                        );
+                    }
+                }
+        );
+
+        ((ComboBox<?>) components.get(CAPITAL_PRIORITY_COMBOBOX)).addActionListener(
+                new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Preferences.getInstance().setCapitalBuildingAIPriority(
+                            ((ComboBox<?>) components.get(CAPITAL_PRIORITY_COMBOBOX)).getSelectedIndex() + 1
+                        );
+                    }
+                }
+        );
+
         AbstractAction radioButtonsToggle = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -218,8 +247,8 @@ public class SimulationPage extends Page implements IPage {
         ComponentFabric.setupLabel2((JLabel) components.get(AI_LABEL_NAME));
         ComponentFabric.setupLightLabel((JLabel) components.get(AI_LABEL_NAME));
 
-        ComponentFabric.setupComboBox((ComboBox) components.get(WOODEN_PRIORITY_COMBOBOX));
-        ComponentFabric.setupComboBox((ComboBox) components.get(CAPITAL_PRIORITY_COMBOBOX));
+//        ComponentFabric.setupComboBox((ComboBox) components.get(WOODEN_PRIORITY_COMBOBOX));
+//        ComponentFabric.setupComboBox((ComboBox) components.get(CAPITAL_PRIORITY_COMBOBOX));
 
         ComponentFabric.setupControlButtonLight((ControlButton) components.get(START_BUTTON_NAME));
         ComponentFabric.setupControlButtonLight((ControlButton) components.get(STOP_BUTTON_NAME));

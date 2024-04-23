@@ -7,6 +7,7 @@ import java.awt.*;
 
 public abstract class BaseAI implements Runnable {
     protected long speed;
+    protected int priority = Thread.NORM_PRIORITY;
     protected long multiplier = 100000;
     protected boolean isMoving = true;
     protected Point finishPoint;
@@ -23,6 +24,9 @@ public abstract class BaseAI implements Runnable {
         try {
             while (!Thread.currentThread().isInterrupted()) {
                 synchronized (this) {
+                    updatePriority();
+                    Thread.currentThread().setPriority(priority);
+
                     while (!isMoving) {
                         this.wait();
                     }
@@ -34,6 +38,8 @@ public abstract class BaseAI implements Runnable {
             Thread.sleep(TIMER_TICK_VALUE);
         } catch (Exception ignored) {}
     }
+
+    protected abstract void updatePriority();
 
     public void stopMoving() {
         isMoving = false;

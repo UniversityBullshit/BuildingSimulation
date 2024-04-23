@@ -6,12 +6,6 @@ import java.awt.*;
 import java.util.*;
 
 public class Habitat implements IHabitat {
-    public enum BuildingType {
-        ANY,
-        WOODEN,
-        CAPITAL
-    }
-
     private static Habitat instance;
     @Getter
     private int width;
@@ -85,8 +79,6 @@ public class Habitat implements IHabitat {
     public void sleepAI() {
         for (Building building : buildings) {
             building.stopMoving();
-            isWoodenBuildingAISleeping = true;
-            isCapitalBuildingAISleeping = true;
         }
     }
 
@@ -111,9 +103,9 @@ public class Habitat implements IHabitat {
     public void resumeAI() {
         for (Building building : buildings) {
             building.resumeMoving();
-            isWoodenBuildingAISleeping = false;
-            isCapitalBuildingAISleeping = false;
         }
+        isWoodenBuildingAISleeping = false;
+        isCapitalBuildingAISleeping = false;
     }
 
     public void resumeAI(BuildingType type) {

@@ -10,4 +10,9 @@ public class CapitalBuilding extends Building {
         this.probability = Preferences.getInstance().getCapitalBuildingProbability();
         this.speed = Preferences.getInstance().getCapitalBuildingSpeed();
     }
+
+    @Override
+    protected void updatePriority() {
+        priority = Preferences.getInstance().getCapitalBuildingAIPriority();
+    }
 }

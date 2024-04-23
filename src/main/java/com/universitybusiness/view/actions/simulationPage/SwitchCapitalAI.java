@@ -1,6 +1,7 @@
 package com.universitybusiness.view.actions.simulationPage;
 
 import com.universitybusiness.controller.HabitatController;
+import com.universitybusiness.model.BuildingType;
 import com.universitybusiness.model.Habitat;
 import com.universitybusiness.view.viewModel.SimulationViewModel;
 
@@ -20,11 +21,11 @@ public class SwitchCapitalAI extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         if (model.isCapitalAI()) {
             controller.getSimulationService().sleepAI(
-                Habitat.BuildingType.CAPITAL
+                BuildingType.CAPITAL
             );
         } else {
             controller.getSimulationService().resumeAI(
-                Habitat.BuildingType.CAPITAL
+                BuildingType.CAPITAL
             );
         }
     }

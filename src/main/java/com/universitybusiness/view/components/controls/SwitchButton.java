@@ -32,11 +32,13 @@ public class SwitchButton extends JComponent {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
-                isActive = !isActive;
+                if (isEnabled()) {
+                    isActive = !isActive;
 
-                fireActionPerformed();
+                    fireActionPerformed();
 
-                repaint();
+                    repaint();
+                }
             }
         });
     }

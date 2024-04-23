@@ -10,4 +10,9 @@ public class WoodenBuilding extends Building {
         this.probability = Preferences.getInstance().getWoodenBuildingProbability();
         this.speed = Preferences.getInstance().getWoodenBuildingSpeed();
     }
+
+    @Override
+    protected void updatePriority() {
+        priority = Preferences.getInstance().getWoodenBuildingAIPriority();
+    }
 }

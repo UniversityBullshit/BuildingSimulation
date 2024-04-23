@@ -1,6 +1,7 @@
 package com.universitybusiness.view.components.menubar;
 
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.actions.simulationPage.SwitchWoodenAI;
 import com.universitybusiness.view.actions.simulationPage.ToggleTimeAction;
 import com.universitybusiness.view.actions.simulationPage.StartKeyAction;
 import com.universitybusiness.view.actions.simulationPage.StopKeyAction;
@@ -22,6 +23,8 @@ public class SimulationMenuBar extends CustomMenuBar {
         JMenuItem start = new JMenuItem("Start");
         JMenuItem stop = new JMenuItem("Stop");
         JMenuItem toggleTime = new JMenuItem("Show/Hide time");
+        JMenuItem toggleWoodenAI = new JMenuItem("Start/Stop WoodenAI");
+        JMenuItem toggleCapitalAI = new JMenu("Start/Stop CapitalAI");
 
         start.addActionListener(
             new StartKeyAction(
@@ -35,6 +38,12 @@ public class SimulationMenuBar extends CustomMenuBar {
         );
         toggleTime.addActionListener(
             new ToggleTimeAction(
+                context.getViewModelFactory().getSimulationViewModel()
+            )
+        );
+        toggleWoodenAI.addActionListener(
+            new SwitchWoodenAI(
+                context.getController(),
                 context.getViewModelFactory().getSimulationViewModel()
             )
         );
