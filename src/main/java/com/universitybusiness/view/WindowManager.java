@@ -46,6 +46,7 @@ public class WindowManager {
         public static final String SIMULATION = "Simulation";
         public static final String INFORMATION = "Information";
         public static final String CURRENT_OBJECTS = "CurrentObjectsPage";
+        public static final String TERMINAL = "Terminal";
         public static final String HELP = "Help";
         public static final String CONTROLS = "Controls";
     }
@@ -66,6 +67,7 @@ public class WindowManager {
         pages.put(Pages.CURRENT_OBJECTS, new CurrentObjectsPage(mainFrame, this));
         pages.put(Pages.CONTROLS, new ControlsPage(mainFrame, this));
         pages.put(Pages.HELP, new HelpPage(mainFrame, this));
+        pages.put(Pages.TERMINAL, new TerminalPage(mainFrame, this));
 
         currentPage = Pages.MAIN_MENU;
         width = 400;
