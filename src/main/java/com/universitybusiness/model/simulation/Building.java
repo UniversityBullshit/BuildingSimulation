@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class Building extends BaseAI implements Comparable<Building> {
+public abstract class Building extends BaseAI implements Comparable<Building>, Serializable {
     /**
      * Object id
      */

@@ -7,9 +7,10 @@ import com.universitybusiness.model.simulation.IHabitat;
 import lombok.Getter;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.*;
 
-public class Habitat implements IHabitat {
+public class Habitat implements IHabitat, Serializable {
     private static Habitat instance;
     @Getter
     private int width;
@@ -19,7 +20,7 @@ public class Habitat implements IHabitat {
     private long lastWoodenBuildingSpawnTime;
     private long lastCapitalBuildingSpawnTime;
     private Vector<Building> buildings;
-    private HashMap<Long, Thread> threads;
+    private transient HashMap<Long, Thread> threads;
     @Getter
     private HashSet<Long> ids;
     @Getter
@@ -43,6 +44,10 @@ public class Habitat implements IHabitat {
         }
 
         return instance;
+    }
+
+    public static void deserialize(Habitat serializedObject) {
+        instance = serializedObject;
     }
 
     @Override

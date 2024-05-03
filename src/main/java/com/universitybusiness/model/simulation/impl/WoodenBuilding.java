@@ -4,6 +4,7 @@ import com.universitybusiness.model.Preferences;
 import com.universitybusiness.model.simulation.Building;
 
 import java.awt.*;
+import java.io.Serializable;
 
 public class WoodenBuilding extends Building {
     public WoodenBuilding(int x, int y, long time, Point finishPoint) {

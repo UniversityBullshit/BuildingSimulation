@@ -4,8 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class BaseAI implements Runnable {
+public abstract class BaseAI implements Runnable, Serializable {
     protected long speed;
     protected int priority = Thread.NORM_PRIORITY;
     protected long multiplier = 100000;
