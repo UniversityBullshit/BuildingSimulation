@@ -8,6 +8,7 @@ import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.fabrics.ApplicationViewModelFactory;
 import com.universitybusiness.view.viewModel.PreferencesViewModel;
 import com.universitybusiness.view.viewModel.SimulationViewModel;
+import com.universitybusiness.view.viewModel.TerminalViewModel;
 
 import javax.swing.*;
 
@@ -21,7 +22,8 @@ public class Main {
 
         ApplicationViewModelFactory modelFactory = new ApplicationViewModelFactory(
             new SimulationViewModel(controller),
-            new PreferencesViewModel(Preferences.getInstance())
+            new PreferencesViewModel(Preferences.getInstance()),
+            new TerminalViewModel()
         );
 
         WindowManager windowManager = new WindowManager(controller, modelFactory);
