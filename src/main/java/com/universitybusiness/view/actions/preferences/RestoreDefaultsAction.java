@@ -20,6 +20,7 @@ public class RestoreDefaultsAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         windowManager.getViewModelFactory().getPreferencesViewModel().restoreDefaults();
+        Preferences.getInstance().save();
         backToMenuAction.actionPerformed(e);
     }
 }

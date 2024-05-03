@@ -14,8 +14,8 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        // Setup default preferences
-        Preferences.getInstance().restoreDefaults();
+        // Load preferences
+        Preferences.getInstance().load();
 
         SimulationService simulation = new SimulationService(Habitat.getInstance());
         HabitatController controller = new HabitatController(simulation);
@@ -28,5 +28,12 @@ public class Main {
 
         WindowManager windowManager = new WindowManager(controller, modelFactory);
         SwingUtilities.invokeLater(() -> windowManager.swapPage(windowManager.getCurrentPage()));
+
+        // Save preferences on exit
+        try {
+            SwingUtilities.invokeAndWait(() -> {
+                Preferences.getInstance().save();
+            });
+        } catch (Exception ignored) {}
     }
 }

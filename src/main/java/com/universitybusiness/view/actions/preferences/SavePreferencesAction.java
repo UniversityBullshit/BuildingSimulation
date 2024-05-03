@@ -23,6 +23,7 @@ public class SavePreferencesAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (windowManager.getViewModelFactory().getPreferencesViewModel().savePreferences()) {
+            Preferences.getInstance().save();
             swapPageAction.actionPerformed(e);
         } else {
             showErrorMessage();

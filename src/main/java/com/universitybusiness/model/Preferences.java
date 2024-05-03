@@ -1,7 +1,9 @@
 package com.universitybusiness.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
-import lombok.Setter;
+import java.io.File;
 
 
 public class Preferences {
@@ -21,24 +23,34 @@ public class Preferences {
     private static Preferences instance;
 
     @Getter
+    @JsonProperty("wooden_building_interval")
     private long woodenBuildingInterval = Defaults.WOODEN_BUILDING_INTERVAL;
     @Getter
+    @JsonProperty("wooden_building_probability")
     private double woodenBuildingProbability = Defaults.WOODEN_BUILDING_PROBABILITY;
     @Getter
+    @JsonProperty("wooden_building_life_time")
     private long woodenBuildingLifeTime = Defaults.WOODEN_BUILDING_LIFE_TIME;
     @Getter
+    @JsonProperty("wooden_building_speed")
     private long woodenBuildingSpeed = Defaults.WOODEN_BUILDING_SPEED;
     @Getter
+    @JsonProperty("capital_building_interval")
     private long capitalBuildingInterval = Defaults.CAPITAL_BUILDING_INTERVAL;
     @Getter
+    @JsonProperty("capital_building_probability")
     private double capitalBuildingProbability = Defaults.CAPITAL_BUILDING_PROBABILITY;
     @Getter
+    @JsonProperty("capital_building_life_time")
     private long capitalBuildingLifeTime = Defaults.CAPITAL_BUILDING_LIFE_TIME;
     @Getter
+    @JsonProperty("capital_building_speed")
     private long capitalBuildingSpeed = Defaults.CAPITAL_BUILDING_SPEED;
     @Getter
+    @JsonProperty("wooden_building_ai_priority")
     private int woodenBuildingAIPriority = Defaults.WOODEN_BUILDING_AI_PRIORITY;
     @Getter
+    @JsonProperty("capital_building_ai_priority")
     private int capitalBuildingAIPriority = Defaults.CAPITAL_BUILDING_AI_PRIORITY;
 
     private Preferences() {
@@ -64,6 +76,47 @@ public class Preferences {
         setCapitalBuildingSpeed(Defaults.CAPITAL_BUILDING_SPEED);
         setWoodenBuildingAIPriority(Defaults.WOODEN_BUILDING_AI_PRIORITY);
         setCapitalBuildingAIPriority(Defaults.CAPITAL_BUILDING_AI_PRIORITY);
+    }
+
+    public void load() {
+        File file = new File("preferences.json");
+
+        if (file.exists()) {
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                Preferences preferences = mapper.readValue(file, Preferences.class);
+                setWoodenBuildingInterval(preferences.getWoodenBuildingInterval());
+                setWoodenBuildingProbability(preferences.getWoodenBuildingProbability());
+                setWoodenBuildingLifeTime(preferences.getWoodenBuildingLifeTime());
+                setWoodenBuildingSpeed(preferences.getWoodenBuildingSpeed());
+                setCapitalBuildingInterval(preferences.getCapitalBuildingInterval());
+                setCapitalBuildingProbability(preferences.getCapitalBuildingProbability());
+                setCapitalBuildingLifeTime(preferences.getCapitalBuildingLifeTime());
+                setCapitalBuildingSpeed(preferences.getCapitalBuildingSpeed());
+                setWoodenBuildingAIPriority(preferences.getWoodenBuildingAIPriority());
+                setCapitalBuildingAIPriority(preferences.getCapitalBuildingAIPriority());
+            } catch (Exception ignored) {
+                restoreDefaults();
+            }
+
+            return;
+        }
+
+        try {
+            if (file.createNewFile()) {
+                restoreDefaults();
+                save();
+            }
+        } catch (Exception ignored) {}
+    }
+
+    public void save() {
+        File file = new File("preferences.json");
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(file, this);
+        } catch (Exception ignored) {}
     }
 
     /**
