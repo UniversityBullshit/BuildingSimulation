@@ -21,34 +21,24 @@ public class Preferences {
     private static Preferences instance;
 
     @Getter
-    @Setter
     private long woodenBuildingInterval = Defaults.WOODEN_BUILDING_INTERVAL;
     @Getter
-    @Setter
     private double woodenBuildingProbability = Defaults.WOODEN_BUILDING_PROBABILITY;
     @Getter
-    @Setter
     private long woodenBuildingLifeTime = Defaults.WOODEN_BUILDING_LIFE_TIME;
     @Getter
-    @Setter
     private long woodenBuildingSpeed = Defaults.WOODEN_BUILDING_SPEED;
     @Getter
-    @Setter
     private long capitalBuildingInterval = Defaults.CAPITAL_BUILDING_INTERVAL;
     @Getter
-    @Setter
     private double capitalBuildingProbability = Defaults.CAPITAL_BUILDING_PROBABILITY;
     @Getter
-    @Setter
     private long capitalBuildingLifeTime = Defaults.CAPITAL_BUILDING_LIFE_TIME;
     @Getter
-    @Setter
     private long capitalBuildingSpeed = Defaults.CAPITAL_BUILDING_SPEED;
     @Getter
-    @Setter
     private int woodenBuildingAIPriority = Defaults.WOODEN_BUILDING_AI_PRIORITY;
     @Getter
-    @Setter
     private int capitalBuildingAIPriority = Defaults.CAPITAL_BUILDING_AI_PRIORITY;
 
     private Preferences() {
@@ -74,5 +64,155 @@ public class Preferences {
         setCapitalBuildingSpeed(Defaults.CAPITAL_BUILDING_SPEED);
         setWoodenBuildingAIPriority(Defaults.WOODEN_BUILDING_AI_PRIORITY);
         setCapitalBuildingAIPriority(Defaults.CAPITAL_BUILDING_AI_PRIORITY);
+    }
+
+    /**
+     * Set wooden building interval
+     * @param interval interval in milliseconds
+     * @throws IllegalArgumentException if interval is not between 500 and 10000
+     */
+    public void setWoodenBuildingInterval(long interval) throws IllegalArgumentException {
+        if (woodenBuildingInterval != interval) {
+            if (interval < 500 || interval > 10000) {
+                throw new IllegalArgumentException("Wooden building interval must be between 500 and 10000");
+            }
+
+            woodenBuildingInterval = interval;
+        }
+    }
+
+    /**
+     * Set capital building interval
+     * @param interval interval in milliseconds
+     * @throws IllegalArgumentException if interval is not between 500 and 10000
+     */
+    public void setCapitalBuildingInterval(long interval) throws IllegalArgumentException {
+        if (capitalBuildingInterval != interval) {
+            if (interval < 500 || interval > 10000) {
+                throw new IllegalArgumentException("Capital building interval must be between 500 and 10000");
+            }
+
+            capitalBuildingInterval = interval;
+        }
+    }
+
+    /**
+     * Set wooden building probability
+     * @param probability probability between 0 and 1
+     * @throws IllegalArgumentException if probability is not between 0 and 1
+     */
+    public void setWoodenBuildingProbability(double probability) throws IllegalArgumentException {
+        if (woodenBuildingProbability != probability) {
+            if (probability < 0 || probability > 1) {
+                throw new IllegalArgumentException("Wooden building probability must be between 0 and 1");
+            }
+
+            woodenBuildingProbability = probability;
+        }
+    }
+
+    /**
+     * Set capital building probability
+     * @param probability probability between 0 and 1
+     * @throws IllegalArgumentException if probability is not between 0 and 1
+     */
+    public void setCapitalBuildingProbability(double probability) throws IllegalArgumentException {
+        if (capitalBuildingProbability != probability) {
+            if (probability < 0 || probability > 1) {
+                throw new IllegalArgumentException("Capital building probability must be between 0 and 1");
+            }
+
+            capitalBuildingProbability = probability;
+        }
+    }
+
+    /**
+     * Set wooden building lifetime
+     * @param lifeTime lifetime in milliseconds
+     * @throws IllegalArgumentException if lifetime is not between 1 and 1000
+     */
+    public void setWoodenBuildingLifeTime(long lifeTime) throws IllegalArgumentException {
+        if (woodenBuildingLifeTime != lifeTime) {
+            if (lifeTime < 1 || lifeTime > 1000) {
+                throw new IllegalArgumentException("Wooden building lifetime must be between 1 and 1000");
+            }
+
+            woodenBuildingLifeTime = lifeTime;
+        }
+    }
+
+    /**
+     * Set capital building lifetime
+     * @param lifeTime lifetime in milliseconds
+     * @throws IllegalArgumentException if lifetime is not between 1 and 1000
+     */
+    public void setCapitalBuildingLifeTime(long lifeTime) throws IllegalArgumentException {
+        if (capitalBuildingLifeTime != lifeTime) {
+            if (lifeTime < 1 || lifeTime > 1000) {
+                throw new IllegalArgumentException("Capital building lifetime must be between 1 and 1000");
+            }
+
+            capitalBuildingLifeTime = lifeTime;
+        }
+    }
+
+    /**
+     * Set wooden building speed
+     * @param speed speed between 1 and 100
+     * @throws IllegalArgumentException if speed is not between 1 and 100
+     */
+    public void setWoodenBuildingSpeed(long speed) throws IllegalArgumentException {
+        if (woodenBuildingSpeed != speed) {
+            if (speed < 1 || speed > 100) {
+                throw new IllegalArgumentException("Wooden building speed must be between 1 and 100");
+            }
+
+            woodenBuildingSpeed = speed;
+        }
+    }
+
+    /**
+     * Set capital building speed
+     * @param speed speed between 1 and 100
+     * @throws IllegalArgumentException if speed is not between 1 and 100
+     */
+    public void setCapitalBuildingSpeed(long speed) throws IllegalArgumentException {
+        if (capitalBuildingSpeed != speed) {
+            if (speed < 1 || speed > 100) {
+                throw new IllegalArgumentException("Capital building speed must be between 1 and 100");
+            }
+
+            capitalBuildingSpeed = speed;
+        }
+    }
+
+    /**
+     * Set wooden building AI priority
+      * @param priority priority between Thread.MIN_PRIORITY and Thread.MAX_PRIORITY
+     * @throws IllegalArgumentException if priority is not between Thread.MIN_PRIORITY and Thread.MAX_PRIORITY
+     */
+    public void setWoodenBuildingAIPriority(int priority) throws IllegalArgumentException {
+        if (woodenBuildingAIPriority != priority) {
+            if (priority < Thread.MIN_PRIORITY || priority > Thread.MAX_PRIORITY) {
+                throw new IllegalArgumentException("Wooden building AI priority must be between " + Thread.MIN_PRIORITY + " and " + Thread.MAX_PRIORITY);
+            }
+
+            woodenBuildingAIPriority = priority;
+        }
+    }
+
+    /**
+     * Set capital building AI priority
+     * @param priority priority between Thread.MIN_PRIORITY and Thread.MAX_PRIORITY
+     * @throws IllegalArgumentException if priority is not between Thread.MIN_PRIORITY and Thread.MAX_PRIORITY
+     */
+    public void setCapitalBuildingAIPriority(int priority) throws IllegalArgumentException {
+        if (capitalBuildingAIPriority != priority) {
+            if (priority < Thread.MIN_PRIORITY || priority > Thread.MAX_PRIORITY) {
+                throw new IllegalArgumentException("Capital building AI priority must be between " + Thread.MIN_PRIORITY + " and " + Thread.MAX_PRIORITY);
+            }
+
+            capitalBuildingAIPriority = priority;
+        }
     }
 }
