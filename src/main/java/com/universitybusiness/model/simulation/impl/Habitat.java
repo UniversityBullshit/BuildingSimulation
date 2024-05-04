@@ -70,12 +70,6 @@ public class Habitat implements IHabitat, Serializable {
             Thread thread = new Thread(building);
             thread.start();
             instance.threads.put(building.getId(), thread);
-
-            if (building.getId() == 5) {
-                System.out.println(instance.time);
-                System.out.println("Coordinates" + building.getX() + " " + building.getY());
-                System.out.println("");
-            }
         }
     }
 
@@ -234,12 +228,6 @@ public class Habitat implements IHabitat, Serializable {
                 if (currentTime - building.getSpawnTime() >= Preferences.getInstance().getCapitalBuildingLifeTime()) {
                     expired.add(building);
                 }
-            }
-
-            if (building.getId() == 5) {
-                System.out.println(instance.time);
-                System.out.println("Coordinates" + building.getX() + " " + building.getY());
-                System.out.println("");
             }
         }
 
