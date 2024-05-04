@@ -4,9 +4,9 @@ import javax.swing.filechooser.FileFilter;
 import java.io.File;
 
 public class CustomFileFilter extends FileFilter {
-    public static final String FILE_EXTENSION = ".ser";
+    public static final String FILE_EXTENSION = ".bss";
 
-    public static final String FILE_DESCRIPTION = "Serialized files";
+    public static final String FILE_DESCRIPTION = "BuildingSimulator Save file";
 
     @Override
     public boolean accept(File f) {
