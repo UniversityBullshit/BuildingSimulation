@@ -104,7 +104,7 @@ public class HabitatController {
      * @return time spent from simulation start
      */
     public long getSimulationTime() {
-        return simulationService.getTime();
+        return simulationService.getHabitat().getTime();
     }
 
     /**

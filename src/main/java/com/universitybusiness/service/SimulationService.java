@@ -57,6 +57,7 @@ public class SimulationService {
         long TIMER_DELAY_VALUE = 0;
 
         timer = new Timer();
+        time = habitat.getTime();
 
         timer.schedule(new TimerTask() {
             @Override

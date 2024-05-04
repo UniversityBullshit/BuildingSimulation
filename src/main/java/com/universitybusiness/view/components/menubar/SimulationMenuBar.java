@@ -1,6 +1,8 @@
 package com.universitybusiness.view.components.menubar;
 
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.actions.mainMenu.LoadMenuItemListener;
+import com.universitybusiness.view.actions.mainMenu.SaveMenuItemListener;
 import com.universitybusiness.view.actions.simulationPage.*;
 import com.universitybusiness.view.util.Style;
 
@@ -12,6 +14,7 @@ public class SimulationMenuBar extends CustomMenuBar {
     public SimulationMenuBar(WindowManager context) {
         super(context);
         this.add(createActionsMenu());
+        this.add(createFileMenu());
     }
 
     private JMenu createActionsMenu() {
@@ -72,5 +75,21 @@ public class SimulationMenuBar extends CustomMenuBar {
         actions.add(toggleCapitalAI);
 
         return actions;
+    }
+
+    private JMenu createFileMenu() {
+        JMenu file = new JMenu("File");
+        file.setForeground(Style.getPrimaryLightColor());
+
+        JMenuItem load = new JMenuItem("Load");
+        JMenuItem save = new JMenuItem("Save");
+
+        load.addActionListener(new LoadMenuItemListener(context));
+        save.addActionListener(new SaveMenuItemListener());
+
+        file.add(load);
+        file.add(save);
+
+        return file;
     }
 }

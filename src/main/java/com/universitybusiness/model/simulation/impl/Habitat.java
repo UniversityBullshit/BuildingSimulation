@@ -16,6 +16,7 @@ public class Habitat implements IHabitat, Serializable {
     private int width;
     @Getter
     private int height;
+    @Getter
     private long time;
     private long lastWoodenBuildingSpawnTime;
     private long lastCapitalBuildingSpawnTime;
@@ -48,6 +49,25 @@ public class Habitat implements IHabitat, Serializable {
 
     public static void deserialize(Habitat serializedObject) {
         instance = serializedObject;
+        instance.threads = new HashMap<>();
+
+        for (Building building : instance.buildings) {
+            if (building instanceof WoodenBuilding) {
+                if (building.getX() >= (double) instance.width / 2 && building.getY() >= (double) instance.height / 2 ) {
+                    continue;
+                }
+            }
+
+            if (building instanceof CapitalBuilding) {
+                if (building.getX() <= (double) instance.width / 2 && building.getY() <= (double) instance.height / 2 ) {
+                    continue;
+                }
+            }
+
+            Thread thread = new Thread(building);
+            thread.start();
+            instance.threads.put(building.getId(), thread);
+        }
     }
 
     @Override
