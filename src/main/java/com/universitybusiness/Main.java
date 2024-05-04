@@ -1,5 +1,6 @@
 package com.universitybusiness;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.universitybusiness.controller.HabitatController;
 import com.universitybusiness.model.simulation.impl.Habitat;
 import com.universitybusiness.model.Preferences;
@@ -14,6 +15,12 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(new FlatIntelliJLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
         // Load preferences
         Preferences.getInstance().load();
 
