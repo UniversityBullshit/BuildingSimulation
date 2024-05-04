@@ -87,7 +87,8 @@ public class TerminalPage extends Page implements IPage {
 
     @Override
     public void setupAppearance() {
-
+        ((JTextArea) components.get(HISTORY)).setBackground(Color.BLACK);
+        ((JTextArea) components.get(HISTORY)).setForeground(Color.WHITE);
     }
 
     @Override
