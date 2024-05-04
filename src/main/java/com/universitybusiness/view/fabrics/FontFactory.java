@@ -14,14 +14,16 @@ public class FontFactory {
 
     public FontFactory() {
         try {
-            URL resource = ImageFactory.class.getResource("/fonts/Kadwa-Regular.ttf");
-            File file = Paths.get(resource.toURI()).toFile();
-            kadwaRegularFont = Font.createFont(Font.TRUETYPE_FONT, file);
+            InputStream  resource = FontFactory.class.getResourceAsStream("/fonts/Kadwa-Regular.ttf");
+
+            if (resource == null) {
+                throw new FileNotFoundException("Resource not found");
+            }
+
+            kadwaRegularFont = Font.createFont(Font.TRUETYPE_FONT, resource);
             kadwaRegularFont = kadwaRegularFont.deriveFont(Font.PLAIN, 14);
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
         }
     }
 }

@@ -4,6 +4,7 @@ import com.universitybusiness.model.simulation.Building;
 import com.universitybusiness.model.Preferences;
 import com.universitybusiness.model.simulation.BuildingType;
 import com.universitybusiness.model.simulation.IHabitat;
+import com.universitybusiness.model.util.AtomicIdCounter;
 import lombok.Getter;
 
 import java.awt.*;
@@ -50,6 +51,8 @@ public class Habitat implements IHabitat, Serializable {
     public static void deserialize(Habitat serializedObject) {
         instance = serializedObject;
         instance.threads = new HashMap<>();
+
+        AtomicIdCounter.setCounter(instance.buildings.lastElement().getId());
 
         for (Building building : instance.buildings) {
             if (building instanceof WoodenBuilding) {
