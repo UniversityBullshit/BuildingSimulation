@@ -26,6 +26,10 @@ public class LoadMenuItemListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (context.getController().getSimulationStatus()) {
+            context.getController().stopSimulation();
+        }
+
         fileChooser.setDialogTitle(DIALOG_TITLE);
         fileChooser.setFileFilter(new CustomFileFilter());
 

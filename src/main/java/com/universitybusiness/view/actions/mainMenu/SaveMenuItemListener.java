@@ -1,6 +1,7 @@
 package com.universitybusiness.view.actions.mainMenu;
 
 import com.universitybusiness.model.simulation.impl.Habitat;
+import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.util.CustomFileFilter;
 
 import javax.swing.*;
@@ -13,14 +14,22 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 public class SaveMenuItemListener implements ActionListener {
+    private final WindowManager context;
+
     private final JFileChooser fileChooser = new JFileChooser();
 
     private final String DIALOG_TITLE = "Save as...";
 
-    public SaveMenuItemListener() {}
+    public SaveMenuItemListener(WindowManager context) {
+        this.context = context;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (context.getController().getSimulationStatus()) {
+            context.getController().stopSimulation();
+        }
+
         fileChooser.setDialogTitle(DIALOG_TITLE);
         fileChooser.setFileFilter(new CustomFileFilter());
 

@@ -85,7 +85,7 @@ public class SimulationMenuBar extends CustomMenuBar {
         JMenuItem save = new JMenuItem("Save");
 
         load.addActionListener(new LoadMenuItemListener(context));
-        save.addActionListener(new SaveMenuItemListener());
+        save.addActionListener(new SaveMenuItemListener(context));
 
         file.add(load);
         file.add(save);
