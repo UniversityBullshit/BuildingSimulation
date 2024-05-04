@@ -4,6 +4,7 @@ import com.universitybusiness.model.simulation.Building;
 import com.universitybusiness.model.Preferences;
 import com.universitybusiness.model.simulation.BuildingType;
 import com.universitybusiness.model.simulation.IHabitat;
+import com.universitybusiness.model.util.AtomicIdCounter;
 import lombok.Getter;
 
 import java.awt.*;
@@ -51,6 +52,8 @@ public class Habitat implements IHabitat, Serializable {
         instance = serializedObject;
         instance.threads = new HashMap<>();
 
+        AtomicIdCounter.setCounter(instance.buildings.lastElement().getId());
+
         for (Building building : instance.buildings) {
             if (building instanceof WoodenBuilding) {
                 if (building.getX() >= (double) instance.width / 2 && building.getY() >= (double) instance.height / 2 ) {
@@ -67,6 +70,12 @@ public class Habitat implements IHabitat, Serializable {
             Thread thread = new Thread(building);
             thread.start();
             instance.threads.put(building.getId(), thread);
+
+            if (building.getId() == 5) {
+                System.out.println(instance.time);
+                System.out.println("Coordinates" + building.getX() + " " + building.getY());
+                System.out.println("");
+            }
         }
     }
 
@@ -225,6 +234,12 @@ public class Habitat implements IHabitat, Serializable {
                 if (currentTime - building.getSpawnTime() >= Preferences.getInstance().getCapitalBuildingLifeTime()) {
                     expired.add(building);
                 }
+            }
+
+            if (building.getId() == 5) {
+                System.out.println(instance.time);
+                System.out.println("Coordinates" + building.getX() + " " + building.getY());
+                System.out.println("");
             }
         }
 
