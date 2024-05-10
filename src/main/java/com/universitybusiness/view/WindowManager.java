@@ -1,5 +1,6 @@
 package com.universitybusiness.view;
 
+import com.universitybusiness.controller.ClientController;
 import com.universitybusiness.controller.HabitatController;
 import com.universitybusiness.view.fabrics.ApplicationViewModelFactory;
 import com.universitybusiness.view.fabrics.FontFactory;
@@ -23,6 +24,8 @@ public class WindowManager {
     private String currentPage;
     @Getter
     private final HabitatController controller;
+    @Getter
+    private final ClientController clientController;
     @Getter
     private final ApplicationViewModelFactory viewModelFactory;
     @Getter
@@ -49,14 +52,17 @@ public class WindowManager {
         public static final String TERMINAL = "Terminal";
         public static final String HELP = "Help";
         public static final String CONTROLS = "Controls";
+        public static final String USERS = "Users";
     }
 
     public WindowManager(
         HabitatController controller,
+        ClientController clientController,
         ApplicationViewModelFactory viewModelFactory
     ) {
         mainFrame = new JFrame();
         this.controller = controller;
+        this.clientController = clientController;
         this.viewModelFactory = viewModelFactory;
 
         pages = new HashMap<>();
@@ -68,6 +74,7 @@ public class WindowManager {
         pages.put(Pages.CONTROLS, new ControlsPage(mainFrame, this));
         pages.put(Pages.HELP, new HelpPage(mainFrame, this));
         pages.put(Pages.TERMINAL, new TerminalPage(mainFrame, this));
+        pages.put(Pages.USERS, new UsersPage(mainFrame, this));
 
         currentPage = Pages.MAIN_MENU;
         width = 400;
@@ -107,6 +114,7 @@ public class WindowManager {
         JDialog dialog = new JDialog(mainFrame, pageName, true);
         dialog.setLocationRelativeTo(null);
         pages.get(pageName).drawAsDialog(dialog);
+        pages.get(pageName).reset();
         dialog.setVisible(true);
     }
 }

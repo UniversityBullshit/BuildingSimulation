@@ -15,6 +15,7 @@ public class SimulationMenuBar extends CustomMenuBar {
         super(context);
         this.add(createActionsMenu());
         this.add(createFileMenu());
+        this.add(createUsersMenu());
     }
 
     private JMenu createActionsMenu() {
@@ -91,5 +92,18 @@ public class SimulationMenuBar extends CustomMenuBar {
         file.add(save);
 
         return file;
+    }
+
+    private JMenu createUsersMenu() {
+        JMenu server = new JMenu("Server");
+        server.setForeground(Style.getPrimaryLightColor());
+
+        JMenuItem users = new JMenuItem("Users");
+
+        users.addActionListener((e) -> context.showDialog(WindowManager.Pages.USERS));
+
+        server.add(users);
+
+        return server;
     }
 }
