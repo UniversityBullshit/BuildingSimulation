@@ -114,7 +114,14 @@ public class WindowManager {
         JDialog dialog = new JDialog(mainFrame, pageName, true);
         dialog.setLocationRelativeTo(null);
         pages.get(pageName).drawAsDialog(dialog);
-        pages.get(pageName).reset();
         dialog.setVisible(true);
+
+        setUpdating();
+    }
+
+    private void setUpdating() {
+        viewModelFactory.getUsersViewModel().setUpdating(
+            currentPage.equals(Pages.USERS)
+        );
     }
 }
