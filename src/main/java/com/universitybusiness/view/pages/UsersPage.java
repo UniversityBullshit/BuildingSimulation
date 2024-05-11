@@ -1,7 +1,10 @@
 package com.universitybusiness.view.pages;
 
+import com.universitybusiness.controller.ClientController;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.fabrics.ApplicationViewModelFactory;
+import com.universitybusiness.view.viewModel.UsersViewModel;
+import com.universitybusiness.view.viewModel.ViewModel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -34,12 +37,19 @@ public class UsersPage extends Page implements IPage {
     }
 
     private void setupActions() {
+        UsersViewModel viewModel = context.getViewModelFactory().getUsersViewModel();
+        ClientController controller = context.getClientController();
+
         context.getViewModelFactory().getUsersViewModel().addUpdateListener(e -> {
-            ((JLabel) components.get(USERNAME_LABEL)).setText(context.getViewModelFactory().getUsersViewModel().getUsername());
+            ((JLabel) components.get(USERNAME_LABEL)).setText(viewModel.getUsername());
         });
 
         context.getViewModelFactory().getUsersViewModel().addUpdateListener(e -> {
-            ((JList<String>) components.get(USERS_LIST)).setModel(context.getViewModelFactory().getUsersViewModel().getListModel());
+            ((JList<String>) components.get(USERS_LIST)).setModel(viewModel.getListModel());
+        });
+
+        ((JButton) components.get(DISCONNECT_BUTTON)).addActionListener(e -> {
+            controller.getUserList();
         });
     }
 

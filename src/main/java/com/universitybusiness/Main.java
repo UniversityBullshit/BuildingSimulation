@@ -43,40 +43,5 @@ public class Main {
 
         WindowManager windowManager = new WindowManager(habitatController, clientController ,modelFactory);
         SwingUtilities.invokeLater(() -> windowManager.swapPage(windowManager.getCurrentPage()));
-
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            Preferences.getInstance().save();
-            System.exit(0);
-        }));
-    }
-
-    private static void testServer() {
-        try {
-            Socket clientSocket = new Socket("localhost", 8080);
-
-            ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
-            ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
-
-            long id = (Long) in.readObject();
-            String username = (String) in.readObject();
-            System.out.println("Client connected: " + id);
-
-            System.out.println(in.available());
-
-            out.writeObject("Penis");
-            out.writeLong(id);
-            out.flush();
-
-            System.out.println(in.available());
-
-            String response = (String) in.readObject();
-            System.out.println(response);
-
-            out.writeObject("disconnect");
-            out.flush();
-            clientSocket.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -2,15 +2,16 @@ package com.universitybusiness.model.client;
 
 import lombok.Getter;
 
-import java.io.BufferedInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.TreeMap;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
 
 public class Client implements Runnable {
     private Socket socket;
+    @Getter
     private UUID id;
     @Getter
     private String username;
@@ -19,7 +20,8 @@ public class Client implements Runnable {
 
     private ObjectOutputStream out;
     private ObjectInputStream in;
-
+    private Object response = null;
+    private CountDownLatch latch = new CountDownLatch(1);
 
     public static class CommandList {
         public static final String DISCONNECT = "disconnect";
@@ -36,7 +38,7 @@ public class Client implements Runnable {
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Failed to connect to server: " + e.getClass());
         }
     }
 
@@ -44,26 +46,13 @@ public class Client implements Runnable {
         this.command = command;
     }
 
-    public TreeMap<Long, String> getUserList() {
-        processCommand(CommandList.GET_USER_LIST);
-
-        TreeMap<Long, String> users = new TreeMap<>();
-
+    public Object acceptResponse() {
         try {
-            users.putAll((TreeMap<Long, String>) in.readObject());
+            latch.await();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return users;
-    }
-
-    public void disconnect() {
-        try {
-            socket.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return response;
     }
 
     @Override
@@ -79,27 +68,45 @@ public class Client implements Runnable {
                     if (command != null) {
                         switch (command) {
                             case CommandList.DISCONNECT:
-                                out.writeObject(CommandList.DISCONNECT);
-                                connected = false;
+                                disconnect();
                                 break;
                             case CommandList.GET_USER_LIST:
-                                out.writeObject(CommandList.GET_USER_LIST);
+                                getUserList();
                                 break;
                             default:
                                 out.writeObject(command);
                                 break;
                         }
 
-                        out.flush();
                         command = null;
-
-                        String response = (String) in.readObject();
-                        System.out.println(response);
+                        latch = new CountDownLatch(1);
                     }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-            disconnect();
+    private void disconnect() {
+        try {
+            out.writeObject(CommandList.DISCONNECT);
+            connected = false;
+            socket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getUserList() {
+        try {
+            out.writeObject(CommandList.GET_USER_LIST);
+            out.flush();
+
+            synchronized (this) {
+                response = in.readObject();
+                latch.countDown();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

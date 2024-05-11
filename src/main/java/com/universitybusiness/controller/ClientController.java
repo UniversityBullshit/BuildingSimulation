@@ -3,6 +3,7 @@ package com.universitybusiness.controller;
 import com.universitybusiness.model.client.Client;
 
 import java.util.TreeMap;
+import java.util.UUID;
 
 public class ClientController {
     private final Client client;
@@ -15,12 +16,21 @@ public class ClientController {
         return client.getUsername();
     }
 
-    public TreeMap<Long, String> getUserList() {
-        return client.getUserList();
+    public TreeMap<UUID, String> getUserList() {
+        client.processCommand(Client.CommandList.GET_USER_LIST);
+
+        TreeMap<UUID, String> users = new TreeMap<>();
+
+        Object response = client.acceptResponse();
+        if (response instanceof TreeMap) {
+            users = (TreeMap<UUID, String>) response;
+            users.remove(client.getId());
+        }
+
+        return users;
     }
 
     public void disconnect() {
         client.processCommand(Client.CommandList.DISCONNECT);
-        client.disconnect();
     }
 }

@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
+import java.util.TreeMap;
+import java.util.UUID;
 
 public class UsersViewModel implements ViewModel {
     private final ClientController controller;
@@ -60,6 +62,9 @@ public class UsersViewModel implements ViewModel {
 
     public DefaultListModel<String> reloadUsersList() {
         listModel.removeAllElements();
+
+        TreeMap<UUID, String> users = controller.getUserList();
+        users.forEach((key, value) -> listModel.addElement(value));
 
         return listModel;
     }
