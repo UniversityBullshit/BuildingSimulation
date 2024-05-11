@@ -7,10 +7,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.TreeMap;
+import java.util.UUID;
 
 public class Client implements Runnable {
     private Socket socket;
-    private long id;
+    private UUID id;
     @Getter
     private String username;
     private String command;
@@ -68,7 +69,7 @@ public class Client implements Runnable {
     @Override
     public void run() {
         try {
-            id = (Long) in.readObject();
+            id = (UUID) in.readObject();
             username = (String) in.readObject();
 
             System.out.println(id + " " + username);
@@ -91,13 +92,10 @@ public class Client implements Runnable {
 
                         out.flush();
                         command = null;
+
+                        String response = (String) in.readObject();
+                        System.out.println(response);
                     }
-                } else {
-                    int bytes = in.available();
-                    byte[] buffer = new byte[bytes];
-                    in.read(buffer);
-                    String request = new String(buffer);
-                    System.out.println(request);
                 }
             }
 

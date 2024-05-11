@@ -44,14 +44,10 @@ public class Main {
         WindowManager windowManager = new WindowManager(habitatController, clientController ,modelFactory);
         SwingUtilities.invokeLater(() -> windowManager.swapPage(windowManager.getCurrentPage()));
 
-        windowManager.getMainFrame().addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                Preferences.getInstance().save();
-                clientController.disconnect();
-                System.exit(0);
-            }
-        });
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            Preferences.getInstance().save();
+            System.exit(0);
+        }));
     }
 
     private static void testServer() {
@@ -61,12 +57,17 @@ public class Main {
             ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
 
-            long id = in.readLong();
+            long id = (Long) in.readObject();
+            String username = (String) in.readObject();
             System.out.println("Client connected: " + id);
 
-            out.writeObject("loadData");
+            System.out.println(in.available());
+
+            out.writeObject("Penis");
             out.writeLong(id);
             out.flush();
+
+            System.out.println(in.available());
 
             String response = (String) in.readObject();
             System.out.println(response);

@@ -20,7 +20,7 @@ public class UsersPage extends Page implements IPage {
     @Override
     public void initializeComponents() {
         components.put(USERNAME_LABEL, new JLabel("Offline"));
-        components.put(USERS_LIST, new JList(
+        components.put(USERS_LIST, new JList<>(
                 context.getViewModelFactory().getUsersViewModel().getListModel())
         );
         components.put(DISCONNECT_BUTTON, new JButton("Disconnect"));
@@ -29,22 +29,18 @@ public class UsersPage extends Page implements IPage {
     }
 
     @Override
-    public void reset() {
-        super.reset();
-
-        ((JLabel) components.get(USERNAME_LABEL)).setText(
-            context.getClientController().getUsername()
-        );
-
-        context.getViewModelFactory().getUsersViewModel().reloadUsersList();
-    }
-
-    @Override
     public void setupAppearance() {
         ((JList<?>) components.get(USERS_LIST)).setCellRenderer(new UserListRenderer());
     }
 
     private void setupActions() {
+        context.getViewModelFactory().getUsersViewModel().addUpdateListener(e -> {
+            ((JLabel) components.get(USERNAME_LABEL)).setText(context.getViewModelFactory().getUsersViewModel().getUsername());
+        });
+
+        context.getViewModelFactory().getUsersViewModel().addUpdateListener(e -> {
+            ((JList<String>) components.get(USERS_LIST)).setModel(context.getViewModelFactory().getUsersViewModel().getListModel());
+        });
     }
 
     @Override

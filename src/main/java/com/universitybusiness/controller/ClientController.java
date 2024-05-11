@@ -19,10 +19,6 @@ public class ClientController {
         return client.getUserList();
     }
 
-    public void mock() {
-        client.processCommand("Penis");
-    }
-
     public void disconnect() {
         client.processCommand(Client.CommandList.DISCONNECT);
         client.disconnect();
