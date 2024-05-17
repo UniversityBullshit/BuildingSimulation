@@ -53,6 +53,7 @@ public class WindowManager {
         public static final String HELP = "Help";
         public static final String CONTROLS = "Controls";
         public static final String USERS = "Users";
+        public static final String USER_PROFILE = "UserProfile";
     }
 
     public WindowManager(
@@ -75,6 +76,7 @@ public class WindowManager {
         pages.put(Pages.HELP, new HelpPage(mainFrame, this));
         pages.put(Pages.TERMINAL, new TerminalPage(mainFrame, this));
         pages.put(Pages.USERS, new UsersPage(mainFrame, this));
+        pages.put(Pages.USER_PROFILE, new UserProfile(mainFrame, this));
 
         currentPage = Pages.MAIN_MENU;
         width = 400;

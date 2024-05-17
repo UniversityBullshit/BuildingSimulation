@@ -2,6 +2,7 @@ package com.universitybusiness.view.pages;
 
 import com.universitybusiness.controller.ClientController;
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.adapters.User;
 import com.universitybusiness.view.fabrics.ApplicationViewModelFactory;
 import com.universitybusiness.view.viewModel.UsersViewModel;
 import com.universitybusiness.view.viewModel.ViewModel;
@@ -9,6 +10,9 @@ import com.universitybusiness.view.viewModel.ViewModel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 public class UsersPage extends Page implements IPage {
     private final String USERNAME_LABEL = "UsernameLabel";
@@ -33,23 +37,25 @@ public class UsersPage extends Page implements IPage {
 
     @Override
     public void setupAppearance() {
-        ((JList<?>) components.get(USERS_LIST)).setCellRenderer(new UserListRenderer());
+        ((JList<User>) components.get(USERS_LIST)).setCellRenderer(new UserCellRenderer());
     }
 
     private void setupActions() {
         UsersViewModel viewModel = context.getViewModelFactory().getUsersViewModel();
-        ClientController controller = context.getClientController();
 
         context.getViewModelFactory().getUsersViewModel().addUpdateListener(e -> {
             ((JLabel) components.get(USERNAME_LABEL)).setText(viewModel.getUsername());
         });
 
-        context.getViewModelFactory().getUsersViewModel().addUpdateListener(e -> {
-            ((JList<String>) components.get(USERS_LIST)).setModel(viewModel.getListModel());
-        });
-
-        ((JButton) components.get(DISCONNECT_BUTTON)).addActionListener(e -> {
-            controller.getUserList();
+        ((JList<User>) components.get(USERS_LIST)).setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        ((JList<User>) components.get(USERS_LIST)).addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                User user = (User) ((JList) e.getSource()).getSelectedValue();
+                if (user != null) {
+                    viewModel.setSelectedUser(user);
+                    context.showDialog(WindowManager.Pages.USER_PROFILE);
+                }
+            }
         });
     }
 
@@ -77,22 +83,15 @@ public class UsersPage extends Page implements IPage {
         return panel;
     }
 
-    static class UserListRenderer extends DefaultListCellRenderer {
+    class UserCellRenderer extends DefaultListCellRenderer {
         @Override
-        public Component getListCellRendererComponent(
-                JList<?> list,
-                Object value,
-                int index,
-                boolean isSelected,
-                boolean cellHasFocus) {
-            JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            label.setText(value.toString());
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panel.setBorder(new EmptyBorder(new Insets(5, 5, 5, 5)));
 
-            JButton button = new JButton("Load");
-
-            JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING));
+            JLabel label = new JLabel(((User) value).getUsername());
             panel.add(label);
-            panel.add(button);
+
             return panel;
         }
     }

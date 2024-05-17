@@ -32,7 +32,7 @@ public class Main {
 
         SimulationService simulation = new SimulationService(Habitat.getInstance());
         HabitatController habitatController = new HabitatController(simulation);
-        ClientController clientController = new ClientController(client);
+        ClientController clientController = new ClientController(client, simulation);
 
         ApplicationViewModelFactory modelFactory = new ApplicationViewModelFactory(
             new SimulationViewModel(habitatController),

@@ -1,14 +1,15 @@
 package com.universitybusiness.view.viewModel;
 
 import com.universitybusiness.controller.ClientController;
+import com.universitybusiness.view.adapters.User;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.TreeMap;
-import java.util.UUID;
+import java.security.KeyPair;
+import java.util.*;
 
 public class UsersViewModel implements ViewModel {
     private final ClientController controller;
@@ -22,7 +23,13 @@ public class UsersViewModel implements ViewModel {
     @Getter
     private String username = "Offline";
     @Getter
-    private final DefaultListModel<String> listModel;
+    private final DefaultListModel<User> listModel;
+
+    /**
+     * Currently selected user to display in user profile page
+     */
+    @Getter
+    private User selectedUser;
 
     public UsersViewModel(ClientController controller) {
         this.controller = controller;
@@ -60,11 +67,23 @@ public class UsersViewModel implements ViewModel {
         }
     }
 
-    public DefaultListModel<String> reloadUsersList() {
+    public User getUser(int index) {
+        return listModel.get(index);
+    }
+
+    public void setSelectedUser(User user) {
+        if (selectedUser != user) {
+            selectedUser = user;
+        }
+    }
+
+    public DefaultListModel<User> reloadUsersList() {
         listModel.removeAllElements();
 
         TreeMap<UUID, String> users = controller.getUserList();
-        users.forEach((key, value) -> listModel.addElement(value));
+        users.forEach((key, value) -> {
+            listModel.addElement(new User(key, value));
+        });
 
         return listModel;
     }
