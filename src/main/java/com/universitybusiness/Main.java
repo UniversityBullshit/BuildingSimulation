@@ -31,8 +31,11 @@ public class Main {
 
         // Connect to server
         Client client = new Client(8080);
-        Thread clientThread = new Thread(client);
-        clientThread.start();
+
+        if (client.isConnected()) {
+            Thread clientThread = new Thread(client);
+            clientThread.start();
+        }
 
         // Load preferences
         Preferences.getInstance().load();
@@ -47,6 +50,8 @@ public class Main {
             new TerminalViewModel(),
             new UsersViewModel(clientController)
         );
+
+        modelFactory.getUsersViewModel().setUpdating(client.isConnected());
 
         WindowManager windowManager = new WindowManager(habitatController, clientController ,modelFactory);
         SwingUtilities.invokeLater(() -> windowManager.swapPage(windowManager.getCurrentPage()));

@@ -117,13 +117,5 @@ public class WindowManager {
         dialog.setLocationRelativeTo(null);
         pages.get(pageName).drawAsDialog(dialog);
         dialog.setVisible(true);
-
-        setUpdating();
-    }
-
-    private void setUpdating() {
-        viewModelFactory.getUsersViewModel().setUpdating(
-            currentPage.equals(Pages.USERS)
-        );
     }
 }

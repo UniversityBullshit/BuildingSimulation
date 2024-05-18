@@ -25,6 +25,10 @@ public class ClientController {
     }
 
     public TreeMap<UUID, String> getUserList() {
+        if (!client.isConnected()) {
+            return new TreeMap<>();
+        }
+
         client.execute(new Request().add("getUserList"));
         Response response = client.getResponse();
 
@@ -39,6 +43,10 @@ public class ClientController {
     }
 
     public void loadData(UUID id) {
+        if (!client.isConnected()) {
+            return;
+        }
+
         client.execute(new Request()
                 .add("getData")
                 .add(id));
