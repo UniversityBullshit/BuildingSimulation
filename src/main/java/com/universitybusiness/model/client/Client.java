@@ -21,6 +21,9 @@ public class Client implements Runnable {
     private ResponseListener listener;
     private Response response;
 
+    @Getter
+    private boolean connected;
+
     public static class CommandList {
         public static final String DISCONNECT = "disconnect";
         public static final String GET_USER_LIST = "getUserList";
@@ -38,7 +41,10 @@ public class Client implements Runnable {
 
             sender = new RequestSender(out);
             listener = new ResponseListener(in, userData);
+
+            connected = true;
         } catch (Exception e) {
+            connected = false;
             System.out.println("Failed to connect to server: " + e.getClass());
         }
     }
@@ -78,7 +84,7 @@ public class Client implements Runnable {
     public void run() {
         start();
 
-        while (true) {
+        while (connected) {
             response = listener.getResponse();
 
             if (response.get().get(0).equals("getHabitat")) {
