@@ -22,7 +22,9 @@ public class SaveDBMenuItemListener implements ActionListener {
         try {
             context.getDbController().saveToDatabase();
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            System.out.println("Cannot save to db: " + ex.getMessage());
         }
+
+        context.getController().startSimulation();
     }
 }
