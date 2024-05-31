@@ -1,6 +1,7 @@
 package com.universitybusiness;
 
 import com.universitybusiness.controller.ClientController;
+import com.universitybusiness.controller.DBController;
 import com.universitybusiness.controller.HabitatController;
 import com.universitybusiness.controller.IHabitatDBController;
 import com.universitybusiness.model.client.Client;
@@ -19,10 +20,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         // Connect to server
         Client client = new Client(8080);
 
@@ -36,17 +38,7 @@ public class Main {
 
         SimulationService simulation = new SimulationService(Habitat.getInstance());
         HabitatController habitatController = new HabitatController(simulation);
-        IHabitatDBController dbController = new IHabitatDBController() {  // Change on impl
-            @Override
-            public void loadFromDatabase() {
-
-            }
-
-            @Override
-            public void saveToDatabase() {
-
-            }
-        };
+        IHabitatDBController dbController = DBController.getInstance(); // Change on impl
         ClientController clientController = new ClientController(client, simulation);
 
         ApplicationViewModelFactory modelFactory = new ApplicationViewModelFactory(

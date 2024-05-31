@@ -5,6 +5,7 @@ import com.universitybusiness.view.WindowManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class LoadDBMenuItemListener implements ActionListener {
     private final WindowManager context;
@@ -19,8 +20,13 @@ public class LoadDBMenuItemListener implements ActionListener {
             context.getController().stopSimulation();
         }
 
-        context.getDbController().loadFromDatabase();
+        try {
+            context.getDbController().loadFromDatabase();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
         context.getController().setSimulationService(Habitat.getInstance());
         context.swapPage(WindowManager.Pages.SIMULATION);
+        context.getController().startSimulation();
     }
 }

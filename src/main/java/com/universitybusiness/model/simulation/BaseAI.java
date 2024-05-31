@@ -8,10 +8,16 @@ import java.io.Serializable;
 
 public abstract class BaseAI implements Runnable, Serializable {
     protected long speed;
+
     protected int priority = Thread.NORM_PRIORITY;
+
     protected long multiplier = 100000;
+
     protected boolean isMoving = true;
+
+    @Getter
     protected Point finishPoint;
+
     protected final long TIMER_TICK_VALUE = 200;
 
     public BaseAI(Point finishPoint) {

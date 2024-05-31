@@ -4,6 +4,7 @@ import com.universitybusiness.view.WindowManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class SaveDBMenuItemListener implements ActionListener {
     private final WindowManager context;
@@ -18,6 +19,10 @@ public class SaveDBMenuItemListener implements ActionListener {
             context.getController().stopSimulation();
         }
 
-        context.getDbController().saveToDatabase();
+        try {
+            context.getDbController().saveToDatabase();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }

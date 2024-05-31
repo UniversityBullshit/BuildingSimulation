@@ -48,21 +48,48 @@ public class Habitat implements IHabitat, Serializable {
         return instance;
     }
 
+    public static void restoreBuildingFromDb(
+            long id,
+            double x,
+            double y,
+            int finishX,
+            int finishY,
+            long spawnTime,
+            String type
+    ) {
+        if (Objects.equals(type, "WoodenBuilding")) {
+            instance.buildings.add(new WoodenBuilding(id, x, y, spawnTime, new Point(finishX, finishY)));
+            instance.woodenBuildingsCount++;
+            instance.lastWoodenBuildingSpawnTime = spawnTime;
+        } else {
+            instance.buildings.add(new CapitalBuilding(id, x, y, spawnTime, new Point(finishX, finishY)));
+            instance.capitalBuildingsCount++;
+            instance.lastCapitalBuildingSpawnTime = spawnTime;
+        }
+
+        instance.ids.add(id);
+        instance.spawnTimeMap.put(id, spawnTime);
+    }
+
     public static void deserialize(Habitat serializedObject) {
         instance = serializedObject;
         instance.threads = new HashMap<>();
 
         AtomicIdCounter.setCounter(instance.buildings.lastElement().getId());
 
-        for (Building building : instance.buildings) {
+        restoreThreads(instance.buildings);
+    }
+
+    public static void restoreThreads(Vector<Building> buildings) {
+        for (Building building : buildings) {
             if (building instanceof WoodenBuilding) {
-                if (building.getX() >= (double) instance.width / 2 && building.getY() >= (double) instance.height / 2 ) {
+                if (building.getX() >= (double) instance.width / 2 && building.getY() >= (double) instance.height / 2) {
                     continue;
                 }
             }
 
             if (building instanceof CapitalBuilding) {
-                if (building.getX() <= (double) instance.width / 2 && building.getY() <= (double) instance.height / 2 ) {
+                if (building.getX() <= (double) instance.width / 2 && building.getY() <= (double) instance.height / 2) {
                     continue;
                 }
             }
@@ -172,7 +199,7 @@ public class Habitat implements IHabitat, Serializable {
 
                 WoodenBuilding woodenBuilding = new WoodenBuilding(x, y, currentTime, new Point(finishX, finishY));
                 if (isWoodenBuildingAISleeping) woodenBuilding.setIsMoving(false);
-                if (x < width / 2 || y < height / 2 ) {
+                if (x < width / 2 || y < height / 2) {
                     Thread thread = new Thread(woodenBuilding);
                     thread.start();
                     threads.put(woodenBuilding.getId(), thread);
@@ -233,6 +260,7 @@ public class Habitat implements IHabitat, Serializable {
 
         return expired;
     }
+
     private void removeExpiredObjects(Vector<Building> expired) {
         for (Building building : expired) {
             ids.remove(building.getId());

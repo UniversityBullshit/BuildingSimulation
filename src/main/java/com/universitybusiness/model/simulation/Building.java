@@ -60,6 +60,14 @@ public abstract class Building extends BaseAI implements Comparable<Building>, S
         this.spawnTime = time;
     }
 
+    public Building(long id, double x, double y, long time, Point finishPoint) {
+        super(finishPoint);
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.spawnTime = time;
+    }
+
     @Override
     protected void move() {
         if ((Math.abs(x - finishPoint.getX()) > 0.5)

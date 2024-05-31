@@ -14,6 +14,14 @@ public class CapitalBuilding extends Building {
         this.speed = Preferences.getInstance().getCapitalBuildingSpeed();
     }
 
+    public CapitalBuilding(long id, double x, double y, long time, Point finishPoint) {
+        super(id, x, y, time, finishPoint);
+        this.interval = Preferences.getInstance().getCapitalBuildingInterval();
+        this.lifeTime = Preferences.getInstance().getCapitalBuildingLifeTime();
+        this.probability = Preferences.getInstance().getCapitalBuildingProbability();
+        this.speed = Preferences.getInstance().getCapitalBuildingSpeed();
+    }
+
     @Override
     protected void updatePriority() {
         priority = Preferences.getInstance().getCapitalBuildingAIPriority();
