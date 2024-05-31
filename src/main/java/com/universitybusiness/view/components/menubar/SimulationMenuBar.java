@@ -1,7 +1,9 @@
 package com.universitybusiness.view.components.menubar;
 
 import com.universitybusiness.view.WindowManager;
+import com.universitybusiness.view.actions.mainMenu.LoadDBMenuItemListener;
 import com.universitybusiness.view.actions.mainMenu.LoadMenuItemListener;
+import com.universitybusiness.view.actions.mainMenu.SaveDBMenuItemListener;
 import com.universitybusiness.view.actions.mainMenu.SaveMenuItemListener;
 import com.universitybusiness.view.actions.simulationPage.*;
 import com.universitybusiness.view.util.Style;
@@ -15,6 +17,7 @@ public class SimulationMenuBar extends CustomMenuBar {
         super(context);
         this.add(createActionsMenu());
         this.add(createFileMenu());
+        this.add(createDBMenu());
         this.add(createUsersMenu());
     }
 
@@ -92,6 +95,22 @@ public class SimulationMenuBar extends CustomMenuBar {
         file.add(save);
 
         return file;
+    }
+
+    private JMenu createDBMenu() {
+        JMenu db = new JMenu("Database");
+        db.setForeground(Style.getPrimaryLightColor());
+
+        JMenuItem load = new JMenuItem("Load");
+        JMenuItem save = new JMenuItem("Save");
+
+        load.addActionListener(new LoadDBMenuItemListener(context));
+        save.addActionListener(new SaveDBMenuItemListener(context));
+
+        db.add(load);
+        db.add(save);
+
+        return db;
     }
 
     private JMenu createUsersMenu() {

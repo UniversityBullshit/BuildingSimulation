@@ -2,6 +2,7 @@ package com.universitybusiness;
 
 import com.universitybusiness.controller.ClientController;
 import com.universitybusiness.controller.HabitatController;
+import com.universitybusiness.controller.IHabitatDBController;
 import com.universitybusiness.model.client.Client;
 import com.universitybusiness.model.simulation.impl.Habitat;
 import com.universitybusiness.model.Preferences;
@@ -35,6 +36,17 @@ public class Main {
 
         SimulationService simulation = new SimulationService(Habitat.getInstance());
         HabitatController habitatController = new HabitatController(simulation);
+        IHabitatDBController dbController = new IHabitatDBController() {  // Change on impl
+            @Override
+            public void loadFromDatabase() {
+
+            }
+
+            @Override
+            public void saveToDatabase() {
+
+            }
+        };
         ClientController clientController = new ClientController(client, simulation);
 
         ApplicationViewModelFactory modelFactory = new ApplicationViewModelFactory(
@@ -46,7 +58,7 @@ public class Main {
 
         modelFactory.getUsersViewModel().setUpdating(client.isConnected());
 
-        WindowManager windowManager = new WindowManager(habitatController, clientController ,modelFactory);
+        WindowManager windowManager = new WindowManager(habitatController, clientController, dbController, modelFactory);
         SwingUtilities.invokeLater(() -> windowManager.swapPage(windowManager.getCurrentPage()));
     }
 }

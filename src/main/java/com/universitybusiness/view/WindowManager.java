@@ -2,6 +2,7 @@ package com.universitybusiness.view;
 
 import com.universitybusiness.controller.ClientController;
 import com.universitybusiness.controller.HabitatController;
+import com.universitybusiness.controller.IHabitatDBController;
 import com.universitybusiness.view.fabrics.ApplicationViewModelFactory;
 import com.universitybusiness.view.fabrics.FontFactory;
 import com.universitybusiness.view.fabrics.ImageFactory;
@@ -26,6 +27,8 @@ public class WindowManager {
     private final HabitatController controller;
     @Getter
     private final ClientController clientController;
+    @Getter
+    private final IHabitatDBController dbController;
     @Getter
     private final ApplicationViewModelFactory viewModelFactory;
     @Getter
@@ -59,11 +62,13 @@ public class WindowManager {
     public WindowManager(
         HabitatController controller,
         ClientController clientController,
+        IHabitatDBController dbController,
         ApplicationViewModelFactory viewModelFactory
     ) {
         mainFrame = new JFrame();
         this.controller = controller;
         this.clientController = clientController;
+        this.dbController = dbController;
         this.viewModelFactory = viewModelFactory;
 
         pages = new HashMap<>();
