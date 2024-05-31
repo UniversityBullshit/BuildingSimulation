@@ -1,5 +1,7 @@
 package com.universitybusiness.view.components.menubar;
 
+import com.universitybusiness.model.simulation.BuildingType;
+import com.universitybusiness.model.simulation.impl.Habitat;
 import com.universitybusiness.view.WindowManager;
 import com.universitybusiness.view.actions.mainMenu.LoadDBMenuItemListener;
 import com.universitybusiness.view.actions.mainMenu.LoadMenuItemListener;
@@ -10,6 +12,7 @@ import com.universitybusiness.view.util.Style;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class SimulationMenuBar extends CustomMenuBar {
 
@@ -103,12 +106,92 @@ public class SimulationMenuBar extends CustomMenuBar {
 
         JMenuItem load = new JMenuItem("Load");
         JMenuItem save = new JMenuItem("Save");
+        JMenuItem loadWooden = new JMenuItem("Load Wooden");
+        JMenuItem loadCapital = new JMenuItem("Load Capital");
+        JMenuItem saveWooden = new JMenuItem("Save Wooden");
+        JMenuItem saveCapital = new JMenuItem("Save Capital");
 
         load.addActionListener(new LoadDBMenuItemListener(context));
         save.addActionListener(new SaveDBMenuItemListener(context));
 
+        loadWooden.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (context.getController().getSimulationStatus()) {
+                    context.getController().stopSimulation();
+                }
+
+                try {
+                    context.getDbController().loadFromDatabase(BuildingType.WOODEN);
+                } catch (SQLException ex) {
+                    System.out.println("Cannot load from db: " + ex.getMessage());
+                }
+
+                context.getController().setSimulationService(Habitat.getInstance());
+                context.swapPage(WindowManager.Pages.SIMULATION);
+                context.getController().startSimulation();
+            }
+        });
+
+        loadCapital.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (context.getController().getSimulationStatus()) {
+                    context.getController().stopSimulation();
+                }
+
+                try {
+                    context.getDbController().loadFromDatabase(BuildingType.CAPITAL);
+                } catch (SQLException ex) {
+                    System.out.println("Cannot load from db: " + ex.getMessage());
+                }
+
+                context.getController().setSimulationService(Habitat.getInstance());
+                context.swapPage(WindowManager.Pages.SIMULATION);
+                context.getController().startSimulation();
+            }
+        });
+
+        saveWooden.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (context.getController().getSimulationStatus()) {
+                    context.getController().stopSimulation();
+                }
+
+                try {
+                    context.getDbController().saveToDatabase(BuildingType.WOODEN);
+                } catch (SQLException ex) {
+                    System.out.println("Cannot save to db: " + ex.getMessage());
+                }
+
+                context.getController().startSimulation();
+            }
+        });
+
+        saveCapital.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (context.getController().getSimulationStatus()) {
+                    context.getController().stopSimulation();
+                }
+
+                try {
+                    context.getDbController().saveToDatabase(BuildingType.CAPITAL);
+                } catch (SQLException ex) {
+                    System.out.println("Cannot save to db: " + ex.getMessage());
+                }
+
+                context.getController().startSimulation();
+            }
+        });
+
         db.add(load);
         db.add(save);
+        db.add(loadWooden);
+        db.add(loadCapital);
+        db.add(saveWooden);
+        db.add(saveCapital);
 
         return db;
     }

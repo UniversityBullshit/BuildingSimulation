@@ -89,6 +89,8 @@ public class DBController implements IHabitatDBController {
                     type
             );
         }
+
+        Habitat.restoreThreads(habitat.getBuildings());
     }
 
     @Override

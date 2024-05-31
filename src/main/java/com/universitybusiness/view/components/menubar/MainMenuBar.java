@@ -13,7 +13,6 @@ public class MainMenuBar extends CustomMenuBar {
     public MainMenuBar(WindowManager context) {
         super(context);
         this.add(createFileMenu());
-//        this.add(createDBMenu());
     }
 
     private JMenu createFileMenu() {
@@ -31,20 +30,4 @@ public class MainMenuBar extends CustomMenuBar {
 
         return file;
     }
-
-//    private JMenu createDBMenu() {
-//        JMenu db = new JMenu("Database");
-//        db.setForeground(Style.getPrimaryLightColor());
-//
-//        JMenuItem load = new JMenuItem("Load");
-//        JMenuItem save = new JMenuItem("Save");
-//
-//        load.addActionListener(new LoadDBMenuItemListener(context));
-//        save.addActionListener(new SaveDBMenuItemListener(context));
-//
-//        db.add(load);
-//        db.add(save);
-//
-//        return db;
-//    }
 }
