@@ -70,7 +70,10 @@ public class PreferencesProgram implements IProgram {
             return "Number must be given after 'set' action";
         }
 
-        return setCommandPalette.get(parameter).apply(command.split(" ")[2]);
+        String result = setCommandPalette.get(parameter).apply(command.split(" ")[2]);
+        Preferences.getInstance().save();
+
+        return result;
     }
 
     private String getWoodenBuildingProbability(String unused) {

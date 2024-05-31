@@ -2,6 +2,7 @@ package com.universitybusiness;
 
 import com.universitybusiness.controller.ClientController;
 import com.universitybusiness.controller.DBController;
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.universitybusiness.controller.HabitatController;
 import com.universitybusiness.controller.IHabitatDBController;
 import com.universitybusiness.model.client.Client;
@@ -25,6 +26,12 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
+        try {
+            UIManager.setLookAndFeel(new FlatIntelliJLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
         // Connect to server
         Client client = new Client(8080);
 
