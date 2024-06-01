@@ -7,6 +7,6 @@ import java.sql.SQLException;
 public interface IHabitatDBController {
     void loadFromDatabase() throws SQLException;
     void saveToDatabase() throws SQLException;
-    void loadBuildings(BuildingType type) throws SQLException;
-    void saveBuildings(BuildingType type) throws SQLException;
+    void loadFromDatabase(BuildingType type) throws SQLException;
+    void saveToDatabase(BuildingType type) throws SQLException;
 }

@@ -2,6 +2,7 @@ package com.universitybusiness.controller;
 
 import com.universitybusiness.model.simulation.Building;
 import com.universitybusiness.model.simulation.BuildingType;
+import com.universitybusiness.model.simulation.impl.CapitalBuilding;
 import com.universitybusiness.model.simulation.impl.Habitat;
 import com.universitybusiness.model.simulation.impl.WoodenBuilding;
 
@@ -71,11 +72,68 @@ public class DBController implements IHabitatDBController {
         }
     }
 
+    @Override
+    public void loadFromDatabase(BuildingType type) throws SQLException {
+        Habitat habitat = Habitat.getInstance();
+        habitat.reset();
+
+        ResultSet result = select(type);
+
+        while (result.next()) {
+            Habitat.restoreBuildingFromDb(
+                    result.getLong(1),
+                    result.getDouble(2),
+                    result.getDouble(3),
+                    result.getInt(4),
+                    result.getInt(5),
+                    type
+            );
+        }
+    }
+
+    @Override
+    public void saveToDatabase(BuildingType type) throws SQLException {
+        clearTable();
+
+        Habitat habitat = Habitat.getInstance();
+
+        for (Building building : habitat.getBuildings()) {
+            if (type == BuildingType.WOODEN && building instanceof WoodenBuilding) {
+                insert(
+                        building.getId(),
+                        building.getX(),
+                        building.getY(),
+                        building.getFinishPoint().x,
+                        building.getFinishPoint().y,
+                        BuildingType.WOODEN
+                );
+            } else if (type == BuildingType.CAPITAL && building instanceof CapitalBuilding) {
+                insert(
+                        building.getId(),
+                        building.getX(),
+                        building.getY(),
+                        building.getFinishPoint().x,
+                        building.getFinishPoint().y,
+                        BuildingType.CAPITAL
+                );
+            }
+        }
+    }
+
     private ResultSet select() throws SQLException {
         String query = "SELECT * FROM habitat";
 
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
+
+        return resultSet;
+    }
+
+    private ResultSet select(BuildingType type) throws SQLException {
+        PreparedStatement query = connection.prepareStatement("SELECT * FROM habitat WHERE type = ?");
+        query.setInt(1, type.ordinal());
+
+        ResultSet resultSet = query.executeQuery();
 
         return resultSet;
     }
