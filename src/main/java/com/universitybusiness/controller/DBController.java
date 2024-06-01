@@ -1,7 +1,9 @@
 package com.universitybusiness.controller;
 
 import com.universitybusiness.model.simulation.Building;
+import com.universitybusiness.model.simulation.BuildingType;
 import com.universitybusiness.model.simulation.impl.Habitat;
+import com.universitybusiness.model.simulation.impl.WoodenBuilding;
 
 import java.sql.*;
 
@@ -44,8 +46,7 @@ public class DBController implements IHabitatDBController {
                     result.getDouble(3),
                     result.getInt(4),
                     result.getInt(5),
-                    result.getLong(6),
-                    result.getString(7)
+                    result.getInt(6) == 0 ? BuildingType.WOODEN : BuildingType.CAPITAL
             );
         }
 
@@ -65,8 +66,7 @@ public class DBController implements IHabitatDBController {
                     building.getY(),
                     building.getFinishPoint().x,
                     building.getFinishPoint().y,
-                    building.getSpawnTime(),
-                    building.getClass().getSimpleName()
+                    building instanceof WoodenBuilding ? BuildingType.WOODEN : BuildingType.CAPITAL
             );
         }
     }
@@ -86,12 +86,11 @@ public class DBController implements IHabitatDBController {
             double y,
             int finishX,
             int finishY,
-            long time,
-            String type
+            BuildingType type
     ) throws SQLException {
         PreparedStatement query = connection
                 .prepareStatement(
-                        "INSERT INTO habitat (id, x, y, finish_x, finish_y, time, type) VALUES (?, ?, ?, ?, ?, ?, ?)"
+                        "INSERT INTO habitat (id, x, y, finish_x, finish_y, type) VALUES (?, ?, ?, ?, ?, ?)"
                 );
 
         query.setLong(1, id);
@@ -99,8 +98,7 @@ public class DBController implements IHabitatDBController {
         query.setDouble(3, y);
         query.setInt(4, finishX);
         query.setInt(5, finishY);
-        query.setLong(6, time);
-        query.setString(7, type);
+        query.setInt(6, type.ordinal());
 
         query.executeUpdate();
     }
@@ -119,8 +117,7 @@ public class DBController implements IHabitatDBController {
                 "y      real not null," +
                 "finish_x   integer not null," +
                 "finish_y   integer not null," +
-                "time   integer not null," +
-                "type   TEXT not null" +
+                "type   integer not null" +
                 ")";
 
         Statement statement = connection.createStatement();

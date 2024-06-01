@@ -14,8 +14,8 @@ public class CapitalBuilding extends Building {
         this.speed = Preferences.getInstance().getCapitalBuildingSpeed();
     }
 
-    public CapitalBuilding(long id, double x, double y, long time, Point finishPoint) {
-        super(id, x, y, time, finishPoint);
+    public CapitalBuilding(long id, double x, double y, Point finishPoint) {
+        super(id, x, y, finishPoint);
         this.interval = Preferences.getInstance().getCapitalBuildingInterval();
         this.lifeTime = Preferences.getInstance().getCapitalBuildingLifeTime();
         this.probability = Preferences.getInstance().getCapitalBuildingProbability();

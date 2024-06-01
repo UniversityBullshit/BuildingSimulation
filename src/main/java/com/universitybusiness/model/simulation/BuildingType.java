@@ -5,5 +5,5 @@ package com.universitybusiness.model.simulation;
  */
 public enum BuildingType {
     WOODEN,
-    CAPITAL
+    CAPITAL,
 }

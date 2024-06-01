@@ -15,8 +15,8 @@ public class WoodenBuilding extends Building {
         this.speed = Preferences.getInstance().getWoodenBuildingSpeed();
     }
 
-    public WoodenBuilding(long id, double x, double y, long time, Point finishPoint) {
-        super(id, x, y, time, finishPoint);
+    public WoodenBuilding(long id, double x, double y, Point finishPoint) {
+        super(id, x, y,  finishPoint);
         this.interval = Preferences.getInstance().getWoodenBuildingInterval();
         this.lifeTime = Preferences.getInstance().getWoodenBuildingLifeTime();
         this.probability = Preferences.getInstance().getWoodenBuildingProbability();

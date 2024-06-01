@@ -54,21 +54,17 @@ public class Habitat implements IHabitat, Serializable {
             double y,
             int finishX,
             int finishY,
-            long spawnTime,
-            String type
+            BuildingType type
     ) {
-        if (Objects.equals(type, "WoodenBuilding")) {
-            instance.buildings.add(new WoodenBuilding(id, x, y, spawnTime, new Point(finishX, finishY)));
+        if (type == BuildingType.WOODEN) {
+            instance.buildings.add(new WoodenBuilding(id, x, y, new Point(finishX, finishY)));
             instance.woodenBuildingsCount++;
-            instance.lastWoodenBuildingSpawnTime = spawnTime;
         } else {
-            instance.buildings.add(new CapitalBuilding(id, x, y, spawnTime, new Point(finishX, finishY)));
+            instance.buildings.add(new CapitalBuilding(id, x, y, new Point(finishX, finishY)));
             instance.capitalBuildingsCount++;
-            instance.lastCapitalBuildingSpawnTime = spawnTime;
         }
 
         instance.ids.add(id);
-        instance.spawnTimeMap.put(id, spawnTime);
     }
 
     public static void deserialize(Habitat serializedObject) {
