@@ -23,8 +23,9 @@ public class LoadDBMenuItemListener implements ActionListener {
         try {
             context.getDbController().loadFromDatabase();
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            System.out.printf("Cannot load from db: %s", ex.getMessage());
         }
+
         context.getController().setSimulationService(Habitat.getInstance());
         context.swapPage(WindowManager.Pages.SIMULATION);
         context.getController().startSimulation();
